@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: "Montserrat", sans-serif;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+main{
+    position:relative;
+}
+
+/*#540202, #AB3131, #EDE0A6, #799163 and #507B58*/
+
+/*SURVEY ANSWER STYLES*/
+
+.answer-1 {
+    border: 3px solid #540202;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    transition: all .3s ease;
+}
+
+    .answer-1:hover, .answer-1-fill {
+        background-color: #540202;
+    }
+
+.answer-2 {
+    border: 3px solid #AB3131;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    transition: all .3s ease;
+}
+
+    .answer-2:hover, .answer-2-fill {
+        background-color: #AB3131;
+    }
+
+.answer-3 {
+    border: 3px solid #d97d7d;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    transition: all .3s ease;
+}
+
+    .answer-3:hover, .answer-3-fill {
+        background-color: #d97d7d;
+    }
+
+.answer-4 {
+    border: 3px solid #EDE0A6;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    transition: all .3s ease;
+}
+
+    .answer-4:hover, .answer-4-fill {
+        background-color: #EDE0A6;
+    }
+
+.answer-5 {
+    border: 3px solid #799163;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    transition: all .3s ease;
+}
+
+    .answer-5:hover, .answer-5-fill {
+        background-color: #799163;
+    }
+
+.answer-6 {
+    border: 3px solid #507B58;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    transition: all .3s ease;
+}
+
+    .answer-6:hover, .answer-6-fill {
+        background-color: #507B58;
+    }
+
+.answer-7 {
+    border: 3px solid #48b85c;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    transition: all .3s ease;
+}
+
+    .answer-7:hover, .answer-7-fill {
+        background-color: #48b85c;
+    }
+
+.answer-table {
+    table-layout: fixed;
+}
+
+.point-me {
+    cursor: pointer;
+}
+
+.action-items {
+    bottom: 15px;
+    right: 15px;
+}
+
+.card {
+    transition: all .3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+
+}
+
+.link-restyle{
+    text-decoration: none;
+}
+
+.link-restyle:hover {
+    text-decoration: underline;
+}
+
+.card-badge {
+    top: -10px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.title-box {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.domain-box {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.testimonial-card .card-up {
+    height: 120px;
+    overflow: hidden;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+}
+
+.gradient-1 {
+    background: linear-gradient(40deg, #2E3192, #1BFFFF);
+}
+
+.gradient-2 {
+    background: linear-gradient(40deg, #662D8C, #ED1E79);
+}
+
+.gradient-3 {
+    background: linear-gradient(40deg, #614385, #516395);
+}
+
+.gradient-4 {
+    background: linear-gradient(40deg, #EA8D8D, #A890FE);
+}
+
+.gradient-5 {
+    background: linear-gradient(40deg, #D8B5FF, #1EAE98);
+}
+
+
+.gradient-6 {
+    background: linear-gradient(40deg, #BFF098, #6FD6FF);
+}
+
+.gradient-7 {
+    background: linear-gradient(40deg, #4E65FF, #92EFFD);
+}
+
+.gradient-8 {
+    background: linear-gradient(40deg, #A9F1DF, #FFBBBB);
+}
+
+.gradient-9 {
+    background: linear-gradient(40deg, #C33764, #1D2671);
+}
+
+.gradient-10 {
+    background: linear-gradient(40deg, #764BA2, #667EEA);
+}
+
+.gradient-11 {
+    background: linear-gradient(40deg, #EECDA3, #EF629F);
+}
+
+.gradient-12 {
+    background: linear-gradient(40deg, #1D4350, #A43931);
+}
+
+.gradient-13 {
+    background: linear-gradient(40deg, #a80077, #66ff00);
+}
+
+.gradient-14 {
+    background: linear-gradient(40deg, #BA5370, #F4E2D8);
+}
+
+.gradient-15 {
+    background: linear-gradient(40deg, #4CA1AF, #C4E0E5);
+}
+
+.gradient-16 {
+    background: linear-gradient(40deg, #4B79A1, #283E51);
+}
+
+.testimonial-card .avatar {
+    width: 120px;
+    margin-top: -60px;
+    overflow: hidden;
+    border: 5px solid #fff;
+    border-radius: 50%;
+}
+/*chart styles*/
+.chart-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chart-column {
+    width: calc(100% / 3);
+    padding: 5px;
+}
+
+.competence-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.competence-list-item {
+    text-align: center;
+    margin-top: 5px;
+    position: relative;
+    cursor: pointer;
+}

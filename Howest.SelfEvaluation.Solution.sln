@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34723.18
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Howest.SelfEvaluation.Web", "Howest.SelfEvaluation.Web\Howest.SelfEvaluation.Web.csproj", "{807FF21E-E218-4DD2-904E-1B33A5F19D87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Howest.SelfEvaluation.Core", "Howest.SelfEvaluation.Core\Howest.SelfEvaluation.Core.csproj", "{9A9B0362-61FB-4FE9-AF1F-BA9B798108F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{807FF21E-E218-4DD2-904E-1B33A5F19D87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{807FF21E-E218-4DD2-904E-1B33A5F19D87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{807FF21E-E218-4DD2-904E-1B33A5F19D87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{807FF21E-E218-4DD2-904E-1B33A5F19D87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A9B0362-61FB-4FE9-AF1F-BA9B798108F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A9B0362-61FB-4FE9-AF1F-BA9B798108F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A9B0362-61FB-4FE9-AF1F-BA9B798108F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A9B0362-61FB-4FE9-AF1F-BA9B798108F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7BF26DA6-0733-4737-96D5-BD141B7F81F9}
+	EndGlobalSection
+EndGlobal
