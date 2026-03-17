@@ -1788,6 +1788,7 @@ namespace Howest.SelfEvaluation.Web.Data
 			modelBuilder.Entity<Competence>().HasData(competences);
 			modelBuilder.Entity<Indicator>().HasData(indicators);
 			modelBuilder.Entity<Indicator>().HasData(endEvaluationIndicators);
-        }
+			modelBuilder.Entity<ApplicationUserModule>().HasData(ApplicationUserModule);
+		}
 	}
 }

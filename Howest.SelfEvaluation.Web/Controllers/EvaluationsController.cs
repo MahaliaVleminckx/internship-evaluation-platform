@@ -31,10 +31,5 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             return View();
         }
-
-        public IActionResult Add()
-        {
-
-        }
     }
 }
