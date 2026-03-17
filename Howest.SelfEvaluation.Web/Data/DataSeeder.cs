@@ -1,4 +1,5 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Howest.SelfEvaluation.Web.Data
@@ -1754,9 +1755,19 @@ namespace Howest.SelfEvaluation.Web.Data
 			}).ToList();
 			#endregion
 
+			//hardcoded user for dev testing purposes, to be deleted once login implemented
+			var users = new List<ApplicationUser>
+			{
+				new ApplicationUser
+				{
+					Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+					Role = RoleTypes.Student,
+					Username="test@test.com",
+					Created = DateTime.Now
+				}
+			};
 
-
-			modelBuilder.Entity<Module>().HasData(modules);
+            modelBuilder.Entity<Module>().HasData(modules);
 			modelBuilder.Entity<Evaluation>().HasData(evaluations);
 			modelBuilder.Entity<CompetenceDomain>().HasData(domains);
 			modelBuilder.Entity<Competence>().HasData(competences);
