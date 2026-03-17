@@ -55,7 +55,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 .ThenInclude(m => m.Evaluations)
                 .FirstOrDefaultAsync();
 
-            if (module == null)
+            if (module == null || user == null)
             {
                 return NotFound();
             }
