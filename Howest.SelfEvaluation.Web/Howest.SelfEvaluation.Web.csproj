@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <Folder Include="Services\" />
     <Folder Include="wwwroot\excel-templates\" />
     <Folder Include="wwwroot\exports\" />
     <Folder Include="wwwroot\Uploads\" />

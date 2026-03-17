@@ -1754,7 +1754,8 @@ namespace Howest.SelfEvaluation.Web.Data
 			}).ToList();
 			#endregion
 
-			
+
+
 			modelBuilder.Entity<Module>().HasData(modules);
 			modelBuilder.Entity<Evaluation>().HasData(evaluations);
 			modelBuilder.Entity<CompetenceDomain>().HasData(domains);
