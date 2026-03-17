@@ -169,6 +169,8 @@ main{
     padding: 40px;
     width: 100%;
     color: white;
+    height: 140px;
+    border-radius: 5px 5px 0px 0px;
 }
 
 .title-box:hover{
@@ -196,9 +198,34 @@ main{
 }
 
 /*module styles*/
-.module-box{
+.module-box {
     width: 300px;
+    border-radius: 20px;
+    margin-right: 10px;
 }
+
+/*evaluation styles*/
+.evaluation-title-box > * {
+    text-align: center;
+    text-anchor: start;
+    display: inline-flex;
+    vertical-align: middle;
+    justify-content: flex-start;
+}
+
+.evaluation-subtitle{
+    color: dimgray;
+    font-size: 1.2rem;
+}
+
+.btn-info {
+    background-color: deepskyblue;
+    color: white;
+    margin-right: 10px;
+}
+    .btn-info:hover{
+        background-color: #00b1ff
+    }
 
 .gradient-1 {
     background: linear-gradient(40deg, #2E3192, #1BFFFF);
