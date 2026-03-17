@@ -5,5 +5,6 @@ namespace Howest.SelfEvaluation.Web.ViewModels
     public class EvaluationsIndexViewModel
     {
         public ApplicationUser User{ get; set; }
+
     }
 }

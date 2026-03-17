@@ -1,6 +1,7 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
+using Howest.SelfEvaluation.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 .ApplicationUsers
                 .Where(u => u.Username == username)
                 .Include(u=>u.Modules)
+                .ThenInclude(m=>m.Evaluations)
                 .FirstOrDefaultAsync();
 
             if (user == null)
@@ -30,8 +32,13 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 return NotFound();
             }
 
+            EvaluationsIndexViewModel evaluationsIndexViewModel = new EvaluationsIndexViewModel
+            {
+                User = user,
+            };
 
-            return View();
+
+            return View(evaluationsIndexViewModel);
         }
     }
 }

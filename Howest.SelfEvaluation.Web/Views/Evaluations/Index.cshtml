@@ -1,2 +1,17 @@
-﻿
-<b-
+﻿@model EvaluationsIndexViewModel
+
+<h1>Mijn modules</h1>
+
+@foreach (var module in Model.User.Modules)
+{
+    <div class="card card-badge">
+        <!--tips: add .text-center,.text-right to the .card to change card text alignment-->
+        <div class="title-box">
+            <h5>@module.Name</h5>
+        </div>
+        <div class="domain-box">
+            <h6>@module.Description</h6>
+            <p>Aantal evaluaties: @module.Evaluations.Count()</p>
+        </div>
+    </div>
+}
