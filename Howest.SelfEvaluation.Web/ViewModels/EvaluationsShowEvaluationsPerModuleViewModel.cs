@@ -2,9 +2,8 @@
 
 namespace Howest.SelfEvaluation.Web.ViewModels
 {
-    public class EvaluationsIndexViewModel
+    public class EvaluationsShowEvaluationsPerModuleViewModel
     {
-        public ApplicationUser User { get; set; }
-
+        public Module Module { get; set; }
     }
 }
