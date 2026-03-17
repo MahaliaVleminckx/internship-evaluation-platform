@@ -26,6 +26,13 @@ namespace Howest.SelfEvaluation.Web.Data
 				.HasForeignKey(m => m.OwnerId)
 				.OnDelete(DeleteBehavior.NoAction);
 
+			modelBuilder.Entity<ApplicationUser>()
+				.HasMany(a => a.Modules)
+				.WithMany(a => a.ApplicationUsers)
+				.UsingEntity<ApplicationUserModule>();
+
+
+
 			DataSeeder.Seed(modelBuilder);
 			base.OnModelCreating(modelBuilder);
 		}

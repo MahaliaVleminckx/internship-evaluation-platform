@@ -137,6 +137,7 @@ main{
 
 .card {
     transition: all .3s;
+    margin-top: 20px;
 }
 
 .card:hover {
@@ -165,20 +166,66 @@ main{
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    padding: 40px;
+    width: 100%;
+    color: white;
+    height: 140px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.title-box:hover{
+    text-decoration:underline;
 }
 
 .domain-box {
-    display: inline-flex;
+    display: inline-block;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+    color: black;
+    text-decoration: none;
 }
 
-.testimonial-card .card-up {
+.domain-box:hover{
+    text-decoration:none;
+}
+
+.testimonial-card, .card-up {
     height: 120px;
     overflow: hidden;
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
 }
+
+/*module styles*/
+.module-box {
+    width: 300px;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+/*evaluation styles*/
+.evaluation-title-box > * {
+    text-align: center;
+    text-anchor: start;
+    display: inline-flex;
+    vertical-align: middle;
+    justify-content: flex-start;
+}
+
+.evaluation-subtitle{
+    color: dimgray;
+    font-size: 1.2rem;
+}
+
+.btn-info {
+    background-color: deepskyblue;
+    color: white;
+    margin-right: 10px;
+}
+    .btn-info:hover{
+        background-color: #00b1ff
+    }
 
 .gradient-1 {
     background: linear-gradient(40deg, #2E3192, #1BFFFF);
@@ -245,7 +292,7 @@ main{
     background: linear-gradient(40deg, #4B79A1, #283E51);
 }
 
-.testimonial-card .avatar {
+.testimonial-card, .avatar {
     width: 120px;
     margin-top: -60px;
     overflow: hidden;
