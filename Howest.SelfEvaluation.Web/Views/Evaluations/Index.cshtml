@@ -1,13 +1,16 @@
 ﻿@model EvaluationsIndexViewModel
 
+@{
+    var rnd = new Random();
+}
+
 <h1>Mijn modules</h1>
 
 @foreach (var module in Model.User.Modules)
 {
     <div class="card module-box">
-        @* TODO assign controller and action argument *@
-        <a asp-controller="TODO" asp-action="TODO" asp-route-id="@module.Id" class="link-restyle">
-            <div class="title-box gradient-1 text-center">
+        <a asp-controller="Evaluations" asp-action="ShowEvaluationsPerModule" asp-route-moduleId="@module.Id" class="link-restyle">
+            <div class="title-box gradient-@rnd.Next(1,16) text-center">
                 <h3>@module.Name</h3>
             </div>
             <div class="domain-box">

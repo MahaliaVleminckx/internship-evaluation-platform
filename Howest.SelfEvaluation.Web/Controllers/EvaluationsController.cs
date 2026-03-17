@@ -39,5 +39,33 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             return View(evaluationsIndexViewModel);
         }
+
+        public async Task<IActionResult> ShowEvaluationsPerModule(Guid moduleId, string username)
+        {
+            var module = await _db
+                .Modules
+                .Where(m => m.Id == moduleId)
+                .Include(m => m.Evaluations)
+                .FirstOrDefaultAsync();
+
+            var user = await _db
+                .ApplicationUsers
+                .Where(u => u.Username == username)
+                .Include(u => u.Modules)
+                .ThenInclude(m => m.Evaluations)
+                .FirstOrDefaultAsync();
+
+            if (module == null || user == null)
+            {
+                return NotFound();
+            }
+
+            EvaluationsShowEvaluationsPerModuleViewModel evaluationsShowEvaluationsPerModuleViewModel = new EvaluationsShowEvaluationsPerModuleViewModel
+            {
+                Module = module
+            };
+
+            return View(evaluationsShowEvaluationsPerModuleViewModel);
+        }
     }
 }
