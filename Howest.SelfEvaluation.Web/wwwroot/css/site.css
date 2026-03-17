@@ -137,6 +137,7 @@ main{
 
 .card {
     transition: all .3s;
+    margin-top: 20px;
 }
 
 .card:hover {
@@ -165,19 +166,38 @@ main{
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    padding: 40px;
+    width: 100%;
+    color: white;
+}
+
+.title-box:hover{
+    text-decoration:underline;
 }
 
 .domain-box {
-    display: inline-flex;
+    display: inline-block;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+    color: black;
+    text-decoration: none;
 }
 
-.testimonial-card .card-up {
+.domain-box:hover{
+    text-decoration:none;
+}
+
+.testimonial-card, .card-up {
     height: 120px;
     overflow: hidden;
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
+}
+
+/*module styles*/
+.module-box{
+    width: 300px;
 }
 
 .gradient-1 {
@@ -245,7 +265,7 @@ main{
     background: linear-gradient(40deg, #4B79A1, #283E51);
 }
 
-.testimonial-card .avatar {
+.testimonial-card, .avatar {
     width: 120px;
     margin-top: -60px;
     overflow: hidden;

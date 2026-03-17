@@ -4,14 +4,16 @@
 
 @foreach (var module in Model.User.Modules)
 {
-    <div class="card card-badge">
-        <!--tips: add .text-center,.text-right to the .card to change card text alignment-->
-        <div class="title-box">
-            <h5>@module.Name</h5>
-        </div>
-        <div class="domain-box">
-            <h6>@module.Description</h6>
-            <p>Aantal evaluaties: @module.Evaluations.Count()</p>
-        </div>
+    <div class="card module-box">
+        @* TODO assign controller and action argument *@
+        <a asp-controller="TODO" asp-action="TODO" asp-route-id="@module.Id" class="link-restyle">
+            <div class="title-box gradient-1 text-center">
+                <h3>@module.Name</h3>
+            </div>
+            <div class="domain-box">
+                <h6>@module.Description</h6>
+                <h7 class="text-muted">Aantal evaluaties: @module.Evaluations.Count()</h7>
+            </div>
+        </a>
     </div>
 }

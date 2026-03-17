@@ -16,7 +16,6 @@ namespace Howest.SelfEvaluation.Web.Controllers
             _db = db;
         }
 
-        //TODO: student evaluations implementation
         public async Task<IActionResult> Index(string username)
         {
             //todo: move to service
