@@ -1755,18 +1755,19 @@ namespace Howest.SelfEvaluation.Web.Data
 			}).ToList();
 			#endregion
 
-			//hardcoded user for dev testing purposes, to be deleted once login implemented
+			//hardcoded user for dev testing purposes, to be deleted once register implemented
 			var users = new List<ApplicationUser>
 			{
 				new ApplicationUser
 				{
 					Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
-					Role = RoleTypes.Student,
+					Role = RoleTypes.Student.ToString(),
 					Username="test@test.com",
 					Created = DateTime.Now
 				}
 			};
 
+            modelBuilder.Entity<ApplicationUser>().HasData(users);
             modelBuilder.Entity<Module>().HasData(modules);
 			modelBuilder.Entity<Evaluation>().HasData(evaluations);
 			modelBuilder.Entity<CompetenceDomain>().HasData(domains);
