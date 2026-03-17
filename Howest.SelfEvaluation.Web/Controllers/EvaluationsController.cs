@@ -21,7 +21,9 @@ namespace Howest.SelfEvaluation.Web.Controllers
             //todo: move to service
             var user = await _db
                 .ApplicationUsers
-                .FirstOrDefaultAsync(u => u.Username == username);
+                .Where(u => u.Username == username)
+                .Include(u=>u.Modules)
+                .FirstOrDefaultAsync();
 
             if (user == null)
             {

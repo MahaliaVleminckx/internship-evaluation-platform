@@ -35,7 +35,7 @@ namespace Howest.SelfEvaluation.Web
             //custom routes
             app.MapControllerRoute(
                 name: "Evaluations",
-                pattern: "Evaluations/Index",
+                pattern: "Evaluations/Index/{username}",
                 defaults: new { Controller = "Evaluations", Action = "Index" }
             );
 
