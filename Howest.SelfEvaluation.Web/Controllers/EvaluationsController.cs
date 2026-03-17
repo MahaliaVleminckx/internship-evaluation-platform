@@ -1,4 +1,6 @@
-﻿using Howest.SelfEvaluation.Web.Data;
+﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Web.Data;
+using Howest.SelfEvaluation.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,15 +16,25 @@ namespace Howest.SelfEvaluation.Web.Controllers
         }
 
         //TODO: student evaluations implementation
-        //public async Task<IActionResult> Index(int id)
-        //{
-        //    //todo: move to service
-        //    var user = _db
-        //        .ApplicationUsers
-        //        .SingleOrDefaultAsync(u=>u.Id == id);
+        public async Task<IActionResult> Index(string username)
+        {
+            //todo: move to service
+            var user = await _db
+                .ApplicationUsers
+                .FirstOrDefaultAsync(u => u.Username == username);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
 
-        //    return View();
-        //}
+            return View();
+        }
+
+        public IActionResult Add()
+        {
+
+        }
     }
 }

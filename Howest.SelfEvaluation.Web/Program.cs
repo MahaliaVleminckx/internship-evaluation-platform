@@ -31,7 +31,14 @@ namespace Howest.SelfEvaluation.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-            
+
+            //custom routes
+            app.MapControllerRoute(
+                name: "Evaluations",
+                pattern: "Evaluations/Index",
+                defaults: new { Controller = "Evaluations", Action = "Index" }
+            );
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
