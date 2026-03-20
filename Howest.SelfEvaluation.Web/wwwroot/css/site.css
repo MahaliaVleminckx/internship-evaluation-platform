@@ -4,27 +4,61 @@
     font-family: "Montserrat", sans-serif;
 }
 
+.navbar {
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: white;
+    z-index: 10;
+}
+
+.navbar-brand {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+    .navbar-brand img {
+        display: block;
+    }
+
+.custom-btn {
+    background-color: #44C8F5;
+    border: 2px solid #44C8F5;
+    border-radius: 50px;
+    color: white;
+    font-weight:700;
+}
+
+.nav-spacing {
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+.login-page{
+    margin-top: 80px;
+}
+
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
-main{
-    position:relative;
+main {
+    position: relative;
 }
 
 /*#540202, #AB3131, #EDE0A6, #799163 and #507B58*/
@@ -139,18 +173,17 @@ main{
     transition: all .3s;
 }
 
-.card:hover {
-    transform: scale(1.05);
+    .card:hover {
+        transform: scale(1.05);
+    }
 
-}
-
-.link-restyle{
+.link-restyle {
     text-decoration: none;
 }
 
-.link-restyle:hover {
-    text-decoration: underline;
-}
+    .link-restyle:hover {
+        text-decoration: underline;
+    }
 
 .card-badge {
     top: -10px;

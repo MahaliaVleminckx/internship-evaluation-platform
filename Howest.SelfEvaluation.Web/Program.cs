@@ -13,9 +13,9 @@ namespace Howest.SelfEvaluation.Web
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services
-                .AddDbContext<SelfEvaluationsContext>(options => 
-                options.UseSqlServer(builder.Configuration.GetConnectionString("EvaluationDb")));
+            //builder.Services
+            //    .AddDbContext<SelfEvaluationsContext>(options => 
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("EvaluationDb")));
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
