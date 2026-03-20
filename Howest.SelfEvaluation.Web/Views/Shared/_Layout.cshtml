@@ -10,15 +10,16 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 
-<body>
+<body class="@ViewData["BodyClass"]">
     <nav class="navbar navbar-expand-xl sticky-top">
         <div class="container-fluid nav-spacing">
             <a class="navbar-brand" href="#">
                 <img src="/img/psych-logo.png" alt="HOWEST Psychologie" width="150" class="logo-nav" />
             </a>
-           
+          
+
             <div class="ml-auto">
-                <button type="button" class="btn btn-primary custom-btn">INLOGGEN</button>
+                <button type="button" class="btn btn-primary custom-btn"></button>
             </div>
         </div>
     </nav>
