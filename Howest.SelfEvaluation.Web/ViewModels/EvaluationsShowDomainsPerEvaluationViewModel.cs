@@ -2,8 +2,14 @@
 
 namespace Howest.SelfEvaluation.Web.ViewModels
 {
-    public class EvaluationsShowDomainsPerEvaluationViewModel
+    public class EvaluationsShowDomainsPerEvaluationViewModel : BaseUserViewModel
     {
-        public Evaluation Evaluation { get; set; }
+        public Guid Id { get; set; }
+        public string Title { get; set; }
+        public bool IsPublished { get; set; }
+        public Guid ModuleId { get; set; }
+        public string? Description { get; set; }
+        public ICollection<CompetenceDomain> CompetenceDomains { get; set; }
+        public ICollection<EvaluationScore> StudentEvaluationScores { get; set; }
     }
 }

@@ -6,10 +6,10 @@
 
 <h1>Mijn modules</h1>
 
-@foreach (var module in Model.User.Modules)
+@foreach (var module in Model.Modules)
 {
     <div class="card module-box">
-        <a asp-controller="Evaluations" asp-action="ShowEvaluationsPerModule" asp-route-moduleId="@module.Id" asp-route-userId ="@Model.User.Id" 
+        <a asp-controller="Evaluations" asp-action="ShowEvaluationsPerModule" asp-route-moduleId="@module.Id" asp-route-userId ="@Model.UserId" 
         class="link-restyle">
             <div class="title-box gradient-@rnd.Next(1,16) text-center">
                 <h3>@module.Name</h3>
