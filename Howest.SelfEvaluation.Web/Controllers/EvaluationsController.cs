@@ -1,6 +1,7 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
+using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -11,10 +12,12 @@ namespace Howest.SelfEvaluation.Web.Controllers
     public class EvaluationsController : Controller
     {
         private readonly SelfEvaluationsContext _db;
+        private readonly IEvaluationService _evaluationService;
 
-        public EvaluationsController(SelfEvaluationsContext db)
+        public EvaluationsController(SelfEvaluationsContext db, IEvaluationService evaluationService)
         {
             _db = db;
+            _evaluationService = evaluationService;
         }
 
         public async Task<IActionResult> Index(string username)
@@ -23,12 +26,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             // with asp-route-Id for ease of use
 
             //todo: move to service
-            var user = await _db
-                .ApplicationUsers
-                .Where(u => u.Username == username)
-                .Include(u=>u.Modules)
-                .ThenInclude(m=>m.Evaluations)
-                .FirstOrDefaultAsync();
+            var user = await _evaluationService.GetUserByUsernameAsync(username);
 
             if (user == null)
             {
@@ -46,18 +44,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         public async Task<IActionResult> ShowEvaluationsPerModule(Guid moduleId, Guid userId)
         {
-            var module = await _db
-                .Modules
-                .Where(m => m.Id == moduleId)
-                .Include(m => m.Evaluations)
-                .FirstOrDefaultAsync();
-
-            var user = await _db
-                .ApplicationUsers
-                .Where(u => u.Id == userId)
-                .Include(u => u.Modules)
-                .ThenInclude(m => m.Evaluations)
-                .FirstOrDefaultAsync();
+            var module = await _evaluationService.GetModuleByIdAsync(moduleId);
+            var user = await _evaluationService.GetUserByIdAsync(userId);
 
             if (module == null || user == null)
             {
@@ -74,12 +62,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId)
         {
-            var evaluation = await _db
-                .Evaluations
-                .Where(e => e.Id == evaluationId)
-                .Include(e => e.CompetenceDomains)
-                .ThenInclude(d => d.Competences)
-                .FirstOrDefaultAsync();
+            var evaluation = await _evaluationService.GetEvaluationByIdAsync(evaluationId);
 
             if(evaluation == null)
             {
@@ -94,7 +77,6 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             return View(evaluationsShowDomainsPerEvaluationViewModel);
         }
-
 
 
     }
