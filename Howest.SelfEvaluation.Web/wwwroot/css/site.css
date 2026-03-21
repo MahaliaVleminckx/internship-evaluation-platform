@@ -204,6 +204,7 @@ main{
     margin-right: 10px;
 }
 
+
 /*evaluation styles*/
 .evaluation-title-box > * {
     text-align: center;
@@ -226,6 +227,13 @@ main{
     .btn-info:hover{
         background-color: #00b1ff
     }
+
+/*domain styles*/
+.domain-box {
+    width: 300px;
+    border-radius: 20px;
+    margin-right: 10px;
+}
 
 .gradient-1 {
     background: linear-gradient(40deg, #2E3192, #1BFFFF);

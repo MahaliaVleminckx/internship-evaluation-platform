@@ -1,5 +1,7 @@
 using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Web.Data;
+using Howest.SelfEvaluation.Web.Services;
+using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +19,9 @@ namespace Howest.SelfEvaluation.Web
                 .AddDbContext<SelfEvaluationsContext>(options => 
                 options.UseSqlServer(builder.Configuration.GetConnectionString("EvaluationDb")));
             builder.Services.AddControllersWithViews();
+
+            //custom dependency injections
+            builder.Services.AddTransient<IEvaluationService, EvaluationService>();
 
             var app = builder.Build();
 

@@ -1,0 +1,34 @@
+﻿@model EvaluationsShowDomainsPerEvaluationViewModel
+
+@{
+    var rnd = new Random();
+}
+
+<div class="evaluation-title-box">
+    @* TODO: once login system: redirect to Evaluations/Evaluations method*@
+    <a asp-controller="Home" asp-action="Index" class="btn btn-info">
+        ←
+    </a>
+    <h1>Domeinen</h1>
+    <p class="evaluation-subtitle"><sub class="evaluation-subtitle">(@Model.Evaluation.Title)</sub></p>
+</div>
+
+<div style="display:flex">
+    @foreach (var domain in Model.Evaluation.CompetenceDomains)
+    {
+        <div class="card module-box">
+            @* TODO: direct to tests *@
+            <a asp-controller="TODO" asp-action="TODO" asp-route-id="TODO" class="link-restyle">
+                <div class="title-box gradient-@rnd.Next(1, 16) text-center" style="border-radius: 5px;">
+                    <h5>@domain.Name</h5>
+                </div>
+            </a>
+        </div>
+    }
+</div>
+
+@* TODO: chart page*@
+<a asp-controller="Evaluations" asp-action="ShowCharts" asp-route-evaluationId="@Model.Evaluation.Id" class="btn btn-info"
+style="margin-top: 10px">
+    Charts
+</a>
