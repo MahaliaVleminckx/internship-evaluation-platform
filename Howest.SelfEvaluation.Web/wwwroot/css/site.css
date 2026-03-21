@@ -29,7 +29,6 @@
 }
 
 
-
 .nav-spacing {
     padding-left: 150px;
     padding-right: 150px;
@@ -38,56 +37,7 @@
 .login-page{
     margin-top: 80px;
 }
-.module-card {
-    max-height: 300px;
-    max-width: 280px
-}
 
-.module-card .card-header{
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    text-align: center;
-}
-
-.module-card .card-header h4{
-    font-weight: 600;
-    font-size: 1.7rem;
-}
-
-    .module-card .card-header h4:hover {
-        font-weight: 600;
-        font-size: 1.7rem;
-        text-decoration: underline;
-    }
-
-.module-card .card-body p{
-    font-size: 0.8rem;
-    color: gray;
-    margin: 0.9rem 0;
-}
-
-
-.module-card .card-body strong  {
-    font-weight: 600;
-
-}
-
-body.modules-page .navbar .custom-btn{
-    background-color: red;
-    border-color: red;
-    color:white;
-}
-
-body.modules-page .navbar .custom-btn::after{
-    content: "UITLOGGEN";
-}
-
-body:not(.modules-page) .navbar .custom-btn::after {
-    content: "INLOGGEN";
-}
 
 html {
     font-size: 14px;
