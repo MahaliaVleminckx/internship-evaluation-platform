@@ -17,8 +17,7 @@
     @foreach (var evaluation in Model.Module.Evaluations)
     {
         <div class="card module-box">
-            @* TODO link to evaluation tests *@
-            <a asp-controller="TODO" asp-action="TODO" asp-route-id="TODO" class="link-restyle">
+            <a asp-controller="Evaluations" asp-action="ShowDomainsPerEvaluation" asp-route-evaluationId="@evaluation.Id" class="link-restyle">
                 <div class="title-box gradient-@rnd.Next(1,16) text-center">
                     <h3>@evaluation.Title</h3>
                 </div>
