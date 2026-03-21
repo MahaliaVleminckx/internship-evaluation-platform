@@ -92,7 +92,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 UserId = userId
             };
 
-            Sreturn View(evaluationsShowDomainsPerEvaluationViewModel);
+            return View(evaluationsShowDomainsPerEvaluationViewModel);
         }
 
 
