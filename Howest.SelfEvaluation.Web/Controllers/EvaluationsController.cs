@@ -35,9 +35,13 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             EvaluationsIndexViewModel evaluationsIndexViewModel = new EvaluationsIndexViewModel
             {
-                User = user,
+                UserId = user.Id,
+                Username = user.Username,
+                Role = user.Role,
+                Modules = user.Modules,
+                OwnerModules = user.OwnerModules,
+                StudentEvaluationScores = user.StudentEvaluationScores
             };
-
 
             return View(evaluationsIndexViewModel);
         }
@@ -54,13 +58,20 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             EvaluationsShowEvaluationsPerModuleViewModel evaluationsShowEvaluationsPerModuleViewModel = new EvaluationsShowEvaluationsPerModuleViewModel
             {
-                Module = module
+                Id= moduleId,
+                Name = module.Name,
+                Description = module.Description,
+                ApplicationUsers = module.ApplicationUsers,
+                Evaluations = module.Evaluations,
+                Owner = module.Owner,
+                OwnerId = module.OwnerId,
+                UserId = userId
             };
 
             return View(evaluationsShowEvaluationsPerModuleViewModel);
         }
 
-        public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId)
+        public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId, Guid userId)
         {
             var evaluation = await _evaluationService.GetEvaluationByIdAsync(evaluationId);
 
@@ -71,9 +82,15 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             EvaluationsShowDomainsPerEvaluationViewModel evaluationsShowDomainsPerEvaluationViewModel = new EvaluationsShowDomainsPerEvaluationViewModel
             {
-                Evaluation = evaluation
+                Id = evaluationId,
+                ModuleId = evaluation.ModuleId,
+                Title = evaluation.Title,
+                Description = evaluation.Description,
+                CompetenceDomains = evaluation.CompetenceDomains,
+                StudentEvaluationScores = evaluation.StudentEvaluationScores,
+                IsPublished = evaluation.IsPublished,
+                UserId = userId
             };
-
 
             return View(evaluationsShowDomainsPerEvaluationViewModel);
         }
