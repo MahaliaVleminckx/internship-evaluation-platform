@@ -20,6 +20,8 @@ namespace Howest.SelfEvaluation.Web.Services
             return await _db
                 .ApplicationUsers
                 .Where(u => u.Username == username)
+                .Include(u => u.OwnerModules)
+                .Include(u => u.StudentEvaluationScores)
                 .Include(u => u.Modules)
                 .ThenInclude(m => m.Evaluations)
                 .FirstOrDefaultAsync();
@@ -30,6 +32,8 @@ namespace Howest.SelfEvaluation.Web.Services
             return await _db
                 .ApplicationUsers
                 .Where(u => u.Id == userId)
+                .Include(u => u.OwnerModules)
+                .Include(u => u.StudentEvaluationScores)
                 .Include(u => u.Modules)
                 .ThenInclude(m => m.Evaluations)
                 .FirstOrDefaultAsync();
@@ -37,9 +41,11 @@ namespace Howest.SelfEvaluation.Web.Services
 
         public async Task<Module> GetModuleByIdAsync(Guid moduleId)
         {
+            //TODO: fix owner && ownerId null value
             return await _db
                 .Modules
                 .Where(m => m.Id == moduleId)
+                .Include(m => m.Owner)
                 .Include(m => m.Evaluations)
                 .FirstOrDefaultAsync();
         }
@@ -49,6 +55,7 @@ namespace Howest.SelfEvaluation.Web.Services
             return await _db
                 .Evaluations
                 .Where(e => e.Id == evaluationId)
+                .Include(e => e.StudentEvaluationScores)
                 .Include(e => e.CompetenceDomains)
                 .ThenInclude(d => d.Competences)
                 .FirstOrDefaultAsync();
