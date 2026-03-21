@@ -3,6 +3,7 @@ using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace Howest.SelfEvaluation.Web.Controllers
@@ -18,6 +19,9 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         public async Task<IActionResult> Index(string username)
         {
+            //TODO: change string username to Guid userId once we have a login system or perhaps use a btn for development reasons on home screen
+            // with asp-route-Id for ease of use
+
             //todo: move to service
             var user = await _db
                 .ApplicationUsers
@@ -40,7 +44,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(evaluationsIndexViewModel);
         }
 
-        public async Task<IActionResult> ShowEvaluationsPerModule(Guid moduleId, string username)
+        public async Task<IActionResult> ShowEvaluationsPerModule(Guid moduleId, Guid userId)
         {
             var module = await _db
                 .Modules
@@ -50,7 +54,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             var user = await _db
                 .ApplicationUsers
-                .Where(u => u.Username == username)
+                .Where(u => u.Id == userId)
                 .Include(u => u.Modules)
                 .ThenInclude(m => m.Evaluations)
                 .FirstOrDefaultAsync();
@@ -67,5 +71,14 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             return View(evaluationsShowEvaluationsPerModuleViewModel);
         }
+
+        public IActionResult ShowDomainsPerEvaluation()
+        {
+            return View();
+        }
+
+
+
+
     }
 }
