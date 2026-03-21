@@ -72,11 +72,28 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(evaluationsShowEvaluationsPerModuleViewModel);
         }
 
-        public IActionResult ShowDomainsPerEvaluation()
+        public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId)
         {
-            return View();
-        }
+            var evaluation = await _db
+                .Evaluations
+                .Where(e => e.Id == evaluationId)
+                .Include(e => e.CompetenceDomains)
+                .ThenInclude(d => d.Competences)
+                .FirstOrDefaultAsync();
 
+            if(evaluation == null)
+            {
+                return NotFound();
+            }
+
+            EvaluationsShowDomainsPerEvaluationViewModel evaluationsShowDomainsPerEvaluationViewModel = new EvaluationsShowDomainsPerEvaluationViewModel
+            {
+                Evaluation = evaluation
+            };
+
+
+            return View(evaluationsShowDomainsPerEvaluationViewModel);
+        }
 
 
 
