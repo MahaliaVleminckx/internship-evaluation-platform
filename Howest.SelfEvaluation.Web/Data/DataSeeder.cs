@@ -1,4 +1,6 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Core.Enums;
+using Microsoft.CodeAnalysis.Operations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Howest.SelfEvaluation.Web.Data
@@ -1754,13 +1756,39 @@ namespace Howest.SelfEvaluation.Web.Data
 			}).ToList();
 			#endregion
 
-			
-			modelBuilder.Entity<Module>().HasData(modules);
+			//hardcoded user for dev testing purposes, to be deleted once register implemented
+			Guid testUserId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+
+            var users = new List<ApplicationUser>
+			{
+				new ApplicationUser
+				{
+					Id = testUserId,
+					Role = RoleTypes.Student.ToString(),
+					Username="test@test.com",
+					Created = DateTime.Now
+				}
+			};
+
+			var ApplicationUserModule = new List<ApplicationUserModule>
+			{
+				new ApplicationUserModule
+				{
+					ApplicationUserId = testUserId,
+					ModuleId = moduleId
+                }
+			};
+
+
+
+            modelBuilder.Entity<ApplicationUser>().HasData(users);
+            modelBuilder.Entity<Module>().HasData(modules);
 			modelBuilder.Entity<Evaluation>().HasData(evaluations);
 			modelBuilder.Entity<CompetenceDomain>().HasData(domains);
 			modelBuilder.Entity<Competence>().HasData(competences);
 			modelBuilder.Entity<Indicator>().HasData(indicators);
 			modelBuilder.Entity<Indicator>().HasData(endEvaluationIndicators);
-        }
+			modelBuilder.Entity<ApplicationUserModule>().HasData(ApplicationUserModule);
+		}
 	}
 }

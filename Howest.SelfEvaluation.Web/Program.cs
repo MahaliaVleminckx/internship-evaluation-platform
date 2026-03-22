@@ -1,5 +1,7 @@
 using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Web.Data;
+using Howest.SelfEvaluation.Web.Services;
+using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +20,9 @@ namespace Howest.SelfEvaluation.Web
                 options.UseSqlServer(builder.Configuration.GetConnectionString("EvaluationDb")));
             builder.Services.AddControllersWithViews();
 
+            //custom dependency injections
+            builder.Services.AddTransient<IEvaluationService, EvaluationService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -31,7 +36,14 @@ namespace Howest.SelfEvaluation.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-            
+
+            //custom routes
+            app.MapControllerRoute(
+                name: "Evaluations",
+                pattern: "Evaluations/Index/{username}",
+                defaults: new { Controller = "Evaluations", Action = "Index" }
+            );
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
