@@ -60,5 +60,13 @@ namespace Howest.SelfEvaluation.Web.Services
                 .ThenInclude(d => d.Competences)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<IEnumerable<Evaluation>> GetAllEvaluationsAsync()
+        {
+            return await _db
+                .Evaluations
+                .ToListAsync();
+        }
+
     }
 }

@@ -3,12 +3,16 @@ using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace Howest.SelfEvaluation.Web.Controllers
 {
+    //preparation for Microsoft Identity, this controller is public for everyone, other controllers need authorization
+    //need to app.UseAuthorization() in program.cs once implemented for this to work
+    [AllowAnonymous]
     public class EvaluationsController : Controller
     {
         private readonly SelfEvaluationsContext _db;
@@ -24,8 +28,6 @@ namespace Howest.SelfEvaluation.Web.Controllers
         {
             //TODO: change string username to Guid userId once we have a login system or perhaps use a btn for development reasons on home screen
             // with asp-route-Id for ease of use
-
-            //todo: move to service
             var user = await _evaluationService.GetUserByUsernameAsync(username);
 
             if (user == null)
