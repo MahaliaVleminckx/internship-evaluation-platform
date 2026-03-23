@@ -28,7 +28,6 @@ namespace Howest.SelfEvaluation.Web.Controllers
         {
             //TODO: change string username to Guid userId once we have a login system or perhaps use a btn for development reasons on home screen
             // with asp-route-Id for ease of use
-
             var user = await _evaluationService.GetUserByUsernameAsync(username);
 
             if (user == null)

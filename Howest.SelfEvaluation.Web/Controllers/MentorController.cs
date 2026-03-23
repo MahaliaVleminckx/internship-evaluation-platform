@@ -1,5 +1,6 @@
 ﻿using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
+using Howest.SelfEvaluation.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,10 +22,14 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            //todo
+            var allEvaluations = await _evaluationService.GetAllAvailableEvaluationsAsync();
 
+            var mentorIndexViewModel = new MentorIndexViewModel
+            {
+                Evaluations = allEvaluations
+            };
 
-            return View();
+            return View(mentorIndexViewModel);
         }
     }
 }
