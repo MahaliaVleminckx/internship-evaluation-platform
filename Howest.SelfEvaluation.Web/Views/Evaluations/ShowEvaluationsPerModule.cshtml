@@ -1,31 +1,35 @@
 ﻿@model EvaluationsShowEvaluationsPerModuleViewModel
 
-@{
-    var rnd = new Random();
-}
+@* 
+    todo:
+<partial name="_EvaluationsList" model="@Model"></partial> *@
 
-<div class="evaluation-title-box">
-    @* TODO: once login system: redirect to Evaluations/Modules *@
-    <a asp-controller="Home" asp-action="Index" class="btn btn-info">
-         ←
-    </a>
-    <h1>Evaluaties</h1>
-    <p class="evaluation-subtitle"><sub class="evaluation-subtitle">(@Model.Name)</sub></p>
-</div>
-
-<div style="display:flex">
-    @foreach (var evaluation in Model.Evaluations)
-    {
-        <div class="card module-box">
-            <a asp-controller="Evaluations" asp-action="ShowDomainsPerEvaluation" asp-route-evaluationId="@evaluation.Id"
-            asp-route-userId="@Model.UserId" class="link-restyle">
-                <div class="title-box gradient-@rnd.Next(1,16) text-center">
-                    <h4>@evaluation.Title</h4>
-                </div>
-                <div class="domain-box">
-                    <h7 class="text-muted">Beschikbaar tot: @evaluation.EndDate.Value.ToString("d")</h7>
-                </div>
-            </a>
-        </div>
+    @{
+        var rnd = new Random();
     }
-</div>
+
+    <div class="evaluation-title-box">
+        @* TODO: once login system: redirect to Evaluations/Modules *@
+        <a asp-controller="Home" asp-action="Index" class="btn btn-info">
+            ←
+        </a>
+        <h1>Evaluaties</h1>
+        <p class="evaluation-subtitle"><sub class="evaluation-subtitle">(@Model.Name)</sub></p>
+    </div>
+
+    <div style="display:flex">
+        @foreach (var evaluation in Model.Evaluations)
+        {
+            <div class="card module-box">
+                <a asp-controller="Evaluations" asp-action="ShowDomainsPerEvaluation" asp-route-evaluationId="@evaluation.Id"
+                       asp-route-userId="@Model.UserId" class="link-restyle">
+                    <div class="title-box gradient-@rnd.Next(1, 16) text-center">
+                        <h4>@evaluation.Title</h4>
+                    </div>
+                    <div class="domain-box">
+                        <h7 class="text-muted">Beschikbaar tot: @evaluation.EndDate.Value.ToString("d")</h7>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
