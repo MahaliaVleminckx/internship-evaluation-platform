@@ -1,11 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Howest.SelfEvaluation.Web.Data;
+using Howest.SelfEvaluation.Web.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Howest.SelfEvaluation.Web.Controllers
 {
+    //For testing purposes this is public
+    //TODO: Use authorize attribute once Microsoft Identity implemented, uncomment code below to protect from public
+    //[Authorize(Roles = "Mentor")]
     public class MentorController : Controller
     {
-        public IActionResult Index()
+        private readonly SelfEvaluationsContext _db;
+        private readonly IEvaluationService _evaluationService;
+
+        public MentorController(SelfEvaluationsContext db, IEvaluationService evaluationService)
         {
+            _db = db;
+            _evaluationService = evaluationService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            //todo
+
+
             return View();
         }
     }
