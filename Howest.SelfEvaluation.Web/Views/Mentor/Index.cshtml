@@ -1,15 +1,11 @@
 ﻿@model MentorIndexViewModel
 
-@* 
-    todo:
-<partial name="_EvaluationsList" model="@Model"></partial> *@
-
 @{
     var rnd = new Random();
 }
 
 <div class="evaluation-title-box">
-    @* TODO: once login system: redirect to Evaluations/Modules *@
+    @* TODO: once login system: redirect to Mentor/Modules *@
     <a asp-controller="Home" asp-action="Index" class="btn btn-info">
         ←
     </a>
@@ -20,7 +16,7 @@
     @foreach (var evaluation in Model.Evaluations)
     {
         <div class="card module-box">
-            <a asp-controller="Evaluations" asp-action="ShowDomainsPerEvaluation" asp-route-evaluationId="@evaluation.Id"
+            <a asp-controller="Mentor" asp-action="ShowDomainsPerEvaluation" asp-route-evaluationId="@evaluation.Id"
                    asp-route-userId="" class="link-restyle">
                 <div class="title-box gradient-@rnd.Next(1, 16) text-center">
                     <h4>@evaluation.Title</h4>
