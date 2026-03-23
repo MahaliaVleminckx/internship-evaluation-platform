@@ -9,8 +9,22 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
-    <h1>My Page Title</h1>
+
+<body class="@ViewData["BodyClass"]">
+    <nav class="navbar navbar-expand-xl sticky-top">
+        <div class="container-fluid nav-spacing">
+            <a class="navbar-brand" href="#">
+                <img src="/img/psych-logo.png" alt="HOWEST Psychologie" width="150" class="logo-nav" />
+            </a>
+          
+
+            <div class="ml-auto">
+                <button type="button" class="btn btn-primary custom-btn">INLOGGEN</button>
+            </div>
+        </div>
+    </nav>
+
+    @*<h1>My Page Title</h1>*@
     <div class="container">
         @RenderBody()
     </div>
