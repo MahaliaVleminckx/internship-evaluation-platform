@@ -68,7 +68,7 @@ namespace Howest.SelfEvaluation.Web.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Evaluation>> GetAllPublishedEvalutionsAsync()
+        public async Task<IEnumerable<Evaluation>> GetAllPublishedEvaluationsAsync()
         {
             return await _db
                 .Evaluations
