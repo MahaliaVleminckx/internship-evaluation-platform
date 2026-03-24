@@ -24,6 +24,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             _evaluationService = evaluationService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index(string username)
         {
             //TODO: change string username to Guid userId once we have a login system or perhaps use a btn for development reasons on home screen
@@ -48,6 +49,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(evaluationsIndexViewModel);
         }
 
+        [HttpGet]
         public async Task<IActionResult> ShowEvaluationsPerModule(Guid moduleId, Guid userId)
         {
             var module = await _evaluationService.GetModuleByIdAsync(moduleId);
@@ -73,6 +75,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(evaluationsShowEvaluationsPerModuleViewModel);
         }
 
+        [HttpGet]
         public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId, Guid userId)
         {
             var evaluation = await _evaluationService.GetEvaluationByIdAsync(evaluationId);

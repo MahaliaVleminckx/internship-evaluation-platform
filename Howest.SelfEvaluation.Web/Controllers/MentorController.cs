@@ -20,6 +20,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             _evaluationService = evaluationService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var allEvaluations = await _evaluationService.GetAllPublishedEvaluationsAsync();
