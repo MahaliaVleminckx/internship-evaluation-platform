@@ -22,7 +22,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var allEvaluations = await _evaluationService.GetAllEvaluationsAsync();
+            var allEvaluations = await _evaluationService.GetAllPublishedEvaluationsAsync();
 
             var mentorIndexViewModel = new MentorIndexViewModel
             {

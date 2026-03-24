@@ -22,10 +22,10 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var availableEvaluations = await _evaluationService.GetAllEvaluationsAsync();
+            var availableEvaluations = await _evaluationService.GetAllPublishedEvaluationsAsync();
             var teacherIndexViewModel = new TeacherIndexViewModel
             {
-                    Evaluations = availableEvaluations
+                Evaluations = availableEvaluations
             };
             return View(teacherIndexViewModel);
         }
