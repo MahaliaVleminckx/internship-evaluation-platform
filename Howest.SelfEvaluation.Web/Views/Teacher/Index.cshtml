@@ -1,7 +1,33 @@
-﻿
+﻿@model TeacherIndexViewModel
+
 @{
-    ViewData["Title"] = "Index";
+    var rnd = new Random();
 }
 
-<h1>Index</h1>
+<div class="evaluation-title-box">
+    @* TODO: once login system: redirect to Teacher/Modules *@
+    <a asp-controller="Home" asp-action="Index" class="btn btn-info">
+        ←
+    </a>
+    <h1>Evaluaties</h1>
+</div>
 
+<div style="display:flex">
+    @foreach (var evaluation in Model.Evaluations)
+    {
+        <div class="card module-box">
+            @* TODO: awaiting for Microsoft Identity login system. Maybe use the same controller and action but give userId (with a check in the method on which role
+                the user has) as route paramater?
+                this to avoid code duplicity across classes? *@
+            <a asp-controller="Teacher" asp-action="ShowDomainsPerEvaluation" asp-route-evaluationId="@evaluation.Id"
+                   asp-route-userId="" class="link-restyle">
+                <div class="title-box gradient-@rnd.Next(1, 16) text-center">
+                    <h4>@evaluation.Title</h4>
+                </div>
+                <div class="domain-box">
+                    <h7 class="text-muted">Beschikbaar tot: @evaluation.EndDate.Value.ToString("d")</h7>
+                </div>
+            </a>
+        </div>
+    }
+</div>
