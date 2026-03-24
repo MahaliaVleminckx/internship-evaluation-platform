@@ -13,6 +13,10 @@
 </div>
 
 <div style="display:flex">
+    @if (Model.Evaluations.Count() == 0)
+    {
+        <h4 style="margin-top: 10px;">Geen evaluaties werden gevonden.</h4>
+    }
     @foreach (var evaluation in Model.Evaluations)
     {
         <div class="card module-box">

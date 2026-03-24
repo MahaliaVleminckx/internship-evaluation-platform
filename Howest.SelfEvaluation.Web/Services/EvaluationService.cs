@@ -54,7 +54,7 @@ namespace Howest.SelfEvaluation.Web.Services
         {
             return await _db
                 .Evaluations
-                .Where(e => e.Id == evaluationId)
+                .Where(e => e.Id == evaluationId && e.IsPublished == true)
                 .Include(e => e.StudentEvaluationScores)
                 .Include(e => e.CompetenceDomains)
                 .ThenInclude(d => d.Competences)
