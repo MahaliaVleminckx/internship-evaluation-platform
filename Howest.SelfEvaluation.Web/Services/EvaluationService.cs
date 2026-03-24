@@ -54,7 +54,7 @@ namespace Howest.SelfEvaluation.Web.Services
         {
             return await _db
                 .Evaluations
-                .Where(e => e.Id == evaluationId)
+                .Where(e => e.Id == evaluationId && e.IsPublished == true)
                 .Include(e => e.StudentEvaluationScores)
                 .Include(e => e.CompetenceDomains)
                 .ThenInclude(d => d.Competences)
@@ -65,6 +65,14 @@ namespace Howest.SelfEvaluation.Web.Services
         {
             return await _db
                 .Evaluations
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Evaluation>> GetAllPublishedEvaluationsAsync()
+        {
+            return await _db
+                .Evaluations
+                .Where(e => e.IsPublished == true)
                 .ToListAsync();
         }
 
