@@ -3,6 +3,7 @@ using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore; 
 
 namespace Howest.SelfEvaluation.Web.Controllers
 {
@@ -30,6 +31,31 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
 
             return View(mentorIndexViewModel);
+        }
+
+        public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId)
+        {
+            var evaluation = await _db.Evaluations.FindAsync(evaluationId);
+
+            if (evaluation == null)
+            {
+                return NotFound();
+            }
+
+            var domains = await _db.CompetenceDomains
+                .Where(d => d.EvaluationId == evaluationId) .ToListAsync();
+
+            var viewModel = new MentorEvaluationDomainsViewModel
+            {
+                EvaluationId = evaluation.Id,
+                Title = evaluation.Title,
+                IsPublished = evaluation.IsPublished,
+                CompetenceDomains = domains,
+                UserId = Guid.NewGuid() //Temporary for testing purposes 
+            };
+
+            
+            return View(viewModel);
         }
     }
 }
