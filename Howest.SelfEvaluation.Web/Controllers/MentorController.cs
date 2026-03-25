@@ -1,4 +1,5 @@
-﻿using Howest.SelfEvaluation.Web.Data;
+﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -55,6 +56,27 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
 
             
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> ShowCompetencePerDomain (Guid domainId)
+        {
+            var domain = await _db.CompetenceDomains
+                .Include(d => d.Competences)
+                .FirstOrDefaultAsync(d => d.Id == domainId);
+
+            if (domain == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new MentorCompetencesViewModel
+            {
+                DomainId = domain.Id,
+                DomainName = domain.Name,
+                Competences = domain.Competences.ToList()
+            };
+
             return View(viewModel);
         }
     }
