@@ -71,8 +71,16 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 return NotFound();
             }
 
+            var evaluation = await _db.Evaluations.FindAsync(domain.EvaluationId);
+            if (evaluation == null) 
+            {
+                return NotFound();
+            }
+
+
             var viewModel = new MentorCompetencesViewModel
             {
+                EvaluationId = evaluation.Id,
                 DomainId = domain.Id,
                 DomainName = domain.Name,
                 Competences = domain.Competences.ToList()

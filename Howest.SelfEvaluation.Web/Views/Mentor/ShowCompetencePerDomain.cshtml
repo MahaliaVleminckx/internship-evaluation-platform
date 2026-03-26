@@ -61,4 +61,13 @@
             </div>
         </div>
     }
+
+    <div style="margin-top: 30px; display: flex; gap:15px;">
+        <button class="custom-btn" type="submit" name="action" value="save">Evaluatie opslaan</button>
+        @*Gaat momenteel nog terug naar mentor/index moet terug nar domeinen gaan*@
+        <a asp-controller="Mentor" asp-action="ShowDomainsPerEvaluation" asp-route-evaluationId="@Model.EvaluationId">
+            <button class="custom-btn-gobackdomains" type ="button">Terug naar domeinen</button>
+        </a>
+    </div>
+
 </div>
