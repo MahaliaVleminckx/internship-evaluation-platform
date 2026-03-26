@@ -63,6 +63,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         {
             var domain = await _db.CompetenceDomains
                 .Include(d => d.Competences)
+                .ThenInclude(c => c.Indicators)
                 .FirstOrDefaultAsync(d => d.Id == domainId);
 
             if (domain == null)

@@ -1,18 +1,64 @@
 ﻿@model MentorCompetencesViewModel
 
-<div class="evaluation-title-box" style="display:flex; align-items:center; gap:20px;">
+<div class="evaluation-title-box" style="display:flex; align-items:center; gap:20px; margin-bottom:20px;">
     <a asp-controller="Mentor" asp-action="Index" class="custom-btn">
         ←
     </a>
-    <h1>@Model.Title</h1>
-    <p><sub>(@Model.DomainName)</sub></p>
+    <div style="display:flex; align-items:baseline; gap:10px;">
+        <h1 style="margin:0;">@Model.Title</h1>
+        <span class="evaluation-subtitle">(@Model.DomainName)</span>
+    </div>
 </div>
 
 <div>
     @foreach (var competence in Model.Competences)
     {
-        <div class="competence-box" style="box-shadow: 0 2px 5px rgb(185 180 182); padding:15px; margin-bottom:20px; border-radius:8px;">
+        <div class="competence-box" style="box-shadow: 0 2px 5px rgb(185 180 182); padding:15px; margin-bottom:20px; border-radius:8px; background-color: #f8f8f8;">
 
+            <p style="font-weight: 600;">@competence.Name: <small>@competence.Description</small></p>
+
+            @{
+                var groupedIndicator = competence.Indicators.OrderBy(i => i.ScaleValueScore)
+                    .GroupBy(i => i.ScaleValueScore == 1 ? 1 :
+                i.ScaleValueScore <= 3 ? 2 :
+                i.ScaleValueScore <= 5 ? 3 : 4);
+            }
+
+            <div style="display:flex; justify-content:center; gap:20px; margin-top:15px; flex-wrap:wrap;">
+                @foreach (var group in groupedIndicator)
+                {
+                    <div style="flex:1; min-width:120px; text-align:center; margin-bottom:15px;">
+                        <div style="display: flex; justify-content:center; gap: 20px;">
+                            @foreach (var indicator in group)
+                            {
+                                <div style="display:flex; flex-direction: column; align-items: center;">
+                                    <p style="font-size: 0.8rem;font-weight:700; margin:0;">@indicator.ScaleValue</p>
+                                    <input type="radio" name="score-@competence.Id" value="@indicator.ScaleValueScore" class="answer-@indicator.ScaleValueScore" style="margin-top:20px; margin-bottom:10px;" />
+                                </div>
+                            }
+                        </div>
+
+                        <div class="text-muted" style="font-size: 0.8em;">
+                            @group.First().Description
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+            <div style="margin-top:10px;">
+                <input type="radio"
+                       name="score-@competence.Id"
+                       value="0" />
+                <span class="text-muted" style="font-size:0.7em;">
+                    Vraag is niet van toepassing
+                </span>
+            </div>
+
+            <div class="textarea-container">
+                <textarea name="comment-@competence.Id" class="form-control" placeholder=" " required></textarea>
+                <label>Extra toelichting</label>
+            </div>
         </div>
     }
 </div>
