@@ -21,8 +21,6 @@
         </div>
     </div>
 
-    @*<div>*@
-    @*@foreach (var competence in Model.Competences)*@
     @for (int i = 0; i < Model.Competences.Count; i++)
     {
         var competence = Model.Competences[i];
@@ -48,7 +46,6 @@
                             {
                                 <div class="indicator-option" style="display:flex; flex-direction: column; align-items: center;">
                                     <p style="font-size: 0.8rem;font-weight:700; margin:0;">@indicator.ScaleValue</p>
-                                    @*<input type="radio" name="score-@competence.Id" value="@indicator.ScaleValueScore" class="answer-@indicator.ScaleValueScore" style="margin-top:20px; margin-bottom:10px;" />*@
                                     <input type="radio" asp-for="Competences[@i].SelectedIndicatorId" value="@indicator.Id" class="answer-@indicator.ScaleValueScore" style="margin-top:20px; margin-bottom:10px;" />
                                 </div>
                             }
@@ -72,7 +69,6 @@
             </div>
 
             <div class="textarea-container">
-                @*<textarea name="comment-@competence.Id" class="form-control" placeholder=" " required></textarea>*@
                 <textarea asp-for="Competences[@i].Comment" class="form-control" placeholder=" " @*required*@></textarea>
                 <label>Extra toelichting</label>
             </div>

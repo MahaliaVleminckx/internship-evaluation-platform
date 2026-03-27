@@ -10,9 +10,8 @@ namespace Howest.SelfEvaluation.Web.ViewModels
         public string Description { get; set; }
         public List<Indicator> Indicators { get; set; } = new List<Indicator>();
 
-        //Extra action properties voor form
         public Guid? SelectedIndicatorId { get; set; }
-        //public bool NotApplicable { get; set; }
+       
         public string Comment { get; set; }
     }
 }

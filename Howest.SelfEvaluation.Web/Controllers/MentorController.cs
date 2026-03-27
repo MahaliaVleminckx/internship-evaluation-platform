@@ -112,7 +112,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 TempData["ErrorMessage"] = "Er is iets fout gegaan bij het opslaan";
                 return View(model);
             }
-            var userId = Guid.Parse("00000000-0000-0000-0000-000000000010"); /*Tijdelijk voor te testen*/
+            var userId = Guid.Parse("00000000-0000-0000-0000-000000000010");
             foreach (var competence in model.Competences)
             {
                 var competenceExists = await _db.Competences.AnyAsync(c => c.Id == competence.Id);
@@ -120,13 +120,6 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 {
                     continue;
                 }
-                //if (competence.SelectedIndicatorId.HasValue)
-                //{
-                    //var indicator = await _db.Indicators.FirstOrDefaultAsync(i => i.Id == competence.SelectedIndicatorId.Value);
-                    //if (indicator != null)
-                    //{
-                    //    competence.SelectedIndicatorId = null;
-                    //}
                     var score = new EvaluationScore
                     {
                         EvaluationId = model.EvaluationId,
@@ -137,7 +130,6 @@ namespace Howest.SelfEvaluation.Web.Controllers
                         UserId = userId
                     };
                     _db.EvaluationScores.Add(score);
-                //}
             }
 
             await _db.SaveChangesAsync();
