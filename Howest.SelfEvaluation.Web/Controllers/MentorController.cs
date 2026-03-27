@@ -10,7 +10,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 {
     //For testing purposes this is public
     //TODO: Use authorize attribute once Microsoft Identity implemented, uncomment code below to protect from public
-    //[Authorize(Roles = "Mentor")]
+    //[Authorize(Roles = "Mentor, Admin")]
     public class MentorController : Controller
     {
         private readonly SelfEvaluationsContext _db;
@@ -22,9 +22,10 @@ namespace Howest.SelfEvaluation.Web.Controllers
             _evaluationService = evaluationService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var allEvaluations = await _evaluationService.GetAllEvaluationsAsync();
+            var allEvaluations = await _evaluationService.GetAllPublishedEvaluationsAsync();
 
             var mentorIndexViewModel = new MentorIndexViewModel
             {
