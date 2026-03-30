@@ -2,6 +2,7 @@
 using Howest.SelfEvaluation.Core.Enums;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
+using Howest.SelfEvaluation.Web.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Howest.SelfEvaluation.Web.Services
@@ -9,6 +10,7 @@ namespace Howest.SelfEvaluation.Web.Services
     public class EvaluationService : IEvaluationService
     {
         private readonly SelfEvaluationsContext _db;
+
 
         public EvaluationService(SelfEvaluationsContext db)
         {
@@ -76,7 +78,19 @@ namespace Howest.SelfEvaluation.Web.Services
                 .Where(e => e.IsPublished == true)
                 .ToListAsync();
         }
+        public async Task<Evaluation> GetEvaluationForStudentAsync(Guid evaluationId)
+        {
+            return await _db.Evaluations
+                .Include(e => e.CompetenceDomains)
+                    .ThenInclude(d => d.Competences)
+                        .ThenInclude(c => c.Indicators)
+                .FirstOrDefaultAsync(e => e.Id == evaluationId);
+        }
+        public async Task SaveStudentEvaluationAsync(StudentEvaluationViewModel vm)
+        {
+            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001"); // temporary
 
+<<<<<<< HEAD
         public async Task<IEnumerable<ApplicationUser>> GetAllStudentsForMentorAsync(Guid mentorId)
         {
             return await _db
@@ -85,5 +99,26 @@ namespace Howest.SelfEvaluation.Web.Services
                 .ToListAsync();
         }
 
+=======
+            foreach (var q in vm.Questions)
+            {
+                var score = new EvaluationScore
+                {
+                    Id = Guid.NewGuid(),
+                    EvaluationId = vm.EvaluationId,
+                    IndicatorId = q.QuestionId,
+                    UserId = userId,
+                    ExtraInfo = q.Answer,
+                    NotApplicable = false,
+                    Created = DateTime.UtcNow
+                };
+
+                _db.EvaluationScores.Add(score);
+            }
+
+            await _db.SaveChangesAsync();
+        }
+        
+>>>>>>> 5c2afa9 (Added saving forms with static Id's)
     }
 }
