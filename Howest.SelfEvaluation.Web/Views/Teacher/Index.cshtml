@@ -6,7 +6,7 @@
 
 <h1>Mijn modules</h1>
 
-@foreach (var module in Model.OwnerModules)
+@foreach (var module in Model.Modules)
 {
     <div class="card module-box">
         <a asp-controller="Teacher" asp-action="ShowEvaluationsPerModule" asp-route-moduleId="@module.Id" asp-route-userId="@Model.UserId"

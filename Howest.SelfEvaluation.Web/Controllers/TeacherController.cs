@@ -2,6 +2,7 @@
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -30,30 +31,35 @@ namespace Howest.SelfEvaluation.Web.Controllers
             // with asp-route-Id for ease of use
             //you can get into the index through https://localhost:7140/Teacher/Index?username=teacher@test.com
 
+
             if (string.IsNullOrEmpty(username))
             {
                 return BadRequest("Username is required");
             }
 
             var user = await _db.ApplicationUsers
-                .Include(u => u.OwnerModules)
-                .ThenInclude(m => m.Evaluations)
                 .Include(u => u.Modules)
                 .ThenInclude(m => m.Evaluations)
+                .Include(u => u.OwnerModules)
+                .ThenInclude(m => m.Evaluations)
                 .FirstOrDefaultAsync(u => u.Username == username);
+
+
+            var allModules = user.Modules
+              .Concat(user.OwnerModules)
+              .Where(m => m.Evaluations != null && m.Evaluations.Any()).ToList();
 
             if (user == null)
             {
                 return NotFound();
             }
 
-
             TeacherIndexViewModel viewModel = new TeacherIndexViewModel
             {
                 UserId = user.Id,
                 Username = user.Username,
                 Role = user.Role,
-                Modules = user.Modules,
+                Modules = allModules,
                 OwnerModules = user.OwnerModules,
                 TeacherEvaluationScores = user.StudentEvaluationScores
             };
@@ -81,7 +87,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 Evaluations = module.Evaluations.ToList(),
                 UserId = userId
             };
-           return View(viewmodel);
+            return View(viewmodel);
         }
     }
 }
