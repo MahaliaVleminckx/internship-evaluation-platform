@@ -1,4 +1,5 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Web.ViewModels;
 using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace Howest.SelfEvaluation.Web.Services.Interfaces
@@ -11,5 +12,7 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         Task<Evaluation> GetEvaluationByIdAsync(Guid id);
         Task<IEnumerable<Evaluation>> GetAllEvaluationsAsync();
         Task<IEnumerable<Evaluation>> GetAllPublishedEvaluationsAsync();
+        Task<Evaluation> GetEvaluationForStudentAsync(Guid evaluationId);
+        Task SaveStudentEvaluationAsync(StudentEvaluationViewModel vm);
     }
 }
