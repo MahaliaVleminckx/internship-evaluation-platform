@@ -6,7 +6,7 @@
 
 <div class="evaluation-title-box">
     @* TODO: once login system: redirect to Evaluations/Evaluations method*@
-    <a asp-controller="Home" asp-action="Index" class="btn btn-info">
+    <a asp-controller="Home" asp-action="Index" class="btn custom-btn">
         ←
     </a>
     <h1>Domeinen</h1>
@@ -29,7 +29,7 @@
 </div>
 
 @* TODO: chart page*@
-<a asp-controller="Evaluations" asp-action="ShowCharts" asp-route-evaluationId="@Model.ModuleId" class="btn btn-info"
+<a asp-controller="Evaluations" asp-action="ShowCharts" asp-route-evaluationId="@Model.ModuleId" class="btn custom-btn"
 style="margin-top: 10px">
     Charts
 </a>
