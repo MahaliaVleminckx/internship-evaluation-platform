@@ -40,7 +40,7 @@ public class StudentController : Controller
 
         await _evaluationService.SaveStudentEvaluationAsync(vm);
 
-        return RedirectToAction("Index");
+        return RedirectToAction("Index", "Evaluations", new { username = "test@test.com" });
     }
 // Test Code
     [HttpGet]

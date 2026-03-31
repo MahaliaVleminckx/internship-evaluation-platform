@@ -91,18 +91,32 @@ namespace Howest.SelfEvaluation.Web.Services
 
             foreach (var q in vm.Questions)
             {
-                var score = new EvaluationScore
-                {
-                    Id = Guid.NewGuid(),
-                    EvaluationId = vm.EvaluationId,
-                    IndicatorId = q.QuestionId,
-                    UserId = userId,
-                    ExtraInfo = q.Answer,
-                    NotApplicable = false,
-                    Created = DateTime.UtcNow
-                };
+                var existing = await _db.EvaluationScores
+                    .FirstOrDefaultAsync(x =>
+                        x.EvaluationId == vm.EvaluationId &&
+                        x.IndicatorId == q.QuestionId &&
+                        x.UserId == userId);
 
-                _db.EvaluationScores.Add(score);
+                if (existing != null)
+                {
+                    existing.ExtraInfo = q.Answer;
+                    existing.Updated = DateTime.UtcNow;
+                }
+                else
+                {
+                    var score = new EvaluationScore
+                    {
+                        Id = Guid.NewGuid(),
+                        EvaluationId = vm.EvaluationId,
+                        IndicatorId = q.QuestionId,
+                        UserId = userId,
+                        ExtraInfo = q.Answer,
+                        NotApplicable = false,
+                        Created = DateTime.UtcNow
+                    };
+
+                    _db.EvaluationScores.Add(score);
+                }
             }
 
             await _db.SaveChangesAsync();

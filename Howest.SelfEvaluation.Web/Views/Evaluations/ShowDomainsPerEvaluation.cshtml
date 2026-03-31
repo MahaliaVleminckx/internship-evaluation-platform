@@ -27,6 +27,13 @@
         </div>
     }
 </div>
+<a asp-controller="Student"
+   asp-action="Fill"
+   asp-route-evaluationId="@Model.Id"
+   class="btn btn-primary"
+   style="margin-top: 15px;">
+    Fill in evaluation
+</a>
 
 @* TODO: chart page*@
 <a asp-controller="Evaluations" asp-action="ShowCharts" asp-route-evaluationId="@Model.ModuleId" class="btn btn-info"
