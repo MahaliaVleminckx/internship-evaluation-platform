@@ -6,7 +6,7 @@
 
 <div class="evaluation-title-box">
     @* TODO: once login system: redirect to Mentor/Modules *@
-    <a asp-controller="Home" asp-action="Index" class="btn btn-info">
+    <a asp-controller="Home" asp-action="Index" class="btn custom-btn">
         ←
     </a>
     <h1>Evaluaties</h1>
@@ -21,7 +21,7 @@
     {
         <div class="card module-box">
             <a asp-controller="Mentor" asp-action="ShowDomainsPerEvaluation" asp-route-evaluationId="@evaluation.Id"
-                   asp-route-userId="" class="link-restyle">
+                   @*asp-route-userId=""*@ class="link-restyle">
                 <div class="title-box gradient-@rnd.Next(1, 16) text-center">
                     <h4>@evaluation.Title</h4>
                 </div>
