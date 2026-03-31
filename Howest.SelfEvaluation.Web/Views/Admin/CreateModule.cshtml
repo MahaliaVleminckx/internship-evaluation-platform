@@ -1,0 +1,25 @@
+﻿@{ViewData["Title"] = "Create Module"; }
+
+<h1 class="mb-4">Create Module</h1>
+
+<div class="shadow-sm p-5 mb-4 rounded">
+    <form asp-action="CreateModule" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Naam</label>
+            <input type="text" class="form-control" name="name" placeholder="Geef modulenaam" required />
+        </div>
+        <div class="mb-3">
+            <label  for="description" class="form-label">Beschrijving</label>
+            <textarea class="form-control"  id="description" name="description" rows="3" placeholder="Modulebeschrijving"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="ownerId" class="form-label" >Gebruikers</label>
+            <select class="form-select" id="ownerId" name="ownerId">
+                <option value="">-- None --</option>
+                <option value="00000000-0000-0000-0000-000000000020">teacher@test.com</option>
+            </select>
+        </div>
+        <button type="submit" class="custom-btn">Create Module</button>
+        <a href="/" class="btn custom-btn-gobackdomains">Cancel</a>
+    </form>
+</div>
