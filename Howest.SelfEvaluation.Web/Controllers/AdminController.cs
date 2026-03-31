@@ -2,7 +2,8 @@
 using Howest.SelfEvaluation.Web.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-//using System.Reflection;
+using NuGet.Protocol.Providers;
+
 
 namespace Howest.SelfEvaluation.Web.Controllers
 {
@@ -16,11 +17,6 @@ namespace Howest.SelfEvaluation.Web.Controllers
         }
 
         [HttpGet]
-
-        //public IActionResult CreateModule()
-        //{
-        //    return View();
-        //}
 
         public async Task<IActionResult> CreateModule()
         {
@@ -57,18 +53,21 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             _db.Modules.Add(module);
 
+            _db.Set<ApplicationUserModule>().Add(new ApplicationUserModule
+            {
+                ApplicationUserId = ownerId.Value,
+                ModuleId = module.Id
+            });
+
             if (assignedStudentIds != null && assignedStudentIds.Count > 0)
             {
-                var students = await _db.ApplicationUsers.Where(u => assignedStudentIds.Contains(u.Id)).ToListAsync();
-                foreach (var student in students)
+                foreach (var studentId in assignedStudentIds)
                 {
-                    //_db.Set<ApplicationUserModule>().Add(new ApplicationUserModule
-                    //{
-                    //    ApplicationUserId = studentId,
-                    //    ModuleId = module.Id
-                    //});
-
-                    student.Modules.Add(module);
+                    _db.Set<ApplicationUserModule>().Add(new ApplicationUserModule
+                    {
+                        ApplicationUserId = studentId,
+                        ModuleId = module.Id
+                    });
                 }
             }
 
