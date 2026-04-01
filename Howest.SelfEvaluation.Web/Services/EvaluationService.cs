@@ -75,6 +75,14 @@ namespace Howest.SelfEvaluation.Web.Services
                 .Where(e => e.IsPublished == true)
                 .ToListAsync();
         }
+        public async Task<List<ApplicationUser>> GetStudentsForEvaluationAsync(Guid evaluationId)
+        {
+            return await _db.EvaluationScores
+                .Where(es => es.EvaluationId == evaluationId && es.UserId != null)
+                .Select(es => es.User)
+                .Distinct()
+                .ToListAsync();
+        }
 
     }
 }

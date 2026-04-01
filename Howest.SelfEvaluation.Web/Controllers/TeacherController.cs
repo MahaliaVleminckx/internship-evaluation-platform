@@ -89,6 +89,19 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
             return View(viewmodel);
         }
+        [HttpGet]
+        public async Task<IActionResult> ShowStudents(Guid evaluationId)
+        {
+            var students = await _evaluationService.GetStudentsForEvaluationAsync(evaluationId);
+
+            var vm = new TeacherStudentsViewModel
+            {
+                EvaluationId = evaluationId,
+                Students = students
+            };
+
+            return View(vm);
+        }
     }
 }
 

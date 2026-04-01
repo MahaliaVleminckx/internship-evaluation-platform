@@ -30,6 +30,15 @@
                     <h7 class="text-muted">Beschikbaar tot: @evaluation.EndDate.Value.ToString("d")</h7>
                 </div>
             </a>
+            <div style="padding:10px; text-align:center;">
+                <a asp-controller="Teacher"
+                   asp-action="ShowStudents"
+                   asp-route-evaluationId="@evaluation.Id"
+                   class="btn btn-primary">
+                    View students
+                </a>
+            </div>
         </div>
     }
+
 </div>

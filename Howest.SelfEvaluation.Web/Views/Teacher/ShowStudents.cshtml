@@ -1,0 +1,16 @@
+﻿@model TeacherStudentsViewModel
+
+<h2>Select a student</h2>
+
+@foreach (var student in Model.Students)
+{
+    <div>
+        <a asp-controller="Teacher"
+           asp-action="ViewStudentEvaluation"
+           asp-route-evaluationId="@Model.EvaluationId"
+           asp-route-userId="@student.Id">
+
+            @student.Username
+        </a>
+    </div>
+}
