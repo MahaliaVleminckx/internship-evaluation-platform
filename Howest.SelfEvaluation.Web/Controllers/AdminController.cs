@@ -1,5 +1,6 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Web.Data;
+using Howest.SelfEvaluation.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Providers;
@@ -20,34 +21,28 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         public async Task<IActionResult> CreateModule()
         {
-            var students = await _db.ApplicationUsers.Where(u => u.Role == "Student").ToListAsync();
-
-            ViewBag.Students = students;
-
-            var teachers = await _db.ApplicationUsers.Where(u => u.Role == "Teacher").ToListAsync();
-
-            ViewBag.Teachers = teachers;
-
-
-            return View();
-
+            var vm = new CreateModuleViewModel
+            {
+                Students = await _db.ApplicationUsers.Where(u => u.Role == "Student").ToListAsync(),
+                Teachers = await _db.ApplicationUsers.Where(u => u.Role == "Teacher").ToListAsync()
+            };
+            return View(vm);
         }
 
         [HttpPost]
 
-        public async Task<IActionResult> CreateModule(string name, string description, Guid? ownerId, List<Guid> assignedStudentIds)
+        public async Task<IActionResult> CreateModule(CreateModuleViewModel vm)
         {
-            if (string.IsNullOrEmpty(name) || ownerId == null)
+            if (!ModelState.IsValid || vm.OwnerId == null)
             {
-                return BadRequest("Naam en teacher zijn verplicht");
+                return View(vm);
             }
-           
             var module = new Module
             {
                 Id = Guid.NewGuid(),
-                Name = name,
-                Description = description,
-                OwnerId = ownerId,
+                Name = vm.Name,
+                Description = vm.Description,
+                OwnerId = vm.OwnerId,
                 Created = DateTime.Now
             };
 
@@ -55,24 +50,23 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             _db.Set<ApplicationUserModule>().Add(new ApplicationUserModule
             {
-                ApplicationUserId = ownerId.Value,
+                ApplicationUserId = vm.OwnerId.Value,
                 ModuleId = module.Id
             });
 
-            if (assignedStudentIds != null && assignedStudentIds.Count > 0)
+            foreach (var studentId in vm.AssignedStudentIds)
             {
-                foreach (var studentId in assignedStudentIds)
+                _db.Set<ApplicationUserModule>().Add(new ApplicationUserModule
                 {
-                    _db.Set<ApplicationUserModule>().Add(new ApplicationUserModule
-                    {
-                        ApplicationUserId = studentId,
-                        ModuleId = module.Id
-                    });
-                }
+                    ApplicationUserId = studentId,
+                    ModuleId = module.Id
+                });
             }
+
 
             await _db.SaveChangesAsync();
             return RedirectToAction("CreateModule");
         }
+
     }
 }
