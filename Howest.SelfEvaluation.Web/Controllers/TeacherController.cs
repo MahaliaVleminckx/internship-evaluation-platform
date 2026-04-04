@@ -44,10 +44,9 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 .ThenInclude(m => m.Evaluations)
                 .FirstOrDefaultAsync(u => u.Username == username);
 
-
             var allModules = user.Modules
               .Concat(user.OwnerModules)
-              .Where(m => m.Evaluations != null && m.Evaluations.Any()).ToList();
+              .Distinct().ToList();
 
             if (user == null)
             {
