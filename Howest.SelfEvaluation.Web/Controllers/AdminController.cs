@@ -21,7 +21,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         public async Task<IActionResult> CreateModule()
         {
-            var vm = new CreateModuleViewModel
+            var vm = new AdminCreateModuleViewModel
             {
                 Students = await _db.ApplicationUsers.Where(u => u.Role == "Student").ToListAsync(),
                 Teachers = await _db.ApplicationUsers.Where(u => u.Role == "Teacher").ToListAsync()
@@ -31,7 +31,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> CreateModule(CreateModuleViewModel vm)
+        public async Task<IActionResult> CreateModule(AdminCreateModuleViewModel vm)
         {
             if (!ModelState.IsValid || vm.OwnerId == null)
             {

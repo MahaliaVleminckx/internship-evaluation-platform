@@ -2,7 +2,7 @@
 
 namespace Howest.SelfEvaluation.Web.ViewModels
 {
-    public class CreateModuleViewModel
+    public class AdminCreateModuleViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }
