@@ -17,6 +17,12 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
 =======
         Task<Evaluation> GetEvaluationForStudentAsync(Guid evaluationId);
         Task SaveStudentEvaluationAsync(StudentEvaluationViewModel vm);
+<<<<<<< HEAD
 >>>>>>> 5c2afa9 (Added saving forms with static Id's)
+=======
+        Task<CompetenceDomain> GetDomainWithIndicatorsAsync(Guid domainId);
+        Task SaveDomainEvaluationAsync(StudentDomainEvaluationViewModel vm);
+        Task SaveCompetenceEvaluationAsync(StudentCompetencesViewModel vm);
+>>>>>>> d4b44df (Fixed errors from PR feedback)
     }
 }

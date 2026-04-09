@@ -88,7 +88,7 @@ namespace Howest.SelfEvaluation.Web.Services
         }
         public async Task SaveStudentEvaluationAsync(StudentEvaluationViewModel vm)
         {
-            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001"); // temporary
+            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001"); // tijdelijk hardcoded
 
 <<<<<<< HEAD
         public async Task<IEnumerable<ApplicationUser>> GetAllStudentsForMentorAsync(Guid mentorId)
@@ -132,7 +132,89 @@ namespace Howest.SelfEvaluation.Web.Services
 
             await _db.SaveChangesAsync();
         }
+        public async Task<CompetenceDomain> GetDomainWithIndicatorsAsync(Guid domainId)
+        {
+            return await _db.CompetenceDomains
+                .Include(d => d.Competences)
+                    .ThenInclude(c => c.Indicators)
+                .FirstOrDefaultAsync(d => d.Id == domainId);
+        }
+        public async Task SaveDomainEvaluationAsync(StudentDomainEvaluationViewModel vm)
+        {
+            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");// tijdelijk hardcoded
+
+            foreach (var i in vm.Indicators)
+            {
+                var existing = await _db.EvaluationScores
+                    .FirstOrDefaultAsync(x =>
+                        x.IndicatorId == i.IndicatorId &&
+                        x.UserId == userId);
+
+                if (existing != null)
+                {
+                    existing.ExtraInfo = i.ExtraInfo;
+                    existing.NotApplicable = i.NotApplicable;
+                    existing.Updated = DateTime.UtcNow;
+                }
+                else
+                {
+                    var score = new EvaluationScore
+                    {
+                        Id = Guid.NewGuid(),
+                        IndicatorId = i.IndicatorId,
+                        UserId = userId,
+                        ExtraInfo = i.ExtraInfo,
+                        NotApplicable = i.NotApplicable,
+                        Created = DateTime.UtcNow
+                    };
+
+                    _db.EvaluationScores.Add(score);
+                }
+            }
+
+            await _db.SaveChangesAsync();
         
+<<<<<<< HEAD
 >>>>>>> 5c2afa9 (Added saving forms with static Id's)
+=======
+        }
+        public async Task SaveCompetenceEvaluationAsync(StudentCompetencesViewModel vm)
+        {
+            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001"); // TEMP USER
+
+            foreach (var competence in vm.Competences)
+            {
+                if (competence.SelectedIndicatorId == null)
+                    continue;
+
+                var existing = await _db.EvaluationScores
+                    .FirstOrDefaultAsync(x =>
+                        x.IndicatorId == competence.SelectedIndicatorId &&
+                        x.UserId == userId);
+
+                if (existing != null)
+                {
+                    existing.ExtraInfo = competence.Comment;
+                    existing.Updated = DateTime.UtcNow;
+                }
+                else
+                {
+                    var score = new EvaluationScore
+                    {
+                        Id = Guid.NewGuid(),
+                        IndicatorId = competence.SelectedIndicatorId.Value,
+                        UserId = userId,
+                        ExtraInfo = competence.Comment,
+                        Created = DateTime.UtcNow
+                    };
+
+                    _db.EvaluationScores.Add(score);
+                }
+            }
+
+            await _db.SaveChangesAsync();
+        }
+
+>>>>>>> d4b44df (Fixed errors from PR feedback)
     }
 }
