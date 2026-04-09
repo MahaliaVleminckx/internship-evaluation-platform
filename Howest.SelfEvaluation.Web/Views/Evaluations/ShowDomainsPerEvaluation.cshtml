@@ -17,23 +17,19 @@
     @foreach (var domain in Model.CompetenceDomains)
     {
         <div class="card module-box">
-            @* TODO: direct to tests *@
-            <a asp-controller="TODO" asp-action="TODO" asp-route-id="TODO" 
-            asp-route-userId="@Model.UserId" class="link-restyle">
-                <div class="title-box gradient-@rnd.Next(1, 16) text-center" style="border-radius: 5px;">
+            <a asp-controller="Student"
+               asp-action="FillDomain"
+               asp-route-domainId="@domain.Id"
+               class="link-restyle">
+
+                <div class="title-box gradient-@rnd.Next(1, 16) text-center">
                     <h5>@domain.Name</h5>
                 </div>
+
             </a>
         </div>
     }
 </div>
-<a asp-controller="Student"
-   asp-action="Fill"
-   asp-route-evaluationId="@Model.Id"
-   class="btn btn-primary"
-   style="margin-top: 15px;">
-    Fill in evaluation
-</a>
 
 @* TODO: chart page*@
 <a asp-controller="Evaluations" asp-action="ShowCharts" asp-route-evaluationId="@Model.ModuleId" class="btn btn-info"

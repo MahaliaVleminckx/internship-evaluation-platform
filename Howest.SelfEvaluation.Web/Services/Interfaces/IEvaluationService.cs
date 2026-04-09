@@ -14,5 +14,8 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         Task<IEnumerable<Evaluation>> GetAllPublishedEvaluationsAsync();
         Task<Evaluation> GetEvaluationForStudentAsync(Guid evaluationId);
         Task SaveStudentEvaluationAsync(StudentEvaluationViewModel vm);
+        Task<CompetenceDomain> GetDomainWithIndicatorsAsync(Guid domainId);
+        Task SaveDomainEvaluationAsync(StudentDomainEvaluationViewModel vm);
+        Task SaveCompetenceEvaluationAsync(StudentCompetencesViewModel vm);
     }
 }

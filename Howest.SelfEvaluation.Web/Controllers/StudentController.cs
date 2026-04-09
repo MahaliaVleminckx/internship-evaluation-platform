@@ -12,55 +12,38 @@ public class StudentController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Fill(Guid evaluationId)
+    public async Task<IActionResult> FillDomain(Guid domainId)
     {
-        var evaluation = await _evaluationService.GetEvaluationForStudentAsync(evaluationId);
+        var domain = await _evaluationService.GetDomainWithIndicatorsAsync(domainId);
 
-        var vm = new StudentEvaluationViewModel
+        var vm = new StudentCompetencesViewModel
         {
-            EvaluationId = evaluation.Id,
-            Questions = evaluation.CompetenceDomains
-                .SelectMany(d => d.Competences)
-                .SelectMany(c => c.Indicators)
-                .Select(i => new QuestionAnswerViewModel
-                {
-                    QuestionId = i.Id,
-                    QuestionText = i.Description
-                }).ToList()
+            DomainId = domain.Id,
+            EvaluationId = domain.EvaluationId,
+            DomainName = domain.Name,
+
+            Competences = domain.Competences.Select(c => new StudentCompetenceViewModel
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Indicators = c.Indicators.ToList()
+            }).ToList()
         };
 
         return View(vm);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Fill(StudentEvaluationViewModel vm)
+    public async Task<IActionResult> SubmitCompetenceEvaluation(StudentCompetencesViewModel vm)
     {
         if (!ModelState.IsValid)
-            return View(vm);
+            return View("FillDomain", vm);
 
-        await _evaluationService.SaveStudentEvaluationAsync(vm);
+        await _evaluationService.SaveCompetenceEvaluationAsync(vm);
 
-        return RedirectToAction("Index", "Evaluations", new { username = "test@test.com" });
-    }
-// Test Code
-    [HttpGet]
-    public async Task<IActionResult> TestSave()
-    {
-        var vm = new StudentEvaluationViewModel
-        {
-            EvaluationId = Guid.Parse("00000000-0000-0000-0000-000000000004"),
-            Questions = new List<QuestionAnswerViewModel>
-            {
-                new QuestionAnswerViewModel
-                {
-                    QuestionId = Guid.Parse("00000000-0000-0000-0000-000000000029"),
-                    Answer = "Test answer from controller"
-                }
-            }
-        };
+        TempData["SuccessMessage"] = "Evaluatie opgeslagen!";
 
-        await _evaluationService.SaveStudentEvaluationAsync(vm);
-
-        return Content("Saved!");
+        return RedirectToAction("FillDomain", new { domainId = vm.DomainId });
     }
 }
