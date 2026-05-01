@@ -1,4 +1,4 @@
-﻿namespace Howest.SelfEvaluation.Web.ViewModels
+﻿namespace Howest.SelfEvaluation.Web.ViewModels.Mentor
 {
     public class MentorShowStudentsViewModel
     {

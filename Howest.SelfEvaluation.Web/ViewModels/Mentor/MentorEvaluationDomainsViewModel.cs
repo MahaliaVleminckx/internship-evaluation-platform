@@ -1,6 +1,6 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 
-namespace Howest.SelfEvaluation.Web.ViewModels
+namespace Howest.SelfEvaluation.Web.ViewModels.Mentor
 {
     public class MentorEvaluationDomainsViewModel : BaseUserViewModel
     {
