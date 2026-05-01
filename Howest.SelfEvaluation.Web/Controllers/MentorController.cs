@@ -140,8 +140,10 @@ namespace Howest.SelfEvaluation.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Students()
+        public async Task<IActionResult> ShowStudents()
         {
+            var allStudents = await _evaluationService.GetAllStudentsAsync();
+
             return View();
         }
     }

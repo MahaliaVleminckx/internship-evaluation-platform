@@ -11,5 +11,6 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         Task<Evaluation> GetEvaluationByIdAsync(Guid id);
         Task<IEnumerable<Evaluation>> GetAllEvaluationsAsync();
         Task<IEnumerable<Evaluation>> GetAllPublishedEvaluationsAsync();
+        Task<IEnumerable<ApplicationUser>> GetAllStudentsAsync();
     }
 }
