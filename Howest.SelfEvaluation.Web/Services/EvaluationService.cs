@@ -1,4 +1,5 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Core.Enums;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -73,6 +74,14 @@ namespace Howest.SelfEvaluation.Web.Services
             return await _db
                 .Evaluations
                 .Where(e => e.IsPublished == true)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ApplicationUser>> GetAllStudentsAsync()
+        {
+            return await _db
+                .ApplicationUsers
+                .Where(user => user.Role == RoleTypes.Student.ToString())
                 .ToListAsync();
         }
 
