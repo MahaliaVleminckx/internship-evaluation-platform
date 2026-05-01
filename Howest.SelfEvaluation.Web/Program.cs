@@ -5,7 +5,6 @@ using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Blazor;
 
 namespace Howest.SelfEvaluation.Web
 {

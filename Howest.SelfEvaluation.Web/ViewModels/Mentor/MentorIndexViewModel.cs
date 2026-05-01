@@ -2,7 +2,7 @@
 
 namespace Howest.SelfEvaluation.Web.ViewModels.Mentor
 {
-    public class MentorIndexViewModel
+    public class MentorIndexViewModel : MentorStudentIdsViewModel
     {
         public IEnumerable<Evaluation> Evaluations { get; set; }
     }

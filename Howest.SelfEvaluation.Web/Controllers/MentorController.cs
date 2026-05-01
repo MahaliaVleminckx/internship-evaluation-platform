@@ -1,4 +1,5 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Core.Enums;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
@@ -117,7 +118,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 TempData["ErrorMessage"] = "Er is iets fout gegaan bij het opslaan";
                 return View(model);
             }
-            var userId = Guid.Parse("00000000-0000-0000-0000-000000000010");
+            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
             foreach (var competence in model.Competences)
             {
                 var competenceExists = await _db.Competences.AnyAsync(c => c.Id == competence.Id);
@@ -149,6 +150,14 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowStudents(Guid mentorId)
         {
+            var mentor = await _evaluationService.GetUserByIdAsync(mentorId);
+
+            //role check here but may chance when we add identity
+            if(mentor== null || mentor.Role != RoleTypes.Mentor.ToString())
+            {
+                //temporal notfound for testing purposes, need to add custom errror message
+                return NotFound();
+            }
             var allStudents = await _evaluationService.GetAllStudentsForMentorAsync(mentorId);
 
             MentorShowStudentsViewModel mentorShowStudentsViewModel = new MentorShowStudentsViewModel
@@ -163,12 +172,6 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
 
             return View(mentorShowStudentsViewModel);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> ShowStudent(int studentId)
-        {
-            return View();
         }
     }
 }

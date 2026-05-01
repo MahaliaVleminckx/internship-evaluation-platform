@@ -18,7 +18,8 @@
                 <td>@student.Firstname</td>
                 <td>@student.Lastname</td>
                 <td>@student.UserName</td>
-            </tr>        
+                <td><a asp-controller="Mentor" asp-action="Index" asp-route-userId="@student.UserId">Start evaluation</a></td>
+            </tr>
         }
     </tbody>
 </table>
