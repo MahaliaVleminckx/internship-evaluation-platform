@@ -1759,9 +1759,11 @@ namespace Howest.SelfEvaluation.Web.Data
 			//hardcoded users for dev testing purposes, to be deleted once register implemented
 			Guid testUserId = Guid.Parse("00000000-0000-0000-0000-000000000001");
 			Guid testMentorId = Guid.Parse("00000000-0000-0000-0000-000000000002");
+			Guid testMentorIdTwo = Guid.Parse("00000000-0000-0000-0000-000000000003");
 
-			var users = new List<ApplicationUser>
+            var users = new List<ApplicationUser>
 			{
+				//role test users
 				new ApplicationUser
 				{
 					Id = testUserId,
@@ -1782,6 +1784,15 @@ namespace Howest.SelfEvaluation.Web.Data
 					Lastname = "TestMentorLastname"
                 },
 
+                new ApplicationUser
+                {
+                    Id = testMentorIdTwo,
+                    Role = RoleTypes.Mentor.ToString(),
+                    Username = "mentor2@mentor.com",
+                    Created = DateTime.Now,
+                    Firstname = "TestMentorTwoFirstname",
+                    Lastname = "TestMentorTwoLastname"
+                },
 				//more filler users used for testing
 				new ApplicationUser
 				{
@@ -1790,7 +1801,8 @@ namespace Howest.SelfEvaluation.Web.Data
                     Created = DateTime.Now,
                     Firstname = "Julian",
                     Lastname = "Thorne",
-					Username = "julian.thorne@test.com"
+					Username = "julian.thorne@test.com",
+					AssignedMentorId = testMentorId
                 },
                 new ApplicationUser
                 {
@@ -1799,7 +1811,8 @@ namespace Howest.SelfEvaluation.Web.Data
                     Created = DateTime.Now,
                     Firstname = "Elara",
                     Lastname = "Vance",
-                    Username = "elara.vance@test.com"
+                    Username = "elara.vance@test.com",
+                    AssignedMentorId = testMentorIdTwo
                 },
 				new ApplicationUser
                 {
@@ -1808,7 +1821,8 @@ namespace Howest.SelfEvaluation.Web.Data
                     Created = DateTime.Now,
                     Firstname = "Cassian",
                     Lastname = "Cole",
-                    Username = "cassian.cole@test.com"
+                    Username = "cassian.cole@test.com",
+                    AssignedMentorId = testMentorId
                 },
                 new ApplicationUser
                 {
@@ -1817,7 +1831,8 @@ namespace Howest.SelfEvaluation.Web.Data
                     Created = DateTime.Now,
                     Firstname = "Seraphina",
                     Lastname = "Sterling",
-                    Username = "seraphina.sterling@test.com"
+                    Username = "seraphina.sterling@test.com",
+                    AssignedMentorId = testMentorIdTwo
                 },
                 new ApplicationUser
                 {
@@ -1826,7 +1841,8 @@ namespace Howest.SelfEvaluation.Web.Data
                     Created = DateTime.Now,
                     Firstname = "Kaelen",
                     Lastname = "Voss",
-                    Username = "kaelen.voss@test.com"
+                    Username = "kaelen.voss@test.com",
+                    AssignedMentorId = testMentorId
                 },
                 new ApplicationUser
                 {
@@ -1835,7 +1851,8 @@ namespace Howest.SelfEvaluation.Web.Data
                     Created = DateTime.Now,
                     Firstname = "Lyra",
                     Lastname = "Belrose",
-                    Username = "lyra.belrose@test.com"
+                    Username = "lyra.belrose@test.com",
+                    AssignedMentorId = testMentorIdTwo
                 }
 
             };

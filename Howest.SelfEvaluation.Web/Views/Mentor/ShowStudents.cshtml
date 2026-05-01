@@ -2,24 +2,23 @@
 
 <h1>My mentored students:</h1>
 
-<table>
-    <tr>
+<table style="width: 100%;">
+   
+    <thead>
+        <tr>
             <th>First name</th>
-            <th>Last name</th>            
-    </tr>
-    @foreach(var student in Model.Students)
-    {
-        @* Todo: update db *@
-        @* <tr>@student.FirstName</tr>
-        <tr>@student.LastName</tr> *@
-    }
+            <th>Last name</th>
+            <th>Username</th>
+        </tr>
+    </thead>        
+    <tbody>
+        @foreach(var student in Model.Students)
+        {
+            <tr>
+                <td>@student.Firstname</td>
+                <td>@student.Lastname</td>
+                <td>@student.UserName</td>
+            </tr>        
+        }
+    </tbody>
 </table>
-
-
-
-@* for testing purposes *@
-@foreach(var student in Model.Students)
-{
-    <div><p>@student.UserName : @student.UserId</p></div>
-}
-

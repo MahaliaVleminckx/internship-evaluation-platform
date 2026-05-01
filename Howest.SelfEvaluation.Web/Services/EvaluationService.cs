@@ -77,11 +77,12 @@ namespace Howest.SelfEvaluation.Web.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<ApplicationUser>> GetAllStudentsAsync()
+        public async Task<IEnumerable<ApplicationUser>> GetAllStudentsForMentorAsync()
         {
             return await _db
                 .ApplicationUsers
-                .Where(user => user.Role == RoleTypes.Student.ToString())
+                .Where(user => user.Role == RoleTypes.Student.ToString()
+                )
                 .ToListAsync();
         }
 

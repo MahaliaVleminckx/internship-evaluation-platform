@@ -146,14 +146,16 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowStudents()
         {
-            var allStudents = await _evaluationService.GetAllStudentsAsync();
+            var allStudents = await _evaluationService.GetAllStudentsForMentorAsync();
 
             MentorShowStudentsViewModel mentorShowStudentsViewModel = new MentorShowStudentsViewModel
             {
                 Students = allStudents.Select(student => new StudentViewModel
                 {
                     UserId = student.Id,
-                    UserName = student.Username
+                    UserName = student.Username,
+                    Firstname = student.Firstname,
+                    Lastname = student.Lastname
                 })
             };
 
