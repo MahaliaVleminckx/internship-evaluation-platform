@@ -4,6 +4,7 @@ using Howest.SelfEvaluation.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Howest.SelfEvaluation.Web.Migrations
 {
     [DbContext(typeof(SelfEvaluationsContext))]
-    partial class SelfEvaluationsContextModelSnapshot : ModelSnapshot
+    [Migration("20260501011112_AddMentorTestUser")]
+    partial class AddMentorTestUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

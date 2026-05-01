@@ -1756,16 +1756,25 @@ namespace Howest.SelfEvaluation.Web.Data
 			}).ToList();
 			#endregion
 
-			//hardcoded user for dev testing purposes, to be deleted once register implemented
+			//hardcoded users for dev testing purposes, to be deleted once register implemented
 			Guid testUserId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+			Guid testMentorId = Guid.Parse("00000000-0000-0000-0000-000000000002");
 
-            var users = new List<ApplicationUser>
+			var users = new List<ApplicationUser>
 			{
 				new ApplicationUser
 				{
 					Id = testUserId,
 					Role = RoleTypes.Student.ToString(),
 					Username="test@test.com",
+					Created = DateTime.Now
+				},
+
+				new ApplicationUser
+				{
+					Id = testMentorId,
+					Role = RoleTypes.Mentor.ToString(),
+					Username = "mentor@mentor.com",
 					Created = DateTime.Now
 				}
 			};
@@ -1776,7 +1785,13 @@ namespace Howest.SelfEvaluation.Web.Data
 				{
 					ApplicationUserId = testUserId,
 					ModuleId = moduleId
-                }
+                },
+
+				new ApplicationUserModule
+				{
+					ApplicationUserId = testMentorId,
+					ModuleId = moduleId
+				}
 			};
 
 
