@@ -7,6 +7,7 @@ using Howest.SelfEvaluation.Web.ViewModels.Mentor;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace Howest.SelfEvaluation.Web.Controllers
 {
@@ -59,14 +60,14 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 Title = evaluation.Title,
                 IsPublished = evaluation.IsPublished,
                 CompetenceDomains = domains,
-                UserId = Guid.NewGuid() //Temporary for testing purposes 
+                StudentId = studentId
             };
 
 
             return View(viewModel);
         }
 
-        public async Task<IActionResult> ShowCompetencePerDomain(Guid domainId)
+        public async Task<IActionResult> ShowCompetencePerDomain(Guid domainId, Guid studentId)
         {
             var domain = await _db.CompetenceDomains
                 .Include(d => d.Competences)
@@ -104,7 +105,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
                     Name = c.Name,
                     Description = c.Description,
                     Indicators = c.Indicators.ToList()
-                }).ToList()
+                }).ToList(),
+                StudentId = studentId
             };
 
             return View(viewModel);
@@ -119,7 +121,11 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 TempData["ErrorMessage"] = "Er is iets fout gegaan bij het opslaan";
                 return View(model);
             }
-            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+            var sessionMentorId= HttpContext.Session.Get("mentorId");
+            var sessionMentorIdString = Encoding.UTF8.GetString(sessionMentorId);
+            var mentorId = Guid.Parse(sessionMentorIdString);
+            var studentId = model.StudentId;
+
             foreach (var competence in model.Competences)
             {
                 var competenceExists = await _db.Competences.AnyAsync(c => c.Id == competence.Id);
@@ -134,7 +140,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
                         IndicatorId = competence.SelectedIndicatorId,
                         NotApplicable = !competence.SelectedIndicatorId.HasValue,
                         ExtraInfo = competence.Comment,
-                        UserId = userId
+                        UserId = mentorId,
+                        TargetUserId = studentId,
                     };
                     _db.EvaluationScores.Add(score);
             }
@@ -160,7 +167,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 return NotFound();
             }
 
-            //I stored the mentorId in the session as a temoporal work around. Once we have Identity implemented we need to change this
+            //I stored the mentorId in the session as a temoporal work around. Once we have Identity and login system
+            //implemented we need to change this
             HttpContext.Session.SetString("mentorId", mentorId.ToString());
 
             var allStudents = await _evaluationService.GetAllStudentsForMentorAsync(mentorId);
