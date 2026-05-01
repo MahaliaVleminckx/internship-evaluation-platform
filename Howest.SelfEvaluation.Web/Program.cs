@@ -5,6 +5,7 @@ using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Blazor;
 
 namespace Howest.SelfEvaluation.Web
 {
@@ -39,10 +40,18 @@ namespace Howest.SelfEvaluation.Web
 
             //custom routes
             app.MapControllerRoute(
+                name: "MentorShowStudents",
+                pattern: "Mentor/ShowStudents/{mentorId:guid}",
+                defaults: new { Controller = "Mentor", Action = "ShowStudents" }
+            );
+
+            app.MapControllerRoute(
                 name: "Evaluations",
                 pattern: "Evaluations/Index/{username}",
                 defaults: new { Controller = "Evaluations", Action = "Index" }
             );
+
+            
 
             app.MapControllerRoute(
                 name: "default",

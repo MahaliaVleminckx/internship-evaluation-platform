@@ -143,10 +143,13 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         }
 
+        //no real way yet to get the mentorId from the logged in user. For now add this to the url as workaround
+        //testmentor1 GUID: 00000000-0000-0000-0000-000000000002
+        //testmentor2 GUID: 00000000-0000-0000-0000-000000000003
         [HttpGet]
-        public async Task<IActionResult> ShowStudents()
+        public async Task<IActionResult> ShowStudents(Guid mentorId)
         {
-            var allStudents = await _evaluationService.GetAllStudentsForMentorAsync();
+            var allStudents = await _evaluationService.GetAllStudentsForMentorAsync(mentorId);
 
             MentorShowStudentsViewModel mentorShowStudentsViewModel = new MentorShowStudentsViewModel
             {
