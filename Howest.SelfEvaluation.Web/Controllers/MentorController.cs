@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Howest.SelfEvaluation.Web.Controllers
 {
+    //development only:
+    //mentor username: mentor@mentor.com
+
     //For testing purposes this is public
     //TODO: Use authorize attribute once Microsoft Identity implemented, uncomment code below to protect from public
     //[Authorize(Roles = "Mentor, Admin")]
@@ -145,7 +148,16 @@ namespace Howest.SelfEvaluation.Web.Controllers
         {
             var allStudents = await _evaluationService.GetAllStudentsAsync();
 
-            return View();
+            MentorShowStudentsViewModel mentorShowStudentsViewModel = new MentorShowStudentsViewModel
+            {
+                Students = allStudents.Select(student => new StudentViewModel
+                {
+                    UserId = student.Id,
+                    UserName = student.Username
+                })
+            };
+
+            return View(mentorShowStudentsViewModel);
         }
     }
 }

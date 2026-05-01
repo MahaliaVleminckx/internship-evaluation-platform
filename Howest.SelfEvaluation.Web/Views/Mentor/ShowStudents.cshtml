@@ -1,0 +1,10 @@
+﻿@model MentorShowStudentsViewModel
+
+<h1>ShowStudents</h1>
+
+@* for testing purposes *@
+@foreach(var student in Model.Students)
+{
+    <div><p>@student.UserName : @student.UserId</p></div>
+}
+
