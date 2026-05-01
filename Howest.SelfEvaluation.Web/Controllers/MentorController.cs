@@ -159,5 +159,11 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             return View(mentorShowStudentsViewModel);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ShowStudent(int studentId)
+        {
+            return View();
+        }
     }
 }

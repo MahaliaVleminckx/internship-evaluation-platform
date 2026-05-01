@@ -1767,43 +1767,95 @@ namespace Howest.SelfEvaluation.Web.Data
 					Id = testUserId,
 					Role = RoleTypes.Student.ToString(),
 					Username="test@test.com",
-					Created = DateTime.Now
-				},
+					Created = DateTime.Now,
+					Firstname = "TestFirstname",
+					Lastname = "TestLastName"
+                },
 
 				new ApplicationUser
 				{
 					Id = testMentorId,
 					Role = RoleTypes.Mentor.ToString(),
 					Username = "mentor@mentor.com",
-					Created = DateTime.Now
-				}
-			};
-
-			var applicationUserModules = new List<ApplicationUserModule>
-			{
-				new ApplicationUserModule
-				{
-					ApplicationUserId = testUserId,
-					ModuleId = moduleId
+					Created = DateTime.Now,
+					Firstname = "TestMentorFirstname",
+					Lastname = "TestMentorLastname"
                 },
 
-				new ApplicationUserModule
+				//more filler users used for testing
+				new ApplicationUser
 				{
-					ApplicationUserId = testMentorId,
-					ModuleId = moduleId
-				}
-			};
+					Id = Guid.NewGuid(),
+					Role = RoleTypes.Student.ToString(),
+                    Created = DateTime.Now,
+                    Firstname = "Julian",
+                    Lastname = "Thorne",
+					Username = "julian.thorne@test.com"
+                },
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid(),
+                    Role = RoleTypes.Student.ToString(),
+                    Created = DateTime.Now,
+                    Firstname = "Elara",
+                    Lastname = "Vance",
+                    Username = "elara.vance@test.com"
+                },
+				new ApplicationUser
+                {
+                    Id = Guid.NewGuid(),
+                    Role = RoleTypes.Student.ToString(),
+                    Created = DateTime.Now,
+                    Firstname = "Cassian",
+                    Lastname = "Cole",
+                    Username = "cassian.cole@test.com"
+                },
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid(),
+                    Role = RoleTypes.Student.ToString(),
+                    Created = DateTime.Now,
+                    Firstname = "Seraphina",
+                    Lastname = "Sterling",
+                    Username = "seraphina.sterling@test.com"
+                },
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid(),
+                    Role = RoleTypes.Student.ToString(),
+                    Created = DateTime.Now,
+                    Firstname = "Kaelen",
+                    Lastname = "Voss",
+                    Username = "kaelen.voss@test.com"
+                },
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid(),
+                    Role = RoleTypes.Student.ToString(),
+                    Created = DateTime.Now,
+                    Firstname = "Lyra",
+                    Lastname = "Belrose",
+                    Username = "lyra.belrose@test.com"
+                }
 
+            };
 
-
-            modelBuilder.Entity<ApplicationUser>().HasData(users);
+			modelBuilder.Entity<ApplicationUser>().HasData(users);
             modelBuilder.Entity<Module>().HasData(modules);
 			modelBuilder.Entity<Evaluation>().HasData(evaluations);
 			modelBuilder.Entity<CompetenceDomain>().HasData(domains);
 			modelBuilder.Entity<Competence>().HasData(competences);
 			modelBuilder.Entity<Indicator>().HasData(indicators);
 			modelBuilder.Entity<Indicator>().HasData(endEvaluationIndicators);
-			modelBuilder.Entity<ApplicationUserModule>().HasData(applicationUserModules);
+			modelBuilder.Entity(nameof(ApplicationUser)+nameof(Module)).HasData(
+				new { ApplicationUsersId = users[0].Id, ModulesId = moduleId },
+				new { ApplicationUsersId = users[1].Id, ModulesId = moduleId },
+				new { ApplicationUsersId = users[2].Id, ModulesId = moduleId },
+				new { ApplicationUsersId = users[3].Id, ModulesId = moduleId },
+				new { ApplicationUsersId = users[5].Id, ModulesId = moduleId },
+				new { ApplicationUsersId = users[6].Id, ModulesId = moduleId },
+				new { ApplicationUsersId = users[7].Id, ModulesId = moduleId }
+                );
 		}
 	}
 }

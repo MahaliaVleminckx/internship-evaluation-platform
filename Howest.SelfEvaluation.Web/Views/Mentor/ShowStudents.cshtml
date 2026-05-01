@@ -1,6 +1,21 @@
 ﻿@model MentorShowStudentsViewModel
 
-<h1>ShowStudents</h1>
+<h1>My mentored students:</h1>
+
+<table>
+    <tr>
+            <th>First name</th>
+            <th>Last name</th>            
+    </tr>
+    @foreach(var student in Model.Students)
+    {
+        @* Todo: update db *@
+        @* <tr>@student.FirstName</tr>
+        <tr>@student.LastName</tr> *@
+    }
+</table>
+
+
 
 @* for testing purposes *@
 @foreach(var student in Model.Students)
