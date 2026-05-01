@@ -138,5 +138,11 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return RedirectToAction("ShowCompetencePerDomain", new { domainId = model.DomainId});
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Students()
+        {
+            return View();
+        }
     }
 }

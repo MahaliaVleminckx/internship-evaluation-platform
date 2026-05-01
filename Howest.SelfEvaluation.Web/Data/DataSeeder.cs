@@ -1779,7 +1779,7 @@ namespace Howest.SelfEvaluation.Web.Data
 				}
 			};
 
-			var ApplicationUserModule = new List<ApplicationUserModule>
+			var applicationUserModules = new List<ApplicationUserModule>
 			{
 				new ApplicationUserModule
 				{
@@ -1803,7 +1803,7 @@ namespace Howest.SelfEvaluation.Web.Data
 			modelBuilder.Entity<Competence>().HasData(competences);
 			modelBuilder.Entity<Indicator>().HasData(indicators);
 			modelBuilder.Entity<Indicator>().HasData(endEvaluationIndicators);
-			modelBuilder.Entity<ApplicationUserModule>().HasData(ApplicationUserModule);
+			modelBuilder.Entity<ApplicationUserModule>().HasData(applicationUserModules);
 		}
 	}
 }
