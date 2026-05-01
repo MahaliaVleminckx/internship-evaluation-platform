@@ -28,19 +28,20 @@ namespace Howest.SelfEvaluation.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Guid studentId)
         {
             var allEvaluations = await _evaluationService.GetAllPublishedEvaluationsAsync();
 
             var mentorIndexViewModel = new MentorIndexViewModel
             {
-                Evaluations = allEvaluations
+                Evaluations = allEvaluations,
+                StudentId = studentId
             };
 
             return View(mentorIndexViewModel);
         }
 
-        public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId)
+        public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId, Guid studentId)
         {
             var evaluation = await _db.Evaluations.FindAsync(evaluationId);
 
@@ -158,6 +159,10 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 //temporal notfound for testing purposes, need to add custom errror message
                 return NotFound();
             }
+
+            //I stored the mentorId in the session as a temoporal work around. Once we have Identity implemented we need to change this
+            HttpContext.Session.SetString("mentorId", mentorId.ToString());
+
             var allStudents = await _evaluationService.GetAllStudentsForMentorAsync(mentorId);
 
             MentorShowStudentsViewModel mentorShowStudentsViewModel = new MentorShowStudentsViewModel
