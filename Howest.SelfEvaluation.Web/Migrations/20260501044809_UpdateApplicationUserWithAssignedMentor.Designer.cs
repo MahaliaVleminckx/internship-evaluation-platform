@@ -4,6 +4,7 @@ using Howest.SelfEvaluation.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Howest.SelfEvaluation.Web.Migrations
 {
     [DbContext(typeof(SelfEvaluationsContext))]
-    partial class SelfEvaluationsContextModelSnapshot : ModelSnapshot
+    [Migration("20260501044809_UpdateApplicationUserWithAssignedMentor")]
+    partial class UpdateApplicationUserWithAssignedMentor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,22 +57,22 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         },
                         new
                         {
-                            ApplicationUsersId = new Guid("df9f3750-0087-45b4-abcd-af83dadbee0d"),
+                            ApplicationUsersId = new Guid("c37e6459-842a-41a8-8625-caecbe2f1df1"),
                             ModulesId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
-                            ApplicationUsersId = new Guid("f3b02013-43e6-4966-a661-233b75593184"),
+                            ApplicationUsersId = new Guid("be0947f2-2c3a-41f9-bd7e-601d742f1502"),
                             ModulesId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
-                            ApplicationUsersId = new Guid("82c92cc2-3ed1-4872-8155-39fdc8da4c90"),
+                            ApplicationUsersId = new Guid("71b243df-198c-4d9c-834a-db54efbe3730"),
                             ModulesId = new Guid("00000000-0000-0000-0000-000000000003")
                         },
                         new
                         {
-                            ApplicationUsersId = new Guid("45ca2157-3005-4472-9402-c7f3c66f8d10"),
+                            ApplicationUsersId = new Guid("a9f19e8a-31d6-46cd-8f92-68383da28da3"),
                             ModulesId = new Guid("00000000-0000-0000-0000-000000000003")
                         });
                 });
@@ -116,7 +119,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1569),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5863),
                             Firstname = "TestFirstname",
                             Lastname = "TestLastName",
                             Role = "Student",
@@ -125,7 +128,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1573),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5867),
                             Firstname = "TestMentorFirstname",
                             Lastname = "TestMentorLastname",
                             Role = "Mentor",
@@ -134,7 +137,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1576),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5870),
                             Firstname = "TestMentorTwoFirstname",
                             Lastname = "TestMentorTwoLastname",
                             Role = "Mentor",
@@ -142,9 +145,9 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         },
                         new
                         {
-                            Id = new Guid("df9f3750-0087-45b4-abcd-af83dadbee0d"),
+                            Id = new Guid("c37e6459-842a-41a8-8625-caecbe2f1df1"),
                             AssignedMentorId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1621),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5901),
                             Firstname = "Julian",
                             Lastname = "Thorne",
                             Role = "Student",
@@ -152,9 +155,9 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         },
                         new
                         {
-                            Id = new Guid("08b81529-9318-4234-b163-2d60feaa3f99"),
+                            Id = new Guid("8b49877b-991e-41a1-ab3b-627c1a04b292"),
                             AssignedMentorId = new Guid("00000000-0000-0000-0000-000000000003"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1626),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5915),
                             Firstname = "Elara",
                             Lastname = "Vance",
                             Role = "Student",
@@ -162,9 +165,9 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f3b02013-43e6-4966-a661-233b75593184"),
+                            Id = new Guid("be0947f2-2c3a-41f9-bd7e-601d742f1502"),
                             AssignedMentorId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1631),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5920),
                             Firstname = "Cassian",
                             Lastname = "Cole",
                             Role = "Student",
@@ -172,9 +175,9 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         },
                         new
                         {
-                            Id = new Guid("82c92cc2-3ed1-4872-8155-39fdc8da4c90"),
+                            Id = new Guid("71b243df-198c-4d9c-834a-db54efbe3730"),
                             AssignedMentorId = new Guid("00000000-0000-0000-0000-000000000003"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1634),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5923),
                             Firstname = "Seraphina",
                             Lastname = "Sterling",
                             Role = "Student",
@@ -182,9 +185,9 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         },
                         new
                         {
-                            Id = new Guid("45ca2157-3005-4472-9402-c7f3c66f8d10"),
+                            Id = new Guid("a9f19e8a-31d6-46cd-8f92-68383da28da3"),
                             AssignedMentorId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1637),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5926),
                             Firstname = "Kaelen",
                             Lastname = "Voss",
                             Role = "Student",
@@ -192,9 +195,9 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         },
                         new
                         {
-                            Id = new Guid("01d85b9d-9931-40ab-b109-6ae889fd1ef3"),
+                            Id = new Guid("438e0c25-7da8-42a6-bfcc-89712bbdf109"),
                             AssignedMentorId = new Guid("00000000-0000-0000-0000-000000000003"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1640),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5928),
                             Firstname = "Lyra",
                             Lastname = "Belrose",
                             Role = "Student",
@@ -239,7 +242,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000010"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(237),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4424),
                             Description = "De student houdt zich aan voorschriften, regels en procedures. Bijvoorbeeld: aanwezigheid, afspraken nakomen, stiptheid,...",
                             Name = "Betrouwbaarheid"
                         },
@@ -247,7 +250,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000011"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(245),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4432),
                             Description = "De student toont inzet en engagement",
                             Name = "Actieve medewerking"
                         },
@@ -255,7 +258,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000012"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(247),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4434),
                             Description = "De student kan stageopdrachten plannen en organiseren, is nauwkeurig, bewaakt de tijd en heeft een goed werkritme",
                             Name = "Efficiëntie"
                         },
@@ -263,7 +266,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000013"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(249),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4436),
                             Description = "De student kan omgaan met onverwachte zaken, kan inspringen waar nodig en indien nodig, kan snel schakelen tussen taken",
                             Name = "Flexibiliteit"
                         },
@@ -271,7 +274,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000014"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(251),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4438),
                             Description = "De student kan omgaan met werkgerelateerde stressoren (werkdruk, complexe situaties, kan werk en privé voldoende scheiden,…)",
                             Name = "Emotionele coping"
                         },
@@ -279,7 +282,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000015"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(254),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4440),
                             Description = "Groeiende zelfzekerheid en zelfvertrouwen bij uitoefenen van stageactiviteiten: student durft buiten de comfortzone stappen, durft groeien, pakt leerproces in handen",
                             Name = "Zelfvertrouwen"
                         },
@@ -287,7 +290,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000016"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(256),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4442),
                             Description = "De student kan zelfstandig taken uitvoeren, stuurt zichzelf aan, is zelfredzaam",
                             Name = "Autonomie"
                         },
@@ -295,7 +298,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000017"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(258),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4444),
                             Description = "De student levert constructieve bijdragen (aan de organisatie), komt spontaan met nieuwe ideeën",
                             Name = "Initiatief nemen"
                         },
@@ -303,7 +306,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000018"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000007"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(260),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4446),
                             Description = "De student handelt vanuit een laagdrempelige, respectvolle, empathische, divers-sensitieve, ethische en deontologische grondhouding",
                             Name = "Grondhouding"
                         },
@@ -311,7 +314,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000019"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000007"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(263),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4449),
                             Description = "De student functioneert opbouwend en initiatiefnemend in en met een multidisciplinair team en zorgnetwerk",
                             Name = "Functioneren"
                         },
@@ -319,7 +322,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000020"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000007"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(265),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4550),
                             Description = "De student reflecteert kritisch en innovatiegericht op het eigen professioneel handelen en op de eigen persoonlijke ontwikkeling",
                             Name = "Reflecteren"
                         },
@@ -327,7 +330,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000021"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(267),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4554),
                             Description = "De psychologisch consulent voert (alle) fasen van het psychodiagnostisch proces uit: observatie en/of (screenings-, intake)gesprekken, afnemen en scoren van psychodiagnostische testen, interpreteren van psychodiagnostische resultaten, rapporteren van psychodiagnostische gegevens (mondeling en/of schriftelijk)",
                             Name = "Diagnostisch vermogen"
                         },
@@ -335,7 +338,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000022"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(269),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4556),
                             Description = "De psychologisch consulent voert (alle) fasen van de onderzoekscyclus uit (onderzoeksvraag formuleren -informatie verzamelen – onderzoeksmethode bepalen – analyse van de resultaten – terugkoppelen naar onderzoeksvraag): bijvoorbeeld kleinschalig praktijkonderzoek uitvoeren op de werkvloer",
                             Name = "Onderzoekend vermogen"
                         },
@@ -343,7 +346,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000023"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(271),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4558),
                             Description = "De student ontwikkelt een handelings-/ preventieplan",
                             Name = "Ontwikkelen handelingsplan"
                         },
@@ -351,7 +354,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000024"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(273),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4559),
                             Description = "In het kader van de implementatie van het handelings/preventieplan geeft de psychologisch consulent cliënt/klantgerichte informatie en/of advies",
                             Name = "Voorlichten"
                         },
@@ -359,7 +362,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000025"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(275),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4561),
                             Description = "In het kader van de implementatie van het handelings/preventieplan biedt de psychologisch consulent steun aan individuen en groepen",
                             Name = "Ondersteunen"
                         },
@@ -367,7 +370,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000026"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(276),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4563),
                             Description = "In het kader van de implementatie van het handelings/preventieplan faciliteert de psychologisch consulent het verwerven van inzicht/inzichtsverandering",
                             Name = "Counselen"
                         },
@@ -375,7 +378,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000027"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(279),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4567),
                             Description = "In het kader van de implementatie van het handelings/preventieplan leert de psychologisch consulent individuen en groepen vaardigheden aan",
                             Name = "Trainen"
                         },
@@ -383,7 +386,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000028"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(281),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4569),
                             Description = "In het kader van de implementatie van het handelings/preventieplan coacht en motiveert de psychologisch consulent de cliënt om gestelde doelen te bereiken",
                             Name = "Coachen"
                         },
@@ -391,7 +394,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee1e"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(283),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4570),
                             Description = "De student houdt zich aan voorschriften, regels en procedures. Bijvoorbeeld: aanwezigheid, afspraken nakomen, stiptheid,...",
                             Name = "Betrouwbaarheid"
                         },
@@ -399,7 +402,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee11"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(285),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4572),
                             Description = "De student toont inzet en engagement",
                             Name = "Actieve medewerking"
                         },
@@ -407,7 +410,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee12"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(287),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4574),
                             Description = "De student kan stageopdrachten plannen en organiseren, is nauwkeurig, bewaakt de tijd en heeft een goed werkritme",
                             Name = "Efficiëntie"
                         },
@@ -415,7 +418,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee13"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(289),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4576),
                             Description = "De student kan omgaan met onverwachte zaken, kan inspringen waar nodig en indien nodig, kan snel schakelen tussen taken",
                             Name = "Flexibiliteit"
                         },
@@ -423,7 +426,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee14"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(290),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4578),
                             Description = "De student kan omgaan met werkgerelateerde stressoren (werkdruk, complexe situaties, kan werk en privé voldoende scheiden,…)",
                             Name = "Emotionele coping"
                         },
@@ -431,7 +434,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee15"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(292),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4580),
                             Description = "Groeiende zelfzekerheid en zelfvertrouwen bij uitoefenen van stageactiviteiten: student durft buiten de comfortzone stappen, durft groeien, pakt leerproces in handen",
                             Name = "Zelfvertrouwen"
                         },
@@ -439,7 +442,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee16"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(294),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4582),
                             Description = "De student kan zelfstandig taken uitvoeren, stuurt zichzelf aan, is zelfredzaam",
                             Name = "Autonomie"
                         },
@@ -447,7 +450,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee17"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(296),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4584),
                             Description = "De student levert constructieve bijdragen (aan de organisatie), komt spontaan met nieuwe ideeën",
                             Name = "Initiatief nemen"
                         },
@@ -455,7 +458,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee18"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000007"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(298),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4586),
                             Description = "De student handelt vanuit een laagdrempelige, respectvolle, empathische, divers-sensitieve, ethische en deontologische grondhouding",
                             Name = "Grondhouding"
                         },
@@ -463,7 +466,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee19"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000007"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(300),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4587),
                             Description = "De student functioneert opbouwend en initiatiefnemend in en met een multidisciplinair team en zorgnetwerk",
                             Name = "Functioneren"
                         },
@@ -471,7 +474,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee2e"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000007"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(302),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4589),
                             Description = "De student reflecteert kritisch en innovatiegericht op het eigen professioneel handelen en op de eigen persoonlijke ontwikkeling",
                             Name = "Reflecteren"
                         },
@@ -479,7 +482,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee21"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000008"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(304),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4591),
                             Description = "De psychologisch consulent voert (alle) fasen van het psychodiagnostisch proces uit: observatie en/of (screenings-, intake)gesprekken, afnemen en scoren van psychodiagnostische testen, interpreteren van psychodiagnostische resultaten, rapporteren van psychodiagnostische gegevens (mondeling en/of schriftelijk)",
                             Name = "Diagnostisch vermogen"
                         },
@@ -487,7 +490,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee22"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000008"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(306),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4593),
                             Description = "De psychologisch consulent voert (alle) fasen van de onderzoekscyclus uit (onderzoeksvraag formuleren -informatie verzamelen – onderzoeksmethode bepalen – analyse van de resultaten – terugkoppelen naar onderzoeksvraag): bijvoorbeeld kleinschalig praktijkonderzoek uitvoeren op de werkvloer",
                             Name = "Onderzoekend vermogen"
                         },
@@ -495,7 +498,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee23"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000008"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(308),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4595),
                             Description = "De student ontwikkelt een handelings-/ preventieplan",
                             Name = "Ontwikkelen handelingsplan"
                         },
@@ -503,7 +506,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee24"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000009"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(310),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4598),
                             Description = "In het kader van de implementatie van het handelings/preventieplan geeft de psychologisch consulent cliënt/klantgerichte informatie en/of advies",
                             Name = "Voorlichten"
                         },
@@ -511,7 +514,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee25"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000009"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(312),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4600),
                             Description = "In het kader van de implementatie van het handelings/preventieplan biedt de psychologisch consulent steun aan individuen en groepen",
                             Name = "Ondersteunen"
                         },
@@ -519,7 +522,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee26"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000009"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(314),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4601),
                             Description = "In het kader van de implementatie van het handelings/preventieplan faciliteert de psychologisch consulent het verwerven van inzicht/inzichtsverandering",
                             Name = "Counselen"
                         },
@@ -527,7 +530,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee27"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000009"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(316),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4603),
                             Description = "In het kader van de implementatie van het handelings/preventieplan leert de psychologisch consulent individuen en groepen vaardigheden aan",
                             Name = "Trainen"
                         },
@@ -535,7 +538,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee28"),
                             CompetenceDomainId = new Guid("00000000-0000-0000-0000-100000000009"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(318),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4605),
                             Description = "In het kader van de implementatie van het handelings/preventieplan coacht en motiveert de psychologisch consulent de cliënt om gestelde doelen te bereiken",
                             Name = "Coachen"
                         });
@@ -573,56 +576,56 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(89),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4326),
                             EvaluationId = new Guid("00000000-0000-0000-0000-000000000004"),
                             Name = "Domein 1: (Leerlijn) Algemene Houding"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000007"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(94),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4331),
                             EvaluationId = new Guid("00000000-0000-0000-0000-000000000004"),
                             Name = "Domein 2: (Leerlijn) Professioneel Handelen"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000008"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(96),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4333),
                             EvaluationId = new Guid("00000000-0000-0000-0000-000000000004"),
                             Name = "Domein 3: (Leerlijn) Gedrag Onderzoeken"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000009"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(98),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4335),
                             EvaluationId = new Guid("00000000-0000-0000-0000-000000000004"),
                             Name = "Domein 4: (Leerlijn) Gedrag Beïnvloeden"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-100000000006"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(100),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4337),
                             EvaluationId = new Guid("00000000-0000-0000-0000-000000000005"),
                             Name = "Domein 1: (Leerlijn) Algemene Houding"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-100000000007"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(104),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4340),
                             EvaluationId = new Guid("00000000-0000-0000-0000-000000000005"),
                             Name = "Domein 2: (Leerlijn) Professioneel Handelen"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-100000000008"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(106),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4342),
                             EvaluationId = new Guid("00000000-0000-0000-0000-000000000005"),
                             Name = "Domein 3: (Leerlijn) Gedrag Onderzoeken"
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-100000000009"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(108),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4344),
                             EvaluationId = new Guid("00000000-0000-0000-0000-000000000005"),
                             Name = "Domein 4: (Leerlijn) Gedrag Beïnvloeden"
                         });
@@ -672,7 +675,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(64),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4303),
                             Description = "Bij de tussentijdse zelfvaluatie voorzien we vragen om halverwege jouw stageperiode het verloop af te toesten. Zie die als een uitnodiging om deze ervaring kritisch te analyseren en evalueren.",
                             EndDate = new DateTime(2025, 3, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsPublished = true,
@@ -683,7 +686,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000005"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(75),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4314),
                             Description = "Bij de eindevaluatie komen er vragen naar voren over het verloop van jouw stage aan het eind van de stageperiode.",
                             EndDate = new DateTime(2025, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsPublished = true,
@@ -719,9 +722,6 @@ namespace Howest.SelfEvaluation.Web.Migrations
 
                     b.Property<bool>("NotApplicable")
                         .HasColumnType("bit");
-
-                    b.Property<Guid?>("TargetUserId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
@@ -782,7 +782,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000029"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(324),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4611),
                             Description = "Onwettig afwezig, komt systematisch te laat",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -791,7 +791,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000030"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(330),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4617),
                             Description = "Student durft soms eens te laat komen, vergeet bepaalde afspraken, blijft tegen dezelfde voorschriften/afspraken fouten maken",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -800,7 +800,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000031"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(334),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4621),
                             Description = "Student durft soms eens te laat komen, vergeet bepaalde afspraken, blijft tegen dezelfde voorschriften/afspraken fouten maken",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -809,7 +809,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000032"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(373),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4624),
                             Description = "Student komt op tijd, meldt afwezigheid correct, houdt zich aan voorschriften/afspraken",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -818,7 +818,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000033"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(377),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4626),
                             Description = "Student komt op tijd, meldt afwezigheid correct, houdt zich aan voorschriften/afspraken",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -827,7 +827,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000034"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(380),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4629),
                             Description = "Student is altijd stipt, toont een feilloze houding in het nakomen van afspraken",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -836,7 +836,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000035"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(383),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4632),
                             Description = "Student is altijd stipt, toont een feilloze houding in het nakomen van afspraken",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -845,7 +845,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000036"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(386),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4634),
                             Description = "Student is snel tevreden over zichzelf, brengt weinig in, werkt enkel mee op nadrukkelijke vraag. Student bereidt zich systematisch onvoldoende voor. Afwezige houding",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -854,7 +854,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000037"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(389),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4637),
                             Description = "Student is niet altijd goed voorbereid. Neemt vaak een passieve en afwachtende houding aan",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -863,7 +863,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000038"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(393),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4640),
                             Description = "Student is niet altijd goed voorbereid. Neemt vaak een passieve en afwachtende houding aan",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -872,7 +872,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000039"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(396),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4643),
                             Description = "Student is voorbereid en zet zich in om taken tot een goed einde te brengen, is bereid een extra inspanning te leveren indien gevraagd",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -881,7 +881,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000040"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(398),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4645),
                             Description = "Student is voorbereid en zet zich in om taken tot een goed einde te brengen, is bereid een extra inspanning te leveren indien gevraagd",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -890,7 +890,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000041"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(400),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4647),
                             Description = "Student ziet werk, neemt spontaan taken op, toont verantwoordelijkheid en ownership, levert spontaan een gepaste extra inspanning",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -899,7 +899,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000042"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(403),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4650),
                             Description = "Student ziet werk, neemt spontaan taken op, toont verantwoordelijkheid en ownership, levert spontaan een gepaste extra inspanning",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -908,7 +908,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000043"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(405),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4652),
                             Description = "Student werkt chaotisch, haalt deadlines niet. Werkt systematisch slordig en te traag",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -917,7 +917,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000044"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(408),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4655),
                             Description = "Student heeft het moeilijk met plannen en organiseren. Heeft regelmatig bijsturing en hulp nodig bij planning en organisatie",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -926,7 +926,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000045"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(410),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4657),
                             Description = "Student heeft het moeilijk met plannen en organiseren. Heeft regelmatig bijsturing en hulp nodig bij planning en organisatie",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -935,7 +935,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000046"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(413),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4660),
                             Description = "Student kan het werk plannen en organiseren, heeft een goed werkritme",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -944,7 +944,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000047"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(415),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4663),
                             Description = "Student kan het werk plannen en organiseren, heeft een goed werkritme",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -953,7 +953,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000048"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(418),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4665),
                             Description = "Student is proactief in het plannen en organiseren van het werk, werkt heel nauwkeurig en efficiënt",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -962,7 +962,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000049"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(420),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4668),
                             Description = "Student is proactief in het plannen en organiseren van het werk, werkt heel nauwkeurig en efficiënt",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -971,7 +971,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000050"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(423),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4670),
                             Description = "Student heeft een rigide houding, kan zich niet aanpassen aan onverwachte wijzigingen, kan niet schakelen tussen taken",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -980,7 +980,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000051"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(425),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4673),
                             Description = "Student heeft het moeilijk met onverwachte wijzigingen, heeft tijd nodig, kan moeilijk schakelen tussen taken",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -989,7 +989,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000052"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(427),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4675),
                             Description = "Student heeft het moeilijk met onverwachte wijzigingen, heeft tijd nodig, kan moeilijk schakelen tussen taken",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -998,7 +998,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000053"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(430),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4677),
                             Description = "Student kan omgaan met onverwachte wijzigingen, is flexibel, kan schakelen indien nodig",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1007,7 +1007,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000054"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(432),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4680),
                             Description = "Student kan omgaan met onverwachte wijzigingen, is flexibel, kan schakelen indien nodig",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1016,7 +1016,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000055"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(435),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4682),
                             Description = "Student is zeer flexibel, schakelt spontaan en is vooruitziend",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1025,7 +1025,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000056"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(437),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4685),
                             Description = "Student is zeer flexibel, schakelt spontaan en is vooruitziend",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1034,7 +1034,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000057"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000014"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(439),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4733),
                             Description = "Student wordt emotioneel overspoeld, blokkeert, bevriest, loopt weg van moeilijkheden, reageert ongepast",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1043,7 +1043,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000058"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000014"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(442),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4736),
                             Description = "Student reageert vaak onaangepast (ontwijken, rationaliseren, minimaliseren, negeren)",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1052,7 +1052,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000059"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000014"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(444),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4739),
                             Description = "Student reageert vaak onaangepast (ontwijken, rationaliseren, minimaliseren, negeren)",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1061,7 +1061,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000060"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000014"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(447),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4741),
                             Description = "Student herkent stressoren en zoekt naar een gepaste manier om hier mee om te gaan",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1070,7 +1070,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000061"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000014"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(449),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4744),
                             Description = "Student herkent stressoren en zoekt naar een gepaste manier om hier mee om te gaan",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1079,7 +1079,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000062"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000014"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(452),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4747),
                             Description = "Student is weerbaar en veerkrachtig",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1088,7 +1088,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000063"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000014"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(455),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4749),
                             Description = "Student is weerbaar en veerkrachtig",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1097,7 +1097,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000064"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000015"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(457),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4752),
                             Description = "Student is angstig, gaat leermogelijkheden hierdoor uit de weg, durft comfortzone niet verlaten, toont vermijdingsgedrag. Student is ongepast zelfzeker, voelt de rol als stagiair(e) niet aan. Geen communicatie over groeiproces",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1106,7 +1106,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000065"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000015"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(459),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4754),
                             Description = "Student heeft voortdurend aanmoediging en bevestiging nodig om comfortzone te verlaten. Student moet gewezen worden op een gepaste houding als stagiair(e). Weinig communicatie over groeiproces",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1115,7 +1115,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000066"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000015"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(462),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4758),
                             Description = "Student heeft voortdurend aanmoediging en bevestiging nodig om comfortzone te verlaten. Student moet gewezen worden op een gepaste houding als stagiair(e). Weinig communicatie over groeiproces",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1124,7 +1124,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000067"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000015"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(464),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4761),
                             Description = "Student kan met voldoende zelfvertrouwen taken uitvoeren, heeft soms een aanmoediging of zetje nodig. Student communiceert over eigen groeiproces",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1133,7 +1133,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000068"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000015"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(467),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4764),
                             Description = "Student kan met voldoende zelfvertrouwen taken uitvoeren, heeft soms een aanmoediging of zetje nodig. Student communiceert over eigen groeiproces",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1142,7 +1142,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000069"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000015"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(469),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4767),
                             Description = "Student functioneert met zelfzekerheid en zelfvertrouwen en stuurt het eigen leerproces spontaan aan. Communiceert spontaan over groeiproces",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1151,7 +1151,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000070"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000015"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(472),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4769),
                             Description = "Student functioneert met zelfzekerheid en zelfvertrouwen en stuurt het eigen leerproces spontaan aan. Communiceert spontaan over groeiproces",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1160,7 +1160,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000071"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000016"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(474),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4771),
                             Description = "Student heeft voortdurend aansturing nodig",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1169,7 +1169,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000072"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000016"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(476),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4774),
                             Description = "Student kan taken nog onvoldoende zelfstandig uitvoeren, vraagt nog begeleiding",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1178,7 +1178,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000073"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000016"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(479),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4776),
                             Description = "Student kan taken nog onvoldoende zelfstandig uitvoeren, vraagt nog begeleiding",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1187,7 +1187,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000074"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000016"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(481),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4779),
                             Description = "Student kan met zelfvertrouwen en zelfzekerheid taken uitvoeren",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1196,7 +1196,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000075"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000016"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(484),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4781),
                             Description = "Student kan met zelfvertrouwen en zelfzekerheid taken uitvoeren",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1205,7 +1205,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000076"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000016"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(486),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4784),
                             Description = "Student functioneert met grote zelfzekerheid en zelfvertrouwen en stuurt het eigen leerproces spontaan aan, functioneert als beginnend beroepsbeoefenaar",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1214,7 +1214,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000077"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000016"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(489),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4786),
                             Description = "Student functioneert met grote zelfzekerheid en zelfvertrouwen en stuurt het eigen leerproces spontaan aan, functioneert als beginnend beroepsbeoefenaar",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1223,7 +1223,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000078"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000017"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(491),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4789),
                             Description = "Student is passief en afwachtend",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1232,7 +1232,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000079"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000017"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(493),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4791),
                             Description = "Student heeft vaak nog aansporing nodig om bijdragen te leveren. Student blijft eerder terughoudend",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1241,7 +1241,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000080"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000017"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(496),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4793),
                             Description = "Student heeft vaak nog aansporing nodig om bijdragen te leveren. Student blijft eerder terughoudend",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1250,7 +1250,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000081"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000017"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(498),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4796),
                             Description = "Student kan meedenken, is kritisch en verwoordt spontaan eigen ideeën, durft suggesties te geven. Kan ideeën en voorstellen uitwerken",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1259,7 +1259,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000082"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000017"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(501),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4798),
                             Description = "Student kan meedenken, is kritisch en verwoordt spontaan eigen ideeën, durft suggesties te geven. Kan ideeën en voorstellen uitwerken",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1268,7 +1268,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000083"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000017"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(503),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4801),
                             Description = "Student is in staat om ideeën voor te stellen en uit te voeren, gaat hierbij kritisch te werk en koppelt terug",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1277,7 +1277,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000084"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000017"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(506),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4803),
                             Description = "Student is in staat om ideeën voor te stellen en uit te voeren, gaat hierbij kritisch te werk en koppelt terug",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1286,7 +1286,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000085"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000018"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(508),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4806),
                             Description = "Student is meermaals onrespectvol tegenover gevoelens en opvattingen van de cliënt/klant. Toont weinig empathie. Is brutaal in zijn handelen. Heeft weinig oog voor maatschappelijke diversiteit. Maakt meermaals deontologische fouten",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1295,7 +1295,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000086"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000018"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(511),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4808),
                             Description = "Student is soms onrespectvol, tegenover gevoelens en opvattingen van de cliënt/klant, maar kan zichzelf corrigeren op vraag van de mentor",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1304,7 +1304,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000087"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000018"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(513),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4810),
                             Description = "Student is soms onrespectvol, tegenover gevoelens en opvattingen van de cliënt/klant, maar kan zichzelf corrigeren op vraag van de mentor",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1313,7 +1313,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000088"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000018"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(515),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4813),
                             Description = "Student handelt respectvol en zorgzaam tegenover gevoelens en opvattingen van de cliënt/klant. Kan zich inleven in de situatie van de cliënt/klant en toont dit in zijn handelen. Heeft een respectvolle houding tegenover maatschappelijke diversiteit. Handelt naar de deontologische code",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1322,7 +1322,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000089"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000018"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(518),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4815),
                             Description = "Student handelt respectvol en zorgzaam tegenover gevoelens en opvattingen van de cliënt/klant. Kan zich inleven in de situatie van de cliënt/klant en toont dit in zijn handelen. Heeft een respectvolle houding tegenover maatschappelijke diversiteit. Handelt naar de deontologische code",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1331,7 +1331,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000090"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000018"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(520),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4818),
                             Description = "Student toont voorbeeldgedrag op vlak van respect, empathie en divers-sensitief handelen. Is pro-actief in het benaderen van een moeilijke cliënt/klant",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1340,7 +1340,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000091"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000018"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(575),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4820),
                             Description = "Student toont voorbeeldgedrag op vlak van respect, empathie en divers-sensitief handelen. Is pro-actief in het benaderen van een moeilijke cliënt/klant",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1349,7 +1349,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000092"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000019"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(578),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4823),
                             Description = "Student isoleert zich en deelt onvoldoende informatie met collega’s of relevante anderen. Neemt een eerder gesloten houding aan in het team",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1358,7 +1358,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000093"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000019"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(583),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4825),
                             Description = "Student participeert vooral op vraag van de andere(n). Neemt een houding aan die communicatie en samenwerking bemoeilijkt",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1367,7 +1367,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000094"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000019"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(587),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4829),
                             Description = "Student participeert vooral op vraag van de andere(n). Neemt een houding aan die communicatie en samenwerking bemoeilijkt",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1376,7 +1376,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000095"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000019"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(590),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4833),
                             Description = "Student deelt informatie met collega’s en derden volgens de op de werkvloer geldende protocollen en afspraken. Ageert vanuit een open, respectvolle en constructieve houding. Spreekt relevante disciplines binnen de organisatie aan",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1385,7 +1385,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000096"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000019"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(593),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4836),
                             Description = "Student deelt informatie met collega’s en derden volgens de op de werkvloer geldende protocollen en afspraken. Ageert vanuit een open, respectvolle en constructieve houding. Spreekt relevante disciplines binnen de organisatie aan",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1394,7 +1394,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000097"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000019"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(595),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4839),
                             Description = "Student deelt spontaan informatie en onderhoudt spontaan goede contacten. Zet bruikbare ondersteunende samenwerkingsverbanden en/of netwerken op. Is een volwaardig teamlid in de organisatie",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1403,7 +1403,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000098"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000019"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(599),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4842),
                             Description = "Student deelt spontaan informatie en onderhoudt spontaan goede contacten. Zet bruikbare ondersteunende samenwerkingsverbanden en/of netwerken op. Is een volwaardig teamlid in de organisatie",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1412,7 +1412,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000099"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000020"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(601),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4844),
                             Description = "Student is niet in staat op zijn professioneel handelen te reflecteren. Reageert veelal defensief bij het ontvangen van feedback. Stuurt gedrag onvoldoende bij",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1421,7 +1421,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000100"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000020"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(603),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4847),
                             Description = "Student heeft weinig inzicht in zijn professioneel handelen. Student reageert vaak defensief. Student is wisselend in het bijsturen van gedrag",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1430,7 +1430,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000101"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000020"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(606),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4849),
                             Description = "Student heeft weinig inzicht in zijn professioneel handelen. Student reageert vaak defensief. Student is wisselend in het bijsturen van gedrag",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1439,7 +1439,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000102"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000020"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(608),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4852),
                             Description = "Student reflecteert op zijn professioneel handelen. Gaat constructief om met ontvangen feedback. Geeft het eigen handelen vorm en stuurt zijn gedrag bij vanuit een kritische en reflectieve houding",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1448,7 +1448,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000103"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000020"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(610),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4854),
                             Description = "Student reflecteert op zijn professioneel handelen. Gaat constructief om met ontvangen feedback. Geeft het eigen handelen vorm en stuurt zijn gedrag bij vanuit een kritische en reflectieve houding",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1457,7 +1457,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000104"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000020"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(613),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4857),
                             Description = "Integreert spontaan een reflectieve houding in het professioneel handelen. Benut momenten van overleg om op gepaste wijze feedback te ontvangen en te geven aan anderen",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1466,7 +1466,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000105"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000020"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(615),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4859),
                             Description = "Integreert spontaan een reflectieve houding in het professioneel handelen. Benut momenten van overleg om op gepaste wijze feedback te ontvangen en te geven aan anderen",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1475,7 +1475,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000106"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000021"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(618),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4862),
                             Description = "Student slaagt er niet in (fasen van) het psychodiagnostisch proces correct uit te voeren. Mist systematisch nauwkeurigheid en kritische zin. Taalgebruik is onvoldoende correct en professioneel",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1484,7 +1484,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000107"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000021"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(620),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4864),
                             Description = "Student is wisselend in het uitvoeren van (fasen van) het psychodiagnostisch proces. Is af en toe onnauwkeurig. Heeft bijsturing nodig",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1493,7 +1493,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000108"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000021"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(623),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4866),
                             Description = "Student is wisselend in het uitvoeren van (fasen van) het psychodiagnostisch proces. Is af en toe onnauwkeurig. Heeft bijsturing nodig",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1502,7 +1502,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000109"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000021"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(625),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4869),
                             Description = "Student kan elke relevante fase van het psychodiagnostisch proces op een voldoende wijze uitvoeren. Kan nog groeien in het uitvoeren van bepaalde fasen. Kan nog groeien in gebruik van correcte en professionele taal",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1511,7 +1511,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000110"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000021"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(627),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4871),
                             Description = "Student kan elke relevante fase van het psychodiagnostisch proces op een voldoende wijze uitvoeren. Kan nog groeien in het uitvoeren van bepaalde fasen. Kan nog groeien in gebruik van correcte en professionele taal",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1520,7 +1520,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000111"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000021"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(630),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4874),
                             Description = "e student kan elke relevante fase van het psychodiagnostisch proces met kritische zin en nauwkeurigheid uitvoeren. Hanteert correcte en professionele taal",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1529,7 +1529,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000112"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000021"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(632),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4924),
                             Description = "e student kan elke relevante fase van het psychodiagnostisch proces met kritische zin en nauwkeurigheid uitvoeren. Hanteert correcte en professionele taal",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1538,7 +1538,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000113"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000022"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(635),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4927),
                             Description = "Student slaagt er niet in het onderzoeksproces correct uit te voeren. Mist systematisch nauwkeurigheid en kritische zin. Taalgebruik is onvoldoende correct en professioneel",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1547,7 +1547,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000114"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000022"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(637),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4929),
                             Description = "Student is wisselend in het uitvoeren van het onderzoeksproces. Is af en toe onnauwkeurig. Heeft bijsturing nodig",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1556,7 +1556,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000115"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000022"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(640),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4932),
                             Description = "Student is wisselend in het uitvoeren van het onderzoeksproces. Is af en toe onnauwkeurig. Heeft bijsturing nodig",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1565,7 +1565,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000116"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000022"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(642),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4934),
                             Description = "Student kan het onderzoeksproces op een voldoende wijze uitvoeren. Kan nog groeien in het gebruik van correcte en professionele taal",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1574,7 +1574,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000117"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000022"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(644),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4936),
                             Description = "Student kan het onderzoeksproces op een voldoende wijze uitvoeren. Kan nog groeien in het gebruik van correcte en professionele taal",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1583,7 +1583,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000118"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000022"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(647),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4939),
                             Description = "De student kan elke fase van het onderzoeksproces met kritische zin en nauwkeurigheid uitvoeren",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1592,7 +1592,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000119"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000022"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(649),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4942),
                             Description = "De student kan elke fase van het onderzoeksproces met kritische zin en nauwkeurigheid uitvoeren",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1601,7 +1601,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000120"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000023"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(652),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4945),
                             Description = "De student slaagt er niet in om op basis van een psychodiagnostisch of onderzoeksproces een relevante bijdrage te leveren bij het ontwikkelen van een handelings-/preventieplan",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1610,7 +1610,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000121"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000023"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(654),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4947),
                             Description = "De student heeft veel ondersteuning nodig om op basis van een psychodiagnostisch of onderzoeksproces een relevante bijdrage te kunnen leveren bij het ontwikkelen van een handelings-/preventieplan",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1619,7 +1619,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000122"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000023"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(657),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4950),
                             Description = "De student heeft veel ondersteuning nodig om op basis van een psychodiagnostisch of onderzoeksproces een relevante bijdrage te kunnen leveren bij het ontwikkelen van een handelings-/preventieplan",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1628,7 +1628,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000123"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000023"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(659),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4952),
                             Description = "De student kan op basis van een psychodiagnostisch of onderzoeksproces een bijdrage leveren bij het ontwikkelen van een goed handelings-/preventieplan",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1637,7 +1637,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000124"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000023"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(661),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4955),
                             Description = "De student kan op basis van een psychodiagnostisch of onderzoeksproces een bijdrage leveren bij het ontwikkelen van een goed handelings-/preventieplan",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1646,7 +1646,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000125"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000023"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(664),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4957),
                             Description = "De student kan op basis van een psychodiagnostisch of onderzoeksproces zelfstandig een goed handelings-/preventieplan ontwikkelen",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1655,7 +1655,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000126"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000023"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(666),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4960),
                             Description = "De student kan op basis van een psychodiagnostisch of onderzoeksproces zelfstandig een goed handelings-/preventieplan ontwikkelen",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1664,7 +1664,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000127"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000024"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(668),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4962),
                             Description = "Student slaagt er niet in om op een heldere en gestructureerde manier informatie over te brengen en/of te presenteren",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1673,7 +1673,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000128"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000024"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(671),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4964),
                             Description = "Student heeft veel ondersteuning nodig om op een heldere en gestructureerde manier informatie over te brengen en/of te presenteren",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1682,7 +1682,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000129"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000024"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(673),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4967),
                             Description = "Student heeft veel ondersteuning nodig om op een heldere en gestructureerde manier informatie over te brengen en/of te presenteren",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1691,7 +1691,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000130"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000024"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(675),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4969),
                             Description = "Student kan informatie op een didactisch verantwoorde wijze geven en/of presenteren: dit is rekening houdend met doelgroep, valkuilen van het instrument dat ze gebruiken, etc. Kan nog groeien in zelfvertrouwen en overtuigingskracht",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1700,7 +1700,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000131"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000024"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(678),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4972),
                             Description = "Student kan informatie op een didactisch verantwoorde wijze geven en/of presenteren: dit is rekening houdend met doelgroep, valkuilen van het instrument dat ze gebruiken, etc. Kan nog groeien in zelfvertrouwen en overtuigingskracht",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1709,7 +1709,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000132"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000024"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(680),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4974),
                             Description = "Student kan informatie op een heldere en toegankelijke manier geven en/of presenteren. Kan met veel zelfvertrouwen en overtuigingskracht informatie geven en/of presenteren",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1718,7 +1718,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000133"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000024"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(683),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4976),
                             Description = "Student kan informatie op een heldere en toegankelijke manier geven en/of presenteren. Kan met veel zelfvertrouwen en overtuigingskracht informatie geven en/of presenteren",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1727,7 +1727,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000134"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000025"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(685),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4979),
                             Description = "Student slaagt er niet in een begeleidingsrelatie met individuen en groepen op te bouwen. Ondersteunende gespreksvaardigheden (parafraseren, empathisch gissen, etc) worden onvoldoende benut",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1736,7 +1736,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000135"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000025"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(688),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4981),
                             Description = "Student is wisselend in het opbouwen van een begeleidingsrelatie met individuen en groepen. Student is wisselend in het benutten van ondersteunende gespreksvaardigheden",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1745,7 +1745,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000136"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000025"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(690),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4984),
                             Description = "Student is wisselend in het opbouwen van een begeleidingsrelatie met individuen en groepen. Student is wisselend in het benutten van ondersteunende gespreksvaardigheden",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1754,7 +1754,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000137"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000025"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(693),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4986),
                             Description = "Student past ondersteunende gespreksvaardigheden toe bij individuen en groepen (parafraseren, empathisch gissen, etc). Bouwt een begeleidingsrelatie op met individuen en groepen waarin 'warm aanwezig zijn' centraal staat",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1763,7 +1763,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000138"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000025"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(695),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4989),
                             Description = "Student past ondersteunende gespreksvaardigheden toe bij individuen en groepen (parafraseren, empathisch gissen, etc). Bouwt een begeleidingsrelatie op met individuen en groepen waarin 'warm aanwezig zijn' centraal staat",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1772,7 +1772,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000139"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000025"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(697),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4991),
                             Description = "Student past ondersteunende gespreksvaardigheden toe op een vlotte en natuurlijke wijze. Heeft vanuit zichzelf een warm aanwezige en authentieke houding",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1781,7 +1781,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000140"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000025"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(700),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4993),
                             Description = "Student past ondersteunende gespreksvaardigheden toe op een vlotte en natuurlijke wijze. Heeft vanuit zichzelf een warm aanwezige en authentieke houding",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1790,7 +1790,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000141"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000026"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(702),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4996),
                             Description = "Past counselingstechnieken niet of systematisch foutief toe",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1799,7 +1799,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000142"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000026"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(705),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4998),
                             Description = "Past counselingtechnieken wel toe, maar kwaliteit van uitvoering is wisselend",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1808,7 +1808,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000143"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000026"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(707),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5001),
                             Description = "Past counselingtechnieken wel toe, maar kwaliteit van uitvoering is wisselend",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1817,7 +1817,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000144"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000026"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(710),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5003),
                             Description = "Helpt de cliënt inzicht te verwerven in zichzelf en zijn situatie. Kan een stabiele en constructieve werkrelatie opbouwen met cliënt/klant. Kan counselingtechnieken toepassen",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1826,7 +1826,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000145"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000026"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(712),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5005),
                             Description = "Helpt de cliënt inzicht te verwerven in zichzelf en zijn situatie. Kan een stabiele en constructieve werkrelatie opbouwen met cliënt/klant. Kan counselingtechnieken toepassen",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1835,7 +1835,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000146"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000026"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(714),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5008),
                             Description = "Past op effectieve wijze counselingtechnieken toe in gesprekken. Zet aan tot inzichtsverandering. Zet in op empowerment. Zet in op zelfredzaamheid",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1844,7 +1844,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000147"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000026"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(717),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5010),
                             Description = "Past op effectieve wijze counselingtechnieken toe in gesprekken. Zet aan tot inzichtsverandering. Zet in op empowerment. Zet in op zelfredzaamheid",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1853,7 +1853,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000148"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000027"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(719),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5013),
                             Description = "Slaagt er niet in een bestaande training uit te voeren. Zowel inhoudelijk als groepsdynamisch is de training ontoereikend uitgevoerd",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1862,7 +1862,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000149"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000027"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(722),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5015),
                             Description = "Slaagt erin een bestaande training uit te voeren, maar heeft weinig oog voor groepsdynamische processen en/of is weinig flexibel in uitvoering",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1871,7 +1871,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000150"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000027"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(726),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5018),
                             Description = "Slaagt erin een bestaande training uit te voeren, maar heeft weinig oog voor groepsdynamische processen en/of is weinig flexibel in uitvoering",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1880,7 +1880,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000151"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000027"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(756),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5020),
                             Description = "Traint personen op een resultaatsgerichte en persoonlijke wijze om vaardigheden aan te leren. Draagt op een didactisch verantwoorde wijze kennis en inzichten over in een veilige en vertrouwde context, al dan niet samen met een collega of supervisor",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1889,7 +1889,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000152"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000027"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(759),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5023),
                             Description = "Traint personen op een resultaatsgerichte en persoonlijke wijze om vaardigheden aan te leren. Draagt op een didactisch verantwoorde wijze kennis en inzichten over in een veilige en vertrouwde context, al dan niet samen met een collega of supervisor",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1898,7 +1898,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000153"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000027"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(761),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5026),
                             Description = "Kiest een geschikte training, past die aan of stelt die samen in functie van de vraag, op basis van duidelijke kwaliteitscriteria. Toont flexibiliteit in uitvoering, hanteert groepsdynamische processen en enthousiasmeert. Toetst actief af wat het effect is van de training op de deelnemers",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1907,7 +1907,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000154"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000027"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(765),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5029),
                             Description = "Kiest een geschikte training, past die aan of stelt die samen in functie van de vraag, op basis van duidelijke kwaliteitscriteria. Toont flexibiliteit in uitvoering, hanteert groepsdynamische processen en enthousiasmeert. Toetst actief af wat het effect is van de training op de deelnemers",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1916,7 +1916,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000155"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000028"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(768),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5033),
                             Description = "Past coachingstechnieken niet of systematisch foutief toe",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1925,7 +1925,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000156"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000028"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(771),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5036),
                             Description = "Past coachingstechnieken toe, maar kwaliteit van uitvoering is wisselend en/of deze bereiken onvoldoende hun doel",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1934,7 +1934,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000157"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000028"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(775),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5039),
                             Description = "Past coachingstechnieken toe, maar kwaliteit van uitvoering is wisselend en/of deze bereiken onvoldoende hun doel",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -1943,7 +1943,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000158"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000028"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(778),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5043),
                             Description = "Helpt de cliënt inzicht te verwerven in zichzelf, gewenste doelen en mogelijke stappen om deze te realiseren. Kan een stabiele en constructieve werkrelatie opbouwen met cliënt/klant. Maakt gebruik van coachingstechnieken waar nodig",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -1952,7 +1952,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000159"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000028"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(782),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5046),
                             Description = "Helpt de cliënt inzicht te verwerven in zichzelf, gewenste doelen en mogelijke stappen om deze te realiseren. Kan een stabiele en constructieve werkrelatie opbouwen met cliënt/klant. Maakt gebruik van coachingstechnieken waar nodig",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -1961,7 +1961,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000160"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000028"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(784),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5049),
                             Description = "Past op effectieve en doelmatige wijze coachingstechnieken toe en slaagt erin cliënt tot verandering te brengen",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -1970,7 +1970,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000161"),
                             CompetenceId = new Guid("00000000-0000-0000-0000-000000000028"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(786),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5051),
                             Description = "Past op effectieve en doelmatige wijze coachingstechnieken toe en slaagt erin cliënt tot verandering te brengen",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -1979,7 +1979,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa29"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee1e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(819),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5112),
                             Description = "Onwettig afwezig, komt systematisch te laat",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -1988,7 +1988,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa3a"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee1e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(824),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5118),
                             Description = "Student durft soms eens te laat komen, vergeet bepaalde afspraken, blijft tegen dezelfde voorschriften/afspraken fouten maken",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -1997,7 +1997,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa31"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee1e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(829),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5122),
                             Description = "Student durft soms eens te laat komen, vergeet bepaalde afspraken, blijft tegen dezelfde voorschriften/afspraken fouten maken",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2006,7 +2006,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa32"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee1e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(832),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5127),
                             Description = "Student komt op tijd, meldt afwezigheid correct, houdt zich aan voorschriften/afspraken",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2015,7 +2015,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa33"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee1e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(836),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5131),
                             Description = "Student komt op tijd, meldt afwezigheid correct, houdt zich aan voorschriften/afspraken",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2024,7 +2024,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa34"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee1e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(840),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5135),
                             Description = "Student is altijd stipt, toont een feilloze houding in het nakomen van afspraken",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2033,7 +2033,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa35"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee1e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(844),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5138),
                             Description = "Student is altijd stipt, toont een feilloze houding in het nakomen van afspraken",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2042,7 +2042,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa36"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee11"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(876),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5142),
                             Description = "Student is snel tevreden over zichzelf, brengt weinig in, werkt enkel mee op nadrukkelijke vraag. Student bereidt zich systematisch onvoldoende voor. Afwezige houding",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2051,7 +2051,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa37"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee11"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(881),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5145),
                             Description = "Student is niet altijd goed voorbereid. Neemt vaak een passieve en afwachtende houding aan",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2060,7 +2060,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa38"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee11"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(885),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5149),
                             Description = "Student is niet altijd goed voorbereid. Neemt vaak een passieve en afwachtende houding aan",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2069,7 +2069,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa39"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee11"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(888),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5152),
                             Description = "Student is voorbereid en zet zich in om taken tot een goed einde te brengen, is bereid een extra inspanning te leveren indien gevraagd",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2078,7 +2078,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa4a"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee11"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(892),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5156),
                             Description = "Student is voorbereid en zet zich in om taken tot een goed einde te brengen, is bereid een extra inspanning te leveren indien gevraagd",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2087,7 +2087,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa41"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee11"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(896),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5160),
                             Description = "Student ziet werk, neemt spontaan taken op, toont verantwoordelijkheid en ownership, levert spontaan een gepaste extra inspanning",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2096,7 +2096,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa42"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee11"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(900),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5163),
                             Description = "Student ziet werk, neemt spontaan taken op, toont verantwoordelijkheid en ownership, levert spontaan een gepaste extra inspanning",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2105,7 +2105,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa43"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee12"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(903),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5195),
                             Description = "Student werkt chaotisch, haalt deadlines niet. Werkt systematisch slordig en te traag",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2114,7 +2114,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa44"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee12"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(907),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5199),
                             Description = "Student heeft het moeilijk met plannen en organiseren. Heeft regelmatig bijsturing en hulp nodig bij planning en organisatie",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2123,7 +2123,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa45"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee12"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(911),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5203),
                             Description = "Student heeft het moeilijk met plannen en organiseren. Heeft regelmatig bijsturing en hulp nodig bij planning en organisatie",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2132,7 +2132,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa46"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee12"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(915),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5206),
                             Description = "Student kan het werk plannen en organiseren, heeft een goed werkritme",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2141,7 +2141,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa47"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee12"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(919),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5210),
                             Description = "Student kan het werk plannen en organiseren, heeft een goed werkritme",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2150,7 +2150,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa48"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee12"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(922),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5214),
                             Description = "Student is proactief in het plannen en organiseren van het werk, werkt heel nauwkeurig en efficiënt",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2159,7 +2159,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa49"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee12"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(926),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5218),
                             Description = "Student is proactief in het plannen en organiseren van het werk, werkt heel nauwkeurig en efficiënt",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2168,7 +2168,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa5a"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee13"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(930),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5221),
                             Description = "Student heeft een rigide houding, kan zich niet aanpassen aan onverwachte wijzigingen, kan niet schakelen tussen taken",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2177,7 +2177,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa51"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee13"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(933),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5225),
                             Description = "Student heeft het moeilijk met onverwachte wijzigingen, heeft tijd nodig, kan moeilijk schakelen tussen taken",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2186,7 +2186,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa52"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee13"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(962),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5229),
                             Description = "Student heeft het moeilijk met onverwachte wijzigingen, heeft tijd nodig, kan moeilijk schakelen tussen taken",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2195,7 +2195,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa53"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee13"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(966),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5232),
                             Description = "Student kan omgaan met onverwachte wijzigingen, is flexibel, kan schakelen indien nodig",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2204,7 +2204,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa54"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee13"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(970),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5236),
                             Description = "Student kan omgaan met onverwachte wijzigingen, is flexibel, kan schakelen indien nodig",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2213,7 +2213,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa55"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee13"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(973),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5241),
                             Description = "Student is zeer flexibel, schakelt spontaan en is vooruitziend",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2222,7 +2222,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa56"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee13"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(977),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5244),
                             Description = "Student is zeer flexibel, schakelt spontaan en is vooruitziend",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2231,7 +2231,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa57"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee14"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(981),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5247),
                             Description = "Student wordt emotioneel overspoeld, blokkeert, bevriest, loopt weg van moeilijkheden, reageert ongepast",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2240,7 +2240,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa58"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee14"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(985),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5251),
                             Description = "Student reageert vaak onaangepast (ontwijken, rationaliseren, minimaliseren, negeren)",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2249,7 +2249,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa59"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee14"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(989),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5281),
                             Description = "Student reageert vaak onaangepast (ontwijken, rationaliseren, minimaliseren, negeren)",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2258,7 +2258,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa6a"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee14"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(992),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5285),
                             Description = "Student herkent stressoren en zoekt naar een gepaste manier om hier mee om te gaan",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2267,7 +2267,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa61"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee14"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(996),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5289),
                             Description = "Student herkent stressoren en zoekt naar een gepaste manier om hier mee om te gaan",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2276,7 +2276,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa62"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee14"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(999),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5292),
                             Description = "Student is weerbaar en veerkrachtig",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2285,7 +2285,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa63"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee14"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1003),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5295),
                             Description = "Student is weerbaar en veerkrachtig",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2294,7 +2294,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa64"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee15"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1006),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5299),
                             Description = "Student is angstig, gaat leermogelijkheden hierdoor uit de weg, durft comfortzone niet verlaten, toont vermijdingsgedrag. Student is ongepast zelfzeker, voelt de rol als stagiair(e) niet aan. Geen communicatie over groeiproces",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2303,7 +2303,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa65"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee15"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1010),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5302),
                             Description = "Student heeft voortdurend aanmoediging en bevestiging nodig om comfortzone te verlaten. Student moet gewezen worden op een gepaste houding als stagiair(e). Weinig communicatie over groeiproces",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2312,7 +2312,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa66"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee15"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1014),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5306),
                             Description = "Student heeft voortdurend aanmoediging en bevestiging nodig om comfortzone te verlaten. Student moet gewezen worden op een gepaste houding als stagiair(e). Weinig communicatie over groeiproces",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2321,7 +2321,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa67"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee15"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1017),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5310),
                             Description = "Student kan met voldoende zelfvertrouwen taken uitvoeren, heeft soms een aanmoediging of zetje nodig. Student communiceert over eigen groeiproces",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2330,7 +2330,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa68"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee15"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1046),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5313),
                             Description = "Student kan met voldoende zelfvertrouwen taken uitvoeren, heeft soms een aanmoediging of zetje nodig. Student communiceert over eigen groeiproces",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2339,7 +2339,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa69"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee15"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1051),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5318),
                             Description = "Student functioneert met zelfzekerheid en zelfvertrouwen en stuurt het eigen leerproces spontaan aan. Communiceert spontaan over groeiproces",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2348,7 +2348,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa7a"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee15"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1054),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5321),
                             Description = "Student functioneert met zelfzekerheid en zelfvertrouwen en stuurt het eigen leerproces spontaan aan. Communiceert spontaan over groeiproces",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2357,7 +2357,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa71"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee16"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1058),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5325),
                             Description = "Student heeft voortdurend aansturing nodig",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2366,7 +2366,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa72"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee16"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1062),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5329),
                             Description = "Student kan taken nog onvoldoende zelfstandig uitvoeren, vraagt nog begeleiding",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2375,7 +2375,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa73"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee16"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1065),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5333),
                             Description = "Student kan taken nog onvoldoende zelfstandig uitvoeren, vraagt nog begeleiding",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2384,7 +2384,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa74"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee16"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1069),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5336),
                             Description = "Student kan met zelfvertrouwen en zelfzekerheid taken uitvoeren",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2393,7 +2393,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa75"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee16"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1072),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5357),
                             Description = "Student kan met zelfvertrouwen en zelfzekerheid taken uitvoeren",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2402,7 +2402,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa76"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee16"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1076),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5362),
                             Description = "Student functioneert met grote zelfzekerheid en zelfvertrouwen en stuurt het eigen leerproces spontaan aan, functioneert als beginnend beroepsbeoefenaar",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2411,7 +2411,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa77"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee16"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1080),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5366),
                             Description = "Student functioneert met grote zelfzekerheid en zelfvertrouwen en stuurt het eigen leerproces spontaan aan, functioneert als beginnend beroepsbeoefenaar",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2420,7 +2420,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa78"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee17"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1084),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5370),
                             Description = "Student is passief en afwachtend",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2429,7 +2429,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa79"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee17"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1087),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5374),
                             Description = "Student heeft vaak nog aansporing nodig om bijdragen te leveren. Student blijft eerder terughoudend",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2438,7 +2438,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa8a"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee17"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1091),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5377),
                             Description = "Student heeft vaak nog aansporing nodig om bijdragen te leveren. Student blijft eerder terughoudend",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2447,7 +2447,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa81"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee17"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1095),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5381),
                             Description = "Student kan meedenken, is kritisch en verwoordt spontaan eigen ideeën, durft suggesties te geven. Kan ideeën en voorstellen uitwerken",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2456,7 +2456,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa82"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee17"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1099),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5385),
                             Description = "Student kan meedenken, is kritisch en verwoordt spontaan eigen ideeën, durft suggesties te geven. Kan ideeën en voorstellen uitwerken",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2465,7 +2465,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa83"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee17"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1102),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5389),
                             Description = "Student is in staat om ideeën voor te stellen en uit te voeren, gaat hierbij kritisch te werk en koppelt terug",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2474,7 +2474,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa84"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee17"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1106),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5393),
                             Description = "Student is in staat om ideeën voor te stellen en uit te voeren, gaat hierbij kritisch te werk en koppelt terug",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2483,7 +2483,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa85"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee18"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1151),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5396),
                             Description = "Student is meermaals onrespectvol tegenover gevoelens en opvattingen van de cliënt/klant. Toont weinig empathie. Is brutaal in zijn handelen. Heeft weinig oog voor maatschappelijke diversiteit. Maakt meermaals deontologische fouten",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2492,7 +2492,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa86"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee18"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1156),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5400),
                             Description = "Student is soms onrespectvol, tegenover gevoelens en opvattingen van de cliënt/klant, maar kan zichzelf corrigeren op vraag van de mentor",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2501,7 +2501,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa87"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee18"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1160),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5404),
                             Description = "Student is soms onrespectvol, tegenover gevoelens en opvattingen van de cliënt/klant, maar kan zichzelf corrigeren op vraag van de mentor",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2510,7 +2510,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa88"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee18"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1163),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5408),
                             Description = "Student handelt respectvol en zorgzaam tegenover gevoelens en opvattingen van de cliënt/klant. Kan zich inleven in de situatie van de cliënt/klant en toont dit in zijn handelen. Heeft een respectvolle houding tegenover maatschappelijke diversiteit. Handelt naar de deontologische code",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2519,7 +2519,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa89"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee18"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1166),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5412),
                             Description = "Student handelt respectvol en zorgzaam tegenover gevoelens en opvattingen van de cliënt/klant. Kan zich inleven in de situatie van de cliënt/klant en toont dit in zijn handelen. Heeft een respectvolle houding tegenover maatschappelijke diversiteit. Handelt naar de deontologische code",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2528,7 +2528,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa9a"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee18"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1170),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5415),
                             Description = "Student toont voorbeeldgedrag op vlak van respect, empathie en divers-sensitief handelen. Is pro-actief in het benaderen van een moeilijke cliënt/klant",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2537,7 +2537,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa91"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee18"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1173),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5467),
                             Description = "Student toont voorbeeldgedrag op vlak van respect, empathie en divers-sensitief handelen. Is pro-actief in het benaderen van een moeilijke cliënt/klant",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2546,7 +2546,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa92"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee19"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1177),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5471),
                             Description = "Student isoleert zich en deelt onvoldoende informatie met collega’s of relevante anderen. Neemt een eerder gesloten houding aan in het team",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2555,7 +2555,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa93"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee19"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1180),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5475),
                             Description = "Student participeert vooral op vraag van de andere(n). Neemt een houding aan die communicatie en samenwerking bemoeilijkt",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2564,7 +2564,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa94"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee19"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1184),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5479),
                             Description = "Student participeert vooral op vraag van de andere(n). Neemt een houding aan die communicatie en samenwerking bemoeilijkt",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2573,7 +2573,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa95"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee19"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1187),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5482),
                             Description = "Student deelt informatie met collega’s en derden volgens de op de werkvloer geldende protocollen en afspraken. Ageert vanuit een open, respectvolle en constructieve houding. Spreekt relevante disciplines binnen de organisatie aan",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2582,7 +2582,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa96"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee19"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1191),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5486),
                             Description = "Student deelt informatie met collega’s en derden volgens de op de werkvloer geldende protocollen en afspraken. Ageert vanuit een open, respectvolle en constructieve houding. Spreekt relevante disciplines binnen de organisatie aan",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2591,7 +2591,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa97"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee19"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1195),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5489),
                             Description = "Student deelt spontaan informatie en onderhoudt spontaan goede contacten. Zet bruikbare ondersteunende samenwerkingsverbanden en/of netwerken op. Is een volwaardig teamlid in de organisatie",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2600,7 +2600,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa98"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee19"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1200),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5493),
                             Description = "Student deelt spontaan informatie en onderhoudt spontaan goede contacten. Zet bruikbare ondersteunende samenwerkingsverbanden en/of netwerken op. Is een volwaardig teamlid in de organisatie",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2609,7 +2609,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaa99"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee2e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1203),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5497),
                             Description = "Student is niet in staat op zijn professioneel handelen te reflecteren. Reageert veelal defensief bij het ontvangen van feedback. Stuurt gedrag onvoldoende bij",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2618,7 +2618,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa1aa"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee2e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1244),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5501),
                             Description = "Student heeft weinig inzicht in zijn professioneel handelen. Student reageert vaak defensief. Student is wisselend in het bijsturen van gedrag",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2627,7 +2627,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa1a1"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee2e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1249),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5504),
                             Description = "Student heeft weinig inzicht in zijn professioneel handelen. Student reageert vaak defensief. Student is wisselend in het bijsturen van gedrag",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2636,7 +2636,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa1a2"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee2e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1253),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5508),
                             Description = "Student reflecteert op zijn professioneel handelen. Gaat constructief om met ontvangen feedback. Geeft het eigen handelen vorm en stuurt zijn gedrag bij vanuit een kritische en reflectieve houding",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2645,7 +2645,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa1a3"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee2e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1257),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5512),
                             Description = "Student reflecteert op zijn professioneel handelen. Gaat constructief om met ontvangen feedback. Geeft het eigen handelen vorm en stuurt zijn gedrag bij vanuit een kritische en reflectieve houding",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2654,7 +2654,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa1a4"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee2e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1261),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5515),
                             Description = "Integreert spontaan een reflectieve houding in het professioneel handelen. Benut momenten van overleg om op gepaste wijze feedback te ontvangen en te geven aan anderen",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2663,7 +2663,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa1a5"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee2e"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1265),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5519),
                             Description = "Integreert spontaan een reflectieve houding in het professioneel handelen. Benut momenten van overleg om op gepaste wijze feedback te ontvangen en te geven aan anderen",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2672,7 +2672,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa1a6"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee21"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1268),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5523),
                             Description = "Student slaagt er niet in (fasen van) het psychodiagnostisch proces correct uit te voeren. Mist systematisch nauwkeurigheid en kritische zin. Taalgebruik is onvoldoende correct en professioneel",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2681,7 +2681,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa1a7"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee21"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1272),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5563),
                             Description = "Student is wisselend in het uitvoeren van (fasen van) het psychodiagnostisch proces. Is af en toe onnauwkeurig. Heeft bijsturing nodig",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2690,7 +2690,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa1a8"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee21"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1275),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5568),
                             Description = "Student is wisselend in het uitvoeren van (fasen van) het psychodiagnostisch proces. Is af en toe onnauwkeurig. Heeft bijsturing nodig",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2699,7 +2699,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa1a9"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee21"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1278),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5572),
                             Description = "Student kan elke relevante fase van het psychodiagnostisch proces op een voldoende wijze uitvoeren. Kan nog groeien in het uitvoeren van bepaalde fasen. Kan nog groeien in gebruik van correcte en professionele taal",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2708,7 +2708,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa11a"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee21"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1282),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5575),
                             Description = "Student kan elke relevante fase van het psychodiagnostisch proces op een voldoende wijze uitvoeren. Kan nog groeien in het uitvoeren van bepaalde fasen. Kan nog groeien in gebruik van correcte en professionele taal",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2717,7 +2717,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa111"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee21"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1286),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5579),
                             Description = "e student kan elke relevante fase van het psychodiagnostisch proces met kritische zin en nauwkeurigheid uitvoeren. Hanteert correcte en professionele taal",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2726,7 +2726,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa112"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee21"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1290),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5583),
                             Description = "e student kan elke relevante fase van het psychodiagnostisch proces met kritische zin en nauwkeurigheid uitvoeren. Hanteert correcte en professionele taal",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2735,7 +2735,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa113"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee22"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1294),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5587),
                             Description = "Student slaagt er niet in het onderzoeksproces correct uit te voeren. Mist systematisch nauwkeurigheid en kritische zin. Taalgebruik is onvoldoende correct en professioneel",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2744,7 +2744,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa114"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee22"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1297),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5590),
                             Description = "Student is wisselend in het uitvoeren van het onderzoeksproces. Is af en toe onnauwkeurig. Heeft bijsturing nodig",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2753,7 +2753,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa115"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee22"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1300),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5594),
                             Description = "Student is wisselend in het uitvoeren van het onderzoeksproces. Is af en toe onnauwkeurig. Heeft bijsturing nodig",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2762,7 +2762,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa116"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee22"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1304),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5598),
                             Description = "Student kan het onderzoeksproces op een voldoende wijze uitvoeren. Kan nog groeien in het gebruik van correcte en professionele taal",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2771,7 +2771,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa117"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee22"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1342),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5602),
                             Description = "Student kan het onderzoeksproces op een voldoende wijze uitvoeren. Kan nog groeien in het gebruik van correcte en professionele taal",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2780,7 +2780,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa118"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee22"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1346),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5606),
                             Description = "De student kan elke fase van het onderzoeksproces met kritische zin en nauwkeurigheid uitvoeren",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2789,7 +2789,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa119"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee22"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1350),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5609),
                             Description = "De student kan elke fase van het onderzoeksproces met kritische zin en nauwkeurigheid uitvoeren",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2798,7 +2798,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa12a"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee23"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1353),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5612),
                             Description = "De student slaagt er niet in om op basis van een psychodiagnostisch of onderzoeksproces een relevante bijdrage te leveren bij het ontwikkelen van een handelings-/preventieplan",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2807,7 +2807,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa121"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee23"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1357),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5615),
                             Description = "De student heeft veel ondersteuning nodig om op basis van een psychodiagnostisch of onderzoeksproces een relevante bijdrage te kunnen leveren bij het ontwikkelen van een handelings-/preventieplan",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2816,7 +2816,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa122"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee23"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1360),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5619),
                             Description = "De student heeft veel ondersteuning nodig om op basis van een psychodiagnostisch of onderzoeksproces een relevante bijdrage te kunnen leveren bij het ontwikkelen van een handelings-/preventieplan",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2825,7 +2825,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa123"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee23"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1364),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5623),
                             Description = "De student kan op basis van een psychodiagnostisch of onderzoeksproces een bijdrage leveren bij het ontwikkelen van een goed handelings-/preventieplan",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2834,7 +2834,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa124"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee23"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1367),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5652),
                             Description = "De student kan op basis van een psychodiagnostisch of onderzoeksproces een bijdrage leveren bij het ontwikkelen van een goed handelings-/preventieplan",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2843,7 +2843,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa125"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee23"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1371),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5656),
                             Description = "De student kan op basis van een psychodiagnostisch of onderzoeksproces zelfstandig een goed handelings-/preventieplan ontwikkelen",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2852,7 +2852,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa126"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee23"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1374),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5660),
                             Description = "De student kan op basis van een psychodiagnostisch of onderzoeksproces zelfstandig een goed handelings-/preventieplan ontwikkelen",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2861,7 +2861,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa127"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee24"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1378),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5663),
                             Description = "Student slaagt er niet in om op een heldere en gestructureerde manier informatie over te brengen en/of te presenteren",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2870,7 +2870,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa128"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee24"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1382),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5667),
                             Description = "Student heeft veel ondersteuning nodig om op een heldere en gestructureerde manier informatie over te brengen en/of te presenteren",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2879,7 +2879,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa129"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee24"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1385),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5671),
                             Description = "Student heeft veel ondersteuning nodig om op een heldere en gestructureerde manier informatie over te brengen en/of te presenteren",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2888,7 +2888,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa13a"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee24"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1389),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5674),
                             Description = "Student kan informatie op een didactisch verantwoorde wijze geven en/of presenteren: dit is rekening houdend met doelgroep, valkuilen van het instrument dat ze gebruiken, etc. Kan nog groeien in zelfvertrouwen en overtuigingskracht",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2897,7 +2897,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa131"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee24"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1392),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5678),
                             Description = "Student kan informatie op een didactisch verantwoorde wijze geven en/of presenteren: dit is rekening houdend met doelgroep, valkuilen van het instrument dat ze gebruiken, etc. Kan nog groeien in zelfvertrouwen en overtuigingskracht",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2906,7 +2906,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa132"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee24"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1396),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5682),
                             Description = "Student kan informatie op een heldere en toegankelijke manier geven en/of presenteren. Kan met veel zelfvertrouwen en overtuigingskracht informatie geven en/of presenteren",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2915,7 +2915,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa133"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee24"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1425),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5685),
                             Description = "Student kan informatie op een heldere en toegankelijke manier geven en/of presenteren. Kan met veel zelfvertrouwen en overtuigingskracht informatie geven en/of presenteren",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2924,7 +2924,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa134"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee25"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1429),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5689),
                             Description = "Student slaagt er niet in een begeleidingsrelatie met individuen en groepen op te bouwen. Ondersteunende gespreksvaardigheden (parafraseren, empathisch gissen, etc) worden onvoldoende benut",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2933,7 +2933,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa135"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee25"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1432),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5692),
                             Description = "Student is wisselend in het opbouwen van een begeleidingsrelatie met individuen en groepen. Student is wisselend in het benutten van ondersteunende gespreksvaardigheden",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -2942,7 +2942,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa136"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee25"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1436),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5696),
                             Description = "Student is wisselend in het opbouwen van een begeleidingsrelatie met individuen en groepen. Student is wisselend in het benutten van ondersteunende gespreksvaardigheden",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -2951,7 +2951,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa137"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee25"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1439),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5700),
                             Description = "Student past ondersteunende gespreksvaardigheden toe bij individuen en groepen (parafraseren, empathisch gissen, etc). Bouwt een begeleidingsrelatie op met individuen en groepen waarin 'warm aanwezig zijn' centraal staat",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -2960,7 +2960,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa138"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee25"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1443),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5704),
                             Description = "Student past ondersteunende gespreksvaardigheden toe bij individuen en groepen (parafraseren, empathisch gissen, etc). Bouwt een begeleidingsrelatie op met individuen en groepen waarin 'warm aanwezig zijn' centraal staat",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -2969,7 +2969,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa139"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee25"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1447),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5707),
                             Description = "Student past ondersteunende gespreksvaardigheden toe op een vlotte en natuurlijke wijze. Heeft vanuit zichzelf een warm aanwezige en authentieke houding",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -2978,7 +2978,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa14a"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee25"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1451),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5742),
                             Description = "Student past ondersteunende gespreksvaardigheden toe op een vlotte en natuurlijke wijze. Heeft vanuit zichzelf een warm aanwezige en authentieke houding",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -2987,7 +2987,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa141"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee26"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1455),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5746),
                             Description = "Past counselingstechnieken niet of systematisch foutief toe",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -2996,7 +2996,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa142"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee26"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1458),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5750),
                             Description = "Past counselingtechnieken wel toe, maar kwaliteit van uitvoering is wisselend",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -3005,7 +3005,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa143"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee26"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1462),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5754),
                             Description = "Past counselingtechnieken wel toe, maar kwaliteit van uitvoering is wisselend",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -3014,7 +3014,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa144"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee26"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1465),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5757),
                             Description = "Helpt de cliënt inzicht te verwerven in zichzelf en zijn situatie. Kan een stabiele en constructieve werkrelatie opbouwen met cliënt/klant. Kan counselingtechnieken toepassen",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -3023,7 +3023,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa145"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee26"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1469),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5761),
                             Description = "Helpt de cliënt inzicht te verwerven in zichzelf en zijn situatie. Kan een stabiele en constructieve werkrelatie opbouwen met cliënt/klant. Kan counselingtechnieken toepassen",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -3032,7 +3032,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa146"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee26"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1472),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5765),
                             Description = "Past op effectieve wijze counselingtechnieken toe in gesprekken. Zet aan tot inzichtsverandering. Zet in op empowerment. Zet in op zelfredzaamheid",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -3041,7 +3041,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa147"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee26"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1476),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5769),
                             Description = "Past op effectieve wijze counselingtechnieken toe in gesprekken. Zet aan tot inzichtsverandering. Zet in op empowerment. Zet in op zelfredzaamheid",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -3050,7 +3050,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa148"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee27"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1479),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5773),
                             Description = "Slaagt er niet in een bestaande training uit te voeren. Zowel inhoudelijk als groepsdynamisch is de training ontoereikend uitgevoerd",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -3059,7 +3059,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa149"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee27"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1509),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5777),
                             Description = "Slaagt erin een bestaande training uit te voeren, maar heeft weinig oog voor groepsdynamische processen en/of is weinig flexibel in uitvoering",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -3068,7 +3068,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa15a"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee27"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1513),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5781),
                             Description = "Slaagt erin een bestaande training uit te voeren, maar heeft weinig oog voor groepsdynamische processen en/of is weinig flexibel in uitvoering",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -3077,7 +3077,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa151"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee27"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1517),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5784),
                             Description = "Traint personen op een resultaatsgerichte en persoonlijke wijze om vaardigheden aan te leren. Draagt op een didactisch verantwoorde wijze kennis en inzichten over in een veilige en vertrouwde context, al dan niet samen met een collega of supervisor",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -3086,7 +3086,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa152"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee27"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1520),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5788),
                             Description = "Traint personen op een resultaatsgerichte en persoonlijke wijze om vaardigheden aan te leren. Draagt op een didactisch verantwoorde wijze kennis en inzichten over in een veilige en vertrouwde context, al dan niet samen met een collega of supervisor",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -3095,7 +3095,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa153"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee27"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1524),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5792),
                             Description = "Kiest een geschikte training, past die aan of stelt die samen in functie van de vraag, op basis van duidelijke kwaliteitscriteria. Toont flexibiliteit in uitvoering, hanteert groepsdynamische processen en enthousiasmeert. Toetst actief af wat het effect is van de training op de deelnemers",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -3104,7 +3104,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa154"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee27"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1527),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5796),
                             Description = "Kiest een geschikte training, past die aan of stelt die samen in functie van de vraag, op basis van duidelijke kwaliteitscriteria. Toont flexibiliteit in uitvoering, hanteert groepsdynamische processen en enthousiasmeert. Toetst actief af wat het effect is van de training op de deelnemers",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -3113,7 +3113,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa155"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee28"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1531),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5800),
                             Description = "Past coachingstechnieken niet of systematisch foutief toe",
                             ScaleValue = "Zwaar onvoldoende",
                             ScaleValueScore = 1
@@ -3122,7 +3122,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa156"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee28"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1534),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5828),
                             Description = "Past coachingstechnieken toe, maar kwaliteit van uitvoering is wisselend en/of deze bereiken onvoldoende hun doel",
                             ScaleValue = "Onvoldoende",
                             ScaleValueScore = 2
@@ -3131,7 +3131,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa157"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee28"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1538),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5832),
                             Description = "Past coachingstechnieken toe, maar kwaliteit van uitvoering is wisselend en/of deze bereiken onvoldoende hun doel",
                             ScaleValue = "Licht onvoldoende",
                             ScaleValueScore = 3
@@ -3140,7 +3140,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa158"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee28"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1542),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5836),
                             Description = "Helpt de cliënt inzicht te verwerven in zichzelf, gewenste doelen en mogelijke stappen om deze te realiseren. Kan een stabiele en constructieve werkrelatie opbouwen met cliënt/klant. Maakt gebruik van coachingstechnieken waar nodig",
                             ScaleValue = "Voldoende",
                             ScaleValueScore = 4
@@ -3149,7 +3149,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa159"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee28"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1546),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5840),
                             Description = "Helpt de cliënt inzicht te verwerven in zichzelf, gewenste doelen en mogelijke stappen om deze te realiseren. Kan een stabiele en constructieve werkrelatie opbouwen met cliënt/klant. Maakt gebruik van coachingstechnieken waar nodig",
                             ScaleValue = "Goed",
                             ScaleValueScore = 5
@@ -3158,7 +3158,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa16a"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee28"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1550),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5844),
                             Description = "Past op effectieve en doelmatige wijze coachingstechnieken toe en slaagt erin cliënt tot verandering te brengen",
                             ScaleValue = "Zeer goed",
                             ScaleValueScore = 6
@@ -3167,7 +3167,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         {
                             Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaa161"),
                             CompetenceId = new Guid("eeeeeeee-eeee-eeee-eeee-eeeeeeeeee28"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 923, DateTimeKind.Local).AddTicks(1553),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(5847),
                             Description = "Past op effectieve en doelmatige wijze coachingstechnieken toe en slaagt erin cliënt tot verandering te brengen",
                             ScaleValue = "Uitstekend",
                             ScaleValueScore = 7
@@ -3210,7 +3210,7 @@ namespace Howest.SelfEvaluation.Web.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            Created = new DateTime(2026, 5, 1, 23, 26, 24, 922, DateTimeKind.Local).AddTicks(9995),
+                            Created = new DateTime(2026, 5, 1, 6, 48, 8, 443, DateTimeKind.Local).AddTicks(4233),
                             Description = "Zelfevaluaties stageperiode.",
                             Name = "Stage"
                         });

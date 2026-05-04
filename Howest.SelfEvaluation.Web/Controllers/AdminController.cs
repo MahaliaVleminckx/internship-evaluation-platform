@@ -1,6 +1,6 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Web.Data;
-using Howest.SelfEvaluation.Web.ViewModels;
+using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Providers;
@@ -48,19 +48,29 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             _db.Modules.Add(module);
 
-            _db.Set<ApplicationUserModule>().Add(new ApplicationUserModule
-            {
-                ApplicationUserId = vm.OwnerId.Value,
-                ModuleId = module.Id
-            });
+
+            //Had to change this as I updated the db relationship from own class to automatic through EF
+
+            //_db.Set<ApplicationUserModule>().Add(new ApplicationUserModule
+            //{
+            //    ApplicationUserId = vm.OwnerId.Value,
+            //    ModuleId = module.Id
+            //});
+
+            var owner = await _db.ApplicationUsers.FindAsync(vm.OwnerId.Value);
+            module.ApplicationUsers.Add(owner);
 
             foreach (var studentId in vm.AssignedStudentIds)
             {
-                _db.Set<ApplicationUserModule>().Add(new ApplicationUserModule
-                {
-                    ApplicationUserId = studentId,
-                    ModuleId = module.Id
-                });
+                //idem 
+
+                //_db.Set<ApplicationUserModule>().Add(new ApplicationUserModule
+                //{
+                //    ApplicationUserId = studentId,
+                //    ModuleId = module.Id
+                //});
+                var student = await _db.ApplicationUsers.FindAsync(studentId);
+                module.ApplicationUsers.Add(student);
             }
 
 

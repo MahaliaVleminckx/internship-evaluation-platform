@@ -1,8 +1,8 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 
-namespace Howest.SelfEvaluation.Web.ViewModels
+namespace Howest.SelfEvaluation.Web.ViewModels.Mentor
 {
-    public class MentorCompetencesViewModel
+    public class MentorCompetencesViewModel : StudentIdViewModel
     {
         public Guid EvaluationId { get; set; }
         public Guid DomainId { get; set; }

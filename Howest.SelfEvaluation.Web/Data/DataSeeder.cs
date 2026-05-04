@@ -1756,39 +1756,123 @@ namespace Howest.SelfEvaluation.Web.Data
 			}).ToList();
 			#endregion
 
-			//hardcoded user for dev testing purposes, to be deleted once register implemented
+			//hardcoded users for dev testing purposes, to be deleted once register implemented
 			Guid testUserId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+			Guid testMentorId = Guid.Parse("00000000-0000-0000-0000-000000000002");
+			Guid testMentorIdTwo = Guid.Parse("00000000-0000-0000-0000-000000000003");
 
             var users = new List<ApplicationUser>
 			{
+				//role test users
 				new ApplicationUser
 				{
 					Id = testUserId,
 					Role = RoleTypes.Student.ToString(),
 					Username="test@test.com",
-					Created = DateTime.Now
-				}
-			};
+					Created = DateTime.Now,
+					Firstname = "TestFirstname",
+					Lastname = "TestLastName"
+                },
 
-			var ApplicationUserModule = new List<ApplicationUserModule>
-			{
-				new ApplicationUserModule
+				new ApplicationUser
 				{
-					ApplicationUserId = testUserId,
-					ModuleId = moduleId
+					Id = testMentorId,
+					Role = RoleTypes.Mentor.ToString(),
+					Username = "mentor@mentor.com",
+					Created = DateTime.Now,
+					Firstname = "TestMentorFirstname",
+					Lastname = "TestMentorLastname"
+                },
+
+                new ApplicationUser
+                {
+                    Id = testMentorIdTwo,
+                    Role = RoleTypes.Mentor.ToString(),
+                    Username = "mentor2@mentor.com",
+                    Created = DateTime.Now,
+                    Firstname = "TestMentorTwoFirstname",
+                    Lastname = "TestMentorTwoLastname"
+                },
+				//more filler users used for testing
+				new ApplicationUser
+				{
+					Id = Guid.NewGuid(),
+					Role = RoleTypes.Student.ToString(),
+                    Created = DateTime.Now,
+                    Firstname = "Julian",
+                    Lastname = "Thorne",
+					Username = "julian.thorne@test.com",
+					AssignedMentorId = testMentorId
+                },
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid(),
+                    Role = RoleTypes.Student.ToString(),
+                    Created = DateTime.Now,
+                    Firstname = "Elara",
+                    Lastname = "Vance",
+                    Username = "elara.vance@test.com",
+                    AssignedMentorId = testMentorIdTwo
+                },
+				new ApplicationUser
+                {
+                    Id = Guid.NewGuid(),
+                    Role = RoleTypes.Student.ToString(),
+                    Created = DateTime.Now,
+                    Firstname = "Cassian",
+                    Lastname = "Cole",
+                    Username = "cassian.cole@test.com",
+                    AssignedMentorId = testMentorId
+                },
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid(),
+                    Role = RoleTypes.Student.ToString(),
+                    Created = DateTime.Now,
+                    Firstname = "Seraphina",
+                    Lastname = "Sterling",
+                    Username = "seraphina.sterling@test.com",
+                    AssignedMentorId = testMentorIdTwo
+                },
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid(),
+                    Role = RoleTypes.Student.ToString(),
+                    Created = DateTime.Now,
+                    Firstname = "Kaelen",
+                    Lastname = "Voss",
+                    Username = "kaelen.voss@test.com",
+                    AssignedMentorId = testMentorId
+                },
+                new ApplicationUser
+                {
+                    Id = Guid.NewGuid(),
+                    Role = RoleTypes.Student.ToString(),
+                    Created = DateTime.Now,
+                    Firstname = "Lyra",
+                    Lastname = "Belrose",
+                    Username = "lyra.belrose@test.com",
+                    AssignedMentorId = testMentorIdTwo
                 }
-			};
 
+            };
 
-
-            modelBuilder.Entity<ApplicationUser>().HasData(users);
+			modelBuilder.Entity<ApplicationUser>().HasData(users);
             modelBuilder.Entity<Module>().HasData(modules);
 			modelBuilder.Entity<Evaluation>().HasData(evaluations);
 			modelBuilder.Entity<CompetenceDomain>().HasData(domains);
 			modelBuilder.Entity<Competence>().HasData(competences);
 			modelBuilder.Entity<Indicator>().HasData(indicators);
 			modelBuilder.Entity<Indicator>().HasData(endEvaluationIndicators);
-			modelBuilder.Entity<ApplicationUserModule>().HasData(ApplicationUserModule);
+			modelBuilder.Entity(nameof(ApplicationUser)+nameof(Module)).HasData(
+				new { ApplicationUsersId = users[0].Id, ModulesId = moduleId },
+				new { ApplicationUsersId = users[1].Id, ModulesId = moduleId },
+				new { ApplicationUsersId = users[2].Id, ModulesId = moduleId },
+				new { ApplicationUsersId = users[3].Id, ModulesId = moduleId },
+				new { ApplicationUsersId = users[5].Id, ModulesId = moduleId },
+				new { ApplicationUsersId = users[6].Id, ModulesId = moduleId },
+				new { ApplicationUsersId = users[7].Id, ModulesId = moduleId }
+                );
 		}
 	}
 }

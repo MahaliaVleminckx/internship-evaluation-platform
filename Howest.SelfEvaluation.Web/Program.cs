@@ -23,6 +23,9 @@ namespace Howest.SelfEvaluation.Web
             //custom dependency injections
             builder.Services.AddTransient<IEvaluationService, EvaluationService>();
 
+            //add session service
+            builder.Services.AddSession();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -37,12 +40,23 @@ namespace Howest.SelfEvaluation.Web
             app.UseStaticFiles();
             app.UseRouting();
 
+            //install session
+            app.UseSession();
+
             //custom routes
+            app.MapControllerRoute(
+                name: "MentorShowStudents",
+                pattern: "Mentor/ShowStudents/{mentorId:guid}",
+                defaults: new { Controller = "Mentor", Action = "ShowStudents" }
+            );
+
             app.MapControllerRoute(
                 name: "Evaluations",
                 pattern: "Evaluations/Index/{username}",
                 defaults: new { Controller = "Evaluations", Action = "Index" }
             );
+
+            
 
             app.MapControllerRoute(
                 name: "default",
