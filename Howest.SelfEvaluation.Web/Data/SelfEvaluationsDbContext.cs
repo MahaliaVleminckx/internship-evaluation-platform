@@ -30,6 +30,7 @@ namespace Howest.SelfEvaluation.Web.Data
 				.HasMany(a => a.Modules)
 				.WithMany(a => a.ApplicationUsers)
 				.UsingEntity<ApplicationUserModule>();
+			//.UsingEntity(j => j.ToTable("ApplicationUserModule"));
 
 
 

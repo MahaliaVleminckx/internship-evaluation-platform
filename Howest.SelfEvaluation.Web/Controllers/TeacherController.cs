@@ -25,7 +25,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Index(string username)
+        public async Task<IActionResult> Index(string? username)
         {
             //TODO: change string username to Guid userId once we have a login system or perhaps use a btn for development reasons on home screen
             // with asp-route-Id for ease of use
@@ -47,6 +47,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             var allModules = user.Modules
               .Concat(user.OwnerModules)
               .Distinct().ToList();
+
 
             if (user == null)
             {
