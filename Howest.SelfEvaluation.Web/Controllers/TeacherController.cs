@@ -89,6 +89,28 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
             return View(viewmodel);
         }
+
+        public IActionResult Overlay(Guid studentId)
+        {
+            var viewModel = new EvaluationOverlayViewModel
+            {
+                StudentId = studentId,
+                StudentsEvaluation = new StudentEvaluationDomainsViewModel
+                {
+                    Title = "Student Evaluation",
+                    IsPublished = true
+                },
+
+                MentorEvaluation = new MentorEvaluationDomainsViewModel
+                {
+                    Title = "Mentor Evaluation",
+                    IsPublished = true
+                }
+            };
+
+            return View(viewModel);
+        }
+
     }
 }
 

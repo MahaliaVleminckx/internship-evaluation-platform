@@ -1,0 +1,33 @@
+﻿@model Howest.SelfEvaluation.Web.ViewModels.EvaluationOverlayViewModel
+
+<h1>Evaluation Overlay</h1>
+<hr />
+
+<div class="row">
+    
+    <div class="col-md-6">
+        <h2>Student Evaluation</h2>
+        <p>
+            <strong>Title:</strong>
+            @Model.StudentsEvaluation.Title
+        </p>
+        <p>
+            <strong>Published:</strong>
+            @Model.StudentsEvaluation.IsPublished
+        </p>
+    </div>
+
+    <div class="col-md-6">
+        <h2>Mentor Evaluation</h2>
+
+        <p>
+            <strong>Title:</strong>
+            @Model.MentorEvaluation.Title
+        </p>
+        <p>
+            <strong>Published:</strong>
+            @Model.MentorEvaluation.IsPublished
+        </p>
+    </div>
+    
+    </div">
