@@ -1,0 +1,25 @@
+﻿@model MentorShowStudentsViewModel
+
+<h1>Mijn studenten:</h1>
+
+<table style="width: 100%;">
+   
+    <thead>
+        <tr>
+            <th>Voornaam</th>
+            <th>Familienaam</th>
+            <th>Gebruikersnaam</th>
+        </tr>
+    </thead>        
+    <tbody>
+        @foreach(var student in Model.Students)
+        {
+            <tr>
+                <td>@student.Firstname</td>
+                <td>@student.Lastname</td>
+                <td>@student.UserName</td>
+                <td><a asp-controller="Mentor" asp-action="Index" asp-route-studentId="@student.UserId">Start evaluation</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

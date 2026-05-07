@@ -10,13 +10,14 @@ namespace Howest.SelfEvaluation.Core.Entities
 {
     public class ApplicationUser : BaseEntity
     {
+        //todo perhaps: create diff applicationUsers: Teacher, Admin, Mentor, Student for more personalization instead of using Role?
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
         public string Username { get; set; }
         public ICollection<Module> OwnerModules { get; set; }
         public ICollection<Module> Modules { get; set; }
         public ICollection<EvaluationScore> StudentEvaluationScores { get; set; }
         public string Role { get; set; }
-        public DateTime Created { get; set; }
-        public DateTime? Updated { get; set; }
-        public DateTime? Deleted { get; set; }
+        public Guid? AssignedMentorId { get; set; }
     }
 }

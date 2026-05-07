@@ -1,13 +1,19 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Core.Enums;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
+using Howest.SelfEvaluation.Web.ViewModels.Mentor;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace Howest.SelfEvaluation.Web.Controllers
 {
+    //development only:
+    //mentor username: mentor@mentor.com
+
     //For testing purposes this is public
     //TODO: Use authorize attribute once Microsoft Identity implemented, uncomment code below to protect from public
     //[Authorize(Roles = "Mentor, Admin")]
@@ -23,19 +29,20 @@ namespace Howest.SelfEvaluation.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Guid studentId)
         {
             var allEvaluations = await _evaluationService.GetAllPublishedEvaluationsAsync();
 
             var mentorIndexViewModel = new MentorIndexViewModel
             {
-                Evaluations = allEvaluations
+                Evaluations = allEvaluations,
+                StudentId = studentId
             };
 
             return View(mentorIndexViewModel);
         }
 
-        public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId)
+        public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId, Guid studentId)
         {
             var evaluation = await _db.Evaluations.FindAsync(evaluationId);
 
@@ -53,14 +60,14 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 Title = evaluation.Title,
                 IsPublished = evaluation.IsPublished,
                 CompetenceDomains = domains,
-                UserId = Guid.NewGuid() //Temporary for testing purposes 
+                StudentId = studentId
             };
 
 
             return View(viewModel);
         }
 
-        public async Task<IActionResult> ShowCompetencePerDomain(Guid domainId)
+        public async Task<IActionResult> ShowCompetencePerDomain(Guid domainId, Guid studentId)
         {
             var domain = await _db.CompetenceDomains
                 .Include(d => d.Competences)
@@ -98,7 +105,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
                     Name = c.Name,
                     Description = c.Description,
                     Indicators = c.Indicators.ToList()
-                }).ToList()
+                }).ToList(),
+                StudentId = studentId
             };
 
             return View(viewModel);
@@ -113,7 +121,11 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 TempData["ErrorMessage"] = "Er is iets fout gegaan bij het opslaan";
                 return View(model);
             }
-            var userId = Guid.Parse("00000000-0000-0000-0000-000000000010");
+            var sessionMentorId= HttpContext.Session.Get("mentorId");
+            var sessionMentorIdString = Encoding.UTF8.GetString(sessionMentorId);
+            var mentorId = Guid.Parse(sessionMentorIdString);
+            var studentId = model.StudentId;
+
             foreach (var competence in model.Competences)
             {
                 var competenceExists = await _db.Competences.AnyAsync(c => c.Id == competence.Id);
@@ -128,7 +140,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
                         IndicatorId = competence.SelectedIndicatorId,
                         NotApplicable = !competence.SelectedIndicatorId.HasValue,
                         ExtraInfo = competence.Comment,
-                        UserId = userId
+                        UserId = mentorId,
+                        TargetUserId = studentId,
                     };
                     _db.EvaluationScores.Add(score);
             }
@@ -137,6 +150,41 @@ namespace Howest.SelfEvaluation.Web.Controllers
             TempData["SuccessMessage"] = "Evaluatie succesvol opgeslagen!";
             return RedirectToAction("ShowCompetencePerDomain", new { domainId = model.DomainId});
 
+        }
+
+        //no real way yet to get the mentorId from the logged in user. For now add this to the url as workaround
+        //testmentor1 GUID: 00000000-0000-0000-0000-000000000002
+        //testmentor2 GUID: 00000000-0000-0000-0000-000000000003
+        [HttpGet]
+        public async Task<IActionResult> ShowStudents(Guid mentorId)
+        {
+            var mentor = await _evaluationService.GetUserByIdAsync(mentorId);
+
+            //role check here but may chance when we add identity
+            if(mentor== null || mentor.Role != RoleTypes.Mentor.ToString())
+            {
+                //temporal notfound for testing purposes, need to add custom errror message
+                return NotFound();
+            }
+
+            //I stored the mentorId in the session as a temoporal work around. Once we have Identity and login system
+            //implemented we need to change this
+            HttpContext.Session.SetString("mentorId", mentorId.ToString());
+
+            var allStudents = await _evaluationService.GetAllStudentsForMentorAsync(mentorId);
+
+            MentorShowStudentsViewModel mentorShowStudentsViewModel = new MentorShowStudentsViewModel
+            {
+                Students = allStudents.Select(student => new StudentViewModel
+                {
+                    UserId = student.Id,
+                    UserName = student.Username,
+                    Firstname = student.Firstname,
+                    Lastname = student.Lastname
+                })
+            };
+
+            return View(mentorShowStudentsViewModel);
         }
     }
 }

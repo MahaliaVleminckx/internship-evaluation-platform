@@ -10,6 +10,7 @@
 <form asp-action="SubmitCompetenceEvaluation" method="post">
     <input type="hidden" asp-for="EvaluationId" />
     <input type="hidden" asp-for="DomainId" />
+    <input type="hidden" asp-for="StudentId" />
 
     <div class="evaluation-title-box" style="display:flex; align-items:center; gap:20px; margin-bottom:20px;">
         <a asp-controller="Mentor" asp-action="Index" class="custom-btn">

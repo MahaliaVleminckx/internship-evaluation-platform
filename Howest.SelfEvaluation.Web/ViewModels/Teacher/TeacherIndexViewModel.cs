@@ -1,7 +1,7 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 using System.Collections.Generic;
 
-namespace Howest.SelfEvaluation.Web.ViewModels
+namespace Howest.SelfEvaluation.Web.ViewModels.Teacher
 {
     public class TeacherIndexViewModel : BaseUserViewModel
     {
