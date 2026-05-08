@@ -1,6 +1,7 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
+using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
 using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.AspNetCore.Mvc;
@@ -14,14 +15,15 @@ namespace Howest.SelfEvaluation.Web.Controllers
     public class AdminController : Controller
     {
         private readonly SelfEvaluationsContext _db;
+        private readonly IEvaluationService _evaluationService;
 
-        public AdminController (SelfEvaluationsContext db)
+        public AdminController(SelfEvaluationsContext db, IEvaluationService evaluationService)
         {
             _db = db;
+            _evaluationService = evaluationService;
         }
 
         [HttpGet]
-
         public async Task<IActionResult> CreateModule()
         {
             var vm = new AdminCreateModuleViewModel
@@ -98,9 +100,33 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> CreateEvaluation(object viewmodel)
+        public async Task<IActionResult> CreateEvaluation(AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel)
         {
-            return NotFound();
+            if(await _evaluationService.DoesModuleIdExistAsync(adminCreateEvaluationViewmodel.ModuleId))
+            {
+                ModelState.AddModelError("moduleNotFound", $"No module with id {adminCreateEvaluationViewmodel.ModuleId} was found.");
+            }
+            if (!ModelState.IsValid) return View(adminCreateEvaluationViewmodel);
+
+            var newEvaluation = new Evaluation
+            {
+                Id = Guid.NewGuid(),
+                Created = DateTime.UtcNow,
+                ModuleId = adminCreateEvaluationViewmodel.ModuleId,
+                Title = adminCreateEvaluationViewmodel.Title,
+                Description = adminCreateEvaluationViewmodel.Description,
+                //todo; add in view for each of these
+                StartDate = adminCreateEvaluationViewmodel.StartDate,
+                EndDate = adminCreateEvaluationViewmodel.EndDate,
+                CompetenceDomains = new List<CompetenceDomain> { },
+                IsPublished = false,
+                StudentEvaluationScores = new List<EvaluationScore> { }
+
+            };
+
+            _db.Evaluations.Add(newEvaluation);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Dashboard", "Admin");
         }
 
     }
