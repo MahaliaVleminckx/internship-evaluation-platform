@@ -2,6 +2,7 @@
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Howest.SelfEvaluation.Web.Services
 {
@@ -15,7 +16,7 @@ namespace Howest.SelfEvaluation.Web.Services
         }
 
         //service to reseed data in forms
-        public List<CheckboxModel<Guid>> GetCompetenceDomainsDistinctById()
+        public List<CheckboxModel<Guid>> GetCompetenceDomainsDistinctByName()
         {
             //had to do this first. If I had a long linq query for competencedomains in viewmodel, it crashed
             var competenceDomainsDistinctById = _db
@@ -32,5 +33,24 @@ namespace Howest.SelfEvaluation.Web.Services
                 })
                 .ToList();
         }
+
+        public List<SelectListItem> GetModules()
+        {
+            return _db.Modules.Select(m => new SelectListItem
+            {
+                Value = m.Id.ToString(),
+                Text = m.Name,
+            }).ToList();
+        }
+
+        public CheckboxModel<bool> CreatePublisherCheckbox()
+        {
+            return new CheckboxModel<bool>
+            {
+                Text = "Evaluatie publiceren?",
+                //Value prop not needed here because IsSelected is a bool = value
+            };
+        }
+
     }
 }

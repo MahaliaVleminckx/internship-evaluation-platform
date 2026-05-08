@@ -98,22 +98,11 @@ namespace Howest.SelfEvaluation.Web.Controllers
             
             AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel = new AdminCreateEvaluationViewmodel
             {
-                
-
-                //TODO move to FormBuilderService             
-                Modules = await _db.Modules.Select(m => new SelectListItem
-                {
-                    Value = m.Id.ToString(),
-                    Text = m.Name,
-                }).ToListAsync(),
-                IsPublished = new CheckboxModel<bool>
-                {
-                    Text = "Evaluatie publiceren?",
-                    //Value prop not needed here because IsSelected is a bool = value
-                },
+                Modules = _formBuilderService.GetModules(),
+                IsPublished = _formBuilderService.CreatePublisherCheckbox(),
                 StartDate = DateTime.UtcNow.Date,
                 EndDate = DateTime.UtcNow.Date,
-                CompetenceDomains = 
+                CompetenceDomains = _formBuilderService.GetCompetenceDomainsDistinctByName()
             };
 
             return View(adminCreateEvaluationViewmodel);
@@ -130,28 +119,11 @@ namespace Howest.SelfEvaluation.Web.Controllers
             if (!ModelState.IsValid)
             {
                 //move to service
-                adminCreateEvaluationViewmodel.Modules = await _db.Modules.Select(m => new SelectListItem
-                {
-                    Value = m.Id.ToString(),
-                    Text = m.Name,
-                }).ToListAsync();
-                adminCreateEvaluationViewmodel.IsPublished = new CheckboxModel<bool>
-                {
-                    Text = "Evaluatie publiceren?",
-                    //Value prop not needed here because IsSelected is a bool = value
-                };
+                adminCreateEvaluationViewmodel.Modules = _formBuilderService.GetModules();
+                adminCreateEvaluationViewmodel.IsPublished = _formBuilderService.CreatePublisherCheckbox();
                 adminCreateEvaluationViewmodel.StartDate = DateTime.UtcNow.Date;
                 adminCreateEvaluationViewmodel.EndDate = DateTime.UtcNow.Date;
-                adminCreateEvaluationViewmodel.CompetenceDomains = await _db
-                    .CompetenceDomains
-                    .GroupBy(c => c.Id)
-                    .Select(g => g.First())
-                    .Select(c => new CheckboxModel<Guid>
-                    {
-                        Text = c.Name,
-                        Value = c.Id,
-                    })
-                .ToListAsync();
+                adminCreateEvaluationViewmodel.CompetenceDomains = _formBuilderService.GetCompetenceDomainsDistinctByName();
 
                 return View(adminCreateEvaluationViewmodel);
             }
@@ -166,11 +138,11 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 //todo; add in view for each of these
                 StartDate = adminCreateEvaluationViewmodel.StartDate,
                 EndDate = adminCreateEvaluationViewmodel.EndDate,
-                CompetenceDomains = new List<CompetenceDomain> { },
                 IsPublished = adminCreateEvaluationViewmodel.IsPublished.IsSelected,
                 StudentEvaluationScores = new List<EvaluationScore> { }
-
             };
+
+            //todo comptenceDomains linking
 
             _db.Evaluations.Add(newEvaluation);
             await _db.SaveChangesAsync();
