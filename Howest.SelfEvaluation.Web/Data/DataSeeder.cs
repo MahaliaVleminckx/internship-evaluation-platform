@@ -1760,6 +1760,7 @@ namespace Howest.SelfEvaluation.Web.Data
 			Guid testUserId = Guid.Parse("00000000-0000-0000-0000-000000000001");
 			Guid testMentorId = Guid.Parse("00000000-0000-0000-0000-000000000002");
 			Guid testMentorIdTwo = Guid.Parse("00000000-0000-0000-0000-000000000003");
+			Guid testTeacherId = Guid.Parse("00000000-0000-0000-0000-000000000004");
 
             var users = new List<ApplicationUser>
 			{
@@ -1793,6 +1794,17 @@ namespace Howest.SelfEvaluation.Web.Data
                     Firstname = "TestMentorTwoFirstname",
                     Lastname = "TestMentorTwoLastname"
                 },
+
+                new ApplicationUser
+                {
+                    Id = testTeacherId,
+                    Role = RoleTypes.Teacher.ToString(),
+                    Username = "teacher@teacher.com",
+                    Created = DateTime.Now,
+                    Firstname = "TestTeacherFirstname",
+                    Lastname = "TestTeacherLastname"
+                },
+
 				//more filler users used for testing
 				new ApplicationUser
 				{
