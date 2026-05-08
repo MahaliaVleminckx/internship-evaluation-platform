@@ -92,15 +92,39 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateEvaluation()
         {
+
+            //had to do this first. If I had a long linq query for competencedomains in viewmodel, it crashed
+            var competenceDomainsDistinctById = await _db
+                    .CompetenceDomains
+                    .GroupBy(c => c.Name)
+                    .Select(g => g.FirstOrDefault())
+                .ToListAsync();
             AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel = new AdminCreateEvaluationViewmodel
             {
+                
+
                 //TODO move to FormBuilderService             
                 Modules = await _db.Modules.Select(m => new SelectListItem
                 {
                     Value = m.Id.ToString(),
                     Text = m.Name,
-                }).ToListAsync()
+                }).ToListAsync(),
+                IsPublished = new CheckboxModel<bool>
+                {
+                    Text = "Evaluatie publiceren?",
+                    //Value prop not needed here because IsSelected is a bool = value
+                },
+                StartDate = DateTime.UtcNow.Date,
+                EndDate = DateTime.UtcNow.Date,
+                CompetenceDomains = competenceDomainsDistinctById
+                .Select(c => new CheckboxModel<Guid>
+                {
+                    Text = c.Name,
+                    Value = c.Id,
+                })
+                .ToList()
             };
+
             return View(adminCreateEvaluationViewmodel);
         }
 
@@ -108,11 +132,38 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> CreateEvaluation(AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel)
         {
-            if(await _evaluationService.DoesModuleIdExistAsync(adminCreateEvaluationViewmodel.ModuleId))
+            if(!await _evaluationService.DoesModuleIdExistAsync(adminCreateEvaluationViewmodel.ModuleId))
             {
                 ModelState.AddModelError("moduleNotFound", $"No module with id {adminCreateEvaluationViewmodel.ModuleId} was found.");
             }
-            if (!ModelState.IsValid) return View(adminCreateEvaluationViewmodel);
+            if (!ModelState.IsValid)
+            {
+                //move to service
+                adminCreateEvaluationViewmodel.Modules = await _db.Modules.Select(m => new SelectListItem
+                {
+                    Value = m.Id.ToString(),
+                    Text = m.Name,
+                }).ToListAsync();
+                adminCreateEvaluationViewmodel.IsPublished = new CheckboxModel<bool>
+                {
+                    Text = "Evaluatie publiceren?",
+                    //Value prop not needed here because IsSelected is a bool = value
+                };
+                adminCreateEvaluationViewmodel.StartDate = DateTime.UtcNow.Date;
+                adminCreateEvaluationViewmodel.EndDate = DateTime.UtcNow.Date;
+                adminCreateEvaluationViewmodel.CompetenceDomains = await _db
+                    .CompetenceDomains
+                    .GroupBy(c => c.Id)
+                    .Select(g => g.First())
+                    .Select(c => new CheckboxModel<Guid>
+                    {
+                        Text = c.Name,
+                        Value = c.Id,
+                    })
+                .ToListAsync();
+
+                return View(adminCreateEvaluationViewmodel);
+            }
 
             var newEvaluation = new Evaluation
             {
@@ -125,7 +176,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 StartDate = adminCreateEvaluationViewmodel.StartDate,
                 EndDate = adminCreateEvaluationViewmodel.EndDate,
                 CompetenceDomains = new List<CompetenceDomain> { },
-                IsPublished = false,
+                IsPublished = adminCreateEvaluationViewmodel.IsPublished.IsSelected,
                 StudentEvaluationScores = new List<EvaluationScore> { }
 
             };

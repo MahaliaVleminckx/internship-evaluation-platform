@@ -9,20 +9,23 @@ namespace Howest.SelfEvaluation.Web.ViewModels.Admin
 {
     public class AdminCreateEvaluationViewmodel
     {
-        [Required]
+        [Required(ErrorMessage = "Gelieve een titel in te vullen")]
         [DisplayName("Titel")]
         public string Title { get; set; }
 
         [Required]
         [DisplayName("Start datum")]
+        [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
         [Required]
         [DisplayName("Eind datum")]
+        [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; }
 
+        [Required]
         [DisplayName("Evaluatie publiceren?")]
-        public bool IsPublished { get; set; } = false;
+        public CheckboxModel<bool> IsPublished { get; set; }
 
         [Required]
         [DisplayName("Module")]
@@ -30,8 +33,10 @@ namespace Howest.SelfEvaluation.Web.ViewModels.Admin
 
         public List<SelectListItem> Modules { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Gelieve een beschrijving in te vullen")]
         [DisplayName("Beschrijving")]
         public string Description { get; set; }
+
+        public List<CheckboxModel<Guid>> CompetenceDomains { get; set; }
     }
 }
