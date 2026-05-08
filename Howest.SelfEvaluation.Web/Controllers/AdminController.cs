@@ -1,7 +1,10 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Web.Data;
+using Howest.SelfEvaluation.Web.Models;
+using Howest.SelfEvaluation.Web.ViewModels;
 using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Providers;
 
@@ -15,6 +18,12 @@ namespace Howest.SelfEvaluation.Web.Controllers
         public AdminController (SelfEvaluationsContext db)
         {
             _db = db;
+        }
+
+        //made this quickly for redirect purposes on 'Cancel' in forms
+        public async Task<IActionResult> Dashboard()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -76,6 +85,28 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             await _db.SaveChangesAsync();
             return RedirectToAction("CreateModule");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateEvaluation()
+        {
+            AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel = new AdminCreateEvaluationViewmodel
+            {
+                //TODO move to FormBuilderService             
+                Modules = await _db.Modules.Select(m => new SelectListItem
+                {
+                    Value = m.Id.ToString(),
+                    Text = m.Name,
+                }).ToListAsync()
+            };
+            return View(adminCreateEvaluationViewmodel);
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> CreateEvaluation(object viewmodel)
+        {
+            return NotFound();
         }
 
     }

@@ -1,0 +1,24 @@
+﻿@model AdminCreateEvaluationViewmodel
+<h1 class="mb-4">Evaluatie aanmaken</h1>
+
+<div class="shadow-sm p-5 mb-4 rounded">
+    <form asp-controller="Admin" asp-action="CreateEvaluation" method="post">
+        <div class="mb-3">
+            <label asp-for="@Model.Title" class="form-label"></label>
+            <input asp-for="@Model.Title" class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="@Model.Description" class="form-label"></label>
+            <textarea asp-for="@Model.Description" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="@Model.ModuleId" class="form-label"></label>
+            <select asp-for="@Model.ModuleId" asp-items="@Model.Modules" class="form-select"></select>
+        </div>
+
+        <button type="submit" class="custom-btn">Evaluatie aanmaken</button>
+        <a asp-controller="Admin" asp-action="Dashboard" class="btn custom-btn-gobackdomains">Annuleren</a>
+    </form>
+</div>
