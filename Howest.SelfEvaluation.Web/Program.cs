@@ -16,7 +16,7 @@ namespace Howest.SelfEvaluation.Web
 
             // Add services to the container.
             builder.Services
-                .AddDbContext<SelfEvaluationsContext>(options =>
+                .AddDbContext<SelfEvaluationsDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("EvaluationDb")));
             builder.Services.AddControllersWithViews();
 

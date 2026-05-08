@@ -15,10 +15,10 @@ namespace Howest.SelfEvaluation.Web.Controllers
     [AllowAnonymous]
     public class EvaluationsController : Controller
     {
-        private readonly SelfEvaluationsContext _db;
+        private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
 
-        public EvaluationsController(SelfEvaluationsContext db, IEvaluationService evaluationService)
+        public EvaluationsController(SelfEvaluationsDbContext db, IEvaluationService evaluationService)
         {
             _db = db;
             _evaluationService = evaluationService;

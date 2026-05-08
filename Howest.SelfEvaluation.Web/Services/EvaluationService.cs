@@ -8,9 +8,9 @@ namespace Howest.SelfEvaluation.Web.Services
 {
     public class EvaluationService : IEvaluationService
     {
-        private readonly SelfEvaluationsContext _db;
+        private readonly SelfEvaluationsDbContext _db;
 
-        public EvaluationService(SelfEvaluationsContext db)
+        public EvaluationService(SelfEvaluationsDbContext db)
         {
             _db = db;
         }

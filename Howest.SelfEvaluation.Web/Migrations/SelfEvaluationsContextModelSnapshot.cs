@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Howest.SelfEvaluation.Web.Migrations
 {
-    [DbContext(typeof(SelfEvaluationsContext))]
+    [DbContext(typeof(SelfEvaluationsDbContext))]
     partial class SelfEvaluationsContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

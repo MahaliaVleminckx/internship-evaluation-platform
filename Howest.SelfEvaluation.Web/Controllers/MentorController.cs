@@ -19,10 +19,10 @@ namespace Howest.SelfEvaluation.Web.Controllers
     //[Authorize(Roles = "Mentor, Admin")]
     public class MentorController : Controller
     {
-        private readonly SelfEvaluationsContext _db;
+        private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
 
-        public MentorController(SelfEvaluationsContext db, IEvaluationService evaluationService)
+        public MentorController(SelfEvaluationsDbContext db, IEvaluationService evaluationService)
         {
             _db = db;
             _evaluationService = evaluationService;
