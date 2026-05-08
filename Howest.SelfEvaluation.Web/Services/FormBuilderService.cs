@@ -43,7 +43,7 @@ namespace Howest.SelfEvaluation.Web.Services
             }).ToList();
         }
 
-        public CheckboxModel<bool> CreatePublisherCheckbox()
+        public CheckboxModel<bool> CreatePublishCheckbox()
         {
             return new CheckboxModel<bool>
             {

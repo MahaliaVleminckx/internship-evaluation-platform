@@ -51,11 +51,22 @@ namespace Howest.SelfEvaluation.Web.Services
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Evaluation> GetEvaluationByIdAsync(Guid evaluationId)
+        public async Task<Evaluation> GetPublishedEvaluationByIdAsync(Guid evaluationId)
         {
             return await _db
                 .Evaluations
                 .Where(e => e.Id == evaluationId && e.IsPublished == true)
+                .Include(e => e.StudentEvaluationScores)
+                .Include(e => e.CompetenceDomains)
+                .ThenInclude(d => d.Competences)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Evaluation> GetAnyEvaluationByIdAsync(Guid evaluationId)
+        {
+            return await _db
+                .Evaluations
+                .Where(e => e.Id == evaluationId)
                 .Include(e => e.StudentEvaluationScores)
                 .Include(e => e.CompetenceDomains)
                 .ThenInclude(d => d.Competences)

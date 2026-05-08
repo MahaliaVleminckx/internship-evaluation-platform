@@ -7,7 +7,9 @@ using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using NuGet.Protocol.Providers;
+using NuGet.Versioning;
 
 
 namespace Howest.SelfEvaluation.Web.Controllers
@@ -99,7 +101,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel = new AdminCreateEvaluationViewmodel
             {
                 Modules = _formBuilderService.GetModules(),
-                IsPublished = _formBuilderService.CreatePublisherCheckbox(),
+                IsPublished = _formBuilderService.CreatePublishCheckbox(),
                 StartDate = DateTime.UtcNow.Date,
                 EndDate = DateTime.UtcNow.Date,
                 CompetenceDomains = _formBuilderService.GetCompetenceDomainsDistinctByName()
@@ -109,7 +111,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         }
 
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateEvaluation(AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel)
         {
             if(!await _evaluationService.DoesModuleIdExistAsync(adminCreateEvaluationViewmodel.ModuleId))
@@ -119,7 +121,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             if (!ModelState.IsValid)
             {
                 adminCreateEvaluationViewmodel.Modules = _formBuilderService.GetModules();
-                adminCreateEvaluationViewmodel.IsPublished = _formBuilderService.CreatePublisherCheckbox();
+                adminCreateEvaluationViewmodel.IsPublished = _formBuilderService.CreatePublishCheckbox();
                 adminCreateEvaluationViewmodel.StartDate = DateTime.UtcNow.Date;
                 adminCreateEvaluationViewmodel.EndDate = DateTime.UtcNow.Date;
                 adminCreateEvaluationViewmodel.CompetenceDomains = _formBuilderService.GetCompetenceDomainsDistinctByName();
@@ -136,12 +138,11 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 Description = adminCreateEvaluationViewmodel.Description,
                 StartDate = adminCreateEvaluationViewmodel.StartDate,
                 EndDate = adminCreateEvaluationViewmodel.EndDate,
-                IsPublished = adminCreateEvaluationViewmodel.IsPublished.IsSelected,
-                //todo; add in view for each of these
-                StudentEvaluationScores = new List<EvaluationScore> { }
+                IsPublished = adminCreateEvaluationViewmodel.IsPublished.IsSelected
             };
 
             //todo?: restructure database with competencedomain(id - name) then link in new table CompetenceDomainsEvalutions?
+            //since project was delivered like this, currently leaving it like it was
 
             //linking of competenceDomains and evaluation
             List<CompetenceDomain> linkCompetenceDomainsToEvaluation = new List<CompetenceDomain>();
@@ -168,6 +169,45 @@ namespace Howest.SelfEvaluation.Web.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction("Dashboard", "Admin");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateEvaluation(Guid id)
+        {
+            var evaluation = await _evaluationService.GetAnyEvaluationByIdAsync(id);
+            if (evaluation is null) return BadRequest(); //todo UI message
+
+            AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel = new AdminUpdateEvaluationViewModel()
+            {
+                Title = evaluation.Title,
+                Description = evaluation.Description,
+                StartDate = evaluation.StartDate,
+                EndDate = evaluation.EndDate,
+                IsPublished = _formBuilderService.CreatePublishCheckbox(),
+                CompetenceDomains = _formBuilderService.GetCompetenceDomainsDistinctByName(),
+                Modules = _formBuilderService.GetModules()
+            };
+
+            if (evaluation.IsPublished) adminUpdateEvaluationViewModel.IsPublished.IsSelected = true;
+
+            //currently checking if name is the same as competencedomains are grouped (multiple with same name but diff id)
+            var evaluationCompetenceNames = evaluation.CompetenceDomains.Select(c => c.Name).ToList();
+
+            for (int i = 0; i < adminUpdateEvaluationViewModel.CompetenceDomains.Count(); i++)
+            {
+                var competenceDomain = adminUpdateEvaluationViewModel.CompetenceDomains[i];
+                var competenceDomainName = competenceDomain.Text;
+
+                if (evaluationCompetenceNames.Contains(competenceDomainName))
+                {
+                    competenceDomain.IsSelected = true;
+                }
+            }
+
+            return View(adminUpdateEvaluationViewModel);
+        }
+
+        
+
 
     }
 }

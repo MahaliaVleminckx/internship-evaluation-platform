@@ -46,6 +46,11 @@ namespace Howest.SelfEvaluation.Web
 
             //custom routes
             app.MapControllerRoute(
+                name: "AdminUpdateEvaluation",
+                pattern: "Admin/CreateEvaluation/{evaluationId:guid}",
+                defaults: new { Controller = "Admin", Action = "UpdateEvaluation" }
+            );
+            app.MapControllerRoute(
                 name: "MentorShowStudents",
                 pattern: "Mentor/ShowStudents/{mentorId:guid}",
                 defaults: new { Controller = "Mentor", Action = "ShowStudents" }

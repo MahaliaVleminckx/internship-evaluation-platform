@@ -78,7 +78,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId, Guid userId)
         {
-            var evaluation = await _evaluationService.GetEvaluationByIdAsync(evaluationId);
+            var evaluation = await _evaluationService.GetPublishedEvaluationByIdAsync(evaluationId);
 
             if(evaluation == null)
             {

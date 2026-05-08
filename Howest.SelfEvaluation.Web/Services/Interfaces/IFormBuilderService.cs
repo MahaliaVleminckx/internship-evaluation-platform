@@ -5,9 +5,9 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
 {
     public interface IFormBuilderService
     {
-        public List<CheckboxModel<Guid>> GetCompetenceDomainsDistinctByName();
-        public List<SelectListItem> GetModules();
-        public CheckboxModel<bool> CreatePublisherCheckbox();
+        List<CheckboxModel<Guid>> GetCompetenceDomainsDistinctByName();
+        List<SelectListItem> GetModules();
+        CheckboxModel<bool> CreatePublishCheckbox();
 
     }
 }
