@@ -35,16 +35,16 @@
 
         <div class="form-group">
             <label>Competentie domeinen:</label>
-            @foreach(var competenceDomain in Model.CompetenceDomains)
+
+            @for(int i = 0; i < Model.CompetenceDomains.Count(); i++)
                 {
                     <div>
-                    <input asp-for="@competenceDomain.IsSelected" class="form-check-inline" />
-                    <label>@competenceDomain.Text</label>
-                        <input asp-for="@competenceDomain.Value" />
-                        <input asp-for="@competenceDomain.Text" />
-                </div>
+                    <input asp-for="@Model.CompetenceDomains[i].IsSelected" class="form-check-inline" />
+                    <label>@Model.CompetenceDomains[i].Text</label>
+                    <input asp-for="@Model.CompetenceDomains[i].Value" />
+                    <input asp-for="@Model.CompetenceDomains[i].Text" />
+                    </div>
                 }
-            </div>
         
         <div>
             <label>@Model.IsPublished.Text</label>

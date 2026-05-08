@@ -48,7 +48,7 @@ namespace Howest.SelfEvaluation.Web.Services
             return new CheckboxModel<bool>
             {
                 Text = "Evaluatie publiceren?",
-                //Value prop not needed here because IsSelected is a bool = value
+                
             };
         }
 

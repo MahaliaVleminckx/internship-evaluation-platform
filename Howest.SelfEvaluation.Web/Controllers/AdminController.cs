@@ -118,7 +118,6 @@ namespace Howest.SelfEvaluation.Web.Controllers
             }
             if (!ModelState.IsValid)
             {
-                //move to service
                 adminCreateEvaluationViewmodel.Modules = _formBuilderService.GetModules();
                 adminCreateEvaluationViewmodel.IsPublished = _formBuilderService.CreatePublisherCheckbox();
                 adminCreateEvaluationViewmodel.StartDate = DateTime.UtcNow.Date;
@@ -135,16 +134,37 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 ModuleId = adminCreateEvaluationViewmodel.ModuleId,
                 Title = adminCreateEvaluationViewmodel.Title,
                 Description = adminCreateEvaluationViewmodel.Description,
-                //todo; add in view for each of these
                 StartDate = adminCreateEvaluationViewmodel.StartDate,
                 EndDate = adminCreateEvaluationViewmodel.EndDate,
                 IsPublished = adminCreateEvaluationViewmodel.IsPublished.IsSelected,
+                //todo; add in view for each of these
                 StudentEvaluationScores = new List<EvaluationScore> { }
             };
 
-            //todo comptenceDomains linking
+            //todo?: restructure database with competencedomain(id - name) then link in new table CompetenceDomainsEvalutions?
 
-            _db.Evaluations.Add(newEvaluation);
+            //linking of competenceDomains and evaluation
+            List<CompetenceDomain> linkCompetenceDomainsToEvaluation = new List<CompetenceDomain>();
+            var selectedCompetenceDomains = adminCreateEvaluationViewmodel
+                .CompetenceDomains
+                .Where(c => c.IsSelected == true)
+                .ToList();
+
+            for(int i = 0; i < selectedCompetenceDomains.Count(); i++)
+            {
+                var competenceDomain = selectedCompetenceDomains[i];
+
+                linkCompetenceDomainsToEvaluation.Add(new CompetenceDomain
+                {
+                    Id = Guid.NewGuid(),
+                    Created = DateTime.UtcNow,
+                    EvaluationId = newEvaluation.Id,
+                    Name = competenceDomain.Text
+                });
+            }
+
+            await _db.CompetenceDomains.AddRangeAsync(linkCompetenceDomainsToEvaluation);
+            await _db.Evaluations.AddAsync(newEvaluation);
             await _db.SaveChangesAsync();
             return RedirectToAction("Dashboard", "Admin");
         }

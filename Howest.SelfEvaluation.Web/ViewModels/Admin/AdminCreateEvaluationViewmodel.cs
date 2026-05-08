@@ -37,6 +37,6 @@ namespace Howest.SelfEvaluation.Web.ViewModels.Admin
         [DisplayName("Beschrijving")]
         public string Description { get; set; }
 
-        public List<CheckboxModel<Guid>> CompetenceDomains { get; set; }
+        public List<CheckboxModel<Guid>> CompetenceDomains { get; set; } = new List<CheckboxModel<Guid>>();
     }
 }
