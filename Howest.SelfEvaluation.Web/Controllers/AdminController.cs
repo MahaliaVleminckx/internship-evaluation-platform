@@ -20,12 +20,6 @@ namespace Howest.SelfEvaluation.Web.Controllers
             _db = db;
         }
 
-        //made this quickly for redirect purposes on 'Cancel' in forms
-        public async Task<IActionResult> Dashboard()
-        {
-            return View();
-        }
-
         [HttpGet]
 
         public async Task<IActionResult> CreateModule()
