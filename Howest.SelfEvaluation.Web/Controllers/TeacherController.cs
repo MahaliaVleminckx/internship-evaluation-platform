@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Howest.SelfEvaluation.Web.ViewModels.Mentor;
+using NuGet.ProjectModel;
 
 namespace Howest.SelfEvaluation.Web.Controllers
 {
@@ -92,23 +93,52 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(viewmodel);
         }
 
-        public IActionResult Overlay(Guid studentId)
+        //Voorlopig om overlay te kunnen gebruiken: https://localhost:7140/Teacher/Overlay?domainId=00000000-0000-0000-0000-000000000006&studentId=00000000-0000-0000-0000-000000000001
+        public async Task<IActionResult> Overlay(Guid domainId, Guid studentId)
         {
+            var domain = await _db.CompetenceDomains
+                .Include(d => d.Competences)
+                .FirstOrDefaultAsync (d => d.Id == domainId);
+
+            if (domain == null)
+            {
+                return NotFound();
+            }
+
+            var overlayCompetences = new List<OverlayCompetenceViewModel>();
+
+            foreach (var competence in domain.Competences)
+            {
+                var scores = await _db.EvaluationScores
+                    .Where(s => s.CompetenceId == competence.Id && s.TargetUserId == studentId)
+                    .ToListAsync();
+
+                var studentScore = scores.FirstOrDefault(s => s.UserId == studentId);
+                var mentorScore = scores.FirstOrDefault(s => s.UserId != studentId);
+
+                overlayCompetences.Add(new OverlayCompetenceViewModel
+                {
+                    Name = competence.Name,
+                    Description = competence.Description,
+
+                    //tijdelijke score om te testen
+                    StudentScore = studentScore?.IndicatorId != null ? 1 : null,
+                    MentorScore = mentorScore?.IndicatorId != null ? 1 : null,
+
+                    StudentComment = studentScore?.ExtraInfo,
+                    MentorComment = mentorScore?.ExtraInfo
+
+                });
+
+            }
+
             var viewModel = new EvaluationOverlayViewModel
             {
                 StudentId = studentId,
-                StudentsEvaluation = new StudentEvaluationDomainsViewModel
-                {
-                    Title = "Student Evaluation",
-                    IsPublished = true
-                },
-
-                MentorEvaluation = new MentorEvaluationDomainsViewModel
-                {
-                    Title = "Mentor Evaluation",
-                    IsPublished = true
-                }
+                StudentName = "Temporary Test Name",
+                OverlayCompetences = overlayCompetences,
             };
+            
 
             return View(viewModel);
         }
