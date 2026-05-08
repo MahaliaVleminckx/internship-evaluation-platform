@@ -252,7 +252,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             //update linking, first deleting existing links and then re-adding
             foreach(var competenceDomain in evaluation.CompetenceDomains)
             {
-                _db.Remove(competenceDomain);
+                _db.CompetenceDomains.Remove(competenceDomain);
             }
 
 
