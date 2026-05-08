@@ -24,6 +24,12 @@ namespace Howest.SelfEvaluation.Web.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Dashboard()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public async Task<IActionResult> CreateModule()
         {
             var vm = new AdminCreateModuleViewModel
