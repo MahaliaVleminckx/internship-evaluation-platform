@@ -12,5 +12,6 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         Task<IEnumerable<Evaluation>> GetAllEvaluationsAsync();
         Task<IEnumerable<Evaluation>> GetAllPublishedEvaluationsAsync();
         Task<IEnumerable<ApplicationUser>> GetAllStudentsForMentorAsync(Guid mentorId);
+        Task<bool> DoesModuleIdExistAsync(Guid moduleId);
     }
 }

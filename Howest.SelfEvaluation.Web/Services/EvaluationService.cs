@@ -85,5 +85,9 @@ namespace Howest.SelfEvaluation.Web.Services
                 .ToListAsync();
         }
 
+        public async Task<bool> DoesModuleIdExistAsync(Guid moduleId)
+        {
+            return await _db.Modules.AnyAsync(m => m.Id.Equals(moduleId));
+        }
     }
 }
