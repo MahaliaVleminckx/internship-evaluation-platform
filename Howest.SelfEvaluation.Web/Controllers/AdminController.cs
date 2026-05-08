@@ -16,11 +16,13 @@ namespace Howest.SelfEvaluation.Web.Controllers
     {
         private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
+        private readonly IFormBuilderService _formBuilderService;
 
-        public AdminController(SelfEvaluationsDbContext db, IEvaluationService evaluationService)
+        public AdminController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IFormBuilderService formBuilderService)
         {
             _db = db;
             _evaluationService = evaluationService;
+            _formBuilderService = formBuilderService;
         }
 
         [HttpGet]
@@ -93,12 +95,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         public async Task<IActionResult> CreateEvaluation()
         {
 
-            //had to do this first. If I had a long linq query for competencedomains in viewmodel, it crashed
-            var competenceDomainsDistinctById = await _db
-                    .CompetenceDomains
-                    .GroupBy(c => c.Name)
-                    .Select(g => g.FirstOrDefault())
-                .ToListAsync();
+            
             AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel = new AdminCreateEvaluationViewmodel
             {
                 
@@ -116,13 +113,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 },
                 StartDate = DateTime.UtcNow.Date,
                 EndDate = DateTime.UtcNow.Date,
-                CompetenceDomains = competenceDomainsDistinctById
-                .Select(c => new CheckboxModel<Guid>
-                {
-                    Text = c.Name,
-                    Value = c.Id,
-                })
-                .ToList()
+                CompetenceDomains = 
             };
 
             return View(adminCreateEvaluationViewmodel);

@@ -21,7 +21,8 @@ namespace Howest.SelfEvaluation.Web
             builder.Services.AddControllersWithViews();
 
             //custom dependency injections
-            builder.Services.AddTransient<IEvaluationService, EvaluationService>();
+            builder.Services.AddScoped<IEvaluationService, EvaluationService>();
+            builder.Services.AddScoped<IFormBuilderService, FormBuilderService>();
 
             //add session service
             builder.Services.AddSession();
