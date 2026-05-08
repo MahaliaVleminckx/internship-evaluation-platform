@@ -2,29 +2,52 @@
 @model EvaluationOverlayViewModel
 
 <h1>Evaluation Overlay</h1>
-@foreach (var competence in Model.OverlayCompetences)
-{
-    <div class="competence-box">
-        <h3>@competence.Name</h3>
-        <p>@competence.Description</p>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <h3>Evaluatie Student</h3>
         <hr />
-        <div>
-            <strong>Student Score:</strong>
-            @competence.StudentScore
-        </div>
-        <div>
-            <strong>Mentor Score:</strong>
-            @competence.MentorScore
-        </div>
-        <br />
-        <div>
-            <strong>Student Comment:</strong>
-            @competence.StudentComment
+        @foreach (var competence in Model.OverlayCompetences)
+        {
+            @*<div class="competence-box mb-4 p-3 border rounded">*@
+            <div class="competence-box card position-relative p-4 mb-4">
+                <div class="accent-bar"></div>
+            <h4 style="margin-bottom: 5px;">@competence.Name</h4>
+            <p class="text-muted" style="margin-bottom:20px;">@competence.Description</p>
+            <hr />
+            <div class="row">
+                <div class="col-12 col-lg-10 offset-lg-1">
+                    <h5 style="margin-bottom:15px;">Student</h5>
+                    <p>
+                        <strong>Score:</strong>
+                        <span class="score-badge">
+                            @(competence.StudentScore?.ToString() ?? "No evaluation")
+                        </span>
+                    </p>
+                    <div>
+                        <strong>Comment:</strong>
+                        <p class="evaluation-comment" style="margin-top:5px;">@(string.IsNullOrWhiteSpace(competence.StudentComment) ? "No comment provided" : competence.StudentComment)</p>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-lg-10 offset-lg-1">
+
+                    <h5 style="margin-bottom:15px;">Mentor</h5>
+                    <p>
+                        <strong>Score:</strong>
+                        <span class="score-badge">
+                            @(competence.MentorScore?.ToString() ?? "No evaluation")
+                        </span>
+                    </p>
+
+                    <div>
+                        <strong>Comment:</strong>
+                        <p class="evaluation-comment" style="margin-top:5px;">@(string.IsNullOrWhiteSpace(competence.MentorComment) ? "No comment provided" : competence.MentorComment)</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div>
-            <strong>Mentor Comment:</strong>
-            @competence.MentorComment
-        </div>
-    </div>
-}
+        }
