@@ -2,5 +2,6 @@
 {
     public class AdminUpdateEvaluationViewModel : AdminCreateEvaluationViewmodel
     {
+        public Guid Id { get; set; }
     }
 }

@@ -178,6 +178,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel = new AdminUpdateEvaluationViewModel()
             {
+                Id = evaluation.Id,
                 Title = evaluation.Title,
                 Description = evaluation.Description,
                 StartDate = evaluation.StartDate,
@@ -206,7 +207,81 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(adminUpdateEvaluationViewModel);
         }
 
-        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateEvaluation(AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel)
+        {
+            if (!await _evaluationService.DoesModuleIdExistAsync(adminUpdateEvaluationViewModel.ModuleId))
+            {
+                ModelState.AddModelError("moduleNotFound", $"No module with id {adminUpdateEvaluationViewModel.ModuleId} was found.");
+            }
+            if (!ModelState.IsValid)
+            {
+                var existingEvaluation = await _evaluationService.GetAnyEvaluationByIdAsync(adminUpdateEvaluationViewModel.Id);
+
+                //reseeding data in form
+                if (existingEvaluation.IsPublished) adminUpdateEvaluationViewModel.IsPublished.IsSelected = true;
+                adminUpdateEvaluationViewModel.Modules = _formBuilderService.GetModules();
+
+                var evaluationCompetenceNames = existingEvaluation.CompetenceDomains.Select(c => c.Name).ToList();
+
+                for (int i = 0; i < adminUpdateEvaluationViewModel.CompetenceDomains.Count(); i++)
+                {
+                    var competenceDomain = adminUpdateEvaluationViewModel.CompetenceDomains[i];
+                    var competenceDomainName = competenceDomain.Text;
+
+                    if (evaluationCompetenceNames.Contains(competenceDomainName))
+                    {
+                        competenceDomain.IsSelected = true;
+                    }
+                }
+                return View(adminUpdateEvaluationViewModel);
+            }
+
+            var evaluation = await _evaluationService.GetAnyEvaluationByIdAsync(adminUpdateEvaluationViewModel.Id);
+
+            evaluation.Id = adminUpdateEvaluationViewModel.Id;
+            evaluation.Title = adminUpdateEvaluationViewModel.Title;
+            evaluation.Description = adminUpdateEvaluationViewModel.Description;
+            evaluation.StartDate = adminUpdateEvaluationViewModel.StartDate;
+            evaluation.EndDate = adminUpdateEvaluationViewModel.EndDate;
+            evaluation.IsPublished = adminUpdateEvaluationViewModel.IsPublished.IsSelected;
+            evaluation.ModuleId = adminUpdateEvaluationViewModel.ModuleId;
+            evaluation.Updated = DateTime.UtcNow;
+
+            //update linking, first deleting existing links and then re-adding
+            foreach(var competenceDomain in evaluation.CompetenceDomains)
+            {
+                _db.Remove(competenceDomain);
+            }
+
+
+            //linking of competenceDomains and evaluation
+            List<CompetenceDomain> linkCompetenceDomainsToEvaluation = new List<CompetenceDomain>();
+            var selectedCompetenceDomains = adminUpdateEvaluationViewModel
+                .CompetenceDomains
+                .Where(c => c.IsSelected == true)
+                .ToList();
+
+            for (int i = 0; i < selectedCompetenceDomains.Count(); i++)
+            {
+                var competenceDomain = selectedCompetenceDomains[i];
+
+                linkCompetenceDomainsToEvaluation.Add(new CompetenceDomain
+                {
+                    Id = Guid.NewGuid(),
+                    Created = DateTime.UtcNow,
+                    EvaluationId = evaluation.Id,
+                    Name = competenceDomain.Text
+                });
+            }
+
+            await _db.CompetenceDomains.AddRangeAsync(linkCompetenceDomainsToEvaluation);
+            _db.Update(evaluation);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("Dashboard", "Admin");
+        }
 
 
     }
