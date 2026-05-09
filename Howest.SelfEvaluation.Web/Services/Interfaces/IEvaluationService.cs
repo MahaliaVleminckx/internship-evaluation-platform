@@ -1,5 +1,5 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
-using Microsoft.Extensions.Configuration.UserSecrets;
+using Howest.SelfEvaluation.Web.ViewModels;
 
 namespace Howest.SelfEvaluation.Web.Services.Interfaces
 {
@@ -11,6 +11,15 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         Task<Evaluation> GetEvaluationByIdAsync(Guid id);
         Task<IEnumerable<Evaluation>> GetAllEvaluationsAsync();
         Task<IEnumerable<Evaluation>> GetAllPublishedEvaluationsAsync();
+
+        // Student flow
+        Task<Evaluation> GetEvaluationForStudentAsync(Guid evaluationId);
+        Task SaveStudentEvaluationAsync(StudentEvaluationViewModel vm);
+
+        // Domain + competence flow 
+        Task<CompetenceDomain> GetDomainWithIndicatorsAsync(Guid domainId);
+        Task SaveDomainEvaluationAsync(StudentDomainEvaluationViewModel vm); 
+        Task SaveCompetenceEvaluationAsync(StudentCompetencesViewModel vm);
         Task<IEnumerable<ApplicationUser>> GetAllStudentsForMentorAsync(Guid mentorId);
     }
 }
