@@ -80,7 +80,7 @@ namespace Howest.SelfEvaluation.Web.Services
 
         public async Task SaveStudentEvaluationAsync(StudentEvaluationViewModel vm)
         {
-            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+            var userId = Guid.Parse("B7B82198-E824-4E7A-A020-D66C0A292B85");
 
             foreach (var q in vm.Questions)
             {
@@ -103,6 +103,7 @@ namespace Howest.SelfEvaluation.Web.Services
                         EvaluationId = vm.EvaluationId,
                         IndicatorId = q.QuestionId,
                         UserId = userId,
+                        TargetUserId = userId,
                         ExtraInfo = q.Answer,
                         NotApplicable = false,
                         Created = DateTime.UtcNow
@@ -123,7 +124,7 @@ namespace Howest.SelfEvaluation.Web.Services
 
         public async Task SaveDomainEvaluationAsync(StudentDomainEvaluationViewModel vm)
         {
-            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+            var userId = Guid.Parse("B7B82198-E824-4E7A-A020-D66C0A292B85");
 
             foreach (var i in vm.Indicators)
             {
@@ -145,6 +146,7 @@ namespace Howest.SelfEvaluation.Web.Services
                         Id = Guid.NewGuid(),
                         IndicatorId = i.IndicatorId,
                         UserId = userId,
+                        TargetUserId = userId,
                         ExtraInfo = i.ExtraInfo,
                         NotApplicable = i.NotApplicable,
                         Created = DateTime.UtcNow
@@ -157,7 +159,7 @@ namespace Howest.SelfEvaluation.Web.Services
 
         public async Task SaveCompetenceEvaluationAsync(StudentCompetencesViewModel vm)
         {
-            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+            var userId = Guid.Parse("B7B82198-E824-4E7A-A020-D66C0A292B85");
 
             foreach (var competence in vm.Competences)
             {
@@ -185,6 +187,7 @@ namespace Howest.SelfEvaluation.Web.Services
                         IndicatorId = competence.SelectedIndicatorId.Value,
                         CompetenceId = competence.Id,
                         UserId = userId,
+                        TargetUserId = userId,
                         ExtraInfo = competence.Comment,
                         Created = DateTime.UtcNow
                     });

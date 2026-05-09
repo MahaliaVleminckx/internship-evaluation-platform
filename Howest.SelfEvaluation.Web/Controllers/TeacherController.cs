@@ -93,7 +93,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(viewmodel);
         }
 
-        //Voorlopig om overlay te kunnen gebruiken: https://localhost:7140/Teacher/Overlay?domainId=00000000-0000-0000-0000-000000000006&studentId=00000000-0000-0000-0000-000000000001
+        //Voorlopig om overlay te kunnen gebruiken: https://localhost:7140/Teacher/Overlay?domainId=00000000-0000-0000-0000-000000000006&studentId=B7B82198-E824-4E7A-A020-D66C0A292B85
         public async Task<IActionResult> Overlay(Guid domainId, Guid studentId)
         {
             var domain = await _db.CompetenceDomains
