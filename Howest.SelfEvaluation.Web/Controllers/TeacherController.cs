@@ -113,17 +113,34 @@ namespace Howest.SelfEvaluation.Web.Controllers
                     .Where(s => s.CompetenceId == competence.Id && s.TargetUserId == studentId)
                     .ToListAsync();
 
+                var indicatorIds = scores
+                    .Where(s => s.IndicatorId != null)
+                    .Select(s => s.IndicatorId!.Value)
+                    .ToList();
+
+                var indicators = await _db.Indicators
+                    .Where(i => indicatorIds.Contains(i.Id))
+                    .ToDictionaryAsync(i => i.Id);
+
                 var studentScore = scores.FirstOrDefault(s => s.UserId == studentId);
                 var mentorScore = scores.FirstOrDefault(s => s.UserId != studentId);
+
+                var studentIndicator = studentScore?.IndicatorId != null && indicators.ContainsKey(studentScore.IndicatorId.Value)
+                    ? indicators[studentScore.IndicatorId.Value] : null;
+                var mentorIndicator = mentorScore?.IndicatorId != null && indicators.ContainsKey(mentorScore.IndicatorId.Value)
+                     ? indicators[mentorScore.IndicatorId.Value] : null;
+
+
 
                 overlayCompetences.Add(new OverlayCompetenceViewModel
                 {
                     Name = competence.Name,
                     Description = competence.Description,
 
-                    //tijdelijke score om te testen
-                    StudentScore = studentScore?.IndicatorId != null ? 1 : null,
-                    MentorScore = mentorScore?.IndicatorId != null ? 1 : null,
+
+                   StudentScore = studentIndicator?.ScaleValueScore,
+                   MentorScore = mentorIndicator?.ScaleValueScore,
+
 
                     StudentComment = studentScore?.ExtraInfo,
                     MentorComment = mentorScore?.ExtraInfo
