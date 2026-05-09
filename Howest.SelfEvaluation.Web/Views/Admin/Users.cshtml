@@ -1,5 +1,54 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Howest.SelfEvaluation.Web.ViewModels.Admin.AdminUsersViewModel
+
+<h2>Gebruikersbeheer</h2>
+<form method="get">
+    <label>Filteren op rol:</label>
+
+    <select name="role" onchange="this.form.submit()">
+        <option value="">Alle</option>
+        <option value="Student" selected="@(Model.SelectedRole == "Student")">Student</option>
+        <option value="Mentor" selected="@(Model.SelectedRole == "Mentor")">Mentor</option>
+        <option value="Teacher" selected="@(Model.SelectedRole == "Teacher")">Leerkracht</option>
+    </select>
+</form>
+
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Naam</th>
+            <th>E-mail</th>
+            <th>Rol</th>
+            <th>Status</th>
+            <th>Acties</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Firstname @user.Lastname</td>
+                <td>@user.Username</td>
+                <td>@user.Role</td>
+                <td>@(user.Deleted == null ? "Actief" : "Inactief")</td>
+                <td>
+                    <a asp-action="EditUser" asp-route-id="@user.Id">Bewerken</a>
+                    @if (user.Deleted == null)
+                    {
+                        <a asp-action="DeactivateUser"
+                           asp-route-id="@user.Id">Deactiveren</a>
+                    }
+                    else
+                    {
+                        <a asp-action="ReactivateUser"
+                           asp-route-id="@user.Id">Reactiveren</a>
+                    }
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
