@@ -12,7 +12,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
     {
         private readonly SelfEvaluationsContext _db;
 
-        public AdminController (SelfEvaluationsContext db)
+        public AdminController(SelfEvaluationsContext db)
         {
             _db = db;
         }
@@ -97,7 +97,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
 
             return View(vm);
-           
+
         }
 
         [HttpGet]
@@ -130,9 +130,51 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return RedirectToAction("Users");
         }
 
-        public async Task<IActionResult> DeactivateUser (Guid id)
+        [HttpGet]
+        public async Task<IActionResult> EditUser(Guid id)
         {
-            var user = await _db.ApplicationUsers.FindAsync (id);
+            var user = await _db.ApplicationUsers.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new EditUserViewModel
+            {
+                Id = user.Id,
+                Firstname = user.Firstname,
+                Lastname = user.Lastname,
+                Username = user.Username,
+                Role = user.Role
+            };
+            return View(vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            var user = await _db.ApplicationUsers.FindAsync(vm.Id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Firstname = vm.Firstname;
+            user.Lastname = vm.Lastname;
+            user.Username = vm.Username;
+            vm.Role = vm.Role;
+            user.Updated = DateTime.Now;
+
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Users");
+        }
+        public async Task<IActionResult> DeactivateUser(Guid id)
+        {
+            var user = await _db.ApplicationUsers.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -144,7 +186,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         public async Task<IActionResult> ReactivateUser(Guid id)
         {
-            var user = await _db.ApplicationUsers.FindAsync (id);
+            var user = await _db.ApplicationUsers.FindAsync(id);
             if (user == null)
             {
                 return NotFound();

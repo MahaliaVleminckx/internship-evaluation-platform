@@ -1,0 +1,30 @@
+﻿@model Howest.SelfEvaluation.Web.ViewModels.Admin.EditUserViewModel
+
+<h2>Gebruiker bewerken</h2>
+
+<form asp-action="EditUser" asp-controller="Admin" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="All"></div>
+
+    <div>
+        <label>Voornaam</label>
+        <input asp-for="Firstname" />
+    </div>
+    <div>
+        <label>Achternaam</label>
+        <input asp-for="Lastname" />
+    </div>
+    <div>
+        <label>E-mail</label>
+        <input asp-for="Username" />
+    </div>
+    <div>
+        <label>Rol</label>
+        <select asp-for="Role">
+            <option value="Student">Student</option>
+            <option value="Mentor">Mentor</option>
+            <option value="Teacher">Leerkracht</option>
+        </select>
+    </div>
+    <button type="submit">Opslaan</button>
+</form>
