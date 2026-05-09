@@ -11,42 +11,36 @@ namespace Howest.SelfEvaluation.Web.Services
     {
         private readonly SelfEvaluationsContext _db;
 
-
         public EvaluationService(SelfEvaluationsContext db)
         {
             _db = db;
         }
 
-
         public async Task<ApplicationUser> GetUserByUsernameAsync(string username)
         {
-            return await _db
-                .ApplicationUsers
+            return await _db.ApplicationUsers
                 .Where(u => u.Username == username)
                 .Include(u => u.OwnerModules)
                 .Include(u => u.StudentEvaluationScores)
                 .Include(u => u.Modules)
-                .ThenInclude(m => m.Evaluations)
+                    .ThenInclude(m => m.Evaluations)
                 .FirstOrDefaultAsync();
         }
 
         public async Task<ApplicationUser> GetUserByIdAsync(Guid userId)
         {
-            return await _db
-                .ApplicationUsers
+            return await _db.ApplicationUsers
                 .Where(u => u.Id == userId)
                 .Include(u => u.OwnerModules)
                 .Include(u => u.StudentEvaluationScores)
                 .Include(u => u.Modules)
-                .ThenInclude(m => m.Evaluations)
+                    .ThenInclude(m => m.Evaluations)
                 .FirstOrDefaultAsync();
         }
 
         public async Task<Module> GetModuleByIdAsync(Guid moduleId)
         {
-            //TODO: fix owner && ownerId null value
-            return await _db
-                .Modules
+            return await _db.Modules
                 .Where(m => m.Id == moduleId)
                 .Include(m => m.Owner)
                 .Include(m => m.Evaluations)
@@ -55,29 +49,26 @@ namespace Howest.SelfEvaluation.Web.Services
 
         public async Task<Evaluation> GetEvaluationByIdAsync(Guid evaluationId)
         {
-            return await _db
-                .Evaluations
-                .Where(e => e.Id == evaluationId && e.IsPublished == true)
+            return await _db.Evaluations
+                .Where(e => e.Id == evaluationId && e.IsPublished)
                 .Include(e => e.StudentEvaluationScores)
                 .Include(e => e.CompetenceDomains)
-                .ThenInclude(d => d.Competences)
+                    .ThenInclude(d => d.Competences)
                 .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Evaluation>> GetAllEvaluationsAsync()
         {
-            return await _db
-                .Evaluations
-                .ToListAsync();
+            return await _db.Evaluations.ToListAsync();
         }
 
         public async Task<IEnumerable<Evaluation>> GetAllPublishedEvaluationsAsync()
         {
-            return await _db
-                .Evaluations
-                .Where(e => e.IsPublished == true)
+            return await _db.Evaluations
+                .Where(e => e.IsPublished)
                 .ToListAsync();
         }
+
         public async Task<Evaluation> GetEvaluationForStudentAsync(Guid evaluationId)
         {
             return await _db.Evaluations
@@ -86,11 +77,10 @@ namespace Howest.SelfEvaluation.Web.Services
                         .ThenInclude(c => c.Indicators)
                 .FirstOrDefaultAsync(e => e.Id == evaluationId);
         }
+
         public async Task SaveStudentEvaluationAsync(StudentEvaluationViewModel vm)
         {
-            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001"); // tijdelijk hardcoded
-<<<<<<< HEAD
-=======
+            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
 
             foreach (var q in vm.Questions)
             {
@@ -107,7 +97,7 @@ namespace Howest.SelfEvaluation.Web.Services
                 }
                 else
                 {
-                    var score = new EvaluationScore
+                    _db.EvaluationScores.Add(new EvaluationScore
                     {
                         Id = Guid.NewGuid(),
                         EvaluationId = vm.EvaluationId,
@@ -116,14 +106,13 @@ namespace Howest.SelfEvaluation.Web.Services
                         ExtraInfo = q.Answer,
                         NotApplicable = false,
                         Created = DateTime.UtcNow
-                    };
-
-                    _db.EvaluationScores.Add(score);
+                    });
                 }
             }
 
             await _db.SaveChangesAsync();
         }
+
         public async Task<CompetenceDomain> GetDomainWithIndicatorsAsync(Guid domainId)
         {
             return await _db.CompetenceDomains
@@ -131,9 +120,10 @@ namespace Howest.SelfEvaluation.Web.Services
                     .ThenInclude(c => c.Indicators)
                 .FirstOrDefaultAsync(d => d.Id == domainId);
         }
+
         public async Task SaveDomainEvaluationAsync(StudentDomainEvaluationViewModel vm)
         {
-            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");// tijdelijk hardcoded
+            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
 
             foreach (var i in vm.Indicators)
             {
@@ -150,7 +140,7 @@ namespace Howest.SelfEvaluation.Web.Services
                 }
                 else
                 {
-                    var score = new EvaluationScore
+                    _db.EvaluationScores.Add(new EvaluationScore
                     {
                         Id = Guid.NewGuid(),
                         IndicatorId = i.IndicatorId,
@@ -158,18 +148,16 @@ namespace Howest.SelfEvaluation.Web.Services
                         ExtraInfo = i.ExtraInfo,
                         NotApplicable = i.NotApplicable,
                         Created = DateTime.UtcNow
-                    };
-
-                    _db.EvaluationScores.Add(score);
+                    });
                 }
             }
 
             await _db.SaveChangesAsync();
-        
         }
+
         public async Task SaveCompetenceEvaluationAsync(StudentCompetencesViewModel vm)
         {
-            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001"); // TEMP USER
+            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
 
             foreach (var competence in vm.Competences)
             {
@@ -186,154 +174,30 @@ namespace Howest.SelfEvaluation.Web.Services
                     existing.ExtraInfo = competence.Comment;
                     existing.Updated = DateTime.UtcNow;
                     existing.CompetenceId = competence.Id;
+                    existing.EvaluationId = vm.EvaluationId;
                 }
                 else
                 {
-                    var score = new EvaluationScore
+                    _db.EvaluationScores.Add(new EvaluationScore
                     {
                         Id = Guid.NewGuid(),
+                        EvaluationId = vm.EvaluationId,
                         IndicatorId = competence.SelectedIndicatorId.Value,
                         CompetenceId = competence.Id,
                         UserId = userId,
                         ExtraInfo = competence.Comment,
                         Created = DateTime.UtcNow
-                    };
-
-                    _db.EvaluationScores.Add(score);
+                    });
                 }
             }
 
             await _db.SaveChangesAsync();
         }
->>>>>>> fecc8b71435f4d436208559558ad678da80a77a9
-
-<<<<<<< HEAD
         public async Task<IEnumerable<ApplicationUser>> GetAllStudentsForMentorAsync(Guid mentorId)
         {
-            return await _db
-                .ApplicationUsers
-                .Where(user => user.Role == RoleTypes.Student.ToString() && user.AssignedMentorId == mentorId)
+            return await _db.ApplicationUsers
+                .Where(u => u.Role == "Student" && u.AssignedMentorId == mentorId)
                 .ToListAsync();
         }
-
-=======
-            foreach (var q in vm.Questions)
-            {
-                var existing = await _db.EvaluationScores
-                    .FirstOrDefaultAsync(x =>
-                        x.EvaluationId == vm.EvaluationId &&
-                        x.IndicatorId == q.QuestionId &&
-                        x.UserId == userId);
-
-                if (existing != null)
-                {
-                    existing.ExtraInfo = q.Answer;
-                    existing.Updated = DateTime.UtcNow;
-                }
-                else
-                {
-                    var score = new EvaluationScore
-                    {
-                        Id = Guid.NewGuid(),
-                        EvaluationId = vm.EvaluationId,
-                        IndicatorId = q.QuestionId,
-                        UserId = userId,
-                        ExtraInfo = q.Answer,
-                        NotApplicable = false,
-                        Created = DateTime.UtcNow
-                    };
-
-                    _db.EvaluationScores.Add(score);
-                }
-            }
-
-            await _db.SaveChangesAsync();
-        }
-        public async Task<CompetenceDomain> GetDomainWithIndicatorsAsync(Guid domainId)
-        {
-            return await _db.CompetenceDomains
-                .Include(d => d.Competences)
-                    .ThenInclude(c => c.Indicators)
-                .FirstOrDefaultAsync(d => d.Id == domainId);
-        }
-        public async Task SaveDomainEvaluationAsync(StudentDomainEvaluationViewModel vm)
-        {
-            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");// tijdelijk hardcoded
-
-            foreach (var i in vm.Indicators)
-            {
-                var existing = await _db.EvaluationScores
-                    .FirstOrDefaultAsync(x =>
-                        x.IndicatorId == i.IndicatorId &&
-                        x.UserId == userId);
-
-                if (existing != null)
-                {
-                    existing.ExtraInfo = i.ExtraInfo;
-                    existing.NotApplicable = i.NotApplicable;
-                    existing.Updated = DateTime.UtcNow;
-                }
-                else
-                {
-                    var score = new EvaluationScore
-                    {
-                        Id = Guid.NewGuid(),
-                        IndicatorId = i.IndicatorId,
-                        UserId = userId,
-                        ExtraInfo = i.ExtraInfo,
-                        NotApplicable = i.NotApplicable,
-                        Created = DateTime.UtcNow
-                    };
-
-                    _db.EvaluationScores.Add(score);
-                }
-            }
-
-            await _db.SaveChangesAsync();
-        
-<<<<<<< HEAD
->>>>>>> 5c2afa9 (Added saving forms with static Id's)
-=======
-        }
-        public async Task SaveCompetenceEvaluationAsync(StudentCompetencesViewModel vm)
-        {
-            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001"); // TEMP USER
-
-            foreach (var competence in vm.Competences)
-            {
-                if (competence.SelectedIndicatorId == null)
-                    continue;
-
-                var existing = await _db.EvaluationScores
-                    .FirstOrDefaultAsync(x =>
-                        x.IndicatorId == competence.SelectedIndicatorId &&
-                        x.UserId == userId);
-
-                if (existing != null)
-                {
-                    existing.ExtraInfo = competence.Comment;
-                    existing.Updated = DateTime.UtcNow;
-                    existing.CompetenceId = competence.Id;
-                }
-                else
-                {
-                    var score = new EvaluationScore
-                    {
-                        Id = Guid.NewGuid(),
-                        IndicatorId = competence.SelectedIndicatorId.Value,
-                        CompetenceId = competence.Id,
-                        UserId = userId,
-                        ExtraInfo = competence.Comment,
-                        Created = DateTime.UtcNow
-                    };
-
-                    _db.EvaluationScores.Add(score);
-                }
-            }
-
-            await _db.SaveChangesAsync();
-        }
-
->>>>>>> d4b44df (Fixed errors from PR feedback)
     }
 }
