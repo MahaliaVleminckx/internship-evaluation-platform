@@ -80,10 +80,26 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         //Admin user overview pagina
         [HttpGet]
-        public async Task<IActionResult> Users()
+        public async Task<IActionResult> Users(string? role)
         {
-            var users = await _db.ApplicationUsers.ToListAsync();
-            return View(users);
+            var query = _db.ApplicationUsers.AsQueryable();
+
+            //Filter op role
+            if (!string.IsNullOrEmpty(role))
+            {
+                query = query.Where(u => u.Role == role);
+            }
+
+            var vm = new AdminUsersViewModel
+            {
+                Users = await query.ToListAsync(),
+                SelectedRole = role
+            };
+
+            return View(vm);
+            
+            //var users = await _db.ApplicationUsers.ToListAsync();
+            //return View(users);
         }
 
         [HttpGet]
