@@ -1,31 +1,38 @@
 ﻿@model Howest.SelfEvaluation.Core.Entities.ApplicationUser
 
-<h2>Gebruiker toevoegen</h2>
-<form asp-action="CreateUser" asp-controller="Admin" method="post">
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Gebruiker toevoegen</h2>
+
+    <a asp-action="Users" class="btn custom-btn">
+        ←
+    </a>
+    </div>
+
+    <form asp-action="CreateUser" asp-controller="Admin" method="post">
 
 
-    <div asp-validation-summary="All"></div>
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
-    <div>
-        <label>Voornaam</label>
-        <input asp-for="Firstname" />
-    </div>
-    <div>
-        <label>Achternaam</label>
-        <input asp-for="Lastname" />
-    </div>
-    <div>
-        <label>E-mail</label>
-        <input asp-for="Username" />
-    </div>
-    <div>
-        <label>Rol</label>
-        <select asp-for="Role">
-            <option value="Student">Student</option>
-            <option value="Mentor">Mentor</option>
-            <option value="Teacher">Leerkracht</option>
-        </select>
-    </div>
-    <br />
-    <button type="submit">Opslaan</button>
-</form>
+        <div class="mb-3">
+            <label>Voornaam</label>
+            <input asp-for="Firstname" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label>Achternaam</label>
+            <input asp-for="Lastname" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label>E-mail</label>
+            <input asp-for="Username" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label>Rol</label>
+            <select asp-for="Role" class="form-control">
+                <option value="Student">Student</option>
+                <option value="Mentor">Mentor</option>
+                <option value="Teacher">Leerkracht</option>
+            </select>
+        </div>
+        <br />
+        <button type="submit" class="custom-btn px-3 py-2">Opslaan</button>
+    </form>
