@@ -13,6 +13,7 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         Task<IEnumerable<Evaluation>> GetAllEvaluationsAsync();
         Task<IEnumerable<Evaluation>> GetAllPublishedEvaluationsAsync();
 <<<<<<< HEAD
+<<<<<<< HEAD
         Task<IEnumerable<ApplicationUser>> GetAllStudentsForMentorAsync(Guid mentorId);
 =======
         Task<Evaluation> GetEvaluationForStudentAsync(Guid evaluationId);
@@ -24,5 +25,12 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         Task SaveDomainEvaluationAsync(StudentDomainEvaluationViewModel vm);
         Task SaveCompetenceEvaluationAsync(StudentCompetencesViewModel vm);
 >>>>>>> d4b44df (Fixed errors from PR feedback)
+=======
+        Task<Evaluation> GetEvaluationForStudentAsync(Guid evaluationId);
+        Task SaveStudentEvaluationAsync(StudentEvaluationViewModel vm);
+        Task<CompetenceDomain> GetDomainWithIndicatorsAsync(Guid domainId);
+        Task SaveDomainEvaluationAsync(StudentDomainEvaluationViewModel vm);
+        Task SaveCompetenceEvaluationAsync(StudentCompetencesViewModel vm);
+>>>>>>> fecc8b71435f4d436208559558ad678da80a77a9
     }
 }
