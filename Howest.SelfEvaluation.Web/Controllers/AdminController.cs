@@ -97,25 +97,32 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
 
             return View(vm);
-            
-            //var users = await _db.ApplicationUsers.ToListAsync();
-            //return View(users);
+           
         }
 
         [HttpGet]
         public IActionResult CreateUser()
         {
-            return View();
+            return View(new ApplicationUser());
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser(ApplicationUser user)
+        public async Task<IActionResult> CreateUser(CreateUserViewModel vm)
         {
             if (!ModelState.IsValid)
-                return View(user);
+                return View(vm);
 
-            user.Id = Guid.NewGuid();
-            user.Created = DateTime.Now;
+            var user = new ApplicationUser
+            {
+                Id = Guid.NewGuid(),
+                Firstname = vm.Firstname,
+                Lastname = vm.Lastname,
+                Username = vm.Username,
+                Role = vm.Role,
+                Created = DateTime.Now,
+                Deleted = null,
+                AssignedMentorId = null
+            };
 
             _db.ApplicationUsers.Add(user);
             await _db.SaveChangesAsync();
@@ -142,7 +149,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             {
                 return NotFound();
             }
-            user.Deleted = DateTime.Now;
+            user.Deleted = null;
             await _db.SaveChangesAsync();
             return RedirectToAction("Users");
         }
