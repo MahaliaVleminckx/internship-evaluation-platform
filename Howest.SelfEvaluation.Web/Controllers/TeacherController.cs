@@ -109,27 +109,43 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             foreach (var competence in domain.Competences)
             {
-                var scores = await _db.EvaluationScores
-                    .Where(s => s.CompetenceId == competence.Id && s.TargetUserId == studentId)
-                    .ToListAsync();
 
-                var indicatorIds = scores
-                    .Where(s => s.IndicatorId != null)
-                    .Select(s => s.IndicatorId!.Value)
-                    .ToList();
+                var studentScore = await _db.EvaluationScores
+                    .FirstOrDefaultAsync(s => s.CompetenceId == competence.Id &&
+                    s.TargetUserId == studentId &&
+                    s.UserId == studentId);
 
-                var indicators = await _db.Indicators
+                var mentorScore = await _db.EvaluationScores
+                   .FirstOrDefaultAsync(s => s.CompetenceId == competence.Id &&
+                   s.TargetUserId == studentId &&
+                   s.UserId != studentId);
+
+                var indicatorIds = new List<Guid>();
+
+                if (studentScore?.IndicatorId != null)
+                {
+                    indicatorIds.Add(studentScore.IndicatorId.Value);
+                }
+
+                if (mentorScore?.IndicatorId != null)
+                {
+                    indicatorIds.Add(mentorScore.IndicatorId.Value);
+                }
+
+                var indicators = indicatorIds.Any() ? await _db.Indicators
                     .Where(i => indicatorIds.Contains(i.Id))
-                    .ToDictionaryAsync(i => i.Id);
+                    .ToDictionaryAsync(i => i.Id)
+                    : new Dictionary<Guid, Indicator>();
 
-                var studentScore = scores.FirstOrDefault(s => s.UserId == studentId);
-                var mentorScore = scores.FirstOrDefault(s => s.UserId != studentId);
+                Indicator? GetIndicator (EvaluationScore? score)
+                {
+                    if(score?.IndicatorId == null) return null;
 
-                var studentIndicator = studentScore?.IndicatorId != null && indicators.ContainsKey(studentScore.IndicatorId.Value)
-                    ? indicators[studentScore.IndicatorId.Value] : null;
-                var mentorIndicator = mentorScore?.IndicatorId != null && indicators.ContainsKey(mentorScore.IndicatorId.Value)
-                     ? indicators[mentorScore.IndicatorId.Value] : null;
+                    return indicators.TryGetValue(score.IndicatorId.Value, out var indicator) ? indicator : null;
+                }
 
+                var studentIndicator = GetIndicator(studentScore);
+                var mentorIndicator = GetIndicator(mentorScore);
 
 
                 overlayCompetences.Add(new OverlayCompetenceViewModel
@@ -137,13 +153,14 @@ namespace Howest.SelfEvaluation.Web.Controllers
                     Name = competence.Name,
                     Description = competence.Description,
 
+                    StudentScore = studentIndicator?.ScaleValueScore,
+                    MentorScore = mentorIndicator?.ScaleValueScore,
 
-                   StudentScore = studentIndicator?.ScaleValueScore,
-                   MentorScore = mentorIndicator?.ScaleValueScore,
+                    StudentScoreLabel = studentIndicator?.ScaleValue,
+                    MentorScoreLabel = mentorIndicator?.ScaleValue,
 
-
-                    StudentComment = studentScore?.ExtraInfo,
-                    MentorComment = mentorScore?.ExtraInfo
+                    StudentComment = studentScore?.ExtraInfo ?? "",
+                    MentorComment = mentorScore?.ExtraInfo ?? ""
 
                 });
 

@@ -10,7 +10,6 @@
         <hr />
         @foreach (var competence in Model.OverlayCompetences)
         {
-            @*<div class="competence-box mb-4 p-3 border rounded">*@
             <div class="competence-box card position-relative p-4 mb-4">
                 <div class="accent-bar"></div>
             <h4 style="margin-bottom: 5px;">@competence.Name</h4>
@@ -22,7 +21,7 @@
                     <p>
                         <strong>Score:</strong>
                         <span class="score-badge">
-                            @(competence.StudentScore?.ToString() ?? "No evaluation")
+                            @(competence.StudentScoreLabel ?? "No evaluation")
                         </span>
                     </p>
                     <div>
@@ -38,7 +37,7 @@
                     <p>
                         <strong>Score:</strong>
                         <span class="score-badge">
-                            @(competence.MentorScore?.ToString() ?? "No evaluation")
+                            @(competence.MentorScoreLabel ?? "No evaluation")
                         </span>
                     </p>
 
@@ -51,3 +50,4 @@
         </div>
 
         }
+

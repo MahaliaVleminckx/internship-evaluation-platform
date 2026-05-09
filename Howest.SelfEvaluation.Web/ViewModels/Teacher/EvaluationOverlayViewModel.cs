@@ -13,5 +13,7 @@ namespace Howest.SelfEvaluation.Web.ViewModels.Teacher
         public Guid StudentId { get; set; }
 
         public List<OverlayCompetenceViewModel> OverlayCompetences { get; set; } = new();
+
+        
     }
 }
