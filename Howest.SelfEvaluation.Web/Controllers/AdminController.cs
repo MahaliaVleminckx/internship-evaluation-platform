@@ -78,5 +78,57 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return RedirectToAction("CreateModule");
         }
 
+        //Admin user overview pagina
+        [HttpGet]
+        public async Task<IActionResult> Users()
+        {
+            var users = await _db.ApplicationUsers.ToListAsync();
+            return View(users);
+        }
+
+        [HttpGet]
+        public IActionResult CreateUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(ApplicationUser user)
+        {
+            if (!ModelState.IsValid)
+                return View(user);
+
+            user.Id = Guid.NewGuid();
+            user.Created = DateTime.Now;
+
+            _db.ApplicationUsers.Add(user);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("Users");
+        }
+
+        public async Task<IActionResult> DeactivateUser (Guid id)
+        {
+            var user = await _db.ApplicationUsers.FindAsync (id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            user.Deleted = DateTime.Now;
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Users");
+        }
+
+        public async Task<IActionResult> ReactivateUser(Guid id)
+        {
+            var user = await _db.ApplicationUsers.FindAsync (id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            user.Deleted = DateTime.Now;
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Users");
+        }
     }
 }
