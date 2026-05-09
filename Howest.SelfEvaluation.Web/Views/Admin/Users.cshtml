@@ -1,55 +1,68 @@
 ﻿@model Howest.SelfEvaluation.Web.ViewModels.Admin.AdminUsersViewModel
 
-<h2>Gebruikersbeheer</h2>
-<form method="get">
-    <label>Filteren op rol:</label>
+    <div class="d-flex justify-content-between align-items-center mb-3">
 
-    <select name="role" onchange="this.form.submit()">
-        <option value="">Alle</option>
-        <option value="Student" selected="@(Model.SelectedRole == "Student")">Student</option>
-        <option value="Mentor" selected="@(Model.SelectedRole == "Mentor")">Mentor</option>
-        <option value="Teacher" selected="@(Model.SelectedRole == "Teacher")">Leerkracht</option>
-    </select>
-</form>
+        <h2 class="mb-0">Gebruikersbeheer</h2>
 
-<br />
+        
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Naam</th>
-            <th>E-mail</th>
-            <th>Rol</th>
-            <th>Status</th>
-            <th>Acties</th>
-        </tr>
-    </thead>
+    </div>
 
-    <tbody>
-        @foreach (var user in Model.Users)
-        {
-            <tr>
-                <td>@user.Firstname @user.Lastname</td>
-                <td>@user.Username</td>
-                <td>@user.Role</td>
-                <td>@(user.Deleted == null ? "Actief" : "Inactief")</td>
-                <td>
-                    <a asp-action="EditUser" asp-route-id="@user.Id">Bewerken</a>
-                    @if (user.Deleted == null)
+    <form method="get" class="mb-3">
+        <label class="form-label">Filteren op rol:</label>
+
+        <select name="role" class="form-select w-auto" onchange="this.form.submit()">
+            <option value="">Alle</option>
+            <option value="Student" selected="@(Model.SelectedRole == "Student")">Student</option>
+            <option value="Mentor" selected="@(Model.SelectedRole == "Mentor")">Mentor</option>
+            <option value="Teacher" selected="@(Model.SelectedRole == "Teacher")">Leerkracht</option>
+        </select>
+    </form>
+
+    <div class="card-shadow-sm">
+        <div class="card-body p-0">
+
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Naam</th>
+                        <th>E-mail</th>
+                        <th>Rol</th>
+                        <th>Status</th>
+                        <th>Acties</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var user in Model.Users)
                     {
-                        <a asp-action="DeactivateUser"
-                           asp-route-id="@user.Id">Deactiveren</a>
-                    }
-                    else
-                    {
-                        <a asp-action="ReactivateUser"
-                           asp-route-id="@user.Id">Reactiveren</a>
+                        <tr>
+                            <td>@user.Firstname @user.Lastname</td>
+                            <td>@user.Username</td>
+                            <td>@user.Role</td>
+                            <td>@(user.Deleted == null ? "Actief" : "Inactief")</td>
+                            <td>
+                                <a asp-action="EditUser" asp-route-id="@user.Id">Bewerken</a>
+                                @if (user.Deleted == null)
+                                {
+                                    <a asp-action="DeactivateUser"
+                                       asp-route-id="@user.Id">Deactiveren</a>
+                                }
+                                else
+                                {
+                                    <a asp-action="ReactivateUser"
+                                       asp-route-id="@user.Id">Reactiveren</a>
+                                }
+
+                            </td>
+
+                        </tr>
                     }
 
-                </td>
+                </tbody>
 
-            </tr>
-        }
-        <a asp-action="CreateUser" class="btn btn-primary">Gebruiker toevoegen</a>
-    </tbody>
-</table>
+            </table>
+        </div>
+    </div>
+
+    <a asp-action="CreateUser" class="btn custom-btn px-3 py-2 text-decoration-none">Gebruiker toevoegen</a>
