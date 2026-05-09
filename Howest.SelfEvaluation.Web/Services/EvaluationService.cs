@@ -182,6 +182,7 @@ namespace Howest.SelfEvaluation.Web.Services
                 {
                     existing.ExtraInfo = competence.Comment;
                     existing.Updated = DateTime.UtcNow;
+                    existing.CompetenceId = competence.Id;
                 }
                 else
                 {
@@ -189,6 +190,7 @@ namespace Howest.SelfEvaluation.Web.Services
                     {
                         Id = Guid.NewGuid(),
                         IndicatorId = competence.SelectedIndicatorId.Value,
+                        CompetenceId = competence.Id,
                         UserId = userId,
                         ExtraInfo = competence.Comment,
                         Created = DateTime.UtcNow
