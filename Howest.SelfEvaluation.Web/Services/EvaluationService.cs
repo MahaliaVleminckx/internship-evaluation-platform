@@ -199,5 +199,29 @@ namespace Howest.SelfEvaluation.Web.Services
                 .Where(u => u.Role == "Student" && u.AssignedMentorId == mentorId)
                 .ToListAsync();
         }
+        public async Task<List<ApplicationUser>> GetStudentsForDomainAsync(Guid domainId)
+        {
+            return await _db.EvaluationScores
+                .Where(es =>
+                    es.Indicator != null &&
+                    es.Indicator.Competence != null &&
+                    es.Indicator.Competence.CompetenceDomainId == domainId
+                )
+                .Select(es => es.User)
+                .Where(u => u.Role == "Student")
+                .Distinct()
+                .ToListAsync();
+        }
+        public async Task<List<EvaluationScore>> GetStudentResultsForDomainAsync(Guid studentId, Guid domainId)
+        {
+            return await _db.EvaluationScores
+                .Where(es =>
+                    es.UserId == studentId &&
+                    es.Indicator.Competence.CompetenceDomainId == domainId
+                )
+                .Include(es => es.Indicator)
+                    .ThenInclude(i => i.Competence)
+                .ToListAsync();
+        }
     }
 }

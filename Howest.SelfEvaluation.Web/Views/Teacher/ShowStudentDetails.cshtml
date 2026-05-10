@@ -1,0 +1,41 @@
+﻿@model TeacherStudentDetailViewModel
+
+<h2>Resultaten student</h2>
+
+@if (!Model.Results.Any())
+{
+    <p>Geen resultaten gevonden.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Competentie</th>
+                <th>Indicator</th>
+                <th>Score</th>
+                <th>Commentaar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model.Results)
+            {
+                <tr>
+                    <td>@r.Indicator?.Competence?.Name</td>
+                    <td>@r.Indicator?.Description</td>
+                    <td>
+                        @if (r.NotApplicable)
+                        {
+                            <span>n.v.t.</span>
+                        }
+                        else
+                        {
+                            @r.Indicator?.ScaleValue
+                        }
+                    </td>
+                    <td>@r.ExtraInfo</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
