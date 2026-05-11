@@ -34,6 +34,23 @@ namespace Howest.SelfEvaluation.Web.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> ShowAllEvaluations()
+        {
+            var allEvaluations = await _evaluationService.GetAllEvaluationsAsync();
+            AdminShowAllEvaluationsViewModel adminShowAllEvaluationsViewModel = new AdminShowAllEvaluationsViewModel
+            {
+                Evaluations = allEvaluations.Select(e => new EvaluationModel
+                {
+                    Id = e.Id,
+                    Title = e.Title,
+                    IsPublished = e.IsPublished
+                }).ToList() ?? new List<EvaluationModel>()
+            };
+
+            return View(adminShowAllEvaluationsViewModel);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> CreateModule()
         {
             var vm = new AdminCreateModuleViewModel
