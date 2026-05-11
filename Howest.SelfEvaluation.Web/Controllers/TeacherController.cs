@@ -32,7 +32,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         {
             //TODO: change string username to Guid userId once we have a login system or perhaps use a btn for development reasons on home screen
             // with asp-route-Id for ease of use
-            //you can get into the index through https://localhost:7140/Teacher/Index?username=teacher@test.com
+            //you can get into the index through https://localhost:7140/teacher/Index?username=teacher@teacher.com
 
 
             if (string.IsNullOrEmpty(username))
