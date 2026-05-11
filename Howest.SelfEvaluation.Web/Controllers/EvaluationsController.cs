@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Howest.SelfEvaluation.Web.Controllers
 {
     //preparation for Microsoft Identity, this controller is public for everyone, other controllers need authorization
