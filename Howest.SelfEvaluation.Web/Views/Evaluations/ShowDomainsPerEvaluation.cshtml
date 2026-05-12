@@ -18,7 +18,6 @@
     {
         <div style="display:flex; flex-direction:column;">
 
-            <!-- DOMAIN CARD -->
             <div class="card module-box">
                 <a asp-controller="Student"
                    asp-action="FillDomain"
@@ -32,7 +31,6 @@
                 </a>
             </div>
 
-            <!-- ✅ BUTTON UNDER THIS DOMAIN -->
             <a asp-controller="Teacher"
                asp-action="ShowStudents"
                asp-route-domainId="@domain.Id"

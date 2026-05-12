@@ -1,4 +1,4 @@
-﻿@model TeacherStudentDetailViewModel
+﻿@model TeacherShowStudentsDetailsViewModel
 
 <h2>Resultaten student</h2>
 
@@ -21,8 +21,8 @@ else
             @foreach (var r in Model.Results)
             {
                 <tr>
-                    <td>@r.Indicator?.Competence?.Name</td>
-                    <td>@r.Indicator?.Description</td>
+                    <td>@r.CompetenceName</td>
+                    <td>@r.IndicatorDescription</td>
                     <td>
                         @if (r.NotApplicable)
                         {
@@ -30,10 +30,10 @@ else
                         }
                         else
                         {
-                            @r.Indicator?.ScaleValue
+                            @r.Score
                         }
                     </td>
-                    <td>@r.ExtraInfo</td>
+                    <td>@r.Comment</td>
                 </tr>
             }
         </tbody>

@@ -97,10 +97,14 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             var students = await _evaluationService.GetStudentsForDomainAsync(domainId);
 
-            var vm = new TeacherStudentsViewModel
+            var vm = new TeacherShowStudentsViewModel
             {
                 DomainId = domainId,
-                Students = students
+                Students = students.Select(s => new StudentListItemViewModel
+                {
+                    Id = s.Id,
+                    Username = s.Username
+                }).ToList()
             };
 
             return View(vm);
@@ -110,15 +114,23 @@ namespace Howest.SelfEvaluation.Web.Controllers
         {
             var scores = await _evaluationService.GetStudentResultsForDomainAsync(studentId, domainId);
 
-            var vm = new TeacherStudentDetailViewModel
+            var vm = new TeacherShowStudentsDetailsViewModel
             {
                 StudentId = studentId,
                 DomainId = domainId,
-                Results = scores
+                Results = scores.Select(r => new StudentResultViewModel
+                {
+                    CompetenceName = r.Indicator?.Competence?.Name,
+                    IndicatorDescription = r.Indicator?.Description,
+                    Score = r.NotApplicable ? null : r.Indicator.ScaleValue,
+                    NotApplicable = r.NotApplicable,
+                    Comment = r.ExtraInfo
+                }).ToList()
             };
 
             return View(vm);
         }
+
     }
 }
 
