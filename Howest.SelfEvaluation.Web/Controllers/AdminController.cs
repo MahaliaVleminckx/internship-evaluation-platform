@@ -131,10 +131,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateEvaluation(AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel)
         {
-            if(!await _evaluationService.DoesModuleIdExistAsync(adminCreateEvaluationViewmodel.ModuleId))
-            {
-                ModelState.AddModelError("moduleNotFound", $"No module with id {adminCreateEvaluationViewmodel.ModuleId} was found.");
-            }
+
             if (!ModelState.IsValid)
             {
                 adminCreateEvaluationViewmodel.Modules = _formBuilderService.GetModules();
@@ -146,44 +143,20 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 return View(adminCreateEvaluationViewmodel);
             }
 
-            var newEvaluation = new Evaluation
+            var creationResult = await _evaluationService.CreateEvaluationAsync(adminCreateEvaluationViewmodel);
+            if (!creationResult.Succes)
             {
-                Id = Guid.NewGuid(),
-                Created = DateTime.UtcNow,
-                ModuleId = adminCreateEvaluationViewmodel.ModuleId,
-                Title = adminCreateEvaluationViewmodel.Title,
-                Description = adminCreateEvaluationViewmodel.Description,
-                StartDate = adminCreateEvaluationViewmodel.StartDate,
-                EndDate = adminCreateEvaluationViewmodel.EndDate,
-                IsPublished = adminCreateEvaluationViewmodel.IsPublished.IsSelected
-            };
-
-            //todo?: restructure database with competencedomain(id - name) then link in new table CompetenceDomainsEvalutions?
-            //since project was delivered like this, currently leaving it like it was
-
-            //linking of competenceDomains and evaluation
-            List<CompetenceDomain> linkCompetenceDomainsToEvaluation = new List<CompetenceDomain>();
-            var selectedCompetenceDomains = adminCreateEvaluationViewmodel
-                .CompetenceDomains
-                .Where(c => c.IsSelected == true)
-                .ToList();
-
-            for(int i = 0; i < selectedCompetenceDomains.Count(); i++)
-            {
-                var competenceDomain = selectedCompetenceDomains[i];
-
-                linkCompetenceDomainsToEvaluation.Add(new CompetenceDomain
+                foreach(var error in creationResult.Errors)
                 {
-                    Id = Guid.NewGuid(),
-                    Created = DateTime.UtcNow,
-                    EvaluationId = newEvaluation.Id,
-                    Name = competenceDomain.Text
-                });
+                    ModelState.AddModelError("failedCreation", error);
+                }
+                adminCreateEvaluationViewmodel.Modules = _formBuilderService.GetModules();
+                adminCreateEvaluationViewmodel.IsPublished = _formBuilderService.CreatePublishCheckbox();
+                adminCreateEvaluationViewmodel.StartDate = DateTime.UtcNow.Date;
+                adminCreateEvaluationViewmodel.EndDate = DateTime.UtcNow.Date;
+                adminCreateEvaluationViewmodel.CompetenceDomains = _formBuilderService.GetCompetenceDomainsDistinctByName();
+                return View(adminCreateEvaluationViewmodel);
             }
-
-            await _db.CompetenceDomains.AddRangeAsync(linkCompetenceDomainsToEvaluation);
-            await _db.Evaluations.AddAsync(newEvaluation);
-            await _db.SaveChangesAsync();
             return RedirectToAction("Dashboard", "Admin");
         }
 
@@ -191,7 +164,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         public async Task<IActionResult> UpdateEvaluation(Guid id)
         {
             var evaluation = await _evaluationService.GetAnyEvaluationByIdAsync(id);
-            if (evaluation is null) return BadRequest(); //todo UI message
+            if (evaluation is null) return BadRequest();
 
             AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel = new AdminUpdateEvaluationViewModel()
             {
@@ -228,14 +201,41 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateEvaluation(AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel)
         {
-            if (!await _evaluationService.DoesModuleIdExistAsync(adminUpdateEvaluationViewModel.ModuleId))
-            {
-                ModelState.AddModelError("moduleNotFound", $"No module with id {adminUpdateEvaluationViewModel.ModuleId} was found.");
-            }
+            var existingEvaluation = await _evaluationService.GetAnyEvaluationByIdAsync(adminUpdateEvaluationViewModel.Id);
+
             if (!ModelState.IsValid)
             {
-                var existingEvaluation = await _evaluationService.GetAnyEvaluationByIdAsync(adminUpdateEvaluationViewModel.Id);
 
+                if(existingEvaluation is not null)
+                {
+                    //reseeding data in form
+                    if (existingEvaluation.IsPublished) adminUpdateEvaluationViewModel.IsPublished.IsSelected = true;
+                    adminUpdateEvaluationViewModel.Modules = _formBuilderService.GetModules();
+
+                    var evaluationCompetenceNames = existingEvaluation.CompetenceDomains.Select(c => c.Name).ToList();
+
+                    for (int i = 0; i < adminUpdateEvaluationViewModel.CompetenceDomains.Count(); i++)
+                    {
+                        var competenceDomain = adminUpdateEvaluationViewModel.CompetenceDomains[i];
+                        var competenceDomainName = competenceDomain.Text;
+
+                        if (evaluationCompetenceNames.Contains(competenceDomainName))
+                        {
+                            competenceDomain.IsSelected = true;
+                        }
+                    }
+                }
+                
+                return View(adminUpdateEvaluationViewModel);
+            }
+
+            var updateResult = await _evaluationService.UpdateEvaluationAsync(adminUpdateEvaluationViewModel);
+            if (!updateResult.Succes)
+            {
+                foreach(var error in updateResult.Errors)
+                {
+                    ModelState.AddModelError("updateFailure", error);
+                }
                 //reseeding data in form
                 if (existingEvaluation.IsPublished) adminUpdateEvaluationViewModel.IsPublished.IsSelected = true;
                 adminUpdateEvaluationViewModel.Modules = _formBuilderService.GetModules();
@@ -254,48 +254,6 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 }
                 return View(adminUpdateEvaluationViewModel);
             }
-
-            var evaluation = await _evaluationService.GetAnyEvaluationByIdAsync(adminUpdateEvaluationViewModel.Id);
-
-            evaluation.Id = adminUpdateEvaluationViewModel.Id;
-            evaluation.Title = adminUpdateEvaluationViewModel.Title;
-            evaluation.Description = adminUpdateEvaluationViewModel.Description;
-            evaluation.StartDate = adminUpdateEvaluationViewModel.StartDate;
-            evaluation.EndDate = adminUpdateEvaluationViewModel.EndDate;
-            evaluation.IsPublished = adminUpdateEvaluationViewModel.IsPublished.IsSelected;
-            evaluation.ModuleId = adminUpdateEvaluationViewModel.ModuleId;
-            evaluation.Updated = DateTime.UtcNow;
-
-            //update linking, first deleting existing links and then re-adding
-            foreach(var competenceDomain in evaluation.CompetenceDomains)
-            {
-                _db.CompetenceDomains.Remove(competenceDomain);
-            }
-
-
-            //linking of competenceDomains and evaluation
-            List<CompetenceDomain> linkCompetenceDomainsToEvaluation = new List<CompetenceDomain>();
-            var selectedCompetenceDomains = adminUpdateEvaluationViewModel
-                .CompetenceDomains
-                .Where(c => c.IsSelected == true)
-                .ToList();
-
-            for (int i = 0; i < selectedCompetenceDomains.Count(); i++)
-            {
-                var competenceDomain = selectedCompetenceDomains[i];
-
-                linkCompetenceDomainsToEvaluation.Add(new CompetenceDomain
-                {
-                    Id = Guid.NewGuid(),
-                    Created = DateTime.UtcNow,
-                    EvaluationId = evaluation.Id,
-                    Name = competenceDomain.Text
-                });
-            }
-
-            await _db.CompetenceDomains.AddRangeAsync(linkCompetenceDomainsToEvaluation);
-            _db.Update(evaluation);
-            await _db.SaveChangesAsync();
 
             return RedirectToAction("Dashboard", "Admin");
         }

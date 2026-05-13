@@ -1,4 +1,6 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Web.Models;
+using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace Howest.SelfEvaluation.Web.Services.Interfaces
@@ -14,5 +16,7 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         Task<IEnumerable<Evaluation>> GetAllPublishedEvaluationsAsync();
         Task<IEnumerable<ApplicationUser>> GetAllStudentsForMentorAsync(Guid mentorId);
         Task<bool> DoesModuleIdExistAsync(Guid moduleId);
+        Task<ResultModel<Evaluation>> CreateEvaluationAsync(AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel);
+        Task<ResultModel<Evaluation>> UpdateEvaluationAsync(AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel);
     }
 }
