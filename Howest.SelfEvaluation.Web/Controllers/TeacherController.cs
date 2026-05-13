@@ -89,6 +89,33 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
             return View(viewmodel);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId, Guid teacherId)
+        {
+            var evaluation = await _evaluationService.GetEvaluationByIdAsync(evaluationId);
+
+            if (evaluation == null)
+            {
+                return NotFound();
+            }
+
+            TeacherShowDomainsPerEvaluationViewModel teacherShowDomainsPerEvaluationViewModel = new TeacherShowDomainsPerEvaluationViewModel
+            {
+                Id = evaluationId,
+                ModuleId = evaluation.ModuleId,
+                Title = evaluation.Title,
+                Description = evaluation.Description,
+                CompetenceDomains = evaluation.CompetenceDomains,
+                StudentEvaluationScores = evaluation.StudentEvaluationScores,
+                IsPublished = evaluation.IsPublished,
+                UserId = teacherId
+            };
+
+            return View(teacherShowDomainsPerEvaluationViewModel);
+        }
+
+
     }
 }
 
