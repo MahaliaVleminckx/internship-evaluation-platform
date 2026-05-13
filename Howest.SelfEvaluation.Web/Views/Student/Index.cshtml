@@ -1,0 +1,24 @@
+﻿@model EvaluationsIndexViewModel
+
+<h1>Mijn modules</h1>
+
+@foreach (var module in Model.Modules)
+{
+    <div class="card module-box">
+        <a asp-controller="Evaluations"
+           asp-action="ShowEvaluationsPerModule"
+           asp-route-moduleId="@module.Id"
+           asp-route-userId="@Model.UserId"
+           class="link-restyle">
+
+            <div class="title-box">
+                <h3>@module.Name</h3>
+            </div>
+
+            <div class="domain-box">
+                <h6>@module.Description</h6>
+                <p>Aantal evaluaties: @module.Evaluations.Count()</p>
+            </div>
+        </a>
+    </div>
+}
