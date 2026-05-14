@@ -49,6 +49,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
         public async Task<IActionResult> Dashboard()
         {
             //DEVELOPMENT ONLY since no login system yet
+            //TODO: change this to the logged in teacher id (refactor method to use Guid instead of name) once login implemented
+            //for now its hardcoded for demo purposes and we didnt get to do login implementation
             Guid mentorId = Guid.Parse("00000000-0000-0000-0000-000000000002");
             BaseViewModel baseViewModel = new() { Id = mentorId };
             return View(baseViewModel);
