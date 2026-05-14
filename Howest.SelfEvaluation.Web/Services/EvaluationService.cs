@@ -70,6 +70,13 @@ namespace Howest.SelfEvaluation.Web.Services
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<bool> DoesEvaluationTitleExist(string title)
+        {
+            return await _db
+                .Evaluations
+                .AnyAsync(e => e.Title.ToUpper() == title.ToUpper());
+        }
+
         public async Task<IEnumerable<Evaluation>> GetAllEvaluationsAsync()
         {
             return await _db.Evaluations.ToListAsync();
@@ -246,6 +253,11 @@ namespace Howest.SelfEvaluation.Web.Services
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Einddatum kan niet voor begindatum liggen" } };
             }
 
+            if (await DoesEvaluationTitleExist(adminCreateEvaluationViewmodel.Title))
+            {
+                return new ResultModel<Evaluation> { Errors = new List<string> { $"Een evaluatie met naam {adminCreateEvaluationViewmodel.Title} bestaat al" } };
+            }
+
             //todo?: restructure database with competencedomain(id - name) then link in new table CompetenceDomainsEvalutions?
             //since project was delivered like this, currently leaving it like it was
 
@@ -282,9 +294,15 @@ namespace Howest.SelfEvaluation.Web.Services
             {
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Aanpassen mislukt. Er werd geen evaluatie met id {adminUpdateEvaluationViewModel.Id} gevonden" } };
             }
+
             if (existingEvaluation.EndDate < existingEvaluation.StartDate)
             {
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Einddatum kan niet voor begindatum liggen" } };
+            }
+
+            if (await DoesEvaluationTitleExist(adminUpdateEvaluationViewModel.Title))
+            {
+                return new ResultModel<Evaluation> { Errors = new List<string> { $"Een evaluatie met naam {adminUpdateEvaluationViewModel.Title} bestaat al" } };
             }
 
 

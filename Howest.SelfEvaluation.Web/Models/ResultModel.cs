@@ -5,6 +5,6 @@ namespace Howest.SelfEvaluation.Web.Models
     {
         public T Data { get; set; }
         public bool Succes => Errors.Count() == 0;
-        public List<string> Errors { get; set; }
+        public List<string> Errors { get; set; } = new List<string>();
     }
 }
