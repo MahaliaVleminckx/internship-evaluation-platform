@@ -134,11 +134,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             if (!ModelState.IsValid)
             {
-                adminCreateEvaluationViewmodel.Modules = _formBuilderService.GetModules();
-                adminCreateEvaluationViewmodel.IsPublished = _formBuilderService.CreatePublishCheckbox();
-                adminCreateEvaluationViewmodel.StartDate = DateTime.UtcNow.Date;
-                adminCreateEvaluationViewmodel.EndDate = DateTime.UtcNow.Date;
-                adminCreateEvaluationViewmodel.CompetenceDomains = _formBuilderService.GetCompetenceDomainsDistinctByName();
+                await _formBuilderService.ReseedEvaluationCreateFormAsync(adminCreateEvaluationViewmodel);
 
                 return View(adminCreateEvaluationViewmodel);
             }
@@ -150,11 +146,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 {
                     ModelState.AddModelError("failedCreation", error);
                 }
-                adminCreateEvaluationViewmodel.Modules = _formBuilderService.GetModules();
-                adminCreateEvaluationViewmodel.IsPublished = _formBuilderService.CreatePublishCheckbox();
-                adminCreateEvaluationViewmodel.StartDate = DateTime.UtcNow.Date;
-                adminCreateEvaluationViewmodel.EndDate = DateTime.UtcNow.Date;
-                adminCreateEvaluationViewmodel.CompetenceDomains = _formBuilderService.GetCompetenceDomainsDistinctByName();
+                await _formBuilderService.ReseedEvaluationCreateFormAsync(adminCreateEvaluationViewmodel);
                 return View(adminCreateEvaluationViewmodel);
             }
             return RedirectToAction("Dashboard", "Admin");
@@ -178,21 +170,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 Modules = _formBuilderService.GetModules()
             };
 
-            if (evaluation.IsPublished) adminUpdateEvaluationViewModel.IsPublished.IsSelected = true;
-
-            //currently checking if name is the same as competencedomains are grouped (multiple with same name but diff id)
-            var evaluationCompetenceNames = evaluation.CompetenceDomains.Select(c => c.Name).ToList();
-
-            for (int i = 0; i < adminUpdateEvaluationViewModel.CompetenceDomains.Count(); i++)
-            {
-                var competenceDomain = adminUpdateEvaluationViewModel.CompetenceDomains[i];
-                var competenceDomainName = competenceDomain.Text;
-
-                if (evaluationCompetenceNames.Contains(competenceDomainName))
-                {
-                    competenceDomain.IsSelected = true;
-                }
-            }
+            //seeding data in form
+            await _formBuilderService.ReseedEvaluationUpdateFormAsync(adminUpdateEvaluationViewModel, evaluation);
 
             return View(adminUpdateEvaluationViewModel);
         }
@@ -205,27 +184,11 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             if (!ModelState.IsValid)
             {
-
                 if(existingEvaluation is not null)
                 {
                     //reseeding data in form
-                    if (existingEvaluation.IsPublished) adminUpdateEvaluationViewModel.IsPublished.IsSelected = true;
-                    adminUpdateEvaluationViewModel.Modules = _formBuilderService.GetModules();
-
-                    var evaluationCompetenceNames = existingEvaluation.CompetenceDomains.Select(c => c.Name).ToList();
-
-                    for (int i = 0; i < adminUpdateEvaluationViewModel.CompetenceDomains.Count(); i++)
-                    {
-                        var competenceDomain = adminUpdateEvaluationViewModel.CompetenceDomains[i];
-                        var competenceDomainName = competenceDomain.Text;
-
-                        if (evaluationCompetenceNames.Contains(competenceDomainName))
-                        {
-                            competenceDomain.IsSelected = true;
-                        }
-                    }
-                }
-                
+                    await _formBuilderService.ReseedEvaluationUpdateFormAsync(adminUpdateEvaluationViewModel, existingEvaluation);
+                }                
                 return View(adminUpdateEvaluationViewModel);
             }
 
@@ -237,21 +200,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                     ModelState.AddModelError("updateFailure", error);
                 }
                 //reseeding data in form
-                if (existingEvaluation.IsPublished) adminUpdateEvaluationViewModel.IsPublished.IsSelected = true;
-                adminUpdateEvaluationViewModel.Modules = _formBuilderService.GetModules();
-
-                var evaluationCompetenceNames = existingEvaluation.CompetenceDomains.Select(c => c.Name).ToList();
-
-                for (int i = 0; i < adminUpdateEvaluationViewModel.CompetenceDomains.Count(); i++)
-                {
-                    var competenceDomain = adminUpdateEvaluationViewModel.CompetenceDomains[i];
-                    var competenceDomainName = competenceDomain.Text;
-
-                    if (evaluationCompetenceNames.Contains(competenceDomainName))
-                    {
-                        competenceDomain.IsSelected = true;
-                    }
-                }
+                await _formBuilderService.ReseedEvaluationUpdateFormAsync(adminUpdateEvaluationViewModel, existingEvaluation);
                 return View(adminUpdateEvaluationViewModel);
             }
 

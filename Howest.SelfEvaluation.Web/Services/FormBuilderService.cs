@@ -2,6 +2,7 @@
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
+using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Howest.SelfEvaluation.Web.Services
@@ -50,6 +51,36 @@ namespace Howest.SelfEvaluation.Web.Services
                 Text = "Evaluatie publiceren?",
                 
             };
+        }
+
+        //reseed the form of UpdateEvaluation. Created this method since repeated multiple times, might rework
+        public async Task ReseedEvaluationUpdateFormAsync(AdminUpdateEvaluationViewModel viewModel, Evaluation existingEvaluation)
+        {
+            if (existingEvaluation.IsPublished) viewModel.IsPublished.IsSelected = true;
+            viewModel.Modules = GetModules();
+
+            //currently checking if name is the same as competencedomains are grouped (multiple with same name but diff id)
+            var evaluationCompetenceNames = existingEvaluation.CompetenceDomains.Select(c => c.Name).ToList();
+
+            for (int i = 0; i < viewModel.CompetenceDomains.Count(); i++)
+            {
+                var competenceDomain = viewModel.CompetenceDomains[i];
+                var competenceDomainName = competenceDomain.Text;
+
+                if (evaluationCompetenceNames.Contains(competenceDomainName))
+                {
+                    competenceDomain.IsSelected = true;
+                }
+            }
+        }
+
+        public async Task ReseedEvaluationCreateFormAsync(AdminCreateEvaluationViewmodel viewModel)
+        {
+            viewModel.Modules = GetModules();
+            viewModel.IsPublished = CreatePublishCheckbox();
+            viewModel.StartDate = DateTime.UtcNow.Date;
+            viewModel.EndDate = DateTime.UtcNow.Date;
+            viewModel.CompetenceDomains = GetCompetenceDomainsDistinctByName();
         }
 
     }
