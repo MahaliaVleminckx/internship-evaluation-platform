@@ -24,6 +24,10 @@ namespace Howest.SelfEvaluation.Web.Controllers
             _evaluationService = evaluationService;
         }
 
+        public async Task<IActionResult> Dashboard()
+        {
+            return View();
+        }
 
         [HttpGet]
         public async Task<IActionResult> Index(string username)
