@@ -28,5 +28,6 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         Task<bool> DoesModuleIdExistAsync(Guid moduleId);
         Task<ResultModel<Evaluation>> CreateEvaluationAsync(AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel);
         Task<ResultModel<Evaluation>> UpdateEvaluationAsync(AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel);
+        Task<bool> DoesEvaluationTitleExist(string title);
     }
 }
