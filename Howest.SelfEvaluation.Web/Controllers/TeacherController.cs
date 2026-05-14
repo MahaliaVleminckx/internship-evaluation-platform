@@ -26,7 +26,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         public async Task<IActionResult> Dashboard()
         {
-            return View();
+            BaseViewModel baseViewModel = new() { Name = "teacher@teacher.com" };
+            return View(baseViewModel);
         }
 
         [HttpGet]
