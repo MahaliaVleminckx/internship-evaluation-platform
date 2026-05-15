@@ -21,11 +21,13 @@ namespace Howest.SelfEvaluation.Web.Controllers
     {
         private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
+        private readonly IViewModelMappingService _viewModelMappingService;
 
-        public MentorController(SelfEvaluationsDbContext db, IEvaluationService evaluationService)
+        public MentorController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IViewModelMappingService viewModelMappingService)
         {
             _db = db;
             _evaluationService = evaluationService;
+            _viewModelMappingService = viewModelMappingService;
         }
 
         [HttpGet]
@@ -35,7 +37,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             var mentorIndexViewModel = new MentorIndexViewModel
             {
-                Evaluations = allEvaluations,
+                Evaluations = allEvaluations.Select(e => _viewModelMappingService.MapToEvaluationViewModel(e)).ToList(),
                 StudentId = studentId
             };
 
@@ -175,13 +177,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             MentorShowStudentsViewModel mentorShowStudentsViewModel = new MentorShowStudentsViewModel
             {
-                Students = allStudents.Select(student => new StudentViewModel
-                {
-                    UserId = student.Id,
-                    UserName = student.Username,
-                    Firstname = student.Firstname,
-                    Lastname = student.Lastname
-                })
+                Students = allStudents.Select(student => _viewModelMappingService.MapToStudentViewModel(student)).ToList()
             };
 
             return View(mentorShowStudentsViewModel);

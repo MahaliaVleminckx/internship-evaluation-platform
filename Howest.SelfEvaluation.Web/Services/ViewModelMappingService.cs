@@ -50,6 +50,15 @@ namespace Howest.SelfEvaluation.Web.Services
             };
         }
 
-
+        public StudentViewModel MapToStudentViewModel(ApplicationUser student)
+        {
+            return new StudentViewModel
+            {
+                UserId = student.Id,
+                UserName = student.Username,
+                Firstname = student.Firstname,
+                Lastname = student.Lastname
+            };
+        }
     }
 }
