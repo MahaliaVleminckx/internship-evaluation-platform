@@ -9,7 +9,7 @@ namespace Howest.SelfEvaluation.Web.ViewModels
         public bool IsPublished { get; set; }
         public Guid ModuleId { get; set; }
         public string Description { get; set; }
-        public List<CompetenceViewModel> CompetenceDomains { get; set; }
+        public List<CompetenceDomainViewModel> CompetenceDomains { get; set; }
         //public ICollection<EvaluationScore> StudentEvaluationScores { get; set; }
     }
 }

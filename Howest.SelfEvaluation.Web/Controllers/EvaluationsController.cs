@@ -94,11 +94,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 ModuleId = evaluation.ModuleId,
                 Title = evaluation.Title,
                 Description = evaluation.Description,
-                CompetenceDomains = evaluation.CompetenceDomains.Select(c => new CompetenceDomainViewModel
-                {
-                    Id = c.Id,
-                    Comment = c.
-                }),
+                CompetenceDomains = evaluation.CompetenceDomains.Select(c => _viewModelMappingService.MapToCompetenceDomainViewModel(c)).ToList(),
                 //StudentEvaluationScores = evaluation.StudentEvaluationScores,
                 IsPublished = evaluation.IsPublished,
                 UserId = userId
