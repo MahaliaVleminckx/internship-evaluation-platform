@@ -8,5 +8,7 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
     {
         ModuleViewModel MapToModuleViewModel(Module module);
         EvaluationViewModel MapToEvaluationViewModel(Evaluation evaluation);
+        CompetenceDomainViewModel MapToCompetenceDomainViewModel(CompetenceDomain competenceDomain);
+        CompetenceViewModel MapToCompetenceViewModel(Competence competence);
     }
 }

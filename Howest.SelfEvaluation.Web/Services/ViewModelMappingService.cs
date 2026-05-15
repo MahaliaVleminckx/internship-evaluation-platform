@@ -25,11 +25,30 @@ namespace Howest.SelfEvaluation.Web.Services
                 Id = evaluation.Id,
                 IsPublished = evaluation.IsPublished,
                 Title = evaluation.Title,
+                EndDate = evaluation.EndDate,
             };
         }
 
+        public CompetenceDomainViewModel MapToCompetenceDomainViewModel(CompetenceDomain competenceDomain)
+        {
+            return new CompetenceDomainViewModel
+            {
+                Id = competenceDomain.Id,
+                Name = competenceDomain.Name,
+                EvaluationId = competenceDomain.EvaluationId,
+                Competences = competenceDomain.Competences.Select(c => MapToCompetenceViewModel(c)).ToList()
+            };
+        }
 
-
+        public CompetenceViewModel MapToCompetenceViewModel(Competence competence)
+        {
+            return new CompetenceViewModel
+            {
+                Id = competence.Id,
+                Name = competence.Name,
+                Description = competence.Description
+            };
+        }
 
 
     }
