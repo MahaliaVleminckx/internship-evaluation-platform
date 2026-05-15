@@ -42,9 +42,20 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 UserId = user.Id,
                 Username = user.Username,
                 Role = user.Role,
-                Modules = user.Modules,
-                OwnerModules = user.OwnerModules,
-                StudentEvaluationScores = user.StudentEvaluationScores
+                Modules = user.Modules.Select(m => mapto).ToList(),
+                OwnerModules = user.OwnerModules.Select(om => new ModuleViewModel
+                {
+                    Id = om.Id,
+                    Name = om.Name,
+                    Evaluations = om.Evaluations.Select(ome => new EvaluationViewModel
+                    {
+                        Id = ome.Id,
+                        IsPublished = ome.IsPublished,
+                        Title = ome.Title,
+                    }).ToList(),
+                    Description = om.Description,
+                }).ToList(),
+                //StudentEvaluationScores = user.StudentEvaluationScores
             };
 
             return View(evaluationsIndexViewModel);
@@ -66,9 +77,15 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 Id= moduleId,
                 Name = module.Name,
                 Description = module.Description,
-                ApplicationUsers = module.ApplicationUsers,
-                Evaluations = module.Evaluations,
-                Owner = module.Owner,
+                //ApplicationUsers = module.ApplicationUsers,
+                Evaluations = module.Evaluations.Select(e => new EvaluationViewModel
+                {
+                    Id = e.Id,
+                    IsPublished = e.IsPublished,
+                    Title = e.Title,
+                    EndDate = e.EndDate,
+                }).ToList(),
+                //Owner = module.Owner,
                 OwnerId = module.OwnerId,
                 UserId = userId
             };
@@ -92,8 +109,12 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 ModuleId = evaluation.ModuleId,
                 Title = evaluation.Title,
                 Description = evaluation.Description,
-                CompetenceDomains = evaluation.CompetenceDomains,
-                StudentEvaluationScores = evaluation.StudentEvaluationScores,
+                CompetenceDomains = evaluation.CompetenceDomains.Select(c => new CompetenceViewModel
+                {
+                    Id = c.Id,
+                    Comment = c.
+                }),
+                //StudentEvaluationScores = evaluation.StudentEvaluationScores,
                 IsPublished = evaluation.IsPublished,
                 UserId = userId
             };
