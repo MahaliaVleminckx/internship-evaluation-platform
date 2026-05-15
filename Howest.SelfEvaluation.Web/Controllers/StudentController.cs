@@ -1,5 +1,6 @@
 ﻿using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
+using Howest.SelfEvaluation.Web.ViewModels.Student;
 using Microsoft.AspNetCore.Mvc;
 
 public class StudentController : Controller
@@ -45,5 +46,27 @@ public class StudentController : Controller
         TempData["SuccessMessage"] = "Evaluatie opgeslagen!";
 
         return RedirectToAction("FillDomain", new { domainId = vm.DomainId });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ShowDomainResult(Guid domainId, Guid userId)
+    {
+        var scores = await _evaluationService.GetStudentResultsForDomainAsync(userId, domainId);
+
+        var vm = new StudentShowEvaluationViewModel
+        {
+            EvaluationId = domainId, 
+            UserId = userId,
+            Results = scores.Select(r => new StudentEvaluationResultViewModel
+            {
+                CompetenceName = r.Indicator?.Competence?.Name,
+                IndicatorDescription = r.Indicator?.Description,
+                Score = r.NotApplicable ? null : r.Indicator?.ScaleValue,
+                NotApplicable = r.NotApplicable,
+                Comment = r.ExtraInfo
+            }).ToList()
+        };
+
+        return View("ShowEvaluation", vm); 
     }
 }

@@ -406,5 +406,21 @@ main {
     position: relative;
     cursor: pointer;
 }
+.domain-btn {
+    width: 220px;
+    border-radius: 12px;
+    padding: 10px 0;
+    font-weight: 500;
+    text-align: center;
+    background: #4bb7d8;
+    border: none;
+    color: white;
+    transition: all 0.2s ease;
+}
 
+    .domain-btn:hover {
+        background: #3aa4c4;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
 
