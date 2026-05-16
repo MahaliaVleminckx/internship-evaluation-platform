@@ -11,6 +11,16 @@ public class StudentController : Controller
         _evaluationService = evaluationService;
     }
 
+    //for demo purposes, not final
+    public async Task<IActionResult> Dashboard()
+    {
+        //DEVELOPMENT ONLY since no login system yet
+        //TODO: change this to the logged in student (user) id (refactor method to use Guid instead of name) once login implemented
+        //for now its hardcoded for demo purposes and we didnt get to do login implementation
+        BaseViewModel baseViewModel = new BaseViewModel() { Name = "test@test.com" };
+        return View(baseViewModel);
+    }
+
     [HttpGet]
     public async Task<IActionResult> FillDomain(Guid domainId)
     {

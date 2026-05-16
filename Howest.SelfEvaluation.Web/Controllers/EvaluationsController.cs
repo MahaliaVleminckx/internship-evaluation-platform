@@ -16,10 +16,10 @@ namespace Howest.SelfEvaluation.Web.Controllers
     [AllowAnonymous]
     public class EvaluationsController : Controller
     {
-        private readonly SelfEvaluationsContext _db;
+        private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
 
-        public EvaluationsController(SelfEvaluationsContext db, IEvaluationService evaluationService)
+        public EvaluationsController(SelfEvaluationsDbContext db, IEvaluationService evaluationService)
         {
             _db = db;
             _evaluationService = evaluationService;
@@ -79,7 +79,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId, Guid userId)
         {
-            var evaluation = await _evaluationService.GetEvaluationByIdAsync(evaluationId);
+            var evaluation = await _evaluationService.GetPublishedEvaluationByIdAsync(evaluationId);
 
             if(evaluation == null)
             {

@@ -15,15 +15,24 @@ namespace Howest.SelfEvaluation.Web.Controllers
     //[Authorize(Roles = "Teacher, Admin")]
     public class TeacherController : Controller
     {
-        private readonly SelfEvaluationsContext _db;
+        private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
 
-        public TeacherController(SelfEvaluationsContext db, IEvaluationService evaluationService)
+        public TeacherController(SelfEvaluationsDbContext db, IEvaluationService evaluationService)
         {
             _db = db;
             _evaluationService = evaluationService;
         }
 
+        //for demo purposes, not final
+        public async Task<IActionResult> Dashboard()
+        {
+            //DEVELOPMENT ONLY since no login system yet
+            //TODO: change this to the logged in teacher id (refactor method to use Guid instead of name) once login implemented
+            //for now its hardcoded for demo purposes and we didnt get to do login implementation
+            BaseViewModel baseViewModel = new() { Name = "teacher@teacher.com" };
+            return View(baseViewModel);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Index(string username)

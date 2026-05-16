@@ -1,0 +1,11 @@
+﻿@model AdminCreateEvaluationViewmodel
+<h1 class="mb-4">Evaluatie aanmaken</h1>
+
+<div class="shadow-sm p-5 mb-4 rounded">
+    <form asp-controller="Admin" asp-action="CreateEvaluation" method="post">
+
+        <partial name="_EvaluationFormPartial" model="@Model" />
+        <button type="submit" class="custom-btn">Evaluatie aanpassen</button>
+        <a asp-controller="Admin" asp-action="Dashboard" class="btn custom-btn-gobackdomains">Annuleren</a>
+    </form>
+</div>

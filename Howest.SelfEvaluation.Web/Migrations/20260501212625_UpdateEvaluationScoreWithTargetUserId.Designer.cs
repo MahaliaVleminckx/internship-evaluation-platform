@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Howest.SelfEvaluation.Web.Migrations
 {
-    [DbContext(typeof(SelfEvaluationsContext))]
+    [DbContext(typeof(SelfEvaluationsDbContext))]
     [Migration("20260501212625_UpdateEvaluationScoreWithTargetUserId")]
     partial class UpdateEvaluationScoreWithTargetUserId
     {

@@ -19,14 +19,16 @@ namespace Howest.SelfEvaluation.Web.Controllers
     //[Authorize(Roles = "Mentor, Admin")]
     public class MentorController : Controller
     {
-        private readonly SelfEvaluationsContext _db;
+        private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
 
-        public MentorController(SelfEvaluationsContext db, IEvaluationService evaluationService)
+        public MentorController(SelfEvaluationsDbContext db, IEvaluationService evaluationService)
         {
             _db = db;
             _evaluationService = evaluationService;
         }
+
+        
 
         [HttpGet]
         public async Task<IActionResult> Index(Guid studentId)
@@ -40,6 +42,18 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
 
             return View(mentorIndexViewModel);
+        }
+
+        //for demo purposes, not final
+        [HttpGet]
+        public async Task<IActionResult> Dashboard()
+        {
+            //DEVELOPMENT ONLY since no login system yet
+            //TODO: change this to the logged in teacher id (refactor method to use Guid instead of name) once login implemented
+            //for now its hardcoded for demo purposes and we didnt get to do login implementation
+            Guid mentorId = Guid.Parse("00000000-0000-0000-0000-000000000002");
+            BaseViewModel baseViewModel = new() { Id = mentorId };
+            return View(baseViewModel);
         }
 
         public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId, Guid studentId)
