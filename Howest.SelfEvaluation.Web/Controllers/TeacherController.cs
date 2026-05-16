@@ -30,7 +30,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
             //DEVELOPMENT ONLY since no login system yet
             //TODO: change this to the logged in teacher id (refactor method to use Guid instead of name) once login implemented
             //for now its hardcoded for demo purposes and we didnt get to do login implementation
-            BaseViewModel baseViewModel = new() { Name = "teacher@teacher.com" };
+            BaseViewModel baseViewModel = new() { Name = "test@test.com" };
+            //BaseViewModel baseViewModel = new() { Name = "teacher@teacher.com" };
             return View(baseViewModel);
         }
 
@@ -102,7 +103,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId, Guid teacherId)
         {
-            var evaluation = await _evaluationService.GetEvaluationByIdAsync(evaluationId);
+            var evaluation = await _evaluationService.GetPublishedEvaluationByIdAsync(evaluationId);
 
             if (evaluation == null)
             {
