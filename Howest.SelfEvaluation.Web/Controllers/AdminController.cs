@@ -103,7 +103,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpGet]
         public IActionResult CreateUser()
         {
-            return View(new ApplicationUser());
+            return View(new CreateUserViewModel());
         }
 
         [HttpPost]
