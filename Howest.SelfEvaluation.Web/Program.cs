@@ -5,6 +5,7 @@ using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 
 namespace Howest.SelfEvaluation.Web
 {
@@ -44,6 +45,13 @@ namespace Howest.SelfEvaluation.Web
             app.UseSession();
 
             //custom routes
+
+            //admin area
+            app.MapControllerRoute(
+                name: "AdminArea",
+                pattern: "{area:exists}/{controller=Admin}/{action=Dashboard}"
+                );
+
             app.MapControllerRoute(
                 name: "MentorShowStudents",
                 pattern: "Mentor/ShowStudents/{mentorId:guid}",
@@ -54,9 +62,7 @@ namespace Howest.SelfEvaluation.Web
                 name: "Evaluations",
                 pattern: "Evaluations/Index/{username}",
                 defaults: new { Controller = "Evaluations", Action = "Index" }
-            );
-
-            
+            );            
 
             app.MapControllerRoute(
                 name: "default",
