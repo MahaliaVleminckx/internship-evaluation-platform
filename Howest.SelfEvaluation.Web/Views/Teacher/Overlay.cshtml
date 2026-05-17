@@ -1,7 +1,7 @@
 ﻿@using Howest.SelfEvaluation.Web.ViewModels.Teacher
 @model EvaluationOverlayViewModel
 
-<h1>Evaluation Overlay</h1>
+<h1>Evaluatie Overlay</h1>
 
 <div class="row">
 
@@ -21,12 +21,12 @@
                     <p>
                         <strong>Score:</strong>
                         <span class="score-badge">
-                            @(competence.StudentScoreLabel ?? "No evaluation")
+                            @(competence.StudentScoreLabel ?? "Geen evaluatie")
                         </span>
                     </p>
                     <div>
-                        <strong>Comment:</strong>
-                        <p class="evaluation-comment" style="margin-top:5px;">@(string.IsNullOrWhiteSpace(competence.StudentComment) ? "No comment provided" : competence.StudentComment)</p>
+                        <strong>Opmerking:</strong>
+                        <p class="evaluation-comment" style="margin-top:5px;">@(string.IsNullOrWhiteSpace(competence.StudentComment) ? "Geen opmerking" : competence.StudentComment)</p>
                     </div>
                 </div>
 
@@ -37,13 +37,13 @@
                     <p>
                         <strong>Score:</strong>
                         <span class="score-badge">
-                            @(competence.MentorScoreLabel ?? "No evaluation")
+                            @(competence.MentorScoreLabel ?? "Geen evaluatie")
                         </span>
                     </p>
 
                     <div>
-                        <strong>Comment:</strong>
-                        <p class="evaluation-comment" style="margin-top:5px;">@(string.IsNullOrWhiteSpace(competence.MentorComment) ? "No comment provided" : competence.MentorComment)</p>
+                        <strong>Opmerking:</strong>
+                        <p class="evaluation-comment" style="margin-top:5px;">@(string.IsNullOrWhiteSpace(competence.MentorComment) ? "Geen opmerking" : competence.MentorComment)</p>
                     </div>
                 </div>
             </div>
