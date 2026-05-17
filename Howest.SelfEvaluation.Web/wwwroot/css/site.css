@@ -432,4 +432,27 @@ main {
     font-size: 0.9rem;
 }
 
+.bar-row {
+    margin-bottom: 8px;
+}
+
+.bar-bg {
+    width: 100%;
+    height: 12px;
+    background: #eee;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+}
+
+.student {
+    background: green;
+}
+
+.mentor {
+    background: blue;
+}
 

@@ -10,44 +10,59 @@
         <hr />
         @foreach (var competence in Model.OverlayCompetences)
         {
+            <div class="bar-row">
+                <span>Student</span>
+                <div class="bar-bg">
+                    <div class="bar student" style="width:@(competence.StudentScore *15)%"></div>
+                </div>
+            </div>
+
+            <div class="bar-row">
+                <span>Mentor</span>
+                <div class="bar-bg">
+                    <div class="bar mentor" style="width:@(competence.MentorScore *15)%"></div>
+                </div>
+            </div>
+
+
             <div class="competence-box card position-relative p-4 mb-4">
                 <div class="accent-bar"></div>
-            <h4 style="margin-bottom: 5px;">@competence.Name</h4>
-            <p class="text-muted" style="margin-bottom:20px;">@competence.Description</p>
-            <hr />
-            <div class="row">
-                <div class="col-12 col-lg-10 offset-lg-1">
-                    <h5 style="margin-bottom:15px;">Student</h5>
-                    <p>
-                        <strong>Score:</strong>
-                        <span class="score-badge">
-                            @(competence.StudentScoreLabel ?? "Geen evaluatie")
-                        </span>
-                    </p>
-                    <div>
-                        <strong>Opmerking:</strong>
-                        <p class="evaluation-comment" style="margin-top:5px;">@(string.IsNullOrWhiteSpace(competence.StudentComment) ? "Geen opmerking" : competence.StudentComment)</p>
+                <h4 style="margin-bottom: 5px;">@competence.Name</h4>
+                <p class="text-muted" style="margin-bottom:20px;">@competence.Description</p>
+                <hr />
+                <div class="row">
+                    <div class="col-12 col-lg-10 offset-lg-1">
+                        <h5 style="margin-bottom:15px;">Student</h5>
+                        <p>
+                            <strong>Score:</strong>
+                            <span class="score-badge">
+                                @(competence.StudentScoreLabel ?? "Geen evaluatie")
+                            </span>
+                        </p>
+                        <div>
+                            <strong>Opmerking:</strong>
+                            <p class="evaluation-comment" style="margin-top:5px;">@(string.IsNullOrWhiteSpace(competence.StudentComment) ? "Geen opmerking" : competence.StudentComment)</p>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="col-12 col-lg-10 offset-lg-1">
+                    <div class="col-12 col-lg-10 offset-lg-1">
 
-                    <h5 style="margin-bottom:15px;">Mentor</h5>
-                    <p>
-                        <strong>Score:</strong>
-                        <span class="score-badge">
-                            @(competence.MentorScoreLabel ?? "Geen evaluatie")
-                        </span>
-                    </p>
+                        <h5 style="margin-bottom:15px;">Mentor</h5>
+                        <p>
+                            <strong>Score:</strong>
+                            <span class="score-badge">
+                                @(competence.MentorScoreLabel ?? "Geen evaluatie")
+                            </span>
+                        </p>
 
-                    <div>
-                        <strong>Opmerking:</strong>
-                        <p class="evaluation-comment" style="margin-top:5px;">@(string.IsNullOrWhiteSpace(competence.MentorComment) ? "Geen opmerking" : competence.MentorComment)</p>
+                        <div>
+                            <strong>Opmerking:</strong>
+                            <p class="evaluation-comment" style="margin-top:5px;">@(string.IsNullOrWhiteSpace(competence.MentorComment) ? "Geen opmerking" : competence.MentorComment)</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         }
 
