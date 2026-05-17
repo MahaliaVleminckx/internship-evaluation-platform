@@ -1,0 +1,30 @@
+﻿@model TeacherOverlaySelectViewModel
+
+<h2>Overlay selectie</h2>
+<form asp-action="OverlaySelector" method="post">
+    <div class="mb-3">
+        <label>Student</label>
+        <select asp-for="StudentId" class="form-control">
+            <option value="">-- Kies student --</option>
+            @foreach (var student in Model.Students)
+            {
+                <option value="@student.Id">
+                    @student.Firstname @student.Lastname
+                </option>
+            }
+        </select>
+    <div class="mb-3">
+        <label>Domein</label>
+        <select asp-for="DomainId" class="form-control">
+            <option value="">-- Kies domein --</option>
+            @foreach (var domain in Model.Domains)
+            {
+                <option value="@domain.Id">@domain.Name - @domain.Evaluation.Title</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn custom-btn">Open overlay</button>
+</form>
+
+      

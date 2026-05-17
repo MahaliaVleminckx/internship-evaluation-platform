@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Howest.SelfEvaluation.Web.ViewModels.Mentor;
 using NuGet.ProjectModel;
+using System.Threading.Tasks;
 
 namespace Howest.SelfEvaluation.Web.Controllers
 {
@@ -175,6 +176,41 @@ namespace Howest.SelfEvaluation.Web.Controllers
             
 
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task <IActionResult> OverlaySelector()
+        {
+            var vm = new TeacherOverlaySelectViewModel
+            {
+                Students = await _db.ApplicationUsers
+                .Where(u => u.Role == "Student")
+                .ToListAsync(),
+
+                Evaluations = await _db.Evaluations.ToListAsync(),
+
+                Domains = await _db.CompetenceDomains
+                .Include(d => d.Evaluation).AsNoTracking()
+                .ToListAsync()
+            };
+            return View(vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> OverlaySelector(TeacherOverlaySelectViewModel vm)
+        {
+            vm.Students = await _db.ApplicationUsers.Where(u => u.Role == "Student").ToListAsync();
+            vm.Domains = await _db.CompetenceDomains.ToListAsync();
+
+            if (vm.DomainId == null || vm.StudentId == null)
+            {
+                return View(vm);
+            }
+            return RedirectToAction("Overlay", new
+            {
+                domainId = vm.DomainId,
+                studentId = vm.StudentId
+            });
+            
         }
 
     }
