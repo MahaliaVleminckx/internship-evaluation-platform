@@ -105,6 +105,12 @@ namespace Howest.SelfEvaluation.Web.Controllers
             {
                 return NotFound();
             }
+            var student = await _db.ApplicationUsers.FirstOrDefaultAsync(u => u.Id == studentId);
+
+            if (student == null)
+            {
+                return NotFound();
+            }
 
             var overlayCompetences = new List<OverlayCompetenceViewModel>();
 
@@ -170,7 +176,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             var viewModel = new EvaluationOverlayViewModel
             {
                 StudentId = studentId,
-                StudentName = "Temporary Test Name",
+                StudentName = $"{student.Firstname} {student.Lastname}",
                 OverlayCompetences = overlayCompetences,
             };
             
