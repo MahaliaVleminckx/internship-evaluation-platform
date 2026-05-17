@@ -26,6 +26,8 @@ namespace Howest.SelfEvaluation.Web
             //add session service
             builder.Services.AddSession();
 
+            builder.Services.AddScoped<AdminUserService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

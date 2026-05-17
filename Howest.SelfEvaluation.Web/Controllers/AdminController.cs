@@ -1,5 +1,7 @@
-﻿using Howest.SelfEvaluation.Core.Entities;
+﻿using Azure.Identity;
+using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Web.Data;
+using Howest.SelfEvaluation.Web.Services;
 using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +13,14 @@ namespace Howest.SelfEvaluation.Web.Controllers
     public class AdminController : Controller
     {
         private readonly SelfEvaluationsContext _db;
+        private readonly AdminUserService _adminUserService;
 
-        public AdminController(SelfEvaluationsContext db)
+        public AdminController(SelfEvaluationsContext db, AdminUserService adminUserService)
         {
             _db = db;
+            _adminUserService = adminUserService;
         }
+
 
         [HttpGet]
 
@@ -82,31 +87,40 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Users(string? role)
         {
-            var query = _db.ApplicationUsers.AsQueryable();
+            var users = await _adminUserService.GetUsers(role);
 
             //Filter op role
-            if (!string.IsNullOrEmpty(role))
-            {
-                query = query.Where(u => u.Role == role);
-            }
+            //if (!string.IsNullOrEmpty(role))
+            //{
+            //    query = query.Where(u => u.Role == role);
+            //}
 
             
 
-            var users = await query
-                .Select(u => new AdminUserItemsViewModel
+            //var users = await query
+            //    .Select(u => new AdminUserItemsViewModel
+            //    {
+            //        Id = u.Id,
+            //        Username = u.Username,
+            //        Firstname = u.Firstname,
+            //        Lastname = u.Lastname,
+            //        Role = u.Role,
+            //        Deleted = u.Deleted,
+            //        Created = u.Created
+            //    }).ToListAsync();
+
+            var vm = new AdminUsersViewModel
+            {
+                Users = users.Select(u => new AdminUserItemsViewModel
                 {
                     Id = u.Id,
                     Username = u.Username,
                     Firstname = u.Firstname,
                     Lastname = u.Lastname,
                     Role = u.Role,
-                    Deleted = u.Deleted,
-                    Created = u.Created
-                }).ToListAsync();
-
-            var vm = new AdminUsersViewModel
-            {
-                Users = users,
+                    Created = u.Created,
+                    Deleted = u.Deleted
+                }).ToList(),
                 SelectedRole = role
             };
 
@@ -138,8 +152,9 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 AssignedMentorId = null
             };
 
-            _db.ApplicationUsers.Add(user);
-            await _db.SaveChangesAsync();
+            //_db.ApplicationUsers.Add(user);
+            //await _db.SaveChangesAsync();
+            await _adminUserService.CreateAsync(user);
 
             return RedirectToAction("Users");
         }
@@ -147,7 +162,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUser(Guid id)
         {
-            var user = await _db.ApplicationUsers.FindAsync(id);
+            //var user = await _db.ApplicationUsers.FindAsync(id);
+            var user = await _adminUserService.GetByIdAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -171,7 +187,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 return View(vm);
             }
 
-            var user = await _db.ApplicationUsers.FindAsync(vm.Id);
+            //var user = await _db.ApplicationUsers.FindAsync(vm.Id);
+            var user = await _adminUserService.GetByIdAsync(vm.Id);
             if (user == null)
             {
                 return NotFound();
@@ -183,30 +200,35 @@ namespace Howest.SelfEvaluation.Web.Controllers
             user.Role = vm.Role;
             user.Updated = DateTime.Now;
 
-            await _db.SaveChangesAsync();
+            //await _db.SaveChangesAsync();
+            await _adminUserService.UpdateAsync(user);
             return RedirectToAction("Users");
         }
         public async Task<IActionResult> DeactivateUser(Guid id)
         {
-            var user = await _db.ApplicationUsers.FindAsync(id);
+            //var user = await _db.ApplicationUsers.FindAsync(id);
+            var user = await _adminUserService.GetByIdAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
-            user.Deleted = DateTime.Now;
-            await _db.SaveChangesAsync();
+            //user.Deleted = DateTime.Now;
+            //await _db.SaveChangesAsync();
+            await _adminUserService.DeactivateAsync(user);
             return RedirectToAction("Users");
         }
 
         public async Task<IActionResult> ReactivateUser(Guid id)
         {
-            var user = await _db.ApplicationUsers.FindAsync(id);
+            //var user = await _db.ApplicationUsers.FindAsync(id);
+            var user = await _adminUserService.GetByIdAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
-            user.Deleted = null;
-            await _db.SaveChangesAsync();
+            //user.Deleted = null;
+            //await _db.SaveChangesAsync();
+            await _adminUserService.ReactivateAsync(user);
             return RedirectToAction("Users");
         }
     }
