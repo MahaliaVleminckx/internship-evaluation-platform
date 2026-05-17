@@ -90,9 +90,23 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 query = query.Where(u => u.Role == role);
             }
 
+            
+
+            var users = await query
+                .Select(u => new AdminUserItemsViewModel
+                {
+                    Id = u.Id,
+                    Username = u.Username,
+                    Firstname = u.Firstname,
+                    Lastname = u.Lastname,
+                    Role = u.Role,
+                    Deleted = u.Deleted,
+                    Created = u.Created
+                }).ToListAsync();
+
             var vm = new AdminUsersViewModel
             {
-                Users = await query.ToListAsync(),
+                Users = users,
                 SelectedRole = role
             };
 
@@ -103,11 +117,11 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpGet]
         public IActionResult CreateUser()
         {
-            return View(new CreateUserViewModel());
+            return View(new AdminCreateUsersViewModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser(CreateUserViewModel vm)
+        public async Task<IActionResult> CreateUser(AdminCreateUsersViewModel vm)
         {
             if (!ModelState.IsValid)
                 return View(vm);
@@ -139,7 +153,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 return NotFound();
             }
 
-            var vm = new EditUserViewModel
+            var vm = new AdminEditUsersViewModel
             {
                 Id = user.Id,
                 Firstname = user.Firstname,
@@ -150,7 +164,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(vm);
         }
         [HttpPost]
-        public async Task<IActionResult> EditUser(EditUserViewModel vm)
+        public async Task<IActionResult> EditUser(AdminEditUsersViewModel vm)
         {
             if (!ModelState.IsValid)
             {

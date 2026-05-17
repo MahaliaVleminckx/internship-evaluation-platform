@@ -4,7 +4,7 @@ namespace Howest.SelfEvaluation.Web.ViewModels.Admin
 {
     public class AdminUsersViewModel
     {
-        public List<ApplicationUser> Users { get; set; } = new();
+        public List<AdminUserItemsViewModel> Users { get; set; } = new();
         public string? SelectedRole { get; set; }
     }
 }
