@@ -105,6 +105,7 @@ namespace Howest.SelfEvaluation.Web.Services
                         EvaluationId = vm.EvaluationId,
                         IndicatorId = q.QuestionId,
                         UserId = userId,
+                        TargetUserId = userId,
                         ExtraInfo = q.Answer,
                         NotApplicable = false,
                         Created = DateTime.UtcNow
@@ -147,6 +148,7 @@ namespace Howest.SelfEvaluation.Web.Services
                         Id = Guid.NewGuid(),
                         IndicatorId = i.IndicatorId,
                         UserId = userId,
+                        TargetUserId = userId,
                         ExtraInfo = i.ExtraInfo,
                         NotApplicable = i.NotApplicable,
                         Created = DateTime.UtcNow
@@ -187,6 +189,7 @@ namespace Howest.SelfEvaluation.Web.Services
                         IndicatorId = competence.SelectedIndicatorId.Value,
                         CompetenceId = competence.Id,
                         UserId = userId,
+                        TargetUserId = userId,
                         ExtraInfo = competence.Comment,
                         Created = DateTime.UtcNow
                     });

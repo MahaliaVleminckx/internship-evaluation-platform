@@ -9,6 +9,7 @@ public class StudentCompetencesViewModel
     public string DomainName { get; set; }
 
     public List<StudentCompetenceViewModel> Competences { get; set; }
+    public bool IsReadOnly { get; set; }
 }
 
 public class StudentCompetenceViewModel
@@ -22,4 +23,5 @@ public class StudentCompetenceViewModel
 
     public Guid? SelectedIndicatorId { get; set; }
     public string Comment { get; set; }
+    
 }

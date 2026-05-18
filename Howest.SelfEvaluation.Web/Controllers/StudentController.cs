@@ -17,18 +17,30 @@ public class StudentController : Controller
     {
         var domain = await _evaluationService.GetDomainWithIndicatorsAsync(domainId);
 
+        var userId = Guid.Parse("00000000-0000-0000-0000-000000000001"); // TODO: replace later with logged-in user
+
+        var scores = await _evaluationService.GetStudentResultsForDomainAsync(userId, domainId);
+
         var vm = new StudentCompetencesViewModel
         {
             DomainId = domain.Id,
             EvaluationId = domain.EvaluationId,
             DomainName = domain.Name,
 
+            IsReadOnly = scores.Any(), 
+
             Competences = domain.Competences.Select(c => new StudentCompetenceViewModel
             {
                 Id = c.Id,
                 Name = c.Name,
                 Description = c.Description,
-                Indicators = c.Indicators.ToList()
+                Indicators = c.Indicators.ToList(),
+
+                SelectedIndicatorId = scores
+                    .FirstOrDefault(s => s.CompetenceId == c.Id)?.IndicatorId,
+
+                Comment = scores
+                    .FirstOrDefault(s => s.CompetenceId == c.Id)?.ExtraInfo
             }).ToList()
         };
 
