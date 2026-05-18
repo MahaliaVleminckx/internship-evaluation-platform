@@ -1,5 +1,10 @@
 ﻿@model AdminCreateEvaluationViewmodel
-<h1 class="mb-4">Evaluatie aanmaken</h1>
+<div class="evaluation-title-box mt-4">
+    <a asp-controller="Admin" asp-action="ShowAllEvaluations" class="btn custom-btn">
+        ←
+    </a>
+    <h1>Evaluatie aanmaken</h1>
+</div>
 
 <div class="shadow-sm p-5 mb-4 rounded">
     <form asp-controller="Admin" asp-action="CreateEvaluation" method="post">
