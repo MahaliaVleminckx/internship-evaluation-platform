@@ -53,16 +53,12 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 return NotFound();
             }
 
-            //TODO REFACTOR AFTER DB UPDATE
-            //var domains = await _db.CompetenceDomains
-            //    .Where(d => d.EvaluationId == evaluationId).ToListAsync();
-
             var viewModel = new MentorEvaluationDomainsViewModel
             {
                 EvaluationId = evaluation.Id,
                 Title = evaluation.Title,
                 IsPublished = evaluation.IsPublished,
-                //CompetenceDomains = domains,
+                CompetenceDomains = evaluation.CompetenceDomains,
                 StudentId = studentId
             };
 
