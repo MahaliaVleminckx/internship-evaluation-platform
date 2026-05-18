@@ -59,7 +59,6 @@ namespace Howest.SelfEvaluation.Web.Services
             if (existingEvaluation.IsPublished) viewModel.IsPublished.IsSelected = true;
             viewModel.Modules = GetModules();
 
-            //currently checking if name is the same as competencedomains are grouped (multiple with same name but diff id)
             var evaluationCompetenceNames = existingEvaluation.CompetenceDomains.Select(c => c.Name).ToList();
 
             for (int i = 0; i < viewModel.CompetenceDomains.Count(); i++)
