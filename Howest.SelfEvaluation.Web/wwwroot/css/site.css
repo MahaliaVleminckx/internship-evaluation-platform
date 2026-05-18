@@ -406,5 +406,11 @@ main {
     position: relative;
     cursor: pointer;
 }
+.domain-btn {
+    width: 100%;
+    border-radius: 20px;
+    padding: 8px 0;
+    font-weight: 500;
+}
 
 
