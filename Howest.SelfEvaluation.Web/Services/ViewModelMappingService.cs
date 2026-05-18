@@ -35,7 +35,7 @@ namespace Howest.SelfEvaluation.Web.Services
             {
                 Id = competenceDomain.Id,
                 Name = competenceDomain.Name,
-                EvaluationId = competenceDomain.EvaluationId,
+                //EvaluationId = competenceDomain.EvaluationId,
                 Competences = competenceDomain.Competences.Select(c => MapToCompetenceViewModel(c)).ToList()
             };
         }

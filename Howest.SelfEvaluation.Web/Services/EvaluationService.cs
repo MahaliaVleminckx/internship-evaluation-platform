@@ -272,13 +272,14 @@ namespace Howest.SelfEvaluation.Web.Services
             {
                 var competenceDomain = selectedCompetenceDomains[i];
 
-                linkCompetenceDomainsToEvaluation.Add(new CompetenceDomain
-                {
-                    Id = Guid.NewGuid(),
-                    Created = DateTime.UtcNow,
-                    EvaluationId = newEvaluation.Id,
-                    Name = competenceDomain.Text
-                });
+                //TODO AFTER REFACTOR DB
+                //linkCompetenceDomainsToEvaluation.Add(new CompetenceDomain
+                //{
+                //    Id = Guid.NewGuid(),
+                //    Created = DateTime.UtcNow,
+                //    EvaluationId = newEvaluation.Id,
+                //    Name = competenceDomain.Text
+                //});
             }
 
             await _db.CompetenceDomains.AddRangeAsync(linkCompetenceDomainsToEvaluation);
@@ -295,12 +296,12 @@ namespace Howest.SelfEvaluation.Web.Services
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Aanpassen mislukt. Er werd geen evaluatie met id {adminUpdateEvaluationViewModel.Id} gevonden" } };
             }
 
-            if (existingEvaluation.EndDate < existingEvaluation.StartDate)
+            if (adminUpdateEvaluationViewModel.EndDate < adminUpdateEvaluationViewModel.StartDate)
             {
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Einddatum kan niet voor begindatum liggen" } };
             }
 
-            if (await DoesEvaluationTitleExist(adminUpdateEvaluationViewModel.Title))
+            if (await DoesEvaluationTitleExist(adminUpdateEvaluationViewModel.Title) && existingEvaluation.Id != adminUpdateEvaluationViewModel.Id)
             {
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Een evaluatie met naam {adminUpdateEvaluationViewModel.Title} bestaat al" } };
             }
@@ -332,13 +333,14 @@ namespace Howest.SelfEvaluation.Web.Services
             {
                 var competenceDomain = selectedCompetenceDomains[i];
 
-                linkCompetenceDomainsToEvaluation.Add(new CompetenceDomain
-                {
-                    Id = Guid.NewGuid(),
-                    Created = DateTime.UtcNow,
-                    EvaluationId = existingEvaluation.Id,
-                    Name = competenceDomain.Text
-                });
+                //TODO AFTER REFACTOR DB
+                //linkCompetenceDomainsToEvaluation.Add(new CompetenceDomain
+                //{
+                //    Id = Guid.NewGuid(),
+                //    Created = DateTime.UtcNow,
+                //    EvaluationId = existingEvaluation.Id,
+                //    Name = competenceDomain.Text
+                //});
             }
 
             await _db.CompetenceDomains.AddRangeAsync(linkCompetenceDomainsToEvaluation);
