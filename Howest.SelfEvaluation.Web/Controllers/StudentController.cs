@@ -34,7 +34,13 @@ public class StudentController : Controller
                 Id = c.Id,
                 Name = c.Name,
                 Description = c.Description,
-                Indicators = c.Indicators.ToList(),
+                Indicators = c.Indicators.Select(i => new IndicatorViewModel
+                {
+                    Id = i.Id,
+                    Description = i.Description,
+                    ScaleValue = i.ScaleValue,
+                    ScaleValueScore = i.ScaleValueScore
+                }).ToList(),
 
                 SelectedIndicatorId = scores
                     .FirstOrDefault(s => s.CompetenceId == c.Id)?.IndicatorId,

@@ -2,7 +2,7 @@
 using Howest.SelfEvaluation.Core.Enums;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
-using Howest.SelfEvaluation.Web.ViewModels;
+using Howest.SelfEvaluation.Web.ViewModels.Student;
 using Microsoft.EntityFrameworkCore;
 
 namespace Howest.SelfEvaluation.Web.Services

@@ -1,5 +1,5 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
-using Howest.SelfEvaluation.Web.ViewModels;
+using Howest.SelfEvaluation.Web.ViewModels.Student;
 
 namespace Howest.SelfEvaluation.Web.Services.Interfaces
 {
