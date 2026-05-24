@@ -60,5 +60,19 @@ namespace Howest.SelfEvaluation.Web.Services
                 Lastname = student.Lastname
             };
         }
+
+        public EvaluationScoreViewModel MapToEvaluationScoreViewModel(EvaluationScore evaluationScore)
+        {
+            return new EvaluationScoreViewModel
+            {
+                EvaluationId = evaluationScore.EvaluationId,
+                CompetenceId = evaluationScore.CompetenceId,
+                ExtraInfo = evaluationScore.ExtraInfo,
+                IndicatorId = evaluationScore.IndicatorId,
+                NotApplicable = evaluationScore.NotApplicable,
+                TargetUserId = evaluationScore.TargetUserId,
+                UserId = evaluationScore.UserId,
+            };
+        }
     }
 }

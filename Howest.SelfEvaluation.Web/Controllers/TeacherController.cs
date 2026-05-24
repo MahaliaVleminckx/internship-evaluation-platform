@@ -17,11 +17,13 @@ namespace Howest.SelfEvaluation.Web.Controllers
     {
         private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
+        private readonly IViewModelMappingService _mappingService;
 
-        public TeacherController(SelfEvaluationsDbContext db, IEvaluationService evaluationService)
+        public TeacherController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IViewModelMappingService mappingService)
         {
             _db = db;
             _evaluationService = evaluationService;
+            _mappingService = mappingService;
         }
 
         //for demo purposes, not final
@@ -116,8 +118,12 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 ModuleId = evaluation.ModuleId,
                 Title = evaluation.Title,
                 Description = evaluation.Description,
-                CompetenceDomains = evaluation.CompetenceDomains,
-                StudentEvaluationScores = evaluation.StudentEvaluationScores,
+                CompetenceDomains = evaluation.CompetenceDomains?
+                                    .Select(c => _mappingService.MapToCompetenceDomainViewModel(c))
+                                    .ToList() ?? new(),
+                StudentEvaluationScores = evaluation.StudentEvaluationScores?
+                                    .Select(e => _mappingService.MapToEvaluationScoreViewModel(e))
+                                    .ToList() ?? new(),
                 IsPublished = evaluation.IsPublished,
                 UserId = teacherId
             };
