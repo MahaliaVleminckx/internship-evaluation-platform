@@ -30,6 +30,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
             _viewModelMappingService = viewModelMappingService;
         }
 
+        
+
         [HttpGet]
         public async Task<IActionResult> Index(Guid studentId)
         {
@@ -42,6 +44,18 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
 
             return View(mentorIndexViewModel);
+        }
+
+        //for demo purposes, not final
+        [HttpGet]
+        public async Task<IActionResult> Dashboard()
+        {
+            //DEVELOPMENT ONLY since no login system yet
+            //TODO: change this to the logged in teacher id (refactor method to use Guid instead of name) once login implemented
+            //for now its hardcoded for demo purposes and we didnt get to do login implementation
+            Guid mentorId = Guid.Parse("00000000-0000-0000-0000-000000000002");
+            BaseViewModel baseViewModel = new() { Id = mentorId };
+            return View(baseViewModel);
         }
 
         public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId, Guid studentId)

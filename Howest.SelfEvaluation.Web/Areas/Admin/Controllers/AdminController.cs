@@ -28,6 +28,7 @@ namespace Howest.SelfEvaluation.Web.Areas.Admin.Controllers
             _formBuilderService = formBuilderService;
         }
 
+        //for demo purposes, not final
         [HttpGet]
         public async Task<IActionResult> Dashboard()
         {
