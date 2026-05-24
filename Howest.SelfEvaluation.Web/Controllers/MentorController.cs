@@ -21,11 +21,13 @@ namespace Howest.SelfEvaluation.Web.Controllers
     {
         private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
+        private readonly IViewModelMappingService _viewModelMappingService;
 
-        public MentorController(SelfEvaluationsDbContext db, IEvaluationService evaluationService)
+        public MentorController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IViewModelMappingService viewModelMappingService)
         {
             _db = db;
             _evaluationService = evaluationService;
+            _viewModelMappingService = viewModelMappingService;
         }
 
         
@@ -37,7 +39,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             var mentorIndexViewModel = new MentorIndexViewModel
             {
-                Evaluations = allEvaluations,
+                Evaluations = allEvaluations.Select(e => _viewModelMappingService.MapToEvaluationViewModel(e)).ToList(),
                 StudentId = studentId
             };
 
@@ -65,15 +67,12 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 return NotFound();
             }
 
-            var domains = await _db.CompetenceDomains
-                .Where(d => d.EvaluationId == evaluationId).ToListAsync();
-
             var viewModel = new MentorEvaluationDomainsViewModel
             {
                 EvaluationId = evaluation.Id,
                 Title = evaluation.Title,
                 IsPublished = evaluation.IsPublished,
-                CompetenceDomains = domains,
+                CompetenceDomains = evaluation.CompetenceDomains,
                 StudentId = studentId
             };
 
@@ -98,21 +97,22 @@ namespace Howest.SelfEvaluation.Web.Controllers
             foreach (var c in domain.Competences)
             {
                 Console.WriteLine($"Competence {c.Name} has {c.Indicators.Count} indicators");
-            }   
-
-            var evaluation = await _db.Evaluations.FindAsync(domain.EvaluationId);
-            if (evaluation == null)
-            {
-                return NotFound();
             }
+
+            //TODO REFACTOR AFTER DB UPDATE
+            //var evaluation = await _db.Evaluations.FindAsync(domain.EvaluationId);
+            //if (evaluation == null)
+            //{
+            //    return NotFound();
+            //}
 
 
             var viewModel = new MentorCompetencesViewModel
             {
-                EvaluationId = evaluation.Id,
+                //EvaluationId = evaluation.Id,
                 DomainId = domain.Id,
                 DomainName = domain.Name,
-                Title = evaluation.Title,
+                //Title = evaluation.Title,
                 Competences = domain.Competences.Select(c => new CompetenceViewModel
                 {
                     Id = c.Id,
@@ -189,13 +189,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             MentorShowStudentsViewModel mentorShowStudentsViewModel = new MentorShowStudentsViewModel
             {
-                Students = allStudents.Select(student => new StudentViewModel
-                {
-                    UserId = student.Id,
-                    UserName = student.Username,
-                    Firstname = student.Firstname,
-                    Lastname = student.Lastname
-                })
+                Students = allStudents.Select(student => _viewModelMappingService.MapToStudentViewModel(student)).ToList()
             };
 
             return View(mentorShowStudentsViewModel);

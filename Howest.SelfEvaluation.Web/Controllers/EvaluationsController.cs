@@ -18,11 +18,13 @@ namespace Howest.SelfEvaluation.Web.Controllers
     {
         private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
+        private readonly IViewModelMappingService _viewModelMappingService;
 
-        public EvaluationsController(SelfEvaluationsDbContext db, IEvaluationService evaluationService)
+        public EvaluationsController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IViewModelMappingService viewModelMappingService)
         {
             _db = db;
             _evaluationService = evaluationService;
+            _viewModelMappingService = viewModelMappingService;
         }
 
         [HttpGet]
@@ -42,11 +44,11 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 UserId = user.Id,
                 Username = user.Username,
                 Role = user.Role,
-                Modules = user.Modules,
-                OwnerModules = user.OwnerModules,
-                StudentEvaluationScores = user.StudentEvaluationScores
+                Modules = user.Modules.Select(m => _viewModelMappingService.MapToModuleViewModel(m)).ToList(),
+                OwnerModules = user.OwnerModules.Select(om => _viewModelMappingService.MapToModuleViewModel(om)).ToList(),
+                //StudentEvaluationScores = user.StudentEvaluationScores
             };
-
+            
             return View(evaluationsIndexViewModel);
         }
 
@@ -66,9 +68,9 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 Id= moduleId,
                 Name = module.Name,
                 Description = module.Description,
-                ApplicationUsers = module.ApplicationUsers,
-                Evaluations = module.Evaluations,
-                Owner = module.Owner,
+                //ApplicationUsers = module.ApplicationUsers,
+                Evaluations = module.Evaluations.Select(e => _viewModelMappingService.MapToEvaluationViewModel(e)).ToList(),
+                //Owner = module.Owner,
                 OwnerId = module.OwnerId,
                 UserId = userId
             };
@@ -92,8 +94,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 ModuleId = evaluation.ModuleId,
                 Title = evaluation.Title,
                 Description = evaluation.Description,
-                CompetenceDomains = evaluation.CompetenceDomains,
-                StudentEvaluationScores = evaluation.StudentEvaluationScores,
+                CompetenceDomains = evaluation.CompetenceDomains.Select(c => _viewModelMappingService.MapToCompetenceDomainViewModel(c)).ToList(),
+                //StudentEvaluationScores = evaluation.StudentEvaluationScores,
                 IsPublished = evaluation.IsPublished,
                 UserId = userId
             };

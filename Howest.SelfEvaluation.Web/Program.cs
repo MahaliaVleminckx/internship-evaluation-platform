@@ -23,6 +23,7 @@ namespace Howest.SelfEvaluation.Web
             //custom dependency injections
             builder.Services.AddScoped<IEvaluationService, EvaluationService>();
             builder.Services.AddScoped<IFormBuilderService, FormBuilderService>();
+            builder.Services.AddScoped<IViewModelMappingService,  ViewModelMappingService>();
 
             //add session service
             builder.Services.AddSession();

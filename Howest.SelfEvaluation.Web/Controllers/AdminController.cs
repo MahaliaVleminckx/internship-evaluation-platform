@@ -40,12 +40,12 @@ namespace Howest.SelfEvaluation.Web.Controllers
             var allEvaluations = await _evaluationService.GetAllEvaluationsAsync();
             AdminShowAllEvaluationsViewModel adminShowAllEvaluationsViewModel = new AdminShowAllEvaluationsViewModel
             {
-                Evaluations = allEvaluations.Select(e => new EvaluationModel
+                Evaluations = allEvaluations.Select(e => new EvaluationViewModel
                 {
                     Id = e.Id,
                     Title = e.Title,
                     IsPublished = e.IsPublished
-                }).ToList() ?? new List<EvaluationModel>()
+                }).ToList() ?? new List<EvaluationViewModel>()
             };
 
             return View(adminShowAllEvaluationsViewModel);

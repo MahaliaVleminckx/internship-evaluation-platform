@@ -258,30 +258,22 @@ namespace Howest.SelfEvaluation.Web.Services
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Een evaluatie met naam {adminCreateEvaluationViewmodel.Title} bestaat al" } };
             }
 
-            //todo?: restructure database with competencedomain(id - name) then link in new table CompetenceDomainsEvalutions?
-            //since project was delivered like this, currently leaving it like it was
-
             //linking of competenceDomains and evaluation
-            List<CompetenceDomain> linkCompetenceDomainsToEvaluation = new List<CompetenceDomain>();
-            var selectedCompetenceDomains = adminCreateEvaluationViewmodel
+            var selectedCompetenceDomainIds = adminCreateEvaluationViewmodel
                 .CompetenceDomains
                 .Where(c => c.IsSelected == true)
+                .Select(c => c.Value)
                 .ToList();
+            var competenceDomains = new List<CompetenceDomain>();
 
-            for (int i = 0; i < selectedCompetenceDomains.Count(); i++)
+            foreach(var id in selectedCompetenceDomainIds)
             {
-                var competenceDomain = selectedCompetenceDomains[i];
-
-                linkCompetenceDomainsToEvaluation.Add(new CompetenceDomain
-                {
-                    Id = Guid.NewGuid(),
-                    Created = DateTime.UtcNow,
-                    EvaluationId = newEvaluation.Id,
-                    Name = competenceDomain.Text
-                });
+                var competenceDomain = await GetDomainWithIndicatorsAsync(id);
+                competenceDomains.Add(competenceDomain);
             }
 
-            await _db.CompetenceDomains.AddRangeAsync(linkCompetenceDomainsToEvaluation);
+            newEvaluation.CompetenceDomains = competenceDomains;
+
             await _db.Evaluations.AddAsync(newEvaluation);
             await _db.SaveChangesAsync();
             return new ResultModel<Evaluation> { Data = newEvaluation };
@@ -295,12 +287,12 @@ namespace Howest.SelfEvaluation.Web.Services
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Aanpassen mislukt. Er werd geen evaluatie met id {adminUpdateEvaluationViewModel.Id} gevonden" } };
             }
 
-            if (existingEvaluation.EndDate < existingEvaluation.StartDate)
+            if (adminUpdateEvaluationViewModel.EndDate < adminUpdateEvaluationViewModel.StartDate)
             {
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Einddatum kan niet voor begindatum liggen" } };
             }
 
-            if (await DoesEvaluationTitleExist(adminUpdateEvaluationViewModel.Title))
+            if (await DoesEvaluationTitleExist(adminUpdateEvaluationViewModel.Title) && existingEvaluation.Id != adminUpdateEvaluationViewModel.Id)
             {
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Een evaluatie met naam {adminUpdateEvaluationViewModel.Title} bestaat al" } };
             }
@@ -322,27 +314,23 @@ namespace Howest.SelfEvaluation.Web.Services
             }
 
             //linking of competenceDomains and evaluation
-            List<CompetenceDomain> linkCompetenceDomainsToEvaluation = new List<CompetenceDomain>();
-            var selectedCompetenceDomains = adminUpdateEvaluationViewModel
+            //linking of competenceDomains and evaluation
+            var selectedCompetenceDomainIds = adminUpdateEvaluationViewModel
                 .CompetenceDomains
                 .Where(c => c.IsSelected == true)
+                .Select(c => c.Value)
                 .ToList();
+            var competenceDomains = new List<CompetenceDomain>();
 
-            for (int i = 0; i < selectedCompetenceDomains.Count(); i++)
+            foreach (var id in selectedCompetenceDomainIds)
             {
-                var competenceDomain = selectedCompetenceDomains[i];
-
-                linkCompetenceDomainsToEvaluation.Add(new CompetenceDomain
-                {
-                    Id = Guid.NewGuid(),
-                    Created = DateTime.UtcNow,
-                    EvaluationId = existingEvaluation.Id,
-                    Name = competenceDomain.Text
-                });
+                var competenceDomain = await GetDomainWithIndicatorsAsync(id);
+                competenceDomains.Add(competenceDomain);
             }
 
-            await _db.CompetenceDomains.AddRangeAsync(linkCompetenceDomainsToEvaluation);
-            _db.Update(existingEvaluation);
+            existingEvaluation.CompetenceDomains = competenceDomains;
+
+            _db.Evaluations.Update(existingEvaluation);
             await _db.SaveChangesAsync();
             return new ResultModel<Evaluation> { Data = existingEvaluation };
         }

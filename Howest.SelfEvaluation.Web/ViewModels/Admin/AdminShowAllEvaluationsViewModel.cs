@@ -4,6 +4,6 @@ namespace Howest.SelfEvaluation.Web.ViewModels.Admin
 {
     public class AdminShowAllEvaluationsViewModel
     {
-        public List<EvaluationModel> Evaluations { get; set; }
+        public List<EvaluationViewModel> Evaluations { get; set; }
     }
 }
