@@ -1,13 +1,14 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.Data;
-using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Providers;
 
 
-namespace Howest.SelfEvaluation.Web.Controllers
+namespace Howest.SelfEvaluation.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class AdminController : Controller
     {
         private readonly SelfEvaluationsContext _db;

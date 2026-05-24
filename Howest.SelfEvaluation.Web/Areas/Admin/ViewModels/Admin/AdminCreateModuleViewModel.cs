@@ -1,6 +1,6 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 
-namespace Howest.SelfEvaluation.Web.ViewModels.Admin
+namespace Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin
 {
     public class AdminCreateModuleViewModel
     {
