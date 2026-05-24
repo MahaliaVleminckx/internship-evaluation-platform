@@ -17,12 +17,14 @@ namespace Howest.SelfEvaluation.Web
 
             // Add services to the container.
             builder.Services
-                .AddDbContext<SelfEvaluationsContext>(options =>
+                .AddDbContext<SelfEvaluationsDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("EvaluationDb")));
             builder.Services.AddControllersWithViews();
 
             //custom dependency injections
-            builder.Services.AddTransient<IEvaluationService, EvaluationService>();
+            builder.Services.AddScoped<IEvaluationService, EvaluationService>();
+            builder.Services.AddScoped<IFormBuilderService, FormBuilderService>();
+            builder.Services.AddScoped<IViewModelMappingService,  ViewModelMappingService>();
 
             //add session service
             builder.Services.AddSession();
@@ -52,6 +54,11 @@ namespace Howest.SelfEvaluation.Web
                 pattern: "{area:exists}/{controller=Admin}/{action=Dashboard}"
                 );
 
+            app.MapControllerRoute(
+                name: "AdminUpdateEvaluation",
+                pattern: "Admin/CreateEvaluation/{evaluationId:guid}",
+                defaults: new { Controller = "Admin", Action = "UpdateEvaluation" }
+            );
             app.MapControllerRoute(
                 name: "MentorShowStudents",
                 pattern: "Mentor/ShowStudents/{mentorId:guid}",
