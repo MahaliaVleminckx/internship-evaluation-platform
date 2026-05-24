@@ -1,8 +1,8 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Web.Models;
-using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using Howest.SelfEvaluation.Web.ViewModels;
+using Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin;
 
 namespace Howest.SelfEvaluation.Web.Services.Interfaces
 {

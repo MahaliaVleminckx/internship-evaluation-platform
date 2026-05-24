@@ -1,6 +1,6 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.Models;
-using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Howest.SelfEvaluation.Web.Services.Interfaces

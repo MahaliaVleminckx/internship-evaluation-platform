@@ -3,9 +3,9 @@ using Howest.SelfEvaluation.Core.Enums;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
-using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin;
 
 namespace Howest.SelfEvaluation.Web.Services
 {

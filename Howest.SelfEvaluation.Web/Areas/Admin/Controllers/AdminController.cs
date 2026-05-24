@@ -4,7 +4,6 @@ using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
-using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -109,7 +108,7 @@ namespace Howest.SelfEvaluation.Web.Areas.Admin.Controllers
 
 
             await _db.SaveChangesAsync();
-            return RedirectToAction("CreateModule");
+            return RedirectToAction("CreateModule", new { Area = "Admin" });
         }
 
         [HttpGet]
@@ -151,7 +150,7 @@ namespace Howest.SelfEvaluation.Web.Areas.Admin.Controllers
                 await _formBuilderService.ReseedEvaluationCreateFormAsync(adminCreateEvaluationViewmodel);
                 return View(adminCreateEvaluationViewmodel);
             }
-            return RedirectToAction("Dashboard", "Admin");
+            return RedirectToAction("Dashboard", "Admin", new { Area = "Admin" });
         }
 
         [HttpGet]
@@ -206,7 +205,7 @@ namespace Howest.SelfEvaluation.Web.Areas.Admin.Controllers
                 return View(adminUpdateEvaluationViewModel);
             }
 
-            return RedirectToAction("Dashboard", "Admin");
+            return RedirectToAction("Dashboard", "Admin", new { Area = "Admin" });
         }
 
 
