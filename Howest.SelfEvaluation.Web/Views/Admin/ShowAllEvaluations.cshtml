@@ -1,0 +1,41 @@
+﻿@model AdminShowAllEvaluationsViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="evaluation-title-box mt-4 mb-4">
+                <a asp-controller="Admin" asp-action="Dashboard" class="btn custom-btn">
+                    ←
+                </a>
+                <h1>Alle evaluaties</h1>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table">
+                   
+                    <thead>
+                        <tr>
+                            <th>Titel</th>
+                            <th>Id</th>
+                            <th>Is gepubliceerd?</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                        @foreach (var evaluation in Model.Evaluations)
+                        {
+                            <tr>
+                                <td>@evaluation.Title</td>
+                                <td>@evaluation.Id</td>
+                                <td>@(evaluation.IsPublished ? "Ja" : "Nee")</td>
+                                <td><a asp-controller="Admin" asp-action="UpdateEvaluation" asp-route-id="@evaluation.Id" class="btn custom-btn">aanpassen</a></td>
+                            </tr>
+                        }
+                    </tbody>
+        
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

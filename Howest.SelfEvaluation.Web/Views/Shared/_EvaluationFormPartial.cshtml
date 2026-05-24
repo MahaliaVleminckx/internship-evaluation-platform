@@ -1,0 +1,54 @@
+﻿@model AdminCreateEvaluationViewmodel
+
+<div class="mb-3">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+
+    <label asp-for="@Model.Title" class="form-label"></label>
+    <input asp-for="@Model.Title" class="form-control" />
+    <span asp-validation-for="@Model.Title" class="text-danger"></span>
+
+</div>
+
+<div class="mb-3">
+    <label asp-for="@Model.Description" class="form-label"></label>
+    <textarea asp-for="@Model.Description" class="form-control" rows="3"></textarea>
+    <span asp-validation-for="@Model.Description" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="@Model.StartDate" class="form-label"></label>
+    <input asp-for="@Model.StartDate" class="form-control" rows="3" />
+    <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="@Model.EndDate" class="form-label"></label>
+    <input asp-for="@Model.EndDate" class="form-control" rows="3" />
+    <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="@Model.ModuleId" class="form-label"></label>
+    <select asp-for="@Model.ModuleId" asp-items="@Model.Modules" class="form-select"></select>
+</div>
+
+<div class="form-group">
+    <label>Competentie domeinen:</label>
+
+    @for (int i = 0; i < Model.CompetenceDomains.Count(); i++)
+    {
+        <div>
+            <input asp-for="@Model.CompetenceDomains[i].IsSelected" class="form-check-inline" />
+            <label>@Model.CompetenceDomains[i].Text</label>
+            <input asp-for="@Model.CompetenceDomains[i].Value" />
+            <input asp-for="@Model.CompetenceDomains[i].Text" />
+        </div>
+    }
+        
+    <div>
+        <label>@Model.IsPublished.Text</label>
+        <input asp-for="@Model.IsPublished.IsSelected" class="form-check-inline" />
+        <input asp-for="@Model.IsPublished.Value" />
+        <input asp-for="@Model.IsPublished.Text" />
+    </div>
