@@ -225,7 +225,7 @@ namespace Howest.SelfEvaluation.Web.Services
                 .Where(u => u.Role == "Student" && u.AssignedMentorId == mentorId)
                 .ToListAsync();
         }
-
+<<<<<<< feature/student-view-evaluations
         public async Task<List<EvaluationScore>> GetStudentOwnResultsAsync(Guid userId, Guid evaluationId)
         {
             return await _db.EvaluationScores
@@ -244,6 +244,24 @@ namespace Howest.SelfEvaluation.Web.Services
                     es.UserId == userId &&
                     es.Indicator != null &&
                     es.Indicator.Competence != null &&
+        public async Task<List<ApplicationUser>> GetStudentsForDomainAsync(Guid domainId)
+        {
+            return await _db.EvaluationScores
+                .Where(es =>
+                    es.Indicator != null &&
+                    es.Indicator.Competence != null &&
+                    es.Indicator.Competence.CompetenceDomainId == domainId
+                )
+                .Select(es => es.User)
+                .Where(u => u.Role == "Student")
+                .Distinct()
+                .ToListAsync();
+        }
+        public async Task<List<EvaluationScore>> GetStudentResultsForDomainAsync(Guid studentId, Guid domainId)
+        {
+            return await _db.EvaluationScores
+                .Where(es =>
+                    es.UserId == studentId &&
                     es.Indicator.Competence.CompetenceDomainId == domainId
                 )
                 .Include(es => es.Indicator)

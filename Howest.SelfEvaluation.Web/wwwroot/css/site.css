@@ -416,6 +416,10 @@ main {
     border: none;
     color: white;
     transition: all 0.2s ease;
+    width: 100%;
+    border-radius: 20px;
+    padding: 8px 0;
+    font-weight: 500;
 }
 
     .domain-btn:hover {
