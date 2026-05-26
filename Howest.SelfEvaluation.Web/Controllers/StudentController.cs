@@ -19,7 +19,7 @@ public class StudentController : Controller
         var vm = new StudentCompetencesViewModel
         {
             DomainId = domain.Id,
-            EvaluationId = domain.EvaluationId,
+            //EvaluationId = domain.EvaluationId,
             DomainName = domain.Name,
 
             Competences = domain.Competences.Select(c => new StudentCompetenceViewModel
