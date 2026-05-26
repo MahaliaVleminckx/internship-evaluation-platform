@@ -242,6 +242,7 @@ namespace Howest.SelfEvaluation.Web.Services
                 .Include(es => es.Indicator)
                     .ThenInclude(i => i.Competence)
                 .ToListAsync();
+        }
 
         public async Task<bool> DoesModuleIdExistAsync(Guid moduleId)
         {
