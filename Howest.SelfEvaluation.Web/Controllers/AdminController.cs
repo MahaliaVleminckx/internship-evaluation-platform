@@ -119,7 +119,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         public async Task<IActionResult> CreateEvaluation()
         {
 
-            
+
             AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel = new AdminCreateEvaluationViewmodel
             {
                 Modules = _formBuilderService.GetModules(),
@@ -147,7 +147,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             var creationResult = await _evaluationService.CreateEvaluationAsync(adminCreateEvaluationViewmodel);
             if (!creationResult.Succes)
             {
-                foreach(var error in creationResult.Errors)
+                foreach (var error in creationResult.Errors)
                 {
                     ModelState.AddModelError("failedCreation", error);
                 }
@@ -189,18 +189,18 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             if (!ModelState.IsValid)
             {
-                if(existingEvaluation is not null)
+                if (existingEvaluation is not null)
                 {
                     //reseeding data in form
                     await _formBuilderService.ReseedEvaluationUpdateFormAsync(adminUpdateEvaluationViewModel, existingEvaluation);
-                }                
+                }
                 return View(adminUpdateEvaluationViewModel);
             }
 
             var updateResult = await _evaluationService.UpdateEvaluationAsync(adminUpdateEvaluationViewModel);
             if (!updateResult.Succes)
             {
-                foreach(var error in updateResult.Errors)
+                foreach (var error in updateResult.Errors)
                 {
                     ModelState.AddModelError("updateFailure", error);
                 }
@@ -241,23 +241,30 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpGet]
         public IActionResult CreateUser()
         {
-            return View(new AdminCreateUsersViewModel());
+            return View(new AdminCreateUsersViewModel
+            {
+                Roles = GetRoles()
+            });
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateUser(AdminCreateUsersViewModel vm)
         {
             if (!ModelState.IsValid)
+            {
+                vm.Roles = GetRoles();
                 return View(vm);
+            }
 
             var existingUser = await _adminUserService.GetByEmailAsync(vm.Username);
 
             if (existingUser != null)
             {
                 ModelState.AddModelError("Username", "Email wordt al gebruikt");
+                vm.Roles = GetRoles();
                 return View(vm);
             }
-           
+
 
             var user = new ApplicationUser
             {
@@ -291,7 +298,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 Firstname = user.Firstname,
                 Lastname = user.Lastname,
                 Username = user.Username.ToLowerInvariant(),
-                Role = user.Role
+                Role = user.Role,
+                Roles = GetRoles()
             };
             return View(vm);
         }
@@ -300,6 +308,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
+                vm.Roles = GetRoles();
                 return View(vm);
             }
 
@@ -308,9 +317,10 @@ namespace Howest.SelfEvaluation.Web.Controllers
             if (existingUser != null && existingUser.Id != vm.Id)
             {
                 ModelState.AddModelError("Username", "Email wordt al gebruikt");
+                vm.Roles = GetRoles();
                 return View(vm);
             }
-         
+
 
             var user = await _adminUserService.GetByIdAsync(vm.Id);
             if (user == null)
@@ -341,7 +351,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         public async Task<IActionResult> ReactivateUser(Guid id)
         {
-           
+
             var user = await _adminUserService.GetByIdAsync(id);
             if (user == null)
             {
@@ -349,6 +359,16 @@ namespace Howest.SelfEvaluation.Web.Controllers
             }
             await _adminUserService.ReactivateAsync(user);
             return RedirectToAction("Users");
+        }
+
+        private List<SelectListItem> GetRoles()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem("Student", "Student"),
+                new SelectListItem("Mentor", "Mentor"),
+                new SelectListItem("Teacher", "Teacher")
+            };
         }
     }
 }

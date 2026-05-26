@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace Howest.SelfEvaluation.Web.ViewModels.Admin
 {
@@ -22,5 +23,6 @@ namespace Howest.SelfEvaluation.Web.ViewModels.Admin
         [Required(ErrorMessage = "Rol is verplicht")]
 
         public string Role { get; set; }
+        public List<SelectListItem> Roles { get; set; } = new();
     }
 }
