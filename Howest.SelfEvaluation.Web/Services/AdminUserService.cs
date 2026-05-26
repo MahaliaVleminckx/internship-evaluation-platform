@@ -7,9 +7,9 @@ namespace Howest.SelfEvaluation.Web.Services
 {
     public class AdminUserService
     {
-        private readonly SelfEvaluationsContext _db;
+        private readonly SelfEvaluationsDbContext _db;
 
-        public AdminUserService( SelfEvaluationsContext db)
+        public AdminUserService( SelfEvaluationsDbContext db)
         {
             _db = db;
         }
@@ -53,6 +53,11 @@ namespace Howest.SelfEvaluation.Web.Services
         {
             user.Deleted = null;
             await _db.SaveChangesAsync();
+        }
+
+        public async Task<ApplicationUser?> GetByEmailAsync(string email)
+        {
+            return await _db.ApplicationUsers.FirstOrDefaultAsync(u => u.Username.ToLower() == email.ToLower());
         }
 
     }
