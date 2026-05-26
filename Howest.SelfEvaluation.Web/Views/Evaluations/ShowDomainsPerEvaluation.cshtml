@@ -5,23 +5,21 @@
 }
 
 <div class="evaluation-title-box">
-    @* TODO: once login system: redirect to Evaluations/Evaluations method*@
     <a asp-controller="Home" asp-action="Index" class="btn custom-btn">
         ←
     </a>
     <h1>Domeinen</h1>
-    <p class="evaluation-subtitle"><sub class="evaluation-subtitle">(@Model.Title)</sub></p>
+    <p class="evaluation-subtitle">
+        <sub>(@Model.Title)</sub>
+    </p>
 </div>
-<div style="display:flex">
-    @foreach (var domain in Model.CompetenceDomains)
-    {
-        <div class="card module-box">
 
-
-<div style="display:flex; flex-wrap:wrap; gap:20px;">
+<div style="display:flex; flex-wrap:wrap; gap:10px;">
     @foreach (var domain in Model.CompetenceDomains)
     {
         <div class="card module-box" style="width:250px;">
+
+            <!-- DOMAIN LINK -->
             <a asp-controller="Student"
                asp-action="FillDomain"
                asp-route-domainId="@domain.Id"
@@ -31,20 +29,18 @@
                 <div class="title-box gradient-@rnd.Next(1, 16) text-center">
                     <h5>@domain.Name</h5>
                 </div>
-
             </a>
 
+            <!-- STUDENT RESULT BUTTON -->
             <div class="card-body text-center">
 
-                @if (Model.StudentEvaluationScores != null && Model.StudentEvaluationScores.Any(s =>
-                            s.UserId == Model.UserId &&
-                            s.Indicator != null &&
-                            s.Indicator.Competence.CompetenceDomainId == domain.Id))
+                @if (Model.StudentEvaluationScores?.Any(s =>
+                            s.Indicator?.Competence?.CompetenceDomainId == domain.Id) == true)
                 {
                     <a asp-controller="Student"
                        asp-action="ShowDomainResult"
                        asp-route-domainId="@domain.Id"
-                       asp-route-evaluationId="@Model.EvaluationId"
+                       asp-route-evaluationId="@Model.Id"
                        asp-route-userId="@Model.UserId"
                        class="btn custom-btn domain-btn">
                         Bekijk mijn antwoorden
@@ -58,20 +54,25 @@
                 }
 
             </div>
-                <a asp-controller="Teacher"
-                   asp-action="ShowStudents"
-                   asp-route-domainId="@domain.Id"
-                   class="btn custom-btn domain-btn">
-                    Bekijk studenten
+            <div class="card-body text-center">
+                    <!-- TEACHER BUTTON -->
+                    <a asp-controller="Teacher"
+                       asp-action="ShowStudents"
+                       asp-route-domainId="@domain.Id"
+                       class="btn custom-btn domain-btn">
+                        Bekijk studenten
                 </a>
-
             </div>
 
         </div>
     }
 </div>
-@* TODO: chart page*@
-<a asp-controller="Evaluations" asp-action="ShowCharts" asp-route-evaluationId="@Model.Id" class="btn custom-btn"
-style="margin-top: 10px">
+
+<!-- CHARTS BUTTON -->
+<a asp-controller="Evaluations"
+   asp-action="ShowCharts"
+   asp-route-evaluationId="@Model.Id"
+   class="btn custom-btn"
+   style="margin-top: 10px">
     Charts
 </a>
