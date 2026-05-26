@@ -17,6 +17,11 @@
     {
         <div class="card module-box">
 
+
+<div style="display:flex; flex-wrap:wrap; gap:20px;">
+    @foreach (var domain in Model.CompetenceDomains)
+    {
+        <div class="card module-box" style="width:250px;">
             <a asp-controller="Student"
                asp-action="FillDomain"
                asp-route-domainId="@domain.Id"
@@ -51,6 +56,15 @@
                 }
 
             </div>
+                <a asp-controller="Teacher"
+                   asp-action="ShowStudents"
+                   asp-route-domainId="@domain.Id"
+                   class="btn custom-btn domain-btn">
+                    Bekijk studenten
+                </a>
+
+            </div>
+
         </div>
     }
 </div>

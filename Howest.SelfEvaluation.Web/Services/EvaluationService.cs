@@ -3,12 +3,9 @@ using Howest.SelfEvaluation.Core.Enums;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
-<<<<<<< feature/student-view-evaluations
 using Howest.SelfEvaluation.Web.ViewModels.Student;
-=======
 using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.ViewModels;
->>>>>>> dev
 using Microsoft.EntityFrameworkCore;
 
 namespace Howest.SelfEvaluation.Web.Services
@@ -228,7 +225,6 @@ namespace Howest.SelfEvaluation.Web.Services
                 .Where(u => u.Role == "Student" && u.AssignedMentorId == mentorId)
                 .ToListAsync();
         }
-<<<<<<< feature/student-view-evaluations
         public async Task<List<EvaluationScore>> GetStudentOwnResultsAsync(Guid userId, Guid evaluationId)
         {
             return await _db.EvaluationScores
@@ -247,6 +243,24 @@ namespace Howest.SelfEvaluation.Web.Services
                     es.UserId == userId &&
                     es.Indicator != null &&
                     es.Indicator.Competence != null &&
+        public async Task<List<ApplicationUser>> GetStudentsForDomainAsync(Guid domainId)
+        {
+            return await _db.EvaluationScores
+                .Where(es =>
+                    es.Indicator != null &&
+                    es.Indicator.Competence != null &&
+                    es.Indicator.Competence.CompetenceDomainId == domainId
+                )
+                .Select(es => es.User)
+                .Where(u => u.Role == "Student")
+                .Distinct()
+                .ToListAsync();
+        }
+        public async Task<List<EvaluationScore>> GetStudentResultsForDomainAsync(Guid studentId, Guid domainId)
+        {
+            return await _db.EvaluationScores
+                .Where(es =>
+                    es.UserId == studentId &&
                     es.Indicator.Competence.CompetenceDomainId == domainId
                 )
                 .Include(es => es.Indicator)
@@ -254,7 +268,6 @@ namespace Howest.SelfEvaluation.Web.Services
                 .ToListAsync();
         }
 
-=======
 
         public async Task<bool> DoesModuleIdExistAsync(Guid moduleId)
         {
@@ -370,6 +383,5 @@ namespace Howest.SelfEvaluation.Web.Services
             await _db.SaveChangesAsync();
             return new ResultModel<Evaluation> { Data = existingEvaluation };
         }
->>>>>>> dev
     }
 }
