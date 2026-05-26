@@ -1,4 +1,5 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Web.ViewModels.Student;
 using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.Extensions.Configuration.UserSecrets;
@@ -25,8 +26,9 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         Task SaveDomainEvaluationAsync(StudentDomainEvaluationViewModel vm); 
         Task SaveCompetenceEvaluationAsync(StudentCompetencesViewModel vm);
         Task<IEnumerable<ApplicationUser>> GetAllStudentsForMentorAsync(Guid mentorId);
+        Task<List<EvaluationScore>> GetStudentOwnResultsAsync(Guid userId, Guid evaluationId);
+        Task<List<EvaluationScore>> GetStudentResultsForDomainAsync(Guid userId, Guid domainId);
         Task<List<ApplicationUser>> GetStudentsForDomainAsync(Guid domainId);
-        Task<List<EvaluationScore>> GetStudentResultsForDomainAsync(Guid studentId, Guid domainId);
         Task<bool> DoesModuleIdExistAsync(Guid moduleId);
         Task<ResultModel<Evaluation>> CreateEvaluationAsync(AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel);
         Task<ResultModel<Evaluation>> UpdateEvaluationAsync(AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel);

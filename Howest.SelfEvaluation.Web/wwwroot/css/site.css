@@ -407,10 +407,34 @@ main {
     cursor: pointer;
 }
 .domain-btn {
-    width: 100%;
+    width: 220px;
     border-radius: 20px;
     padding: 8px 0;
     font-weight: 500;
+    text-align: center;
+    background: #4bb7d8;
+    border: none;
+    color: white;
+    transition: all 0.2s ease;
 }
 
+    .domain-btn:hover {
+        background: #3aa4c4;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+.textarea-container {
+    position: static !important;
+}
+
+    .textarea-container label {
+        position: static !important;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .textarea-container textarea {
+        padding-top: 8px !important;
+    }
 
