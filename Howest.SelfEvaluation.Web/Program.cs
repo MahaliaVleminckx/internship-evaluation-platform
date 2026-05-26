@@ -24,11 +24,12 @@ namespace Howest.SelfEvaluation.Web
             builder.Services.AddScoped<IEvaluationService, EvaluationService>();
             builder.Services.AddScoped<IFormBuilderService, FormBuilderService>();
             builder.Services.AddScoped<IViewModelMappingService,  ViewModelMappingService>();
+            builder.Services.AddScoped<IAdminUserService, AdminUserService>();
 
             //add session service
             builder.Services.AddSession();
 
-            builder.Services.AddScoped<AdminUserService>();
+            
 
             var app = builder.Build();
 

@@ -21,9 +21,9 @@ namespace Howest.SelfEvaluation.Web.Controllers
         private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
         private readonly IFormBuilderService _formBuilderService;
-        private readonly AdminUserService _adminUserService;
+        private readonly IAdminUserService _adminUserService;
 
-        public AdminController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IFormBuilderService formBuilderService, AdminUserService adminUserService)
+        public AdminController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IFormBuilderService formBuilderService, IAdminUserService adminUserService)
         {
             _db = db;
             _evaluationService = evaluationService;

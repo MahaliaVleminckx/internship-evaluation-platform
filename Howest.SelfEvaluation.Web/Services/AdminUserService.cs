@@ -1,11 +1,12 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Web.Data;
+using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace Howest.SelfEvaluation.Web.Services
 {
-    public class AdminUserService
+    public class AdminUserService : IAdminUserService
     {
         private readonly SelfEvaluationsDbContext _db;
 
