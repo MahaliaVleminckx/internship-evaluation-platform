@@ -247,15 +247,17 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser(AdminCreateUsersViewModel vm)
         {
+            if (!ModelState.IsValid)
+                return View(vm);
+
             var existingUser = await _adminUserService.GetByEmailAsync(vm.Username);
 
             if (existingUser != null)
             {
-                ModelState.AddModelError("Email", "Email is already in use");
+                ModelState.AddModelError("Username", "Email wordt al gebruikt");
                 return View(vm);
             }
-            if (!ModelState.IsValid)
-                return View(vm);
+           
 
             var user = new ApplicationUser
             {
@@ -296,18 +298,19 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUser(AdminEditUsersViewModel vm)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
 
             var existingUser = await _adminUserService.GetByEmailAsync(vm.Username);
 
             if (existingUser != null && existingUser.Id != vm.Id)
             {
-                ModelState.AddModelError("Email", "Email is already in use");
+                ModelState.AddModelError("Username", "Email wordt al gebruikt");
                 return View(vm);
             }
-            if (!ModelState.IsValid)
-            {
-                return View(vm);
-            }
+         
 
             var user = await _adminUserService.GetByIdAsync(vm.Id);
             if (user == null)

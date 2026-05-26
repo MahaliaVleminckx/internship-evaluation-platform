@@ -57,7 +57,8 @@ namespace Howest.SelfEvaluation.Web.Services
 
         public async Task<ApplicationUser?> GetByEmailAsync(string email)
         {
-            return await _db.ApplicationUsers.FirstOrDefaultAsync(u => u.Username.ToLower() == email.ToLower());
+            email = email.ToLower();
+            return await _db.ApplicationUsers.FirstOrDefaultAsync(u => u.Username == email);
         }
 
     }
