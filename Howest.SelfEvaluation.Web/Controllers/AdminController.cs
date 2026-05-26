@@ -172,7 +172,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             user.Firstname = vm.Firstname;
             user.Lastname = vm.Lastname;
-            user.Username = vm.Username;
+            user.Username = vm.Username.ToLowerInvariant();
             user.Role = vm.Role;
             user.Updated = DateTime.Now;
 
