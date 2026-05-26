@@ -24,7 +24,7 @@ public class StudentController : Controller
         var vm = new StudentCompetencesViewModel
         {
             DomainId = domain.Id,
-            EvaluationId = domain.EvaluationId,
+            //EvaluationId = domain.EvaluationId,
             DomainName = domain.Name,
 
             IsReadOnly = scores.Any(), 

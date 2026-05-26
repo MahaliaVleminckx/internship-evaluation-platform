@@ -1,0 +1,15 @@
+﻿@model AdminUpdateEvaluationViewModel
+<div class="evaluation-title-box mt-4">
+    <a asp-controller="Admin" asp-action="ShowAllEvaluations" class="btn custom-btn">
+        ←
+    </a>
+    <h1>Evaluatie aanpassen</h1>
+</div>
+
+<div class="shadow-sm p-5 mb-4 rounded">
+    <form asp-controller="Admin" asp-action="UpdateEvaluation" method="post">
+        <partial name="_EvaluationFormPartial" model="@Model" />
+            <button type="submit" class="custom-btn">Doorgaan</button>
+            <a asp-controller="Admin" asp-action="Dashboard" class="btn custom-btn-gobackdomains">Annuleren</a>
+        </form>
+    </div>
