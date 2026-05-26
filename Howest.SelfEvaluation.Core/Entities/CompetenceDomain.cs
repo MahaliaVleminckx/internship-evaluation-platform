@@ -9,7 +9,8 @@ namespace Howest.SelfEvaluation.Core.Entities
 	public class CompetenceDomain : BaseEntity
 	{
 		public string Name { get; set; }
-		public Guid EvaluationId { get; set; }
-		public ICollection<Competence> Competences { get; set; }
+        //public Guid EvaluationId { get; set; }
+        public ICollection<Evaluation> Evaluations { get; set; }
+        public ICollection<Competence> Competences { get; set; }
 	}
 }

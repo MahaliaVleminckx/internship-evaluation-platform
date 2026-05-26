@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Howest.SelfEvaluation.Web.Data
 {
-	public class SelfEvaluationsContext : DbContext
+	public class SelfEvaluationsDbContext : DbContext
 	{
 
 		public DbSet<ApplicationUser> ApplicationUsers { get; set; }
@@ -15,7 +15,7 @@ namespace Howest.SelfEvaluation.Web.Data
 
 		public DbSet<EvaluationScore> EvaluationScores { get; set; }
 
-		public SelfEvaluationsContext(DbContextOptions<SelfEvaluationsContext> options) : base(options) { }
+		public SelfEvaluationsDbContext(DbContextOptions<SelfEvaluationsDbContext> options) : base(options) { }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -25,12 +25,6 @@ namespace Howest.SelfEvaluation.Web.Data
 				.WithMany(o => o.OwnerModules)
 				.HasForeignKey(m => m.OwnerId)
 				.OnDelete(DeleteBehavior.NoAction);
-
-			modelBuilder.Entity<ApplicationUser>()
-				.HasMany(a => a.Modules)
-				.WithMany(m => m.ApplicationUsers)
-				.UsingEntity(x => x.ToTable(nameof(ApplicationUser) + nameof(Module)));
-
 
 
 			DataSeeder.Seed(modelBuilder);

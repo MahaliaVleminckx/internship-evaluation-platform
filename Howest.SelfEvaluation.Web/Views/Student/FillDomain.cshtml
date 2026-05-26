@@ -3,6 +3,12 @@
 {
     <div class="alert-success" style="padding:10px; border-radius:5px; margin-bottom:20px; background-color:#d4edda; color:#155724; border:1px solid #c3e6cb;">
         @TempData["SuccessMessage"]
+        @if (Model.IsReadOnly)
+        {
+            <div style="padding:10px; border-radius:5px; margin-bottom:20px; background-color:#e2f0ff; color:#0c5460; border:1px solid #bee5eb;">
+                Je evaluatie is ingevuld en wordt hieronder weergegeven.
+            </div>
+        }
     </div>
 }
 
@@ -65,7 +71,9 @@
                                            asp-for="Competences[@i].SelectedIndicatorId"
                                            value="@indicator.Id"
                                            class="answer-@indicator.ScaleValueScore"
-                                           style="margin-top:20px; margin-bottom:10px;" />
+                                           style="margin-top:20px; margin-bottom:10px;" 
+                                           style="margin-top:20px; margin-bottom:10px;"
+                                           disabled="@(Model.IsReadOnly)">
                                 </div>
                             }
                         </div>
@@ -79,9 +87,10 @@
 
             <!-- NOT APPLICABLE -->
             <div style="margin-top:10px;">
-                <input type="radio"
-                       asp-for="Competences[@i].SelectedIndicatorId"
-                       value="" />
+               <input type="radio"
+                   asp-for="Competences[@i].SelectedIndicatorId"
+                   value=""
+                       disabled="@(Model.IsReadOnly)" />
                 <span class="text-muted" style="font-size:0.7em;">
                     Vraag is niet van toepassing
                 </span>
@@ -89,10 +98,13 @@
 
             <!-- COMMENT -->
             <div class="textarea-container">
+                <label style="display:block; margin-bottom:5px;">
+                    Extra toelichting
+                </label>
+
                 <textarea asp-for="Competences[@i].Comment"
                           class="form-control"
-                          placeholder=" "></textarea>
-                <label>Extra toelichting</label>
+                          readonly="@(Model.IsReadOnly)"></textarea>
             </div>
 
         </div>
@@ -100,7 +112,10 @@
 
     <!-- BUTTONS -->
     <div style="margin-top: 30px; display: flex; gap:15px;">
-        <button class="custom-btn" type="submit">Evaluatie opslaan</button>
+        @if (!Model.IsReadOnly)
+        {
+            <button class="custom-btn" type="submit">Evaluatie opslaan</button>
+        }
 
         <a asp-controller="Evaluations"
            asp-action="ShowDomainsPerEvaluation"
