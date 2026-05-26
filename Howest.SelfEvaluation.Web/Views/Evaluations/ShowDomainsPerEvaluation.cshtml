@@ -13,10 +13,10 @@
     <p class="evaluation-subtitle"><sub class="evaluation-subtitle">(@Model.Title)</sub></p>
 </div>
 
-<div style="display:flex">
+<div style="display:flex; flex-wrap:wrap; gap:20px;">
     @foreach (var domain in Model.CompetenceDomains)
     {
-        <div class="card module-box">
+        <div class="card module-box" style="width:250px;">
             <a asp-controller="Student"
                asp-action="FillDomain"
                asp-route-domainId="@domain.Id"
@@ -27,10 +27,21 @@
                 </div>
 
             </a>
+
+            <div class="card-body text-center">
+
+                <a asp-controller="Teacher"
+                   asp-action="ShowStudents"
+                   asp-route-domainId="@domain.Id"
+                   class="btn custom-btn domain-btn">
+                    Bekijk studenten
+                </a>
+
+            </div>
+
         </div>
     }
 </div>
-
 @* TODO: chart page*@
 <a asp-controller="Evaluations" asp-action="ShowCharts" asp-route-evaluationId="@Model.ModuleId" class="btn custom-btn"
 style="margin-top: 10px">

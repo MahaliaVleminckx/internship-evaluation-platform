@@ -13,5 +13,6 @@ namespace Howest.SelfEvaluation.Core.Entities
 		public string Description { get; set; }
 		public ICollection<Indicator> Indicators { get; set; }
 		public ICollection<EvaluationScore> StudentEvaluationScores { get; set; }
-	}
+        public CompetenceDomain CompetenceDomain { get; set; }
+    }
 }
