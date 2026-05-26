@@ -13,7 +13,7 @@ public class StudentController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> FillDomain(Guid domainId)
+    public async Task<IActionResult> FillDomain(Guid domainId, Guid evaluationId)
     {
         var domain = await _evaluationService.GetDomainWithIndicatorsAsync(domainId);
 
@@ -24,7 +24,7 @@ public class StudentController : Controller
         var vm = new StudentCompetencesViewModel
         {
             DomainId = domain.Id,
-            //EvaluationId = domain.EvaluationId,
+            EvaluationId = evaluationId, 
             DomainName = domain.Name,
 
             IsReadOnly = scores.Any(), 
@@ -70,6 +70,7 @@ public class StudentController : Controller
     public async Task<IActionResult> ShowDomainResult(Guid domainId, Guid userId)
     {
         var scores = await _evaluationService.GetStudentResultsForDomainAsync(userId, domainId);
+
 
         var vm = new StudentShowEvaluationViewModel
         {

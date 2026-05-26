@@ -20,6 +20,7 @@
             <a asp-controller="Student"
                asp-action="FillDomain"
                asp-route-domainId="@domain.Id"
+               asp-route-evaluationId="@Model.Id"
                class="link-restyle">
 
                 <div class="title-box gradient-@rnd.Next(1, 16) text-center">
@@ -30,7 +31,7 @@
 
             <div class="card-body text-center">
 
-                @if (Model.StudentEvaluationScores.Any(s =>
+                @if (Model.StudentEvaluationScores != null && Model.StudentEvaluationScores.Any(s =>
                             s.UserId == Model.UserId &&
                             s.Indicator != null &&
                             s.Indicator.Competence.CompetenceDomainId == domain.Id))
@@ -38,6 +39,7 @@
                     <a asp-controller="Student"
                        asp-action="ShowDomainResult"
                        asp-route-domainId="@domain.Id"
+                       asp-route-evaluationId="@Model.EvaluationId"
                        asp-route-userId="@Model.UserId"
                        class="btn custom-btn domain-btn">
                         Bekijk mijn antwoorden
