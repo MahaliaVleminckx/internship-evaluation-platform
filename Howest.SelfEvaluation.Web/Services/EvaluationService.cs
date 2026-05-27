@@ -1,7 +1,10 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Core.Enums;
 using Howest.SelfEvaluation.Web.Data;
+using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
+using Howest.SelfEvaluation.Web.ViewModels.Student;
+using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,9 +12,9 @@ namespace Howest.SelfEvaluation.Web.Services
 {
     public class EvaluationService : IEvaluationService
     {
-        private readonly SelfEvaluationsContext _db;
+        private readonly SelfEvaluationsDbContext _db;
 
-        public EvaluationService(SelfEvaluationsContext db)
+        public EvaluationService(SelfEvaluationsDbContext db)
         {
             _db = db;
         }
@@ -47,14 +50,34 @@ namespace Howest.SelfEvaluation.Web.Services
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Evaluation> GetEvaluationByIdAsync(Guid evaluationId)
+        public async Task<Evaluation> GetPublishedEvaluationByIdAsync(Guid evaluationId)
         {
             return await _db.Evaluations
                 .Where(e => e.Id == evaluationId && e.IsPublished)
                 .Include(e => e.StudentEvaluationScores)
+                    .ThenInclude(s => s.Indicator)
+                        .ThenInclude(i => i.Competence)
                 .Include(e => e.CompetenceDomains)
                     .ThenInclude(d => d.Competences)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<Evaluation> GetAnyEvaluationByIdAsync(Guid evaluationId)
+        {
+            return await _db
+                .Evaluations
+                .Where(e => e.Id == evaluationId)
+                .Include(e => e.StudentEvaluationScores)
+                .Include(e => e.CompetenceDomains)
+                .ThenInclude(d => d.Competences)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> DoesEvaluationTitleExist(string title)
+        {
+            return await _db
+                .Evaluations
+                .AnyAsync(e => e.Title.ToUpper() == title.ToUpper());
         }
 
         public async Task<IEnumerable<Evaluation>> GetAllEvaluationsAsync()
@@ -201,6 +224,159 @@ namespace Howest.SelfEvaluation.Web.Services
             return await _db.ApplicationUsers
                 .Where(u => u.Role == "Student" && u.AssignedMentorId == mentorId)
                 .ToListAsync();
+        }
+
+        public async Task<List<EvaluationScore>> GetStudentOwnResultsAsync(Guid userId, Guid evaluationId)
+        {
+            return await _db.EvaluationScores
+                .Where(es =>
+                    es.UserId == userId &&
+                    es.EvaluationId == evaluationId
+                )
+                .Include(es => es.Indicator)
+                    .ThenInclude(i => i.Competence)
+                .ToListAsync();
+        }
+        public async Task<List<EvaluationScore>> GetStudentResultsForDomainAsync(Guid userId, Guid domainId)
+        {
+            return await _db.EvaluationScores
+                .Where(es =>
+                    es.UserId == userId &&
+                    es.Indicator != null &&
+                    es.Indicator.Competence != null &&
+                    es.Indicator.Competence.CompetenceDomainId == domainId)
+                .Include(es => es.Indicator)
+                    .ThenInclude(i => i.Competence)
+                .ToListAsync();
+        }
+
+        public async Task<List<ApplicationUser>> GetStudentsForDomainAsync(Guid domainId)
+        {
+            return await _db.EvaluationScores
+                .Where(es =>
+                    es.Indicator != null &&
+                    es.Indicator.Competence != null &&
+                    es.Indicator.Competence.CompetenceDomainId == domainId
+                )
+                .Select(es => es.User)
+                .Where(u => u.Role == "Student")
+                .Distinct()
+                .ToListAsync();
+        }
+
+        public async Task<bool> DoesModuleIdExistAsync(Guid moduleId)
+        {
+            return await _db.Modules.AnyAsync(m => m.Id.Equals(moduleId));
+        }
+
+        public async Task<ResultModel<Evaluation>> CreateEvaluationAsync(AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel)
+        {
+            var newEvaluation = new Evaluation
+            {
+                Id = Guid.NewGuid(),
+                Created = DateTime.UtcNow,
+                ModuleId = adminCreateEvaluationViewmodel.ModuleId,
+                Title = adminCreateEvaluationViewmodel.Title,
+                Description = adminCreateEvaluationViewmodel.Description,
+                StartDate = adminCreateEvaluationViewmodel.StartDate,
+                EndDate = adminCreateEvaluationViewmodel.EndDate,
+                IsPublished = adminCreateEvaluationViewmodel.IsPublished.IsSelected
+            };
+
+            var searchExistingEvaluation = await GetAnyEvaluationByIdAsync(newEvaluation.Id);
+            if(searchExistingEvaluation is not null)
+            {
+                return new ResultModel<Evaluation> 
+                { 
+                    Errors = new List<string> { $"Aanmaken mislukt. Een evaluatie met id {searchExistingEvaluation.Id} bestaat al"} 
+                };
+            }
+
+            if(newEvaluation.EndDate < newEvaluation.StartDate)
+            {
+                return new ResultModel<Evaluation> { Errors = new List<string> { $"Einddatum kan niet voor begindatum liggen" } };
+            }
+
+            if (await DoesEvaluationTitleExist(adminCreateEvaluationViewmodel.Title))
+            {
+                return new ResultModel<Evaluation> { Errors = new List<string> { $"Een evaluatie met naam {adminCreateEvaluationViewmodel.Title} bestaat al" } };
+            }
+
+            //linking of competenceDomains and evaluation
+            var selectedCompetenceDomainIds = adminCreateEvaluationViewmodel
+                .CompetenceDomains
+                .Where(c => c.IsSelected == true)
+                .Select(c => c.Value)
+                .ToList();
+            var competenceDomains = new List<CompetenceDomain>();
+
+            foreach(var id in selectedCompetenceDomainIds)
+            {
+                var competenceDomain = await GetDomainWithIndicatorsAsync(id);
+                competenceDomains.Add(competenceDomain);
+            }
+
+            newEvaluation.CompetenceDomains = competenceDomains;
+
+            await _db.Evaluations.AddAsync(newEvaluation);
+            await _db.SaveChangesAsync();
+            return new ResultModel<Evaluation> { Data = newEvaluation };
+        }
+
+        public async Task<ResultModel<Evaluation>> UpdateEvaluationAsync(AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel)
+        {
+            var existingEvaluation = await GetAnyEvaluationByIdAsync(adminUpdateEvaluationViewModel.Id);
+            if(existingEvaluation is null)
+            {
+                return new ResultModel<Evaluation> { Errors = new List<string> { $"Aanpassen mislukt. Er werd geen evaluatie met id {adminUpdateEvaluationViewModel.Id} gevonden" } };
+            }
+
+            if (adminUpdateEvaluationViewModel.EndDate < adminUpdateEvaluationViewModel.StartDate)
+            {
+                return new ResultModel<Evaluation> { Errors = new List<string> { $"Einddatum kan niet voor begindatum liggen" } };
+            }
+
+            if (await DoesEvaluationTitleExist(adminUpdateEvaluationViewModel.Title) && existingEvaluation.Id != adminUpdateEvaluationViewModel.Id)
+            {
+                return new ResultModel<Evaluation> { Errors = new List<string> { $"Een evaluatie met naam {adminUpdateEvaluationViewModel.Title} bestaat al" } };
+            }
+
+
+            existingEvaluation.Id = adminUpdateEvaluationViewModel.Id;
+            existingEvaluation.Title = adminUpdateEvaluationViewModel.Title;
+            existingEvaluation.Description = adminUpdateEvaluationViewModel.Description;
+            existingEvaluation.StartDate = adminUpdateEvaluationViewModel.StartDate;
+            existingEvaluation.EndDate = adminUpdateEvaluationViewModel.EndDate;
+            existingEvaluation.IsPublished = adminUpdateEvaluationViewModel.IsPublished.IsSelected;
+            existingEvaluation.ModuleId = adminUpdateEvaluationViewModel.ModuleId;
+            existingEvaluation.Updated = DateTime.UtcNow;
+
+            //update linking, first deleting existing links and then re-adding
+            foreach (var competenceDomain in existingEvaluation.CompetenceDomains)
+            {
+                _db.CompetenceDomains.Remove(competenceDomain);
+            }
+
+            //linking of competenceDomains and evaluation
+            //linking of competenceDomains and evaluation
+            var selectedCompetenceDomainIds = adminUpdateEvaluationViewModel
+                .CompetenceDomains
+                .Where(c => c.IsSelected == true)
+                .Select(c => c.Value)
+                .ToList();
+            var competenceDomains = new List<CompetenceDomain>();
+
+            foreach (var id in selectedCompetenceDomainIds)
+            {
+                var competenceDomain = await GetDomainWithIndicatorsAsync(id);
+                competenceDomains.Add(competenceDomain);
+            }
+
+            existingEvaluation.CompetenceDomains = competenceDomains;
+
+            _db.Evaluations.Update(existingEvaluation);
+            await _db.SaveChangesAsync();
+            return new ResultModel<Evaluation> { Data = existingEvaluation };
         }
     }
 }

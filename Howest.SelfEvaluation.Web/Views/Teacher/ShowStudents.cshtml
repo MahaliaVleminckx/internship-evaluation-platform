@@ -1,0 +1,26 @@
+﻿@model Howest.SelfEvaluation.Web.ViewModels.Teacher.TeacherShowStudentsViewModel
+
+<h2>Studenten voor dit domein</h2>
+
+@if (!Model.Students.Any())
+{
+    <p>Geen studenten gevonden.</p>
+}
+else
+{
+    <p><strong>Aantal studenten:</strong> @Model.Students.Count()</p>
+
+    <ul>
+        @foreach (var student in Model.Students)
+        {
+            <li>
+                <a asp-controller="Teacher"
+                   asp-action="ShowStudentDetails"
+                   asp-route-studentId="@student.Id"
+                   asp-route-domainId="@Model.DomainId">
+                    @student.Username
+                </a>
+            </li>
+        }
+    </ul>
+}

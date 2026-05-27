@@ -1,4 +1,4 @@
-﻿namespace Howest.SelfEvaluation.Web.ViewModels
+﻿namespace Howest.SelfEvaluation.Web.ViewModels.Student
 {
     public class StudentViewModel : BaseUserViewModel
     {

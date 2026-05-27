@@ -58,11 +58,6 @@ namespace Howest.SelfEvaluation.Web.Data
 			Guid domainThree = Guid.Parse("00000000-0000-0000-0000-000000000008");
 			Guid domainFour = Guid.Parse("00000000-0000-0000-0000-000000000009");
 
-			Guid domainOneEnd = Guid.Parse("00000000-0000-0000-0000-100000000006");
-			Guid domainTwoEnd = Guid.Parse("00000000-0000-0000-0000-100000000007");
-			Guid domainThreeEnd = Guid.Parse("00000000-0000-0000-0000-100000000008");
-			Guid domainFourEnd = Guid.Parse("00000000-0000-0000-0000-100000000009");
-
 			var domains = new List<CompetenceDomain>
 			{
 				//Midterm Evaluation Domains
@@ -71,58 +66,28 @@ namespace Howest.SelfEvaluation.Web.Data
 					Id = domainOne,
 					Created = DateTime.Now,
 					Name = "Domein 1: (Leerlijn) Algemene Houding",
-					EvaluationId = evaluationIdMid
+					//EvaluationId = evaluationIdMid
 				},
 				new CompetenceDomain
 				{
 					Id = domainTwo,
 					Created = DateTime.Now,
 					Name = "Domein 2: (Leerlijn) Professioneel Handelen",
-					EvaluationId = evaluationIdMid
+					//EvaluationId = evaluationIdMid
 				},
 				new CompetenceDomain
 				{
 					Id = domainThree,
 					Created = DateTime.Now,
 					Name = "Domein 3: (Leerlijn) Gedrag Onderzoeken",
-					EvaluationId = evaluationIdMid
+					//EvaluationId = evaluationIdMid
 				},
 				new CompetenceDomain
 				{
 					Id = domainFour,
 					Created = DateTime.Now,
 					Name = "Domein 4: (Leerlijn) Gedrag Beïnvloeden",
-					EvaluationId = evaluationIdMid
-				},
-
-				//End Evaluation Domains
-				new CompetenceDomain
-				{
-					Id = domainOneEnd,
-					Created = DateTime.Now,
-					Name = "Domein 1: (Leerlijn) Algemene Houding",
-					EvaluationId = evaluationIdEnd
-				},
-				new CompetenceDomain
-				{
-					Id = domainTwoEnd,
-					Created = DateTime.Now,
-					Name = "Domein 2: (Leerlijn) Professioneel Handelen",
-					EvaluationId = evaluationIdEnd
-				},
-				new CompetenceDomain
-				{
-					Id = domainThreeEnd,
-					Created = DateTime.Now,
-					Name = "Domein 3: (Leerlijn) Gedrag Onderzoeken",
-					EvaluationId = evaluationIdEnd
-				},
-				new CompetenceDomain
-				{
-					Id = domainFourEnd,
-					Created = DateTime.Now,
-					Name = "Domein 4: (Leerlijn) Gedrag Beïnvloeden",
-					EvaluationId = evaluationIdEnd
+					//EvaluationId = evaluationIdMid
 				}
 			};
 
@@ -149,26 +114,6 @@ namespace Howest.SelfEvaluation.Web.Data
 			Guid compEighteen = Guid.Parse("00000000-0000-0000-0000-000000000026");
 			Guid compNineteen = Guid.Parse("00000000-0000-0000-0000-000000000027");
 			Guid compTwenty = Guid.Parse("00000000-0000-0000-0000-000000000028");
-
-			Guid compOneEnd = Guid.Parse(compOne.ToString().Replace("0", "e"));
-			Guid compTwoEnd = Guid.Parse(compTwo.ToString().Replace("0", "e"));
-			Guid compThreeEnd = Guid.Parse(compThree.ToString().Replace("0", "e"));
-			Guid compFourEnd = Guid.Parse(compFour.ToString().Replace("0", "e"));
-			Guid compFiveEnd = Guid.Parse(compFive.ToString().Replace("0", "e"));
-			Guid compSixEnd = Guid.Parse(compSix.ToString().Replace("0", "e"));
-			Guid compSevenEnd = Guid.Parse(compSeven.ToString().Replace("0", "e"));
-			Guid compEightEnd = Guid.Parse(compEight.ToString().Replace("0", "e"));
-			Guid compTenEnd = Guid.Parse(compTen.ToString().Replace("0", "e"));
-			Guid compElevenEnd = Guid.Parse(compEleven.ToString().Replace("0", "e"));
-			Guid compTwelveEnd = Guid.Parse(compTwelve.ToString().Replace("0", "e"));
-			Guid compThirteenEnd = Guid.Parse(compThirteen.ToString().Replace("0", "e"));
-			Guid compFourteenEnd = Guid.Parse(compFourteen.ToString().Replace("0", "e"));
-			Guid compFifteenEnd = Guid.Parse(compFifteen.ToString().Replace("0", "e"));
-			Guid compSixteenEnd = Guid.Parse(compSixteen.ToString().Replace("0", "e"));
-			Guid compSeventeenEnd = Guid.Parse(compSeventeen.ToString().Replace("0", "e"));
-			Guid compEighteenEnd = Guid.Parse(compEighteen.ToString().Replace("0", "e"));
-			Guid compNineteenEnd = Guid.Parse(compNineteen.ToString().Replace("0", "e"));
-			Guid compTwentyEnd = Guid.Parse(compTwenty.ToString().Replace("0", "e"));
 
 			var competences = new List<Competence>
 			{
@@ -333,169 +278,12 @@ namespace Howest.SelfEvaluation.Web.Data
 					Description = "In het kader van de implementatie van het handelings/preventieplan coacht en motiveert de psychologisch consulent de cliënt om gestelde doelen te bereiken"
 				},
 
-				//End Evaluation Domains
-				//Domain 1
-				new Competence
-				{
-					Id = compOneEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainOneEnd,
-					Name = "Betrouwbaarheid",
-					Description = "De student houdt zich aan voorschriften, regels en procedures. Bijvoorbeeld: aanwezigheid, afspraken nakomen, stiptheid,..."
-				},
-				new Competence
-				{
-					Id = compTwoEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainOneEnd,
-					Name = "Actieve medewerking",
-					Description = "De student toont inzet en engagement"
-				},
-				new Competence
-				{
-					Id = compThreeEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainOneEnd,
-					Name = "Efficiëntie",
-					Description = "De student kan stageopdrachten plannen en organiseren, is nauwkeurig, bewaakt de tijd en heeft een goed werkritme"
-				},
-				new Competence
-				{
-					Id = compFourEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainOneEnd,
-					Name = "Flexibiliteit",
-					Description = "De student kan omgaan met onverwachte zaken, kan inspringen waar nodig en indien nodig, kan snel schakelen tussen taken"
-				},
-				new Competence
-				{
-					Id = compFiveEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainOneEnd,
-					Name = "Emotionele coping",
-					Description = "De student kan omgaan met werkgerelateerde stressoren (werkdruk, complexe situaties, kan werk en privé voldoende scheiden,…)"
-				},
-				new Competence
-				{
-					Id = compSixEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainOneEnd,
-					Name = "Zelfvertrouwen",
-					Description = "Groeiende zelfzekerheid en zelfvertrouwen bij uitoefenen van stageactiviteiten: student durft buiten de comfortzone stappen, durft groeien, pakt leerproces in handen"
-				},
-				new Competence
-				{
-					Id = compSevenEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainOneEnd,
-					Name = "Autonomie",
-					Description = "De student kan zelfstandig taken uitvoeren, stuurt zichzelf aan, is zelfredzaam"
-				},
-				new Competence
-				{
-					Id = compEightEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainOneEnd,
-					Name = "Initiatief nemen",
-					Description = "De student levert constructieve bijdragen (aan de organisatie), komt spontaan met nieuwe ideeën"
-				},
-
-				//Domain 2
-				new Competence
-				{
-					Id = compTenEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainTwoEnd,
-					Name = "Grondhouding",
-					Description = "De student handelt vanuit een laagdrempelige, respectvolle, empathische, divers-sensitieve, ethische en deontologische grondhouding"
-				},
-				new Competence
-				{
-					Id = compElevenEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainTwoEnd,
-					Name = "Functioneren",
-					Description = "De student functioneert opbouwend en initiatiefnemend in en met een multidisciplinair team en zorgnetwerk"
-				},
-				new Competence
-				{
-					Id = compTwelveEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainTwoEnd,
-					Name = "Reflecteren",
-					Description = "De student reflecteert kritisch en innovatiegericht op het eigen professioneel handelen en op de eigen persoonlijke ontwikkeling"
-				},
-
-				//Domain 3
-				new Competence
-				{
-					Id = compThirteenEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainThreeEnd,
-					Name = "Diagnostisch vermogen",
-					Description = "De psychologisch consulent voert (alle) fasen van het psychodiagnostisch proces uit: observatie en/of (screenings-, intake)gesprekken, afnemen en scoren van psychodiagnostische testen, interpreteren van psychodiagnostische resultaten, rapporteren van psychodiagnostische gegevens (mondeling en/of schriftelijk)"
-				},
-				new Competence
-				{
-					Id = compFourteenEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainThreeEnd,
-					Name = "Onderzoekend vermogen",
-					Description = "De psychologisch consulent voert (alle) fasen van de onderzoekscyclus uit (onderzoeksvraag formuleren -informatie verzamelen – onderzoeksmethode bepalen – analyse van de resultaten – terugkoppelen naar onderzoeksvraag): bijvoorbeeld kleinschalig praktijkonderzoek uitvoeren op de werkvloer"
-				},
-				new Competence
-				{
-					Id = compFifteenEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainThreeEnd,
-					Name = "Ontwikkelen handelingsplan",
-					Description = "De student ontwikkelt een handelings-/ preventieplan"
-				},
-
-				//Domain 4
-				new Competence
-				{
-					Id = compSixteenEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainFourEnd,
-					Name = "Voorlichten",
-					Description = "In het kader van de implementatie van het handelings/preventieplan geeft de psychologisch consulent cliënt/klantgerichte informatie en/of advies"
-				},
-				new Competence
-				{
-					Id = compSeventeenEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainFourEnd,
-					Name = "Ondersteunen",
-					Description = "In het kader van de implementatie van het handelings/preventieplan biedt de psychologisch consulent steun aan individuen en groepen"
-				},
-				new Competence
-				{
-					Id = compEighteenEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainFourEnd,
-					Name = "Counselen",
-					Description = "In het kader van de implementatie van het handelings/preventieplan faciliteert de psychologisch consulent het verwerven van inzicht/inzichtsverandering"
-				},
-				new Competence
-				{
-					Id = compNineteenEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainFourEnd,
-					Name = "Trainen",
-					Description = "In het kader van de implementatie van het handelings/preventieplan leert de psychologisch consulent individuen en groepen vaardigheden aan"
-				},
-				new Competence
-				{
-					Id = compTwentyEnd,
-					Created = DateTime.Now,
-					CompetenceDomainId = domainFourEnd,
-					Name = "Coachen",
-					Description = "In het kader van de implementatie van het handelings/preventieplan coacht en motiveert de psychologisch consulent de cliënt om gestelde doelen te bereiken"
-				},
-
 			};
 			#endregion
+			foreach(var x in competences)
+			{
+				Console.WriteLine(x);
+			}
 
 			#region Indicators
 
@@ -1745,15 +1533,15 @@ namespace Howest.SelfEvaluation.Web.Data
 
 			};
 
-			List<Indicator> endEvaluationIndicators = indicators.Select(i => new Indicator
-			{
-				Id = Guid.Parse(i.Id.ToString().Replace("0", "a")),
-				CompetenceId = Guid.Parse(i.CompetenceId.ToString().Replace("0", "e")),
-				Created = DateTime.Now,
-				ScaleValue = i.ScaleValue,
-				Description = i.Description,
-				ScaleValueScore = i.ScaleValueScore
-			}).ToList();
+			//List<Indicator> endEvaluationIndicators = indicators.Select(i => new Indicator
+			//{
+			//	Id = Guid.Parse(i.Id.ToString().Replace("0", "a")),
+			//	CompetenceId = Guid.Parse(i.CompetenceId.ToString().Replace("0", "e")),
+			//	Created = DateTime.Now,
+			//	ScaleValue = i.ScaleValue,
+			//	Description = i.Description,
+			//	ScaleValueScore = i.ScaleValueScore
+			//}).ToList();
 			#endregion
 
 			//hardcoded users for dev testing purposes, to be deleted once register implemented
@@ -1873,18 +1661,42 @@ namespace Howest.SelfEvaluation.Web.Data
             modelBuilder.Entity<Module>().HasData(modules);
 			modelBuilder.Entity<Evaluation>().HasData(evaluations);
 			modelBuilder.Entity<CompetenceDomain>().HasData(domains);
-			modelBuilder.Entity<Competence>().HasData(competences);
+
+            //link domains to respective evaluation
+            modelBuilder.Entity<Evaluation>()
+                .HasMany(e => e.CompetenceDomains)
+                .WithMany(c => c.Evaluations)
+                .UsingEntity(j => j.HasData(
+                    new { EvaluationsId = (Guid)evaluationIdMid, CompetenceDomainsId = (Guid)domainOne },
+                    new { EvaluationsId = (Guid)evaluationIdMid, CompetenceDomainsId = (Guid)domainTwo },
+                    new { EvaluationsId = (Guid)evaluationIdMid, CompetenceDomainsId = (Guid)domainThree },
+                    new { EvaluationsId = (Guid)evaluationIdMid, CompetenceDomainsId = (Guid)domainFour },
+
+                    new { EvaluationsId = (Guid)evaluationIdEnd, CompetenceDomainsId = (Guid)domainOne },
+                    new { EvaluationsId = (Guid)evaluationIdEnd, CompetenceDomainsId = (Guid)domainTwo },
+                    new { EvaluationsId = (Guid)evaluationIdEnd, CompetenceDomainsId = (Guid)domainThree },
+                    new { EvaluationsId = (Guid)evaluationIdEnd, CompetenceDomainsId = (Guid)domainFour }
+                    ));
+
+            modelBuilder.Entity<Competence>().HasData(competences);
 			modelBuilder.Entity<Indicator>().HasData(indicators);
-			modelBuilder.Entity<Indicator>().HasData(endEvaluationIndicators);
-			modelBuilder.Entity(nameof(ApplicationUser)+nameof(Module)).HasData(
-				new { ApplicationUsersId = users[0].Id, ModulesId = moduleId },
-				new { ApplicationUsersId = users[1].Id, ModulesId = moduleId },
-				new { ApplicationUsersId = users[2].Id, ModulesId = moduleId },
-				new { ApplicationUsersId = users[3].Id, ModulesId = moduleId },
-				new { ApplicationUsersId = users[5].Id, ModulesId = moduleId },
-				new { ApplicationUsersId = users[6].Id, ModulesId = moduleId },
-				new { ApplicationUsersId = users[7].Id, ModulesId = moduleId }
-                );
+			//modelBuilder.Entity<Indicator>().HasData(endEvaluationIndicators);
+
+
+			modelBuilder.Entity<ApplicationUser>()
+				.HasMany(e => e.Modules)
+				.WithMany(m => m.ApplicationUsers)
+				.UsingEntity(j => j.HasData(
+                    new { ApplicationUsersId = users[0].Id, ModulesId = moduleId },
+					new { ApplicationUsersId = users[1].Id, ModulesId = moduleId },
+					new { ApplicationUsersId = users[2].Id, ModulesId = moduleId },
+					new { ApplicationUsersId = users[3].Id, ModulesId = moduleId },
+					new { ApplicationUsersId = users[5].Id, ModulesId = moduleId },
+					new { ApplicationUsersId = users[6].Id, ModulesId = moduleId },
+					new { ApplicationUsersId = users[7].Id, ModulesId = moduleId }));
+
+			
+
 		}
 	}
 }

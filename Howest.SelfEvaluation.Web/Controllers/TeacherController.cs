@@ -18,10 +18,10 @@ namespace Howest.SelfEvaluation.Web.Controllers
     //[Authorize(Roles = "Teacher, Admin")]
     public class TeacherController : Controller
     {
-        private readonly SelfEvaluationsContext _db;
+        private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
 
-        public TeacherController(SelfEvaluationsContext db, IEvaluationService evaluationService)
+        public TeacherController(SelfEvaluationsDbContext db, IEvaluationService evaluationService)
         {
             _db = db;
             _evaluationService = evaluationService;
@@ -93,130 +93,46 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
             return View(viewmodel);
         }
-
-        //Voorlopig om overlay te kunnen gebruiken: https://localhost:7140/Teacher/Overlay?domainId=00000000-0000-0000-0000-000000000006&studentId=B7B82198-E824-4E7A-A020-D66C0A292B85
-        public async Task<IActionResult> Overlay(Guid domainId, Guid studentId)
-        {
-            var domain = await _db.CompetenceDomains
-                .Include(d => d.Competences)
-                .FirstOrDefaultAsync (d => d.Id == domainId);
-
-            if (domain == null)
-            {
-                return NotFound();
-            }
-            var student = await _db.ApplicationUsers.FirstOrDefaultAsync(u => u.Id == studentId);
-
-            if (student == null)
-            {
-                return NotFound();
-            }
-
-            var overlayCompetences = new List<OverlayCompetenceViewModel>();
-
-            foreach (var competence in domain.Competences)
-            {
-
-                var studentScore = await _db.EvaluationScores
-                    .FirstOrDefaultAsync(s => s.CompetenceId == competence.Id &&
-                    s.TargetUserId == studentId &&
-                    s.UserId == studentId);
-
-                var mentorScore = await _db.EvaluationScores
-                   .FirstOrDefaultAsync(s => s.CompetenceId == competence.Id &&
-                   s.TargetUserId == studentId &&
-                   s.UserId != studentId);
-
-                var indicatorIds = new List<Guid>();
-
-                if (studentScore?.IndicatorId != null)
-                {
-                    indicatorIds.Add(studentScore.IndicatorId.Value);
-                }
-
-                if (mentorScore?.IndicatorId != null)
-                {
-                    indicatorIds.Add(mentorScore.IndicatorId.Value);
-                }
-
-                var indicators = indicatorIds.Any() ? await _db.Indicators
-                    .Where(i => indicatorIds.Contains(i.Id))
-                    .ToDictionaryAsync(i => i.Id)
-                    : new Dictionary<Guid, Indicator>();
-
-                Indicator? GetIndicator (EvaluationScore? score)
-                {
-                    if(score?.IndicatorId == null) return null;
-
-                    return indicators.TryGetValue(score.IndicatorId.Value, out var indicator) ? indicator : null;
-                }
-
-                var studentIndicator = GetIndicator(studentScore);
-                var mentorIndicator = GetIndicator(mentorScore);
-
-
-                overlayCompetences.Add(new OverlayCompetenceViewModel
-                {
-                    Name = competence.Name,
-                    Description = competence.Description,
-
-                    StudentScore = studentIndicator?.ScaleValueScore,
-                    MentorScore = mentorIndicator?.ScaleValueScore,
-
-                    StudentScoreLabel = studentIndicator?.ScaleValue,
-                    MentorScoreLabel = mentorIndicator?.ScaleValue,
-
-                    StudentComment = studentScore?.ExtraInfo ?? "",
-                    MentorComment = mentorScore?.ExtraInfo ?? ""
-
-                });
-
-            }
-
-            var viewModel = new EvaluationOverlayViewModel
-            {
-                StudentId = studentId,
-                StudentName = $"{student.Firstname} {student.Lastname}",
-                OverlayCompetences = overlayCompetences,
-            };
-            
-
-            return View(viewModel);
-        }
-
         [HttpGet]
-        public async Task <IActionResult> OverlaySelector()
+        public async Task<IActionResult> ShowStudents(Guid domainId)
         {
-            var vm = new TeacherOverlaySelectViewModel
+            if (domainId == Guid.Empty)
+                return RedirectToAction("Index");
+
+            var students = await _evaluationService.GetStudentsForDomainAsync(domainId);
+
+            var vm = new TeacherShowStudentsViewModel
             {
-                Students = await _db.ApplicationUsers
-                .Where(u => u.Role == "Student")
-                .ToListAsync(),
-
-                Evaluations = await _db.Evaluations.ToListAsync(),
-
-                Domains = await _db.CompetenceDomains
-                .Include(d => d.Evaluation).AsNoTracking()
-                .ToListAsync()
+                DomainId = domainId,
+                Students = students.Select(s => new StudentListItemViewModel
+                {
+                    Id = s.Id,
+                    Username = s.Username
+                }).ToList()
             };
+
             return View(vm);
         }
-        [HttpPost]
-        public async Task<IActionResult> OverlaySelector(TeacherOverlaySelectViewModel vm)
+        [HttpGet]
+        public async Task<IActionResult> ShowStudentDetails(Guid studentId, Guid domainId)
         {
-            vm.Students = await _db.ApplicationUsers.Where(u => u.Role == "Student").ToListAsync();
-            vm.Domains = await _db.CompetenceDomains.ToListAsync();
+            var scores = await _evaluationService.GetStudentResultsForDomainAsync(studentId, domainId);
 
-            if (vm.DomainId == null || vm.StudentId == null)
+            var vm = new TeacherShowStudentsDetailsViewModel
             {
-                return View(vm);
-            }
-            return RedirectToAction("Overlay", new
-            {
-                domainId = vm.DomainId,
-                studentId = vm.StudentId
-            });
-            
+                StudentId = studentId,
+                DomainId = domainId,
+                Results = scores.Select(r => new StudentResultViewModel
+                {
+                    CompetenceName = r.Indicator?.Competence?.Name,
+                    IndicatorDescription = r.Indicator?.Description,
+                    Score = r.NotApplicable ? null : r.Indicator.ScaleValue,
+                    NotApplicable = r.NotApplicable,
+                    Comment = r.ExtraInfo
+                }).ToList()
+            };
+
+            return View(vm);
         }
 
     }
