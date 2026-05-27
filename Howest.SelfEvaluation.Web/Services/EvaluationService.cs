@@ -7,6 +7,7 @@ using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin;
+using Howest.SelfEvaluation.Web.ViewModels.Student;
 
 namespace Howest.SelfEvaluation.Web.Services
 {
