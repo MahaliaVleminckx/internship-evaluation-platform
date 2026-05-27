@@ -2,12 +2,13 @@
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
+using Howest.SelfEvaluation.Web.ViewModels.Mentor;
 using Howest.SelfEvaluation.Web.ViewModels.Teacher;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
-using Howest.SelfEvaluation.Web.ViewModels.Mentor;
 using NuGet.ProjectModel;
 using System.Threading.Tasks;
 
@@ -147,33 +148,58 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(vm);
         }
 
+
         [HttpGet]
         public async Task<IActionResult> OverlaySelector()
         {
             var vm = new TeacherOverlaySelectViewModel
             {
-                Students = await _db.ApplicationUsers
-                .Where(u => u.Role == "Student")
-                .ToListAsync(),
+                StudentOptions = await _db.ApplicationUsers
+                    .Where(u => u.Role == "Student")
+                    .Select(s => new SelectListItem
+                    {
+                        Value = s.Id.ToString(),
+                        Text = s.Firstname + " " + s.Lastname
+                    })
+                    .ToListAsync(),
 
-                Evaluations = await _db.Evaluations.ToListAsync(),
-
-                Domains = await _db.CompetenceDomains
-                .Include(d => d.Evaluations).AsNoTracking()
-                .ToListAsync()
+                DomainOptions = await _db.CompetenceDomains
+                    .Include(d => d.Evaluations)
+                    .Select(d => new SelectListItem
+                    {
+                        Value = d.Id.ToString(),
+                        Text = d.Name + " (" +
+                               (d.Evaluations.Any()
+                                   ? string.Join(",", d.Evaluations.Select(e => e.Title))
+                                   : "geen evaluaties") + ")"
+                    })
+                    .ToListAsync()
             };
+
             return View(vm);
         }
-
         [HttpPost]
         public async Task<IActionResult> OverlaySelector(TeacherOverlaySelectViewModel vm)
         {
-            vm.Students = await _db.ApplicationUsers
+            vm.StudentOptions = await _db.ApplicationUsers
                 .Where(u => u.Role == "Student")
+                .Select(s => new SelectListItem
+                {
+                    Value = s.Id.ToString(),
+                    Text = s.Firstname + " " + s.Lastname
+                })
                 .ToListAsync();
 
-            vm.Domains = await _db.CompetenceDomains
+            vm.DomainOptions = await _db.CompetenceDomains
                 .Include(d => d.Evaluations)
+                .Select(d => new SelectListItem
+                {
+                    Value = d.Id.ToString(),
+                    Text = d.Name + " (" +
+                           (d.Evaluations.Any()
+                               ? string.Join(",", d.Evaluations.Select(e => e.Title))
+                               : "geen evaluaties") + ")"
+                })
                 .ToListAsync();
 
             if (!vm.DomainId.HasValue || !vm.StudentId.HasValue)
@@ -188,6 +214,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 studentId = vm.StudentId
             });
         }
+
 
     }
 }

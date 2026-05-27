@@ -5,34 +5,23 @@
 <div asp-validation-summary="All" class="text-danger"></div>
 
 <form asp-action="OverlaySelector" method="post">
+
     <div class="mb-3">
         <label>Student</label>
-        <select asp-for="StudentId" class="form-control">
+        <select asp-for="StudentId" asp-items="Model.StudentOptions" class="form-control">
             <option value="">-- Kies student --</option>
-            @foreach (var student in Model.Students)
-            {
-                <option value="@student.Id">
-                    @student.Firstname @student.Lastname
-                </option>
-            }
         </select>
     </div>
+
     <div class="mb-3">
         <label>Domein</label>
-        <select asp-for="DomainId" class="form-control">
+        <select asp-for="DomainId" asp-items="Model.DomainOptions" class="form-control">
             <option value="">-- Kies domein --</option>
-            @foreach (var domain in Model.Domains)
-            {
-                <option value="@domain.Id">
-                    @domain.Name ( @(domain.Evaluations?.Any() == true
-                    ? string.Join(",", domain.Evaluations.Select(e => e.Title))
-                    : "geen evaluaties")
-                    )
-                </option>
-            }
         </select>
     </div>
 
-    <button type="submit" class="btn custom-btn">Open overlay</button>
-</form>
+    <button type="submit" class="btn custom-btn">
+        Open overlay
+    </button>
 
+</form>
