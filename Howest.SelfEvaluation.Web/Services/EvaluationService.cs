@@ -3,6 +3,7 @@ using Howest.SelfEvaluation.Core.Enums;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
+using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin;
@@ -54,6 +55,8 @@ namespace Howest.SelfEvaluation.Web.Services
             return await _db.Evaluations
                 .Where(e => e.Id == evaluationId && e.IsPublished)
                 .Include(e => e.StudentEvaluationScores)
+                    .ThenInclude(s => s.Indicator)
+                        .ThenInclude(i => i.Competence)
                 .Include(e => e.CompetenceDomains)
                     .ThenInclude(d => d.Competences)
                 .FirstOrDefaultAsync();
@@ -123,6 +126,7 @@ namespace Howest.SelfEvaluation.Web.Services
                         EvaluationId = vm.EvaluationId,
                         IndicatorId = q.QuestionId,
                         UserId = userId,
+                        TargetUserId = userId,
                         ExtraInfo = q.Answer,
                         NotApplicable = false,
                         Created = DateTime.UtcNow
@@ -165,6 +169,7 @@ namespace Howest.SelfEvaluation.Web.Services
                         Id = Guid.NewGuid(),
                         IndicatorId = i.IndicatorId,
                         UserId = userId,
+                        TargetUserId = userId,
                         ExtraInfo = i.ExtraInfo,
                         NotApplicable = i.NotApplicable,
                         Created = DateTime.UtcNow
@@ -205,6 +210,7 @@ namespace Howest.SelfEvaluation.Web.Services
                         IndicatorId = competence.SelectedIndicatorId.Value,
                         CompetenceId = competence.Id,
                         UserId = userId,
+                        TargetUserId = userId,
                         ExtraInfo = competence.Comment,
                         Created = DateTime.UtcNow
                     });
@@ -217,6 +223,44 @@ namespace Howest.SelfEvaluation.Web.Services
         {
             return await _db.ApplicationUsers
                 .Where(u => u.Role == "Student" && u.AssignedMentorId == mentorId)
+                .ToListAsync();
+        }
+
+        public async Task<List<EvaluationScore>> GetStudentOwnResultsAsync(Guid userId, Guid evaluationId)
+        {
+            return await _db.EvaluationScores
+                .Where(es =>
+                    es.UserId == userId &&
+                    es.EvaluationId == evaluationId
+                )
+                .Include(es => es.Indicator)
+                    .ThenInclude(i => i.Competence)
+                .ToListAsync();
+        }
+        public async Task<List<EvaluationScore>> GetStudentResultsForDomainAsync(Guid userId, Guid domainId)
+        {
+            return await _db.EvaluationScores
+                .Where(es =>
+                    es.UserId == userId &&
+                    es.Indicator != null &&
+                    es.Indicator.Competence != null &&
+                    es.Indicator.Competence.CompetenceDomainId == domainId)
+                .Include(es => es.Indicator)
+                    .ThenInclude(i => i.Competence)
+                .ToListAsync();
+        }
+
+        public async Task<List<ApplicationUser>> GetStudentsForDomainAsync(Guid domainId)
+        {
+            return await _db.EvaluationScores
+                .Where(es =>
+                    es.Indicator != null &&
+                    es.Indicator.Competence != null &&
+                    es.Indicator.Competence.CompetenceDomainId == domainId
+                )
+                .Select(es => es.User)
+                .Where(u => u.Role == "Student")
+                .Distinct()
                 .ToListAsync();
         }
 

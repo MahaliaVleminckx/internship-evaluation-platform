@@ -4,6 +4,7 @@ using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
 using Howest.SelfEvaluation.Web.ViewModels.Mentor;
+using Howest.SelfEvaluation.Web.ViewModels.Student;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

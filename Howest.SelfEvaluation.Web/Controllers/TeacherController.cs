@@ -98,6 +98,48 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
             return View(viewmodel);
         }
+        [HttpGet]
+        public async Task<IActionResult> ShowStudents(Guid domainId)
+        {
+            if (domainId == Guid.Empty)
+                return RedirectToAction("Index");
+
+            var students = await _evaluationService.GetStudentsForDomainAsync(domainId);
+
+            var vm = new TeacherShowStudentsViewModel
+            {
+                DomainId = domainId,
+                Students = students.Select(s => new StudentListItemViewModel
+                {
+                    Id = s.Id,
+                    Username = s.Username
+                }).ToList()
+            };
+
+            return View(vm);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ShowStudentDetails(Guid studentId, Guid domainId)
+        {
+            var scores = await _evaluationService.GetStudentResultsForDomainAsync(studentId, domainId);
+
+            var vm = new TeacherShowStudentsDetailsViewModel
+            {
+                StudentId = studentId,
+                DomainId = domainId,
+                Results = scores.Select(r => new StudentResultViewModel
+                {
+                    CompetenceName = r.Indicator?.Competence?.Name,
+                    IndicatorDescription = r.Indicator?.Description,
+                    Score = r.NotApplicable ? null : r.Indicator.ScaleValue,
+                    NotApplicable = r.NotApplicable,
+                    Comment = r.ExtraInfo
+                }).ToList()
+            };
+
+            return View(vm);
+        }
+
     }
 }
 
