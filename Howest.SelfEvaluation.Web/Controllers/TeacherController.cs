@@ -154,64 +154,78 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 return NotFound();
             }
 
-            var overlayCompetences = new List<OverlayCompetenceViewModel>();
+            var evaluations = await _db.Evaluations.ToListAsync();
 
+            var overlayCompetences = new List<OverlayCompetenceViewModel>();
             foreach (var competence in domain.Competences ?? new List<Competence>())
             {
-
-                var studentScore = await _db.EvaluationScores
-                    .FirstOrDefaultAsync(s => s.CompetenceId == competence.Id &&
-                    s.TargetUserId == studentId &&
-                    s.UserId == studentId);
-
-                var mentorScore = await _db.EvaluationScores
-                   .FirstOrDefaultAsync(s => s.CompetenceId == competence.Id &&
-                   s.TargetUserId == studentId &&
-                   s.UserId != studentId);
-
-                var indicatorIds = new List<Guid>();
-
-                if (studentScore?.IndicatorId != null)
-                {
-                    indicatorIds.Add(studentScore.IndicatorId.Value);
-                }
-
-                if (mentorScore?.IndicatorId != null)
-                {
-                    indicatorIds.Add(mentorScore.IndicatorId.Value);
-                }
-
-                var indicators = indicatorIds.Any() ? await _db.Indicators
-                    .Where(i => indicatorIds.Contains(i.Id))
-                    .ToDictionaryAsync(i => i.Id)
-                    : new Dictionary<Guid, Indicator>();
-
-                Indicator? GetIndicator(EvaluationScore? score)
-                {
-                    if (score?.IndicatorId == null) return null;
-
-                    return indicators.TryGetValue(score.IndicatorId.Value, out var indicator) ? indicator : null;
-                }
-
-                var studentIndicator = GetIndicator(studentScore);
-                var mentorIndicator = GetIndicator(mentorScore);
-
-
-                overlayCompetences.Add(new OverlayCompetenceViewModel
+                var overlayCompetence = new OverlayCompetenceViewModel
                 {
                     Name = competence.Name,
-                    Description = competence.Description,
+                    Description = competence.Description
+                };
 
-                    StudentScore = studentIndicator?.ScaleValueScore,
-                    MentorScore = mentorIndicator?.ScaleValueScore,
+                foreach (var evaluation in evaluations)
+                {
+                    var studentScore = await _db.EvaluationScores.FirstOrDefaultAsync
+                        (s =>
+                        s.CompetenceId == competence.Id &&
+                        s.TargetUserId == studentId &&
+                        s.UserId == studentId &&
+                        s.EvaluationId == evaluation.Id);
 
-                    StudentScoreLabel = studentIndicator?.ScaleValue,
-                    MentorScoreLabel = mentorIndicator?.ScaleValue,
+                    var mentorScore = await _db.EvaluationScores.FirstOrDefaultAsync
+                        (s =>
+                        s.CompetenceId == competence.Id &&
+                        s.TargetUserId == studentId &&
+                        s.UserId != studentId &&
+                        s.EvaluationId == evaluation.Id);
 
-                    StudentComment = studentScore?.ExtraInfo ?? "",
-                    MentorComment = mentorScore?.ExtraInfo ?? ""
+                    var indicatorIds = new List<Guid>();
 
-                });
+                    if (studentScore?.IndicatorId != null)
+                    {
+                        indicatorIds.Add(studentScore.IndicatorId.Value);
+                    }
+
+                    if (mentorScore?.IndicatorId != null)
+                    {
+                        indicatorIds.Add(mentorScore.IndicatorId.Value);
+                    }
+
+                    var indicators = indicatorIds.Any() ? await _db.Indicators
+                   .Where(i => indicatorIds.Contains(i.Id))
+                   .ToDictionaryAsync(i => i.Id)
+                   : new Dictionary<Guid, Indicator>();
+
+                    Indicator? GetIndicator(EvaluationScore? score)
+                    {
+                        if (score?.IndicatorId == null) return null;
+
+                        return indicators.TryGetValue(score.IndicatorId.Value, out var indicator) ? indicator : null;
+                    }
+
+                    var studentIndicator = GetIndicator(studentScore);
+                    var mentorIndicator = GetIndicator(mentorScore);
+
+                    overlayCompetence.Evaluations.Add(new OverlayEvaluationComparisonViewModel
+                    {
+                        EvaluationTitle = evaluation.Title,
+
+                        StudentScore = studentIndicator?.ScaleValueScore,
+                        MentorScore = mentorIndicator?.ScaleValueScore,
+
+                        StudentScoreLabel = studentIndicator?.ScaleValue,
+                        MentorScoreLabel = mentorIndicator?.ScaleValue,
+
+                        StudentComment = studentScore?.ExtraInfo ?? "",
+                        MentorComment = mentorScore?.ExtraInfo ?? ""
+
+                    });
+
+                }
+
+                overlayCompetences.Add(overlayCompetence);
 
             }
 
