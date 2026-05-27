@@ -23,7 +23,12 @@
             <option value="">-- Kies domein --</option>
             @foreach (var domain in Model.Domains)
             {
-                <option value="@domain.Id">@domain.Name (@string.Join(",", domain.Evaluations.Select(e => e.Title)))</option>
+                <option value="@domain.Id">
+                    @domain.Name ( @(domain.Evaluations?.Any() == true
+                    ? string.Join(",", domain.Evaluations.Select(e => e.Title))
+                    : "geen evaluaties")
+                    )
+                </option>
             }
         </select>
     </div>

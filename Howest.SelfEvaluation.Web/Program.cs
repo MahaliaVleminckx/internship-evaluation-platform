@@ -24,6 +24,7 @@ namespace Howest.SelfEvaluation.Web
             builder.Services.AddScoped<IEvaluationService, EvaluationService>();
             builder.Services.AddScoped<IFormBuilderService, FormBuilderService>();
             builder.Services.AddScoped<IViewModelMappingService,  ViewModelMappingService>();
+            builder.Services.AddScoped<IOverlayService, OverlayService>();
 
             //add session service
             builder.Services.AddSession();
