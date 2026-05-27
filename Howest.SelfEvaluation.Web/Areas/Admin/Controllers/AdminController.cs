@@ -1,10 +1,10 @@
 ﻿using Azure.Identity;
 using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
-using Howest.SelfEvaluation.Web.Services;
 using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,8 +14,9 @@ using NuGet.Protocol.Providers;
 using NuGet.Versioning;
 
 
-namespace Howest.SelfEvaluation.Web.Controllers
+namespace Howest.SelfEvaluation.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class AdminController : Controller
     {
         private readonly SelfEvaluationsDbContext _db;
@@ -31,6 +32,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             _adminUserService = adminUserService;
         }
 
+        //for demo purposes, not final
         [HttpGet]
         public async Task<IActionResult> Dashboard()
         {
@@ -112,7 +114,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
 
             await _db.SaveChangesAsync();
-            return RedirectToAction("CreateModule");
+            return RedirectToAction("CreateModule", new { Area = "Admin" });
         }
 
         [HttpGet]
@@ -154,7 +156,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 await _formBuilderService.ReseedEvaluationCreateFormAsync(adminCreateEvaluationViewmodel);
                 return View(adminCreateEvaluationViewmodel);
             }
-            return RedirectToAction("Dashboard", "Admin");
+            return RedirectToAction("Dashboard", "Admin", new { Area = "Admin" });
         }
 
         [HttpGet]
@@ -209,7 +211,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 return View(adminUpdateEvaluationViewModel);
             }
 
-            return RedirectToAction("Dashboard", "Admin");
+            return RedirectToAction("Dashboard", "Admin", new { Area = "Admin" });
         }
 
 

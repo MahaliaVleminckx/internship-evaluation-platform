@@ -30,6 +30,15 @@ namespace Howest.SelfEvaluation.Web.Controllers
             _overlayService = overlayService;
         }
 
+        //for demo purposes, not final
+        public async Task<IActionResult> Dashboard()
+        {
+            //DEVELOPMENT ONLY since no login system yet
+            //TODO: change this to the logged in teacher id (refactor method to use Guid instead of name) once login implemented
+            //for now its hardcoded for demo purposes and we didnt get to do login implementation
+            BaseViewModel baseViewModel = new() { Name = "teacher@teacher.com" };
+            return View(baseViewModel);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Index(string? username)

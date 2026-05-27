@@ -4,7 +4,7 @@
 <h1 class="mb-4">Create Module</h1>
 
 <div class="shadow-sm p-5 mb-4 rounded">
-    <form asp-action="CreateModule" method="post">
+    <form asp-area="Admin" asp-action="CreateModule" method="post">
         <div class="mb-3">
             <label asp-for="Name" class="form-label">Naam</label>
             <input asp-for="Name" class="form-control" placeholder="Geef modulenaam" required />
