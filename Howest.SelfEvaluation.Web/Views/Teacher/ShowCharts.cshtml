@@ -1,0 +1,85 @@
+﻿@model Howest.SelfEvaluation.Web.ViewModels.Student.StudentShowEvaluationViewModel
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<h1>Student Charts</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Competentie</th>
+            <th>Indicator</th>
+            <th>Score</th>
+            <th>Commentaar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Results)
+        {
+            <tr>
+                <td>@item.CompetenceName</td>
+                <td>@item.IndicatorDescription</td>
+                <td>@item.Score</td>
+                <td>@item.Comment</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Grafiek</h2>
+
+<div style="width:400px; margin:20px auto;">
+    <canvas id="evaluationChart" style="height:300px;"></canvas>
+</div>
+
+@{
+    var labelsList = Model.Results.Select(r => r.CompetenceName).ToList();
+
+    var dataList = Model.Results.Select(r =>
+        r.Score == "Zwaar onvoldoende" ? 1 :
+        r.Score == "Onvoldoende" ? 2 :
+        r.Score == "Licht onvoldoende" ? 2.5 :
+        r.Score == "Voldoende" ? 3 :
+        r.Score == "Goed" ? 4 :
+        r.Score == "Uitstekend" ? 5 : 0
+    ).ToList();
+}
+
+<script>
+    const labels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(labelsList));
+    const data = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(dataList));
+
+    const ctx = document.getElementById('evaluationChart');
+
+    new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                fill: true,
+                backgroundColor: 'rgba(75, 183, 216, 0.3)',
+                borderColor: '#4bb7d8',
+                pointBackgroundColor: '#4bb7d8'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 5,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+</script>

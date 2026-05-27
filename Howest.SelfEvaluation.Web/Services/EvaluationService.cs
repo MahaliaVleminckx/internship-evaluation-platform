@@ -250,11 +250,12 @@ namespace Howest.SelfEvaluation.Web.Services
                 .ToListAsync();
         }
 
-        public async Task<List<ApplicationUser>> GetStudentsForDomainAsync(Guid domainId)
+        public async Task<List<ApplicationUser>> GetStudentsForDomainAsync(Guid domainId, Guid evaluationId)
         {
             return await _db.EvaluationScores
                 .Where(es =>
                     es.Indicator != null &&
+                    es.EvaluationId == evaluationId &&
                     es.Indicator.Competence != null &&
                     es.Indicator.Competence.CompetenceDomainId == domainId
                 )

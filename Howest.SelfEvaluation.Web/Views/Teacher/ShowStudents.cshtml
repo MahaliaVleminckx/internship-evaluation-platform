@@ -15,8 +15,9 @@ else
         {
             <li>
                 <a asp-controller="Teacher"
-                   asp-action="ShowStudentDetails"
-                   asp-route-studentId="@student.Id"
+                   asp-action="ShowStudentCharts"
+                   asp-route-userId="@student.Id"
+                   asp-route-evaluationId="@Model.EvaluationId"
                    asp-route-domainId="@Model.DomainId">
                     @student.Username
                 </a>
