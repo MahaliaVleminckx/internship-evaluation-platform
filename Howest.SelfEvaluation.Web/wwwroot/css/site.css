@@ -470,11 +470,11 @@ main {
 }
 
 .student {
-    background: green;
+    background: #FF8A5B;
 }
 
 .mentor {
-    background: blue;
+    background: #2F80ED;
 }
     .textarea-container label {
         position: static !important;

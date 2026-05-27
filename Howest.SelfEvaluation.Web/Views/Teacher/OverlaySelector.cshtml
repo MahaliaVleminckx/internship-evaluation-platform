@@ -19,7 +19,7 @@
             <option value="">-- Kies domein --</option>
             @foreach (var domain in Model.Domains)
             {
-                <option value="@domain.Id">@domain.Name - @domain.Evaluation.Title</option>
+                <option value="@domain.Id">@domain.Name @*- @domain.Evaluation.Title*@</option>
             }
         </select>
     </div>
