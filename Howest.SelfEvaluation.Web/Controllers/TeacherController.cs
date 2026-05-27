@@ -156,7 +156,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             var overlayCompetences = new List<OverlayCompetenceViewModel>();
 
-            foreach (var competence in domain.Competences)
+            foreach (var competence in domain.Competences ?? new List<Competence>())
             {
 
                 var studentScore = await _db.EvaluationScores
@@ -249,11 +249,12 @@ namespace Howest.SelfEvaluation.Web.Controllers
             vm.Students = await _db.ApplicationUsers.Where(u => u.Role == "Student").ToListAsync();
             vm.Domains = await _db.CompetenceDomains.ToListAsync();
 
-            if (vm.DomainId == null || vm.StudentId == null)
+            if (!vm.DomainId.HasValue || !vm.StudentId.HasValue)
             {
+                ModelState.AddModelError("", "Select a student and a domain");
                 return View(vm);
             }
-            return RedirectToAction("Overlay", new
+            return RedirectToAction(nameof(Overlay), new
             {
                 domainId = vm.DomainId,
                 studentId = vm.StudentId
