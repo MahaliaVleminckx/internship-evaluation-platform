@@ -1,0 +1,34 @@
+﻿@model Howest.SelfEvaluation.Web.ViewModels.Admin.AdminEditUsersViewModel
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h2 class="mb-0">Gebruiker bewerken</h2>
+    <a asp-action="Users" class="btn custom-btn">
+        ←
+    </a>
+
+</div>
+        <form asp-action="EditUser" asp-controller="Admin" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label  asp-for="Firstname" class="form-label"></label>
+                <input asp-for="Firstname" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label  asp-for="Lastname" class="form-label"></label>
+                <input asp-for="Lastname"class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label  asp-for="Username" class="form-label"></label>
+                <input asp-for="Username"class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label  asp-for="Role" class="form-label"></label>
+                <select asp-for="Role" asp-items="Model.Roles"class="form-control">
+                </select>
+            </div>
+            <button type="submit" class="custom-btn px-3 py-2">Opslaan</button>
+        </form>
+ 

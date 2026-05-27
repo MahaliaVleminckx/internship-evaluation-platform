@@ -1,8 +1,10 @@
-﻿using Howest.SelfEvaluation.Core.Entities;
+﻿using Azure.Identity;
+using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
+using Howest.SelfEvaluation.Web.Services;
 using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,12 +21,14 @@ namespace Howest.SelfEvaluation.Web.Controllers
         private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
         private readonly IFormBuilderService _formBuilderService;
+        private readonly IAdminUserService _adminUserService;
 
-        public AdminController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IFormBuilderService formBuilderService)
+        public AdminController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IFormBuilderService formBuilderService, IAdminUserService adminUserService)
         {
             _db = db;
             _evaluationService = evaluationService;
             _formBuilderService = formBuilderService;
+            _adminUserService = adminUserService;
         }
 
         [HttpGet]
@@ -32,6 +36,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         {
             return View();
         }
+
 
         [HttpGet]
         public async Task<IActionResult> ShowAllEvaluations()
@@ -114,7 +119,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         public async Task<IActionResult> CreateEvaluation()
         {
 
-            
+
             AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel = new AdminCreateEvaluationViewmodel
             {
                 Modules = _formBuilderService.GetModules(),
@@ -142,7 +147,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             var creationResult = await _evaluationService.CreateEvaluationAsync(adminCreateEvaluationViewmodel);
             if (!creationResult.Succes)
             {
-                foreach(var error in creationResult.Errors)
+                foreach (var error in creationResult.Errors)
                 {
                     ModelState.AddModelError("failedCreation", error);
                 }
@@ -184,18 +189,18 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             if (!ModelState.IsValid)
             {
-                if(existingEvaluation is not null)
+                if (existingEvaluation is not null)
                 {
                     //reseeding data in form
                     await _formBuilderService.ReseedEvaluationUpdateFormAsync(adminUpdateEvaluationViewModel, existingEvaluation);
-                }                
+                }
                 return View(adminUpdateEvaluationViewModel);
             }
 
             var updateResult = await _evaluationService.UpdateEvaluationAsync(adminUpdateEvaluationViewModel);
             if (!updateResult.Succes)
             {
-                foreach(var error in updateResult.Errors)
+                foreach (var error in updateResult.Errors)
                 {
                     ModelState.AddModelError("updateFailure", error);
                 }
@@ -208,5 +213,162 @@ namespace Howest.SelfEvaluation.Web.Controllers
         }
 
 
+        //Admin user overview pagina
+        [HttpGet]
+        public async Task<IActionResult> Users(string? role)
+        {
+            var users = await _adminUserService.GetUsers(role);
+
+            var vm = new AdminUsersViewModel
+            {
+                Users = users.Select(u => new AdminUserItemsViewModel
+                {
+                    Id = u.Id,
+                    Username = u.Username,
+                    Firstname = u.Firstname,
+                    Lastname = u.Lastname,
+                    Role = u.Role,
+                    Created = u.Created,
+                    Deleted = u.Deleted
+                }).ToList(),
+                SelectedRole = role
+            };
+
+            return View(vm);
+
+        }
+
+        [HttpGet]
+        public IActionResult CreateUser()
+        {
+            return View(new AdminCreateUsersViewModel
+            {
+                Roles = GetRoles()
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(AdminCreateUsersViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                vm.Roles = GetRoles();
+                return View(vm);
+            }
+
+            var existingUser = await _adminUserService.GetByEmailAsync(vm.Username);
+
+            if (existingUser != null)
+            {
+                ModelState.AddModelError("Username", "Email wordt al gebruikt");
+                vm.Roles = GetRoles();
+                return View(vm);
+            }
+
+
+            var user = new ApplicationUser
+            {
+                Id = Guid.NewGuid(),
+                Firstname = vm.Firstname,
+                Lastname = vm.Lastname,
+                Username = vm.Username.ToLowerInvariant(),
+                Role = vm.Role,
+                Created = DateTime.Now,
+                Deleted = null,
+                AssignedMentorId = null
+            };
+
+            await _adminUserService.CreateAsync(user);
+
+            return RedirectToAction("Users");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(Guid id)
+        {
+            var user = await _adminUserService.GetByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new AdminEditUsersViewModel
+            {
+                Id = user.Id,
+                Firstname = user.Firstname,
+                Lastname = user.Lastname,
+                Username = user.Username.ToLowerInvariant(),
+                Role = user.Role,
+                Roles = GetRoles()
+            };
+            return View(vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditUser(AdminEditUsersViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                vm.Roles = GetRoles();
+                return View(vm);
+            }
+
+            var existingUser = await _adminUserService.GetByEmailAsync(vm.Username);
+
+            if (existingUser != null && existingUser.Id != vm.Id)
+            {
+                ModelState.AddModelError("Username", "Email wordt al gebruikt");
+                vm.Roles = GetRoles();
+                return View(vm);
+            }
+
+
+            var user = await _adminUserService.GetByIdAsync(vm.Id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Firstname = vm.Firstname;
+            user.Lastname = vm.Lastname;
+            user.Username = vm.Username.ToLowerInvariant();
+            user.Role = vm.Role;
+            user.Updated = DateTime.Now;
+
+            await _adminUserService.UpdateAsync(user);
+            return RedirectToAction("Users");
+        }
+        public async Task<IActionResult> DeactivateUser(Guid id)
+        {
+            var user = await _adminUserService.GetByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            await _adminUserService.DeactivateAsync(user);
+            return RedirectToAction("Users");
+        }
+
+        public async Task<IActionResult> ReactivateUser(Guid id)
+        {
+
+            var user = await _adminUserService.GetByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            await _adminUserService.ReactivateAsync(user);
+            return RedirectToAction("Users");
+        }
+
+        private List<SelectListItem> GetRoles()
+        {
+            return new List<SelectListItem>
+            {
+                new SelectListItem("Student", "Student"),
+                new SelectListItem("Mentor", "Mentor"),
+                new SelectListItem("Teacher", "Teacher")
+            };
+        }
     }
 }
