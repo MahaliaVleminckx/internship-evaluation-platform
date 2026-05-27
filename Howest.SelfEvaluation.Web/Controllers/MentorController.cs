@@ -61,7 +61,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
         public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId, Guid studentId)
         {
-            var evaluation = await _db.Evaluations.FindAsync(evaluationId);
+            var evaluation = await _evaluationService.GetAnyEvaluationByIdAsync(evaluationId);
 
             if (evaluation == null)
             {
@@ -81,7 +81,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> ShowCompetencePerDomain(Guid domainId, Guid studentId)
+        public async Task<IActionResult> ShowCompetencePerDomain(Guid evaluationId, Guid domainId, Guid studentId)
         {
             var domain = await _db.CompetenceDomains
                 .Include(d => d.Competences)
@@ -101,19 +101,19 @@ namespace Howest.SelfEvaluation.Web.Controllers
             }
 
             //TODO REFACTOR AFTER DB UPDATE
-            //var evaluation = await _db.Evaluations.FindAsync(domain.EvaluationId);
-            //if (evaluation == null)
-            //{
-            //    return NotFound();
-            //}
+            var evaluation = await _evaluationService.GetAnyEvaluationByIdAsync(evaluationId);
+            if (evaluation == null)
+            {
+                return NotFound();
+            }
 
 
             var viewModel = new MentorCompetencesViewModel
             {
-                //EvaluationId = evaluation.Id,
+                EvaluationId = evaluation.Id,
                 DomainId = domain.Id,
                 DomainName = domain.Name,
-                //Title = evaluation.Title,
+                Title = evaluation.Title,
                 Competences = domain.Competences.Select(c => new CompetenceViewModel
                 {
                     Id = c.Id,
@@ -163,7 +163,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             await _db.SaveChangesAsync();
             TempData["SuccessMessage"] = "Evaluatie succesvol opgeslagen!";
-            return RedirectToAction("ShowCompetencePerDomain", new { domainId = model.DomainId});
+            return RedirectToAction("ShowCompetencePerDomain", new { evaluationId = model.EvaluationId, domainId = model.DomainId, studentId = model.StudentId });
 
         }
 
