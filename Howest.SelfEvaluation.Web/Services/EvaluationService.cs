@@ -104,7 +104,7 @@ namespace Howest.SelfEvaluation.Web.Services
 
         public async Task SaveStudentEvaluationAsync(StudentEvaluationViewModel vm)
         {
-            var userId = Guid.Parse("B7B82198-E824-4E7A-A020-D66C0A292B85");
+            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
 
             foreach (var q in vm.Questions)
             {
@@ -148,7 +148,7 @@ namespace Howest.SelfEvaluation.Web.Services
 
         public async Task SaveDomainEvaluationAsync(StudentDomainEvaluationViewModel vm)
         {
-            var userId = Guid.Parse("B7B82198-E824-4E7A-A020-D66C0A292B85");
+            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
 
             foreach (var i in vm.Indicators)
             {
@@ -183,7 +183,7 @@ namespace Howest.SelfEvaluation.Web.Services
 
         public async Task SaveCompetenceEvaluationAsync(StudentCompetencesViewModel vm)
         {
-            var userId = Guid.Parse("B7B82198-E824-4E7A-A020-D66C0A292B85");
+            var userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
 
             foreach (var competence in vm.Competences)
             {
