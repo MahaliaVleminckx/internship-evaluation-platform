@@ -17,11 +17,13 @@ namespace Howest.SelfEvaluation.Web.Controllers
     {
         private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
+        private readonly IViewModelMappingService _mappingService;
 
-        public TeacherController(SelfEvaluationsDbContext db, IEvaluationService evaluationService)
+        public TeacherController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IViewModelMappingService mappingService)
         {
             _db = db;
             _evaluationService = evaluationService;
+            _mappingService = mappingService;
         }
 
         //for demo purposes, not final
@@ -30,7 +32,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
             //DEVELOPMENT ONLY since no login system yet
             //TODO: change this to the logged in teacher id (refactor method to use Guid instead of name) once login implemented
             //for now its hardcoded for demo purposes and we didnt get to do login implementation
-            BaseViewModel baseViewModel = new() { Name = "teacher@teacher.com" };
+            BaseViewModel baseViewModel = new() { Name = "test@test.com" };
+            //BaseViewModel baseViewModel = new() { Name = "teacher@teacher.com" };
             return View(baseViewModel);
         }
 
@@ -139,6 +142,37 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             return View(vm);
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId, Guid teacherId)
+        {
+            var evaluation = await _evaluationService.GetPublishedEvaluationByIdAsync(evaluationId);
+
+            if (evaluation == null)
+            {
+                return NotFound();
+            }
+
+            TeacherShowDomainsPerEvaluationViewModel teacherShowDomainsPerEvaluationViewModel = new TeacherShowDomainsPerEvaluationViewModel
+            {
+                Id = evaluationId,
+                ModuleId = evaluation.ModuleId,
+                Title = evaluation.Title,
+                Description = evaluation.Description,
+                CompetenceDomains = evaluation.CompetenceDomains?
+                                    .Select(c => _mappingService.MapToCompetenceDomainViewModel(c))
+                                    .ToList() ?? new(),
+                StudentEvaluationScores = evaluation.StudentEvaluationScores?
+                                    .Select(e => _mappingService.MapToEvaluationScoreViewModel(e))
+                                    .ToList() ?? new(),
+                IsPublished = evaluation.IsPublished,
+                UserId = teacherId
+            };
+
+            return View(teacherShowDomainsPerEvaluationViewModel);
+        }
+
 
     }
 }
