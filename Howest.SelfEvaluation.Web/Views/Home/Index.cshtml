@@ -9,10 +9,10 @@
         <div style="border: dotted 1px red; border-radius:10px; margin-top: 25rem;">
             <h5>Dit is enkel voor ontwikkeling omgeving</h5>
             @* voorlopig alleen voor demo, dit wordt later verwijderd eens we login implementeren *@
-            <a class="btn btn-link btn-sm" asp-controller="Admin" asp-action="Dashboard" >Naar admin dashboard</a>
+            <a class="btn btn-link btn-sm" asp-area="Admin" asp-controller="Admin" asp-action="Dashboard" >Naar admin dashboard</a>
             <a class="btn btn-link btn-sm" asp-controller="Mentor" asp-action="Dashboard" >Naar mentor dashboard</a>
-        <a class="btn btn-link btn-sm" asp-controller="Teacher" asp-action="Dashboard">Naar leerkracht dashboard</a>
-        <a class="btn btn-link btn-sm" asp-controller="Student" asp-action="Dashboard">Naar student dashboard</a>
+            <a class="btn btn-link btn-sm" asp-controller="Teacher" asp-action="Dashboard">Naar leerkracht dashboard</a>
+            <a class="btn btn-link btn-sm" asp-controller="Student" asp-action="Dashboard">Naar student dashboard</a>
 
 
         </div>

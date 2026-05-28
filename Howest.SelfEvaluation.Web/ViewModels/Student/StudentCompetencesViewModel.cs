@@ -1,4 +1,5 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Web.ViewModels;
 
 public class StudentCompetencesViewModel
 {
@@ -9,6 +10,7 @@ public class StudentCompetencesViewModel
     public string DomainName { get; set; }
 
     public List<StudentCompetenceViewModel> Competences { get; set; }
+    public bool IsReadOnly { get; set; }
 }
 
 public class StudentCompetenceViewModel
@@ -18,8 +20,9 @@ public class StudentCompetenceViewModel
     public string Name { get; set; }
     public string Description { get; set; }
 
-    public List<Indicator> Indicators { get; set; }
+    public List<IndicatorViewModel> Indicators { get; set; }
 
     public Guid? SelectedIndicatorId { get; set; }
     public string Comment { get; set; }
+    
 }

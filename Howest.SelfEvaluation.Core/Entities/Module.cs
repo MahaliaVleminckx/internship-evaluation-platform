@@ -12,7 +12,7 @@ namespace Howest.SelfEvaluation.Core.Entities
         public Guid? OwnerId { get; set; }
         public ApplicationUser Owner { get; set; }
         public string Description { get; set; }
-        public ICollection<ApplicationUser> ApplicationUsers { get; set; }
-        public ICollection<Evaluation> Evaluations { get; set; }
+        public ICollection<ApplicationUser> ApplicationUsers { get; set; } = new List<ApplicationUser>();
+        public ICollection<Evaluation> Evaluations { get; set; } = new List<Evaluation>();
     }
 }

@@ -10,6 +10,7 @@ namespace Howest.SelfEvaluation.Web.ViewModels
         public Guid ModuleId { get; set; }
         public string Description { get; set; }
         public List<CompetenceDomainViewModel> CompetenceDomains { get; set; }
-        //public ICollection<EvaluationScore> StudentEvaluationScores { get; set; }
+        public ICollection<EvaluationScore> StudentEvaluationScores { get; set; }
+        public Guid EvaluationId { get; set; }
     }
 }

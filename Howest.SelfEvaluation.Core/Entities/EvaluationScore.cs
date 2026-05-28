@@ -18,6 +18,7 @@ namespace Howest.SelfEvaluation.Core.Entities
                                                 // or TargetUserId = UserId when student fills in evaluation for theirself
         public ApplicationUser User { get; set; }
         public Guid? IndicatorId { get; set; }
-        
+        public Indicator Indicator { get; set; }
+
     }
 }
