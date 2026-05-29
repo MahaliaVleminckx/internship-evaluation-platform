@@ -1,11 +1,9 @@
-﻿using Howest.SelfEvaluation.Core.Entities;
-using Howest.SelfEvaluation.Web.Models;
+﻿using Howest.SelfEvaluation.Web.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
 
-namespace Howest.SelfEvaluation.Web.ViewModels.Admin
+namespace Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin
 {
     public class AdminCreateEvaluationViewmodel
     {
