@@ -13,13 +13,17 @@ else
     <ul>
         @foreach (var student in Model.Students)
         {
-            <li>
+            <li style="margin-bottom:10px;">
+                <strong>@student.Username</strong>
+
                 <a asp-controller="Teacher"
                    asp-action="ShowStudentCharts"
                    asp-route-userId="@student.Id"
                    asp-route-evaluationId="@Model.EvaluationId"
-                   asp-route-domainId="@Model.DomainId">
-                    @student.Username
+                   asp-route-domainId="@Model.DomainId"
+                   class="btn custom-btn"
+                   style="margin-left:10px;">
+                    Bekijk evaluatie
                 </a>
             </li>
         }

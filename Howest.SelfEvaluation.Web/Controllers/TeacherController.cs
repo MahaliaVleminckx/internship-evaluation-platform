@@ -114,17 +114,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowStudentCharts(Guid userId, Guid evaluationId, Guid domainId)
         {
-            var scores = await _db.EvaluationScores
-                .Where(s =>
-                    s.UserId == userId &&
-                    s.EvaluationId == evaluationId &&
-                    s.Indicator != null &&
-                    s.Indicator.Competence != null &&
-                    s.Indicator.Competence.CompetenceDomainId == domainId
-                )
-                .Include(s => s.Indicator)
-                    .ThenInclude(i => i.Competence)
-                .ToListAsync();
+            var scores = await _evaluationService.GetStudentResultsAsync(userId, evaluationId, domainId);
 
             var vm = new StudentShowEvaluationViewModel
             {
@@ -142,6 +132,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             return View("ShowCharts", vm);
         }
+
 
     }
 }
