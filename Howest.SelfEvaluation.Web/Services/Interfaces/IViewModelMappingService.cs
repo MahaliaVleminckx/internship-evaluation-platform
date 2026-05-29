@@ -12,5 +12,6 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         CompetenceDomainViewModel MapToCompetenceDomainViewModel(CompetenceDomain competenceDomain);
         CompetenceViewModel MapToCompetenceViewModel(Competence competence);
         StudentViewModel MapToStudentViewModel(ApplicationUser student);
+        EvaluationScoreViewModel MapToEvaluationScoreViewModel(EvaluationScore evaluationScore);
     }
 }

@@ -1,0 +1,35 @@
+﻿@model TeacherShowDomainsPerEvaluationViewModel
+
+@{
+    var rnd = new Random();
+}
+
+<div class="evaluation-title-box">
+    @* TODO: once login system: redirect to Teacher/Evaluations method*@
+    <a asp-controller="Home" asp-action="Index" class="btn custom-btn">
+        ←
+    </a>
+    <h1>Domeinen</h1>
+    <p class="evaluation-subtitle"><sub class="evaluation-subtitle">(@Model.Title)</sub></p>
+</div>
+
+<div style="display:flex">
+    @foreach (var domain in Model.CompetenceDomains)
+    {
+        <div class="card module-box">
+            @* TODO: after getting code from joren: ShowStudents redirect*@
+            @* Or use Overlay method from Mahalia?*@
+            <a asp-controller="Teacher" asp-action="Overlay" asp-route-domainId="@domain.Id" class="link-restyle">
+                <div class="title-box gradient-@rnd.Next(1, 16) text-center">
+                    <h5>@domain.Name</h5>
+                </div>
+            </a>
+        </div>
+    }
+</div>
+
+@* TODO: chart page*@
+<a asp-controller="Evaluations" asp-action="ShowCharts" asp-route-evaluationId="@Model.ModuleId" class="btn custom-btn"
+       style="margin-top: 10px">
+    Charts
+</a>
