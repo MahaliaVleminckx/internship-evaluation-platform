@@ -12,13 +12,29 @@
         </tr>
     </thead>        
     <tbody>
-        @foreach(var student in Model.Students)
+        @foreach (var student in Model.Students)
         {
             <tr>
                 <td>@student.Firstname</td>
                 <td>@student.Lastname</td>
                 <td>@student.UserName</td>
-                <td><a asp-controller="Mentor" asp-action="Index" asp-route-studentId="@student.UserId">Start evaluation</a></td>
+
+                <td>
+                    <a asp-controller="Mentor"
+                       asp-action="Index"
+                       asp-route-studentId="@student.UserId">
+                        Start evaluatie
+                    </a>
+                </td>
+
+                <td>
+                    <a asp-controller="Mentor"
+                       asp-action="ShowEvaluationsForStudent"
+                       asp-route-studentId="@student.UserId"
+                       class="btn custom-btn">
+                        Bekijk evaluaties
+                    </a>
+                </td>
             </tr>
         }
     </tbody>

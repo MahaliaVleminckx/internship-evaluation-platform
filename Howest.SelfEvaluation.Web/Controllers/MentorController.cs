@@ -217,5 +217,39 @@ namespace Howest.SelfEvaluation.Web.Controllers
             // ✅ reuse student view (NO chart)
             return View("~/Views/Student/ShowEvaluation.cshtml", vm);
         }
+        [HttpGet]
+        public async Task<IActionResult> ShowEvaluationsForStudent(Guid studentId)
+        {
+            var evaluations = await _evaluationService.GetAllEvaluationsAsync();
+
+            var vm = new MentorEvaluationDomainsViewModel
+            {
+                StudentId = studentId,
+                Evaluations = evaluations.ToList()
+            };
+
+            return View(vm);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ShowStudentCharts(Guid userId, Guid evaluationId, Guid domainId)
+        {
+            var scores = await _evaluationService.GetStudentResultsAsync(userId, evaluationId, domainId);
+
+            var vm = new StudentShowEvaluationViewModel
+            {
+                UserId = userId,
+                EvaluationId = evaluationId,
+                Results = scores.Select(s => new StudentEvaluationResultViewModel
+                {
+                    CompetenceName = s.Indicator?.Competence?.Name,
+                    IndicatorDescription = s.Indicator?.Description,
+                    Score = s.NotApplicable ? null : s.Indicator?.ScaleValue,
+                    NotApplicable = s.NotApplicable,
+                    Comment = s.ExtraInfo
+                }).ToList()
+            };
+
+            return View("~/Views/Student/ShowEvaluation.cshtml", vm);
+        }
     }
 }

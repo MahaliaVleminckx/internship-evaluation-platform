@@ -8,5 +8,6 @@ namespace Howest.SelfEvaluation.Web.ViewModels.Mentor
         public string Title { get; set; }
         public bool IsPublished { get; set; }
         public ICollection<CompetenceDomain> CompetenceDomains { get; set; } = new List<CompetenceDomain>();
+        public List<Evaluation> Evaluations { get; set; }
     }
 }
