@@ -378,5 +378,17 @@ namespace Howest.SelfEvaluation.Web.Services
             await _db.SaveChangesAsync();
             return new ResultModel<Evaluation> { Data = existingEvaluation };
         }
+        public async Task<List<EvaluationScore>> GetStudentResultsAsync(Guid userId, Guid evaluationId, Guid domainId)
+        {
+            return await _db.EvaluationScores
+                .Where(s =>
+                    s.TargetUserId == userId &&
+                    s.EvaluationId == evaluationId &&
+                    (domainId == Guid.Empty || s.Indicator.Competence.CompetenceDomainId == domainId)
+                )
+                .Include(s => s.Indicator)
+                    .ThenInclude(i => i.Competence)
+                .ToListAsync();
+        }
     }
 }
