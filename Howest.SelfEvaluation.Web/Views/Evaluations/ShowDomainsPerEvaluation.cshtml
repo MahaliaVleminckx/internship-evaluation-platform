@@ -59,9 +59,11 @@
                     <a asp-controller="Teacher"
                        asp-action="ShowStudents"
                        asp-route-domainId="@domain.Id"
+                       asp-route-evaluationId="@Model.Id"
                        class="btn custom-btn domain-btn">
                         Bekijk studenten
                 </a>
+
             </div>
 
         </div>

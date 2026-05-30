@@ -2,6 +2,7 @@
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
+using Howest.SelfEvaluation.Web.ViewModels.Student;
 using Howest.SelfEvaluation.Web.ViewModels.Mentor;
 using Howest.SelfEvaluation.Web.ViewModels.Teacher;
 using Microsoft.AspNetCore.Identity;
@@ -21,12 +22,14 @@ namespace Howest.SelfEvaluation.Web.Controllers
     {
         private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
+        private readonly IViewModelMappingService _mappingService;
         private readonly IOverlayService _overlayService;
 
-        public TeacherController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IOverlayService overlayService)
+        public TeacherController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IViewModelMappingService mappingService, IOverlayService overlayService)
         {
             _db = db;
             _evaluationService = evaluationService;
+            _mappingService = mappingService;
             _overlayService = overlayService;
         }
 
@@ -36,7 +39,8 @@ namespace Howest.SelfEvaluation.Web.Controllers
             //DEVELOPMENT ONLY since no login system yet
             //TODO: change this to the logged in teacher id (refactor method to use Guid instead of name) once login implemented
             //for now its hardcoded for demo purposes and we didnt get to do login implementation
-            BaseViewModel baseViewModel = new() { Name = "teacher@teacher.com" };
+            BaseViewModel baseViewModel = new() { Name = "test@test.com" };
+            //BaseViewModel baseViewModel = new() { Name = "teacher@teacher.com" };
             return View(baseViewModel);
         }
 
@@ -106,16 +110,17 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(viewmodel);
         }
         [HttpGet]
-        public async Task<IActionResult> ShowStudents(Guid domainId)
+        public async Task<IActionResult> ShowStudents(Guid domainId, Guid evaluationId)
         {
             if (domainId == Guid.Empty)
                 return RedirectToAction("Index");
 
-            var students = await _evaluationService.GetStudentsForDomainAsync(domainId);
+            var students = await _evaluationService.GetStudentsForDomainAsync(domainId, evaluationId);
 
             var vm = new TeacherShowStudentsViewModel
             {
                 DomainId = domainId,
+                EvaluationId = evaluationId,
                 Students = students.Select(s => new StudentListItemViewModel
                 {
                     Id = s.Id,
@@ -126,26 +131,57 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(vm);
         }
         [HttpGet]
-        public async Task<IActionResult> ShowStudentDetails(Guid studentId, Guid domainId)
+        public async Task<IActionResult> ShowStudentCharts(Guid userId, Guid evaluationId, Guid domainId)
         {
-            var scores = await _evaluationService.GetStudentResultsForDomainAsync(studentId, domainId);
+            var scores = await _evaluationService.GetStudentResultsAsync(userId, evaluationId, domainId);
 
-            var vm = new TeacherShowStudentsDetailsViewModel
+            var vm = new StudentShowEvaluationViewModel
             {
-                StudentId = studentId,
-                DomainId = domainId,
-                Results = scores.Select(r => new StudentResultViewModel
+                UserId = userId,
+                EvaluationId = evaluationId,
+                Results = scores.Select(s => new StudentEvaluationResultViewModel
                 {
-                    CompetenceName = r.Indicator?.Competence?.Name,
-                    IndicatorDescription = r.Indicator?.Description,
-                    Score = r.NotApplicable ? null : r.Indicator.ScaleValue,
-                    NotApplicable = r.NotApplicable,
-                    Comment = r.ExtraInfo
+                    CompetenceName = s.Indicator?.Competence?.Name,
+                    IndicatorDescription = s.Indicator?.Description,
+                    Score = s.NotApplicable ? null : s.Indicator?.ScaleValue,
+                    NotApplicable = s.NotApplicable,
+                    Comment = s.ExtraInfo
                 }).ToList()
             };
 
-            return View(vm);
+            return View("ShowCharts", vm);
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ShowDomainsPerEvaluation(Guid evaluationId, Guid teacherId)
+        {
+            var evaluation = await _evaluationService.GetPublishedEvaluationByIdAsync(evaluationId);
+
+            if (evaluation == null)
+            {
+                return NotFound();
+            }
+
+            TeacherShowDomainsPerEvaluationViewModel teacherShowDomainsPerEvaluationViewModel = new TeacherShowDomainsPerEvaluationViewModel
+            {
+                Id = evaluationId,
+                ModuleId = evaluation.ModuleId,
+                Title = evaluation.Title,
+                Description = evaluation.Description,
+                CompetenceDomains = evaluation.CompetenceDomains?
+                                    .Select(c => _mappingService.MapToCompetenceDomainViewModel(c))
+                                    .ToList() ?? new(),
+                StudentEvaluationScores = evaluation.StudentEvaluationScores?
+                                    .Select(e => _mappingService.MapToEvaluationScoreViewModel(e))
+                                    .ToList() ?? new(),
+                IsPublished = evaluation.IsPublished,
+                UserId = teacherId
+            };
+
+            return View(teacherShowDomainsPerEvaluationViewModel);
+        }
+
 
         public async Task<IActionResult> Overlay(Guid domainId, Guid studentId)
         {
