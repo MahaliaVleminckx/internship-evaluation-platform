@@ -3,11 +3,15 @@ using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
 using Howest.SelfEvaluation.Web.ViewModels.Student;
+using Howest.SelfEvaluation.Web.ViewModels.Mentor;
 using Howest.SelfEvaluation.Web.ViewModels.Teacher;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
+using NuGet.ProjectModel;
+using System.Threading.Tasks;
 
 namespace Howest.SelfEvaluation.Web.Controllers
 {
@@ -19,12 +23,14 @@ namespace Howest.SelfEvaluation.Web.Controllers
         private readonly SelfEvaluationsDbContext _db;
         private readonly IEvaluationService _evaluationService;
         private readonly IViewModelMappingService _mappingService;
+        private readonly IOverlayService _overlayService;
 
-        public TeacherController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IViewModelMappingService mappingService)
+        public TeacherController(SelfEvaluationsDbContext db, IEvaluationService evaluationService, IViewModelMappingService mappingService, IOverlayService overlayService)
         {
             _db = db;
             _evaluationService = evaluationService;
             _mappingService = mappingService;
+            _overlayService = overlayService;
         }
 
         //for demo purposes, not final
@@ -39,11 +45,11 @@ namespace Howest.SelfEvaluation.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string username)
+        public async Task<IActionResult> Index(string? username)
         {
             //TODO: change string username to Guid userId once we have a login system or perhaps use a btn for development reasons on home screen
             // with asp-route-Id for ease of use
-            //you can get into the index through https://localhost:7140/Teacher/Index?username=teacher@test.com
+            //you can get into the index through https://localhost:7140/teacher/Index?username=teacher@teacher.com
 
 
             if (string.IsNullOrEmpty(username))
@@ -61,6 +67,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
             var allModules = user.Modules
               .Concat(user.OwnerModules)
               .Distinct().ToList();
+
 
             if (user == null)
             {
@@ -173,6 +180,84 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
 
             return View(teacherShowDomainsPerEvaluationViewModel);
+        }
+
+
+        public async Task<IActionResult> Overlay(Guid domainId, Guid studentId)
+        {
+            var vm = await _overlayService.GetOverlayAsync(domainId, studentId);
+
+            if (vm == null)
+                return NotFound();
+
+            return View(vm);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> OverlaySelector()
+        {
+            var vm = new TeacherOverlaySelectViewModel
+            {
+                StudentOptions = await _db.ApplicationUsers
+                    .Where(u => u.Role == "Student")
+                    .Select(s => new SelectListItem
+                    {
+                        Value = s.Id.ToString(),
+                        Text = s.Firstname + " " + s.Lastname
+                    })
+                    .ToListAsync(),
+
+                DomainOptions = await _db.CompetenceDomains
+                    .Include(d => d.Evaluations)
+                    .Select(d => new SelectListItem
+                    {
+                        Value = d.Id.ToString(),
+                        Text = d.Name + " (" +
+                               (d.Evaluations.Any()
+                                   ? string.Join(",", d.Evaluations.Select(e => e.Title))
+                                   : "geen evaluaties") + ")"
+                    })
+                    .ToListAsync()
+            };
+
+            return View(vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> OverlaySelector(TeacherOverlaySelectViewModel vm)
+        {
+            vm.StudentOptions = await _db.ApplicationUsers
+                .Where(u => u.Role == "Student")
+                .Select(s => new SelectListItem
+                {
+                    Value = s.Id.ToString(),
+                    Text = s.Firstname + " " + s.Lastname
+                })
+                .ToListAsync();
+
+            vm.DomainOptions = await _db.CompetenceDomains
+                .Include(d => d.Evaluations)
+                .Select(d => new SelectListItem
+                {
+                    Value = d.Id.ToString(),
+                    Text = d.Name + " (" +
+                           (d.Evaluations.Any()
+                               ? string.Join(",", d.Evaluations.Select(e => e.Title))
+                               : "geen evaluaties") + ")"
+                })
+                .ToListAsync();
+
+            if (!vm.DomainId.HasValue || !vm.StudentId.HasValue)
+            {
+                ModelState.AddModelError("", "Selecteer een student en een domein");
+                return View(vm);
+            }
+
+            return RedirectToAction(nameof(Overlay), new
+            {
+                domainId = vm.DomainId,
+                studentId = vm.StudentId
+            });
         }
 
 
