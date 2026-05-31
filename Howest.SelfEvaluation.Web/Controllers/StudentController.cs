@@ -1,4 +1,5 @@
-﻿using Howest.SelfEvaluation.Web.Services.Interfaces;
+﻿using Howest.SelfEvaluation.Core.Entities;
+using Howest.SelfEvaluation.Web.Services.Interfaces;
 using Howest.SelfEvaluation.Web.ViewModels;
 using Howest.SelfEvaluation.Web.ViewModels.Student;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,7 @@ public class StudentController : Controller
 
         var userId = Guid.Parse("00000000-0000-0000-0000-000000000001"); // TODO: replace later with logged-in user
 
-        var scores = await _evaluationService.GetStudentResultsForDomainAsync(userId, domainId);
+        var scores = await _evaluationService.GetStudentResultsAsync(userId, evaluationId, domainId);
 
         var vm = new StudentCompetencesViewModel
         {
@@ -77,9 +78,9 @@ public class StudentController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> ShowDomainResult(Guid domainId, Guid userId)
+    public async Task<IActionResult> ShowDomainResult(Guid domainId, Guid userId, Guid evaluationId)
     {
-        var scores = await _evaluationService.GetStudentResultsForDomainAsync(userId, domainId);
+        var scores = await _evaluationService.GetStudentResultsAsync(userId, evaluationId, domainId);
 
 
         var vm = new StudentShowEvaluationViewModel

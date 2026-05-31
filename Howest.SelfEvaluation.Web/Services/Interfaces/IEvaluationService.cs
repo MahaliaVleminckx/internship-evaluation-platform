@@ -27,12 +27,11 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         Task SaveCompetenceEvaluationAsync(StudentCompetencesViewModel vm);
         Task<IEnumerable<ApplicationUser>> GetAllStudentsForMentorAsync(Guid mentorId);
         Task<List<EvaluationScore>> GetStudentOwnResultsAsync(Guid userId, Guid evaluationId);
-        Task<List<EvaluationScore>> GetStudentResultsForDomainAsync(Guid userId, Guid domainId);
-        Task<List<ApplicationUser>> GetStudentsForDomainAsync(Guid domainId);
+        Task<List<ApplicationUser>> GetStudentsForDomainAsync(Guid domainId, Guid evaluationId);
         Task<bool> DoesModuleIdExistAsync(Guid moduleId);
         Task<ResultModel<Evaluation>> CreateEvaluationAsync(AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel);
         Task<ResultModel<Evaluation>> UpdateEvaluationAsync(AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel);
         Task<bool> DoesEvaluationTitleExist(string title);
-        Task<List<EvaluationScore>> GetStudentResultsAsync(Guid studentId, Guid evaluationId, Guid domainId);
+        Task<List<EvaluationScore>> GetStudentResultsAsync(Guid userId, Guid evaluationId, Guid domainId);
     }
 }

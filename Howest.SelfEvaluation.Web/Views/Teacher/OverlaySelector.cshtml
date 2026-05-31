@@ -1,0 +1,27 @@
+﻿@model TeacherOverlaySelectViewModel
+
+<h2>Overlay selectie</h2>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="OverlaySelector" method="post">
+
+    <div class="mb-3">
+        <label>Student</label>
+        <select asp-for="StudentId" asp-items="Model.StudentOptions" class="form-control">
+            <option value="">-- Kies student --</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Domein</label>
+        <select asp-for="DomainId" asp-items="Model.DomainOptions" class="form-control">
+            <option value="">-- Kies domein --</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn custom-btn">
+        Open overlay
+    </button>
+
+</form>
