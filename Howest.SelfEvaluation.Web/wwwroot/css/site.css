@@ -429,6 +429,54 @@ main {
     position: static !important;
 }
 
+.accent-bar{
+    height:4px;
+    width:100%;
+    background-color: #44C8F5;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.score-badge {
+    background-color: #44C8F5;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight:700;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.evaluation-comment{
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.bar-row {
+    margin-bottom: 8px;
+}
+
+.bar-bg {
+    width: 100%;
+    height: 12px;
+    background: #eee;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+}
+
+.student {
+    background: #FF8A5B;
+}
+
+.mentor {
+    background: #2F80ED;
+}
     .textarea-container label {
         position: static !important;
         display: block;

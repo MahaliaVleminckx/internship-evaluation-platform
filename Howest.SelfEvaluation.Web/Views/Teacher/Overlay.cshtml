@@ -1,0 +1,81 @@
+﻿@model EvaluationOverlayViewModel
+
+<div class="container">
+    <h1>Evaluatie Overlay</h1>
+    <h3>@Model.StudentName</h3>
+    <hr />
+
+    @foreach (var competence in Model.OverlayCompetences)
+    {
+        <div class="competence-box card position-relative p-4 mb-4">
+
+            <div class="accent-bar"></div>
+
+            <h4>@competence.Name</h4>
+            <p class="text-muted">@competence.Description</p>
+
+            @foreach (var eval in competence.Evaluations)
+            {
+                <div class="mb-4">
+
+                    <h6 class="evaluation-subtitle">
+                        @eval.EvaluationTitle
+                    </h6>
+
+                    <div class="bar-row">
+                        <span>Student</span>
+                        <div class="bar-bg">
+                            <div class="bar student"
+                                 style="width:@((eval.StudentScore ?? 0) * 15)%"></div>
+                        </div>
+                    </div>
+
+                    <div class="bar-row">
+                        <span>Mentor</span>
+                        <div class="bar-bg">
+                            <div class="bar mentor"
+                                 style="width:@((eval.MentorScore ?? 0) * 15)%"></div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+
+                        <div class="col-md-6">
+                            <strong>Student</strong>
+                            <span class="score-badge">
+                                @(eval.StudentScoreLabel ?? "Geen evaluatie")
+                            </span>
+
+                            <p class="evaluation-comment">
+                                @(string.IsNullOrWhiteSpace(eval.StudentComment)
+                                    ? "Geen opmerking"
+                                    : eval.StudentComment)
+                            </p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Mentor</strong>
+                            <span class="score-badge">
+                                @(eval.MentorScoreLabel ?? "Geen evaluatie")
+                            </span>
+
+                            <p class="evaluation-comment">
+                                @(string.IsNullOrWhiteSpace(eval.MentorComment)
+                                    ? "Geen opmerking"
+                                    : eval.MentorComment)
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                </div>
+            }
+
+        </div>
+    }
+
+</div>
+
+
