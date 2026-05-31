@@ -33,6 +33,6 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         Task<ResultModel<Evaluation>> CreateEvaluationAsync(AdminCreateEvaluationViewmodel adminCreateEvaluationViewmodel);
         Task<ResultModel<Evaluation>> UpdateEvaluationAsync(AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel);
         Task<bool> DoesEvaluationTitleExist(string title);
-        Task<List<EvaluationScore>> GetStudentResultsAsync(Guid userId, Guid evaluationId, Guid domainId);
+        Task<List<EvaluationScore>> GetStudentResultsAsync(Guid studentId, Guid evaluationId, Guid domainId);
     }
 }

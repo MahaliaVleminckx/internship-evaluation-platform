@@ -136,9 +136,14 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 TempData["ErrorMessage"] = "Er is iets fout gegaan bij het opslaan";
                 return View(model);
             }
-            var sessionMentorId= HttpContext.Session.Get("mentorId");
-            var sessionMentorIdString = Encoding.UTF8.GetString(sessionMentorId);
-            var mentorId = Guid.Parse(sessionMentorIdString);
+            var sessionMentorId = HttpContext.Session.Get("MentorId");
+
+            if (sessionMentorId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var mentorId = Guid.Parse(Encoding.UTF8.GetString(sessionMentorId));
             var studentId = model.StudentId;
 
             foreach (var competence in model.Competences)
@@ -214,7 +219,6 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 }).ToList()
             };
 
-            // ✅ reuse student view (NO chart)
             return View("~/Views/Student/ShowEvaluation.cshtml", vm);
         }
         [HttpGet]
@@ -231,13 +235,13 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(vm);
         }
         [HttpGet]
-        public async Task<IActionResult> ShowStudentCharts(Guid userId, Guid evaluationId, Guid domainId)
+        public async Task<IActionResult> ShowStudentCharts(Guid studentId, Guid evaluationId, Guid domainId)
         {
-            var scores = await _evaluationService.GetStudentResultsAsync(userId, evaluationId, domainId);
+            var scores = await _evaluationService.GetStudentResultsAsync(studentId, evaluationId, domainId);
 
             var vm = new StudentShowEvaluationViewModel
             {
-                UserId = userId,
+                UserId = studentId,
                 EvaluationId = evaluationId,
                 Results = scores.Select(s => new StudentEvaluationResultViewModel
                 {
