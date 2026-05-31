@@ -1,0 +1,20 @@
+﻿@using Howest.SelfEvaluation.Core.Entities
+@model List<ApplicationUser>
+
+<h1>Studenten</h1>
+
+<ul>
+    @foreach (var student in Model)
+    {
+        <li>
+            @student.Username
+
+            <a asp-controller="Teacher"
+               asp-action="StudentCombinedEvaluations"
+               asp-route-studentId="@student.Id"
+               class="btn custom-btn">
+                Bekijk evaluaties
+            </a>
+        </li>
+    }
+</ul>

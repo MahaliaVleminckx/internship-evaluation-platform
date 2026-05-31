@@ -1,9 +1,10 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
-using Howest.SelfEvaluation.Web.ViewModels.Student;
-using Howest.SelfEvaluation.Web.Models;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using Howest.SelfEvaluation.Web.ViewModels;
 using Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin;
+using Howest.SelfEvaluation.Web.Models;
+using Howest.SelfEvaluation.Web.ViewModels;
+using Howest.SelfEvaluation.Web.ViewModels.Student;
+using Howest.SelfEvaluation.Web.ViewModels.Teacher;
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace Howest.SelfEvaluation.Web.Services.Interfaces
 {
@@ -33,5 +34,7 @@ namespace Howest.SelfEvaluation.Web.Services.Interfaces
         Task<ResultModel<Evaluation>> UpdateEvaluationAsync(AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel);
         Task<bool> DoesEvaluationTitleExist(string title);
         Task<List<EvaluationScore>> GetStudentResultsAsync(Guid userId, Guid evaluationId, Guid domainId);
+        Task<List<ApplicationUser>> GetStudentsForModule(Guid moduleId);
+        Task<List<EvaluationResultGroup>> GetEvaluationsForStudent(Guid studentId);
     }
 }

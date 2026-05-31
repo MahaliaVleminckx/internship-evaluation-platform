@@ -1,13 +1,14 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Core.Enums;
+using Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
-using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.ViewModels;
-using Microsoft.EntityFrameworkCore;
-using Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin;
+using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.ViewModels.Student;
+using Howest.SelfEvaluation.Web.ViewModels.Teacher;
+using Microsoft.EntityFrameworkCore;
 
 namespace Howest.SelfEvaluation.Web.Services
 {
@@ -381,6 +382,38 @@ namespace Howest.SelfEvaluation.Web.Services
                 .Include(s => s.Indicator)
                     .ThenInclude(i => i.Competence)
                 .ToListAsync();
+        }
+        public async Task<List<ApplicationUser>> GetStudentsForModule(Guid moduleId)
+        {
+            return await _db.ApplicationUsers
+                .Where(u => u.Role == "Student" && u.Modules.Any(m => m.Id == moduleId))
+                .ToListAsync();
+        }
+        public async Task<List<EvaluationResultGroup>> GetEvaluationsForStudent(Guid studentId)
+        {
+            var evaluations = await _db.EvaluationScores
+                .Where(s => s.UserId == studentId)
+                .Include(s => s.Evaluation)
+                .Include(s => s.Indicator)
+                    .ThenInclude(i => i.Competence)
+                .ToListAsync();
+
+            var grouped = evaluations
+                .GroupBy(e => e.Evaluation)
+                .Select(g => new EvaluationResultGroup
+                {
+                    EvaluationTitle = g.Key.Title,
+                    Results = g.Select(s => new StudentEvaluationResultViewModel
+                    {
+                        CompetenceName = s.Indicator.Competence.Name,
+                        IndicatorDescription = s.Indicator.Description,
+                        Score = s.NotApplicable ? null : s.Indicator.ScaleValue,
+                        NotApplicable = s.NotApplicable,
+                        Comment = s.ExtraInfo
+                    }).ToList()
+                }).ToList(); 
+
+            return grouped;
         }
     }
 }

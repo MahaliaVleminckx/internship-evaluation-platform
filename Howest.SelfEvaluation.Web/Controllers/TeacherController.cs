@@ -30,13 +30,21 @@ namespace Howest.SelfEvaluation.Web.Controllers
         //for demo purposes, not final
         public async Task<IActionResult> Dashboard()
         {
+            var moduleId = Guid.Parse("00000000-0000-0000-0000-000000000003");
+
+            var students = await _evaluationService.GetStudentsForModule(moduleId);
+
+            return View(students); 
+        }
+       /* public async Task<IActionResult> Dashboard()
+        {
             //DEVELOPMENT ONLY since no login system yet
             //TODO: change this to the logged in teacher id (refactor method to use Guid instead of name) once login implemented
             //for now its hardcoded for demo purposes and we didnt get to do login implementation
             BaseViewModel baseViewModel = new() { Name = "test@test.com" };
             //BaseViewModel baseViewModel = new() { Name = "teacher@teacher.com" };
             return View(baseViewModel);
-        }
+        }*/
 
         [HttpGet]
         public async Task<IActionResult> Index(string username)
@@ -174,6 +182,25 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
             return View(teacherShowDomainsPerEvaluationViewModel);
         }
+        public async Task<IActionResult> StudentsOverview(Guid moduleId)
+        {
+            var students = await _evaluationService.GetStudentsForModule(moduleId);
+
+            return View(students);
+        }
+        public async Task<IActionResult> StudentCombinedEvaluations(Guid studentId)
+        {
+            var evaluations = await _evaluationService.GetEvaluationsForStudent(studentId);
+
+            var vm = new TeacherCombinedEvaluationViewModel
+            {
+                StudentId = studentId,
+                Evaluations = evaluations
+            };
+
+            return View(vm);
+        }
+
 
 
     }

@@ -19,6 +19,7 @@ namespace Howest.SelfEvaluation.Core.Entities
         public ApplicationUser User { get; set; }
         public Guid? IndicatorId { get; set; }
         public Indicator Indicator { get; set; }
+        public Evaluation Evaluation { get; set; }
 
     }
 }
