@@ -275,15 +275,15 @@ namespace Howest.SelfEvaluation.Web.Services
             };
 
             var searchExistingEvaluation = await GetAnyEvaluationByIdAsync(newEvaluation.Id);
-            if(searchExistingEvaluation is not null)
+            if (searchExistingEvaluation is not null)
             {
-                return new ResultModel<Evaluation> 
-                { 
-                    Errors = new List<string> { $"Aanmaken mislukt. Een evaluatie met id {searchExistingEvaluation.Id} bestaat al"} 
+                return new ResultModel<Evaluation>
+                {
+                    Errors = new List<string> { $"Aanmaken mislukt. Een evaluatie met id {searchExistingEvaluation.Id} bestaat al" }
                 };
             }
 
-            if(newEvaluation.EndDate < newEvaluation.StartDate)
+            if (newEvaluation.EndDate < newEvaluation.StartDate)
             {
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Einddatum kan niet voor begindatum liggen" } };
             }
@@ -301,7 +301,7 @@ namespace Howest.SelfEvaluation.Web.Services
                 .ToList();
             var competenceDomains = new List<CompetenceDomain>();
 
-            foreach(var id in selectedCompetenceDomainIds)
+            foreach (var id in selectedCompetenceDomainIds)
             {
                 var competenceDomain = await GetDomainWithIndicatorsAsync(id);
                 competenceDomains.Add(competenceDomain);
@@ -317,7 +317,7 @@ namespace Howest.SelfEvaluation.Web.Services
         public async Task<ResultModel<Evaluation>> UpdateEvaluationAsync(AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel)
         {
             var existingEvaluation = await GetAnyEvaluationByIdAsync(adminUpdateEvaluationViewModel.Id);
-            if(existingEvaluation is null)
+            if (existingEvaluation is null)
             {
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Aanpassen mislukt. Er werd geen evaluatie met id {adminUpdateEvaluationViewModel.Id} gevonden" } };
             }
@@ -373,22 +373,24 @@ namespace Howest.SelfEvaluation.Web.Services
         {
             return await _db.EvaluationScores
                 .Where(s =>
-                    s.UserId == userId &&
+                    s.TargetUserId == userId &&
                     s.EvaluationId == evaluationId &&
                     s.Indicator != null &&
                     s.Indicator.Competence != null &&
-                    s.Indicator.Competence.CompetenceDomainId == domainId
+                    (domainId == Guid.Empty || s.Indicator.Competence.CompetenceDomainId == domainId)
                 )
                 .Include(s => s.Indicator)
                     .ThenInclude(i => i.Competence)
                 .ToListAsync();
         }
+
         public async Task<List<ApplicationUser>> GetStudentsForModule(Guid moduleId)
         {
             return await _db.ApplicationUsers
                 .Where(u => u.Role == "Student" && u.Modules.Any(m => m.Id == moduleId))
                 .ToListAsync();
         }
+
         public async Task<List<EvaluationResultGroup>> GetEvaluationsForStudent(Guid studentId)
         {
             var evaluations = await _db.EvaluationScores
@@ -411,22 +413,9 @@ namespace Howest.SelfEvaluation.Web.Services
                         NotApplicable = s.NotApplicable,
                         Comment = s.ExtraInfo
                     }).ToList()
-                }).ToList(); 
+                }).ToList();
 
             return grouped;
         }
-{
-    return await _db.EvaluationScores
-        .Where(s =>
-            s.TargetUserId == userId &&
-            s.EvaluationId == evaluationId &&
-            s.Indicator != null &&
-            s.Indicator.Competence != null &&
-            (domainId == Guid.Empty || s.Indicator.Competence.CompetenceDomainId == domainId)
-        )
-        .Include(s => s.Indicator)
-            .ThenInclude(i => i.Competence)
-        .ToListAsync();
-}
     }
 }
