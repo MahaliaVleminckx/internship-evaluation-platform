@@ -18,13 +18,10 @@ namespace Howest.SelfEvaluation.Core.Entities
                                                 // or TargetUserId = UserId when student fills in evaluation for theirself
         public ApplicationUser User { get; set; }
         public Guid? IndicatorId { get; set; }
-<<<<<<< HEAD
+
         public Indicator? Indicator { get; set; }
         
-=======
-        public Indicator Indicator { get; set; }
-        public Evaluation? Evaluation { get; set; }
 
->>>>>>> d81eda2 (Fixed student evaluation filtering and evaluation saving / redirecting)
+        public Evaluation? Evaluation { get; set; }
     }
 }
