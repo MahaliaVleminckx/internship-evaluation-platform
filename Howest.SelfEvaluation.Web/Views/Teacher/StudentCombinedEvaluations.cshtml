@@ -4,30 +4,64 @@
 
 <h1>Evaluaties gecombineerd</h1>
 
-@foreach (var eval in Model.Evaluations)
-{
-    <h2>@eval.EvaluationTitle</h2>
+@{
+    var evaluations = Model.Evaluations;
 
-    <table style="margin-bottom:30px;">
-        <thead>
-            <tr>
-                <th>Competentie</th>
-                <th>Score</th>
-                <th>Commentaar</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in eval.Results)
-            {
-                <tr>
-                    <td>@item.CompetenceName</td>
-                    <td>@item.Score</td>
-                    <td>@item.Comment</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    var competences = evaluations
+        .SelectMany(e => e.Results)
+        .Select(r => r.CompetenceName)
+        .Distinct()
+        .ToList();
 }
+
+<table style="width:100%; border-collapse: collapse; margin-top:20px;">
+    <thead>
+        <tr style="border-bottom:2px solid #ccc;">
+            <th style="text-align:left; padding:10px;">Competentie</th>
+
+            @foreach (var eval in evaluations)
+            {
+                <th style="text-align:left; padding:10px;">
+                    @eval.EvaluationTitle
+                </th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var competence in competences)
+        {
+            <tr style="border-bottom:1px solid #eee;">
+                <td style="padding:10px;">@competence</td>
+
+                @foreach (var eval in evaluations)
+                {
+                    var result = eval.Results
+                    .FirstOrDefault(r => r.CompetenceName == competence);
+
+                    <td style="padding:10px;">
+                        @if (result == null)
+                        {
+                            <span style="color:#aaa;">-</span>
+                        }
+                        else
+                        {
+                            <div>@result.Score</div>
+
+                            @if (!string.IsNullOrWhiteSpace(result.Comment))
+                            {
+                                <div style="font-size:0.85em; color:#666; margin-top:4px;">
+                                    @result.Comment
+                                </div>
+                            }
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
 
 <div style="max-width:700px; height:400px; margin:40px auto;"><canvas id="combinedChart"></canvas>
 </div>
