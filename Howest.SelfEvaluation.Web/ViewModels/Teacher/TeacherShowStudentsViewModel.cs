@@ -9,9 +9,9 @@ namespace Howest.SelfEvaluation.Web.ViewModels.Teacher
         public Guid EvaluationId { get; set; }
     }
 
-    public class StudentViewModel
+    public class TeacherStudentViewModel
     {
         public Guid Id { get; set; }
-        public string Username { get; set; }
+        public string UserName { get; set; }
     }
 }

@@ -1,0 +1,157 @@
+﻿@model TeacherCombinedEvaluationViewModel
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<h1>Evaluaties gecombineerd</h1>
+
+@{
+    var evaluations = Model.Evaluations;
+
+    var competences = evaluations
+        .SelectMany(e => e.Results)
+        .Select(r => r.CompetenceName)
+        .Distinct()
+        .ToList();
+}
+
+<table style="width:100%; border-collapse: collapse; margin-top:20px;">
+    <thead>
+        <tr style="border-bottom:2px solid #ccc;">
+            <th style="text-align:left; padding:10px;">Competentie</th>
+
+            @foreach (var eval in evaluations)
+            {
+                <th style="text-align:left; padding:10px;">
+                    @eval.EvaluationTitle
+                </th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var competence in competences)
+        {
+            <tr style="border-bottom:1px solid #eee;">
+                <td style="padding:10px;">@competence</td>
+
+                @foreach (var eval in evaluations)
+                {
+                    var result = eval.Results
+                    .FirstOrDefault(r => r.CompetenceName == competence);
+
+                    <td style="padding:10px;">
+                        @if (result == null)
+                        {
+                            <span style="color:#aaa;">-</span>
+                        }
+                        else
+                        {
+                            <div>@result.Score</div>
+
+                            @if (!string.IsNullOrWhiteSpace(result.Comment))
+                            {
+                                <div style="font-size:0.85em; color:#666; margin-top:4px;">
+                                    @result.Comment
+                                </div>
+                            }
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div style="max-width:700px; height:400px; margin:40px auto;"><canvas id="combinedChart"></canvas>
+</div>
+
+@{
+    var firstWithResults = Model.Evaluations.FirstOrDefault(e => e.Results.Any());
+
+    var allLabels = Model.Evaluations
+        .SelectMany(e => e.Results)
+        .Select(r => r.CompetenceName)
+        .Distinct()
+        .ToList();
+}
+
+@if (firstWithResults != null)
+{
+    <script>
+        const labels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(allLabels));
+
+        const datasets = [
+            @for (int i = 0; i < Model.Evaluations.Count; i++)
+            {
+                    var eval = Model.Evaluations[i];
+
+                    if (!eval.Results.Any())
+                    {
+                            continue;
+                    }
+
+                                <text>
+            {
+                label: "@eval.EvaluationTitle",
+                data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+                                allLabels.Select(label =>
+                                {
+                                        var result = eval.Results.FirstOrDefault(r => r.CompetenceName == label);
+                                        if (result == null) return (int?)null;
+                                           return result.Score switch
+                                                    {
+                                                            "Zwaar onvoldoende" => 1,
+                                                            "Onvoldoende" => 2,
+                                                            "Licht onvoldoende" => 3,
+                                                            "Voldoende" => 4,
+                                                            "Goed" => 5,
+                                                            "Zeer goed" => 6,       
+                                                            "Uitstekend" => 7,
+                                                            _ => (int?)null
+                                                    };
+                                })
+                        )),
+        fill: false,
+        spanGaps: true,
+        borderColor: "hsl(@(i * 60), 70%, 50%)"
+    },
+    </text>
+                }
+        ];
+
+                new Chart(document.getElementById('combinedChart'), {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                    responsive: true,
+        maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: false,
+                        min: 1,
+                        max: 7,
+                        ticks: {
+                            stepSize: 1,
+                            callback: function(value) {
+                                return ["", "Z.O.", "O.", "L.O.", "V", "G", "Z.G." , "U"][value];
+                            }
+                        },
+                        pointLabels: {
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}
+else
+{
+    <p>Geen evaluaties met resultaten</p>
+}

@@ -1,10 +1,22 @@
-﻿@model BaseViewModel
+﻿
+@model TeacherDashboardViewModel
 
-<h1>Leerkracht Dashboard</h1>
+<h1>Teacher Dashboard</h1>
 
-<div>
-    <div>
-        <a asp-controller="Teacher" asp-action="Index" asp-route-username="@Model.Name">Naar evaluaties</a>
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+@foreach (var student in Model.Students)
+{
+    <div class="card module-box" style="width:250px; text-align:center;">
+        <div class="card-body">
+            <h5>@student.UserName</h5>
+
+            <a asp-controller="Teacher"
+               asp-action="StudentCombinedEvaluations"
+               asp-route-studentId="@student.Id"
+               class="btn custom-btn">
+                Bekijk evaluaties
+            </a>
+        </div>
     </div>
-
+}
 </div>

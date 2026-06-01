@@ -1,13 +1,14 @@
 ﻿using Howest.SelfEvaluation.Core.Entities;
 using Howest.SelfEvaluation.Core.Enums;
+using Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.Data;
 using Howest.SelfEvaluation.Web.Models;
 using Howest.SelfEvaluation.Web.Services.Interfaces;
-using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.ViewModels;
-using Microsoft.EntityFrameworkCore;
-using Howest.SelfEvaluation.Web.Areas.Admin.ViewModels.Admin;
+using Howest.SelfEvaluation.Web.ViewModels.Admin;
 using Howest.SelfEvaluation.Web.ViewModels.Student;
+using Howest.SelfEvaluation.Web.ViewModels.Teacher;
+using Microsoft.EntityFrameworkCore;
 
 namespace Howest.SelfEvaluation.Web.Services
 {
@@ -274,15 +275,15 @@ namespace Howest.SelfEvaluation.Web.Services
             };
 
             var searchExistingEvaluation = await GetAnyEvaluationByIdAsync(newEvaluation.Id);
-            if(searchExistingEvaluation is not null)
+            if (searchExistingEvaluation is not null)
             {
-                return new ResultModel<Evaluation> 
-                { 
-                    Errors = new List<string> { $"Aanmaken mislukt. Een evaluatie met id {searchExistingEvaluation.Id} bestaat al"} 
+                return new ResultModel<Evaluation>
+                {
+                    Errors = new List<string> { $"Aanmaken mislukt. Een evaluatie met id {searchExistingEvaluation.Id} bestaat al" }
                 };
             }
 
-            if(newEvaluation.EndDate < newEvaluation.StartDate)
+            if (newEvaluation.EndDate < newEvaluation.StartDate)
             {
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Einddatum kan niet voor begindatum liggen" } };
             }
@@ -300,7 +301,7 @@ namespace Howest.SelfEvaluation.Web.Services
                 .ToList();
             var competenceDomains = new List<CompetenceDomain>();
 
-            foreach(var id in selectedCompetenceDomainIds)
+            foreach (var id in selectedCompetenceDomainIds)
             {
                 var competenceDomain = await GetDomainWithIndicatorsAsync(id);
                 competenceDomains.Add(competenceDomain);
@@ -316,7 +317,7 @@ namespace Howest.SelfEvaluation.Web.Services
         public async Task<ResultModel<Evaluation>> UpdateEvaluationAsync(AdminUpdateEvaluationViewModel adminUpdateEvaluationViewModel)
         {
             var existingEvaluation = await GetAnyEvaluationByIdAsync(adminUpdateEvaluationViewModel.Id);
-            if(existingEvaluation is null)
+            if (existingEvaluation is null)
             {
                 return new ResultModel<Evaluation> { Errors = new List<string> { $"Aanpassen mislukt. Er werd geen evaluatie met id {adminUpdateEvaluationViewModel.Id} gevonden" } };
             }
@@ -369,18 +370,52 @@ namespace Howest.SelfEvaluation.Web.Services
             return new ResultModel<Evaluation> { Data = existingEvaluation };
         }
         public async Task<List<EvaluationScore>> GetStudentResultsAsync(Guid userId, Guid evaluationId, Guid domainId)
-{
-    return await _db.EvaluationScores
-        .Where(s =>
-            s.TargetUserId == userId &&
-            s.EvaluationId == evaluationId &&
-            s.Indicator != null &&
-            s.Indicator.Competence != null &&
-            (domainId == Guid.Empty || s.Indicator.Competence.CompetenceDomainId == domainId)
-        )
-        .Include(s => s.Indicator)
-            .ThenInclude(i => i.Competence)
-        .ToListAsync();
-}
+        {
+            return await _db.EvaluationScores
+                .Where(s =>
+                    s.TargetUserId == userId &&
+                    s.EvaluationId == evaluationId &&
+                    s.Indicator != null &&
+                    s.Indicator.Competence != null &&
+                    (domainId == Guid.Empty || s.Indicator.Competence.CompetenceDomainId == domainId)
+                )
+                .Include(s => s.Indicator)
+                    .ThenInclude(i => i.Competence)
+                .ToListAsync();
+        }
+
+        public async Task<List<ApplicationUser>> GetStudentsForModule(Guid moduleId)
+        {
+            return await _db.ApplicationUsers
+                .Where(u => u.Role == "Student" && u.Modules.Any(m => m.Id == moduleId))
+                .ToListAsync();
+        }
+
+        public async Task<List<EvaluationResultGroup>> GetEvaluationsForStudent(Guid studentId)
+        {
+            var evaluations = await _db.EvaluationScores
+                .Where(s => s.UserId == studentId)
+                .Include(s => s.Evaluation)
+                .Include(s => s.Indicator)
+                    .ThenInclude(i => i.Competence)
+                .ToListAsync();
+
+            var grouped = evaluations
+                .GroupBy(e => e.Evaluation)
+                .Select(g => new EvaluationResultGroup
+                {
+                    EvaluationTitle = g.Key.Title,
+                    Results = g.Select(s => new StudentEvaluationResultViewModel
+                    {
+                        CompetenceName = s.Indicator.Competence.Name,
+                        IndicatorDescription = s.Indicator.Description,
+                        Score = s.NotApplicable ? null : s.Indicator.ScaleValue,
+                        NotApplicable = s.NotApplicable,
+                        Comment = s.ExtraInfo
+                    }).ToList()
+                }).ToList();
+
+            return grouped;
+        }
     }
 }
