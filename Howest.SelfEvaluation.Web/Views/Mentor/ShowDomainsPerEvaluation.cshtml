@@ -30,6 +30,18 @@
                 <h5>@domain.Name</h5>
             </div>
         </a>
+            <div class="card-body text-center">
+                <a asp-controller="Mentor"
+                   asp-action="ShowStudentCharts"
+                   asp-route-studentId="@Model.StudentId"
+                   asp-route-evaluationId="@Model.EvaluationId"
+                   asp-route-domainId="@domain.Id"
+                   class="btn custom-btn"
+                   style="margin-top:10px;">
+                    Bekijk evaluatie
+                </a>
+            </div>
+
     </div>
     }
 </div>
