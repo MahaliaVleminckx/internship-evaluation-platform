@@ -136,10 +136,21 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 TempData["ErrorMessage"] = "Er is iets fout gegaan bij het opslaan";
                 return View(model);
             }
-            var sessionMentorId= HttpContext.Session.Get("mentorId");
-            var sessionMentorIdString = Encoding.UTF8.GetString(sessionMentorId);
-            var mentorId = Guid.Parse(sessionMentorIdString);
+            var sessionMentorId = HttpContext.Session.GetString("mentorId");
+
+            if (sessionMentorId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var mentorId = Guid.Parse(sessionMentorId);
             var studentId = model.StudentId;
+            var existing = await _db.EvaluationScores.Where(s =>
+            s.EvaluationId == model.EvaluationId &&
+            s.TargetUserId == studentId &&
+            s.UserId == mentorId).ToListAsync();
+
+            _db.EvaluationScores.RemoveRange(existing);
 
             foreach (var competence in model.Competences)
             {
@@ -194,6 +205,65 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
 
             return View(mentorShowStudentsViewModel);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ShowStudentEvaluation(Guid studentId, Guid evaluationId)
+        {
+            var scores = await _evaluationService.GetStudentResultsAsync(studentId, evaluationId, Guid.Empty);
+
+            var vm = new StudentShowEvaluationViewModel
+            {
+                UserId = studentId,
+                EvaluationId = evaluationId,
+                Results = scores.Select(s => new StudentEvaluationResultViewModel
+                {
+                    CompetenceName = s.Indicator?.Competence?.Name,
+                    IndicatorDescription = s.Indicator?.Description,
+                    Score = s.NotApplicable ? null : s.Indicator?.ScaleValue,
+                    NotApplicable = s.NotApplicable,
+                    Comment = s.ExtraInfo
+                }).ToList()
+            };
+
+            return View("~/Views/Student/ShowEvaluation.cshtml", vm);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ShowEvaluationsForStudent(Guid studentId)
+        {
+            var evaluations = await _db.EvaluationScores
+                .Where(s => s.TargetUserId == studentId)
+                .Select(s => s.Evaluation)
+                .Distinct()
+                .ToListAsync();
+
+            var vm = new MentorEvaluationDomainsViewModel
+            {
+                StudentId = studentId,
+                Evaluations = evaluations
+            };
+
+            return View(vm);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ShowStudentCharts(Guid studentId, Guid evaluationId, Guid domainId)
+        {
+            var scores = await _evaluationService.GetStudentResultsAsync(studentId, evaluationId, domainId);
+
+            var vm = new StudentShowEvaluationViewModel
+            {
+                UserId = studentId,
+                EvaluationId = evaluationId,
+                Results = scores.Select(s => new StudentEvaluationResultViewModel
+                {
+                    CompetenceName = s.Indicator?.Competence?.Name,
+                    IndicatorDescription = s.Indicator?.Description,
+                    Score = s.NotApplicable ? null : s.Indicator?.ScaleValue,
+                    NotApplicable = s.NotApplicable,
+                    Comment = s.ExtraInfo
+                }).ToList()
+            };
+
+            return View("~/Views/Student/ShowEvaluation.cshtml", vm);
         }
     }
 }

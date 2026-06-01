@@ -1,0 +1,34 @@
+﻿@{
+    var rnd = new Random();
+}
+
+<h1>Evaluaties van student</h1>
+
+<p>Aantal evaluaties: @Model.Evaluations.Count</p>
+
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+    @foreach (var eval in Model.Evaluations)
+    {
+        <a asp-controller="Mentor"
+           asp-action="ShowDomainsPerEvaluation"
+           asp-route-evaluationId="@eval.Id"
+           asp-route-studentId="@Model.StudentId"
+           class="link-restyle">
+
+            <div class="card module-box" style="width:250px;">
+
+                <div class="title-box gradient-@rnd.Next(1, 16) text-center" style="border-radius:5px;">
+                    <h5>@(eval.Title ?? "Geen titel")</h5>
+                </div>
+
+                <div class="card-body text-center">
+                    <p>
+                        Beschikbaar tot: @eval.EndDate.ToShortDateString()
+                    </p>
+                </div>
+
+            </div>
+
+        </a>
+    }
+</div>

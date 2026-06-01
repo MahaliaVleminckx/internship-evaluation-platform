@@ -415,5 +415,18 @@ namespace Howest.SelfEvaluation.Web.Services
 
             return grouped;
         }
+{
+    return await _db.EvaluationScores
+        .Where(s =>
+            s.TargetUserId == userId &&
+            s.EvaluationId == evaluationId &&
+            s.Indicator != null &&
+            s.Indicator.Competence != null &&
+            (domainId == Guid.Empty || s.Indicator.Competence.CompetenceDomainId == domainId)
+        )
+        .Include(s => s.Indicator)
+            .ThenInclude(i => i.Competence)
+        .ToListAsync();
+}
     }
 }
