@@ -8,7 +8,7 @@
 {
     <h2>@eval.EvaluationTitle</h2>
 
-    <table>
+    <table style="margin-bottom:30px;">
         <thead>
             <tr>
                 <th>Competentie</th>
@@ -29,7 +29,8 @@
     </table>
 }
 
-<canvas id="combinedChart"></canvas>
+<div style="max-width:700px; height:400px; margin:40px auto;"><canvas id="combinedChart"></canvas>
+</div>
 
 @{
     var firstWithResults = Model.Evaluations.FirstOrDefault(e => e.Results.Any());
@@ -63,10 +64,8 @@
                                 allLabels.Select(label =>
                                 {
                                         var result = eval.Results.FirstOrDefault(r => r.CompetenceName == label);
-
                                         if (result == null) return (int?)null;
-
-                                                                                            return result.Score switch
+                                           return result.Score switch
                                                     {
                                                             "Zwaar onvoldoende" => 1,
                                                             "Onvoldoende" => 2,
@@ -94,6 +93,8 @@
                 datasets: datasets
             },
             options: {
+                    responsive: true,
+        maintainAspectRatio: false,
                 scales: {
                     r: {
                         beginAtZero: false,
@@ -102,7 +103,7 @@
                         ticks: {
                             stepSize: 1,
                             callback: function(value) {
-                                return ["", "Z.O.", "O.", "L.O.", "V", "G", "U"][value];
+                                return ["", "Z.O.", "O.", "L.O.", "V", "G", "Z.G." , "U"][value];
                             }
                         },
                         pointLabels: {

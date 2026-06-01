@@ -1,24 +1,22 @@
-﻿@using Howest.SelfEvaluation.Core.Entities
-@model List<ApplicationUser>
+﻿
+@model TeacherDashboardViewModel
 
-<h1>Leerkracht Dashboard</h1>
+<h1>Teacher Dashboard</h1>
 
-<div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:20px;">
-    @foreach (var student in Model)
-    {
-        <div class="card module-box" style="width:250px; text-align:center;">
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+@foreach (var student in Model.Students)
+{
+    <div class="card module-box" style="width:250px; text-align:center;">
+        <div class="card-body">
+            <h5>@student.UserName</h5>
 
-            <div class="card-body">
-                <h5>@student.Username</h5>
-
-                <a asp-controller="Teacher"
-                   asp-action="StudentCombinedEvaluations"
-                   asp-route-studentId="@student.Id"
-                   class="btn custom-btn">
-                    Bekijk evaluaties
-                </a>
-            </div>
-
+            <a asp-controller="Teacher"
+               asp-action="StudentCombinedEvaluations"
+               asp-route-studentId="@student.Id"
+               class="btn custom-btn">
+                Bekijk evaluaties
+            </a>
         </div>
-    }
+    </div>
+}
 </div>

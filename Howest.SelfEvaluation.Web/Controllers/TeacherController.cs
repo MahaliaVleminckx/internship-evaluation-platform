@@ -36,21 +36,38 @@ namespace Howest.SelfEvaluation.Web.Controllers
         //for demo purposes, not final
         public async Task<IActionResult> Dashboard()
         {
-            var moduleId = Guid.Parse("00000000-0000-0000-0000-000000000003");
+            var module = await _db.Modules.FirstOrDefaultAsync();
 
-            var students = await _evaluationService.GetStudentsForModule(moduleId);
+            if (module == null)
+            {
+                return View(new TeacherDashboardViewModel
+                {
+                    Students = new List<TeacherStudentViewModel>()
+                });
+            }
 
-            return View(students); 
+            var students = await _evaluationService.GetStudentsForModule(module.Id);
+
+            var vm = new TeacherDashboardViewModel
+            {
+                Students = students.Select(s => new TeacherStudentViewModel
+                {
+                    Id = s.Id,
+                    UserName = s.Username
+                }).ToList()
+            };
+
+            return View(vm);
         }
-       /* public async Task<IActionResult> Dashboard()
-        {
-            //DEVELOPMENT ONLY since no login system yet
-            //TODO: change this to the logged in teacher id (refactor method to use Guid instead of name) once login implemented
-            //for now its hardcoded for demo purposes and we didnt get to do login implementation
-            BaseViewModel baseViewModel = new() { Name = "test@test.com" };
-            //BaseViewModel baseViewModel = new() { Name = "teacher@teacher.com" };
-            return View(baseViewModel);
-        }*/
+        /* public async Task<IActionResult> Dashboard()
+         {
+             //DEVELOPMENT ONLY since no login system yet
+             //TODO: change this to the logged in teacher id (refactor method to use Guid instead of name) once login implemented
+             //for now its hardcoded for demo purposes and we didnt get to do login implementation
+             BaseViewModel baseViewModel = new() { Name = "test@test.com" };
+             //BaseViewModel baseViewModel = new() { Name = "teacher@teacher.com" };
+             return View(baseViewModel);
+         }*/
 
         [HttpGet]
         public async Task<IActionResult> Index(string? username)
@@ -98,7 +115,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> ShowEvaluationsPerModule(Guid moduleId, Guid userId)
+        public async Task<IActionResult> ShowEvaluationsPerModule(Guid moduleId, Guid studentId)
         {
             var module = await _db.Modules.Include(m => m.Evaluations).FirstOrDefaultAsync(m => m.Id == moduleId);
 
@@ -113,7 +130,7 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 ModuleName = module.Name,
                 ModuleDescription = module.Description,
                 Evaluations = module.Evaluations.ToList(),
-                UserId = userId
+                UserId = studentId
             };
             return View(viewmodel);
         }
@@ -139,13 +156,13 @@ namespace Howest.SelfEvaluation.Web.Controllers
             return View(vm);
         }
         [HttpGet]
-        public async Task<IActionResult> ShowStudentCharts(Guid userId, Guid evaluationId, Guid domainId)
+        public async Task<IActionResult> ShowStudentCharts(Guid studentId, Guid evaluationId, Guid domainId)
         {
-            var scores = await _evaluationService.GetStudentResultsAsync(userId, evaluationId, domainId);
+            var scores = await _evaluationService.GetStudentResultsAsync(studentId, evaluationId, domainId);
 
             var vm = new StudentShowEvaluationViewModel
             {
-                UserId = userId,
+                UserId = studentId,
                 EvaluationId = evaluationId,
                 Results = scores.Select(s => new StudentEvaluationResultViewModel
                 {
@@ -188,12 +205,6 @@ namespace Howest.SelfEvaluation.Web.Controllers
             };
 
             return View(teacherShowDomainsPerEvaluationViewModel);
-        }
-        public async Task<IActionResult> StudentsOverview(Guid moduleId)
-        {
-            var students = await _evaluationService.GetStudentsForModule(moduleId);
-
-            return View(students);
         }
         public async Task<IActionResult> StudentCombinedEvaluations(Guid studentId)
         {
