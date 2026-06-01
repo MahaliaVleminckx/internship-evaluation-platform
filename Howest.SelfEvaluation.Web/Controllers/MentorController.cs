@@ -136,15 +136,21 @@ namespace Howest.SelfEvaluation.Web.Controllers
                 TempData["ErrorMessage"] = "Er is iets fout gegaan bij het opslaan";
                 return View(model);
             }
-            var sessionMentorId = HttpContext.Session.Get("MentorId");
+            var sessionMentorId = HttpContext.Session.GetString("mentorId");
 
             if (sessionMentorId == null)
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            var mentorId = Guid.Parse(Encoding.UTF8.GetString(sessionMentorId));
+            var mentorId = Guid.Parse(sessionMentorId);
             var studentId = model.StudentId;
+            var existing = await _db.EvaluationScores.Where(s =>
+            s.EvaluationId == model.EvaluationId &&
+            s.TargetUserId == studentId &&
+            s.UserId == mentorId).ToListAsync();
+
+            _db.EvaluationScores.RemoveRange(existing);
 
             foreach (var competence in model.Competences)
             {
@@ -224,12 +230,16 @@ namespace Howest.SelfEvaluation.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowEvaluationsForStudent(Guid studentId)
         {
-            var evaluations = await _evaluationService.GetAllEvaluationsAsync();
+            var evaluations = await _db.EvaluationScores
+                .Where(s => s.TargetUserId == studentId)
+                .Select(s => s.Evaluation)
+                .Distinct()
+                .ToListAsync();
 
             var vm = new MentorEvaluationDomainsViewModel
             {
                 StudentId = studentId,
-                Evaluations = evaluations.ToList()
+                Evaluations = evaluations
             };
 
             return View(vm);
